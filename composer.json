@@ -32,5 +32,10 @@
             "Artisans\\Guardian\\": "src/"
         }
     },
+    "extra": {
+        "branch-alias": {
+            "dev-master": "develop"
+        }
+    },
     "minimum-stability": "dev"
 }
