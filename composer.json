@@ -29,7 +29,7 @@
     },
     "autoload": {
         "psr-4": {
-            "Artisans\\Guardian": "src/Artisans/Guardian"
+            "Artisans\\Guardian\\": "src/"
         }
     },
     "minimum-stability": "dev"
