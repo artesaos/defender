@@ -1,0 +1,27 @@
+{
+    "name": "artisans/guardian",
+    "description": "ACL",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Vinicius",
+            "email": "luiz.vinicius73@gmail.com"
+        },
+        {
+            "name": "Andreo Vieira",
+            "email": "andreoav@gmail.com"
+        },
+        {
+            "name": "Oberaldo Büll Jr",
+            "email": "oberaldo@gmail.com"
+        },
+        {
+            "name": "Gilvan Júnio",
+            "email": "packages@gilvancosta.com"
+        }
+    ],
+    "minimum-stability": "dev",
+    "require": {
+        
+    }
+}
