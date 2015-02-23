@@ -1,8 +1,8 @@
-<?php namespace Artisans\Guardian;
+<?php namespace Artisans\Guardian\Providers;
 
 use Illuminate\Support\ServiceProvider as Provider;
 
-class ServiceProvider extends Provider {
+class GuardianServiceProvider extends Provider {
 
 	/**
 	 * Indicates if loading of the provider is deferred.
