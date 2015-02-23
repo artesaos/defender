@@ -80,9 +80,9 @@ class GuardianServiceProvider extends ServiceProvider {
     private function publishMigrations()
     {
         $this->publishes([
-            __DIR__.'/../../resources/migrations/create_guardian_roles_table.stub' => base_path('database/migrations').date('Y_m_d_His').'_create_guardian_roles_table.php',
-            __DIR__.'/../../resources/migrations/create_guardian_permission_role_table.stub' => base_path('database/migrations').date('Y_m_d_His').'_create_guardian_permission_role_table.php',
-            __DIR__.'/../../resources/migrations/create_guardian_permission_user_table.stub' => base_path('database/migrations').date('Y_m_d_His').'_create_guardian_permission_user_table.php'
+            __DIR__.'/../../resources/migrations/create_guardian_roles_table.stub' => base_path('database/migrations/').date('Y_m_d_His').'_create_guardian_roles_table.php',
+            __DIR__.'/../../resources/migrations/create_guardian_permission_role_table.stub' => base_path('database/migrations/').date('Y_m_d_His').'_create_guardian_permission_role_table.php',
+            __DIR__.'/../../resources/migrations/create_guardian_permission_user_table.stub' => base_path('database/migrations/').date('Y_m_d_His').'_create_guardian_permission_user_table.php'
          ]);
     }
 
