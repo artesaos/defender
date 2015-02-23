@@ -19,12 +19,22 @@ return [
     /*
      * Roles table name
      */
-    'roles_table' => 'roles',
+    'role_table' => 'roles',
+
+    /*
+     *
+     */
+    'role_key' => 'role_id',
 
     /*
      * Permissions table name
      */
-    'permissions_table' => 'permissions',
+    'permission_table' => 'permissions',
+
+    /*
+     *
+     */
+    'permission_key' => 'permission_id',
 
     /*
      * Pivot table for roles and users

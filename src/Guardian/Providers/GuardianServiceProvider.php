@@ -23,6 +23,7 @@ class GuardianServiceProvider extends ServiceProvider {
 	public function boot()
 	{
         $this->publishConfiguration();
+        $this->publishMigrations();
 	}
 
 	/**
@@ -74,6 +75,15 @@ class GuardianServiceProvider extends ServiceProvider {
     private function publishConfiguration()
     {
         $this->publishes([ __DIR__.'/../../resources/config/guardian.php' => config_path('guardian.php')]);
+    }
+
+    private function publishMigrations()
+    {
+        $this->publishes([
+            __DIR__.'/../../resources/migrations/create_guardian_roles_table.stub' => base_path('database/migrations').date('Y_m_d_His').'_create_guardian_roles_table.php',
+            __DIR__.'/../../resources/migrations/create_guardian_permission_role_table.stub' => base_path('database/migrations').date('Y_m_d_His').'_create_guardian_permission_role_table.php',
+            __DIR__.'/../../resources/migrations/create_guardian_permission_user_table.stub' => base_path('database/migrations').date('Y_m_d_His').'_create_guardian_permission_user_table.php'
+         ]);
     }
 
 }
