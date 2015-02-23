@@ -68,9 +68,12 @@ class GuardianServiceProvider extends ServiceProvider {
 
 	}
 
+    /**
+     * Publish configuration file
+     */
     private function publishConfiguration()
     {
-        $this->publishes([ __DIR__.'/../../config/guardian.php' => config_path('guardian.php')]);
+        $this->publishes([ __DIR__.'/../../resources/config/guardian.php' => config_path('guardian.php')]);
     }
 
 }
