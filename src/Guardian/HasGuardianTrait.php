@@ -82,7 +82,7 @@ trait HasGuardianTrait {
 			return (int) $userPermissions[$permission];
 		}
 
-		return null;
+		return 0;
 	}
 
 }
