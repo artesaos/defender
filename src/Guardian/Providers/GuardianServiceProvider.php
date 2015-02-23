@@ -1,5 +1,6 @@
 <?php namespace Artisans\Guardian\Providers;
 
+use Artisans\Guardian\Guardian;
 use Illuminate\Support\ServiceProvider as Provider;
 
 class GuardianServiceProvider extends Provider {
@@ -27,7 +28,10 @@ class GuardianServiceProvider extends Provider {
 	 */
 	public function register()
 	{
-		//
+		$this->app->bind('guardian', function($app)
+		{
+			return new Guardian($app);
+		});
 	}
 
 	/**

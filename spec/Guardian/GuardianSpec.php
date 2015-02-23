@@ -9,9 +9,13 @@ use Prophecy\Argument;
 class GuardianSpec extends ObjectBehavior
 {
 
-	function it_is_initializable(Application $app)
+	function let(Application $app)
 	{
 		$this->beConstructedWith($app);
+	}
+
+	function it_is_initializable(Application $app)
+	{
 		$this->shouldHaveType('Artisans\Guardian\Guardian');
 	}
 
