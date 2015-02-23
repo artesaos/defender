@@ -22,7 +22,7 @@ class GuardianServiceProvider extends ServiceProvider {
 	 */
 	public function boot()
 	{
-        // TODO: Register middlewares
+        $this->publishConfiguration();
 	}
 
 	/**
@@ -67,5 +67,10 @@ class GuardianServiceProvider extends ServiceProvider {
         });
 
 	}
+
+    private function publishConfiguration()
+    {
+        $this->publishes([ __DIR__.'/../../config/guardian.php' => config_path('guardian.php')]);
+    }
 
 }
