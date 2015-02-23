@@ -57,15 +57,15 @@ class GuardianServiceProvider extends ServiceProvider {
 	protected function registerEloquentBindings()
 	{
 
-		$this->app->bind('Artisans\Guardian\Repositories\RoleRepository', function($app)
-		{
-			return new EloquentRoleRepository(new Role);
-		});
+		$this->app->bind(
+			'Artisans\Guardian\Repositories\RoleRepository',
+			'Artisans\Guardian\Repositories\Eloquent\EloquentRoleRepository'
+		);
 
-		$this->app->bind('Artisans\Guardian\Repositories\PermissionRepository', function($app)
-		{
-			return new EloquentPermissionRepository(new Permission);
-		});
+		$this->app->bind(
+			'Artisans\Guardian\Repositories\PermissionRepository',
+			'Artisans\Guardian\Repositories\Eloquent\EloquentPermissionRepository'
+		);
 
 	}
 
