@@ -1,6 +1,6 @@
 <?php namespace Artisans\Guardian;
 
-trait HasGuardianRolesTrait {
+trait HasGuardianTrait {
 
     /**
      * Many-to-many role-user relationship
