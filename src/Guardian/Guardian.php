@@ -25,12 +25,12 @@ class Guardian {
 		$this->app = $app;
 	}
 
-    /**
-     * [user description]
-     *
-     * @param Guard $auth
-     * @return \Illuminate\Contracts\Auth\Authenticatable|null
-     */
+	/**
+	 * [user description]
+	 *
+	 * @param Guard $auth
+	 * @return \Illuminate\Contracts\Auth\Authenticatable|null
+	 */
 	protected function user(Guard $auth)
 	{
 		return $auth->user();

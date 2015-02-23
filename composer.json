@@ -1,39 +1,39 @@
 {
-    "name": "artisans/guardian",
-    "description": "ACL",
-    "license": "MIT",
-    "authors": [
-        {
-            "name": "Vinicius",
-            "email": "luiz.vinicius73@gmail.com"
-        },
-        {
-            "name": "Andreo Vieira",
-            "email": "andreoav@gmail.com"
-        },
-        {
-            "name": "Oberaldo Büll Jr",
-            "email": "oberaldo@gmail.com"
-        },
-        {
-            "name": "Gilvan Júnio",
-            "email": "packages@gilvancosta.com"
-        }
-    ],
-    "require": {
-        "php": ">=5.4.0",
-        "illuminate/contracts": "5.0.x",
-        "illuminate/support": "5.0.*",
-        "illuminate/database": "5.0.x"
+  "name": "artisans/guardian",
+  "description": "ACL",
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "Vinicius",
+      "email": "luiz.vinicius73@gmail.com"
     },
-    "require-dev": {
-        "phpunit/phpunit": "4.*",
-        "phpspec/phpspec": "~2.0"
+    {
+      "name": "Andreo Vieira",
+      "email": "andreoav@gmail.com"
     },
-    "autoload": {
-        "psr-4": {
-            "Artisans\\Guardian\\": "src/Guardian/"
-        }
+    {
+      "name": "Oberaldo Büll Jr",
+      "email": "oberaldo@gmail.com"
     },
-    "minimum-stability": "dev"
+    {
+      "name": "Gilvan Júnio",
+      "email": "packages@gilvancosta.com"
+    }
+  ],
+  "require": {
+    "php": ">=5.4.0",
+    "illuminate/contracts": "5.0.x",
+    "illuminate/support": "5.0.*",
+    "illuminate/database": "5.0.x"
+  },
+  "require-dev": {
+    "phpunit/phpunit": "4.*",
+    "phpspec/phpspec": "~2.0"
+  },
+  "autoload": {
+    "psr-4": {
+      "Artisans\\Guardian\\": "src/Guardian/"
+    }
+  },
+  "minimum-stability": "dev"
 }

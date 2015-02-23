@@ -11,11 +11,11 @@ use Illuminate\Contracts\Foundation\Application;
  */
 class EloquentPermissionRepository extends AbstractEloquentRepository implements PermissionRepository {
 
-    /**
-     * @param Application $app
-     * @param Permission  $model
-     */
-    public function __construct(Application $app, Permission $model)
+	/**
+	 * @param Application $app
+	 * @param Permission  $model
+	 */
+	public function __construct(Application $app, Permission $model)
 	{
 		parent::__construct($app, $model);
 	}

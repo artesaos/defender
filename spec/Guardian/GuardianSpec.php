@@ -6,8 +6,7 @@ use Illuminate\Contracts\Foundation\Application;
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
 
-class GuardianSpec extends ObjectBehavior
-{
+class GuardianSpec extends ObjectBehavior {
 
 	function let(Application $app)
 	{

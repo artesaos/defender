@@ -22,8 +22,8 @@ class GuardianServiceProvider extends ServiceProvider {
 	 */
 	public function boot()
 	{
-        $this->publishConfiguration();
-        $this->publishMigrations();
+		$this->publishConfiguration();
+		$this->publishMigrations();
 	}
 
 	/**
@@ -33,7 +33,7 @@ class GuardianServiceProvider extends ServiceProvider {
 	 */
 	public function register()
 	{
-		$this->app->bindShared('guardian', function($app)
+		$this->app->bindShared('guardian', function ($app)
 		{
 			return new Guardian($app);
 		});
@@ -51,35 +51,35 @@ class GuardianServiceProvider extends ServiceProvider {
 		return [];
 	}
 
-    /**
-     * Bind repositories interfaces with their implementations
-     */
+	/**
+	 * Bind repositories interfaces with their implementations
+	 */
 	protected function registerEloquentBindings()
 	{
 
-		$this->app->bindShared('Artisans\Guardian\Repositories\RoleRepository', function($app)
-        {
-            return new EloquentRoleRepository($app, new Role);
-        });
+		$this->app->bindShared('Artisans\Guardian\Repositories\RoleRepository', function ($app)
+		{
+			return new EloquentRoleRepository($app, new Role);
+		});
 
-		$this->app->bindShared('Artisans\Guardian\Repositories\PermissionRepository', function($app)
-        {
-            return new EloquentPermissionRepository($app, new Permission);
-        });
+		$this->app->bindShared('Artisans\Guardian\Repositories\PermissionRepository', function ($app)
+		{
+			return new EloquentPermissionRepository($app, new Permission);
+		});
 
 	}
 
-    /**
-     * Publish configuration file
-     */
-    private function publishConfiguration()
-    {
-        $this->publishes([__DIR__.'/../../resources/config/guardian.php' => config_path('guardian.php')], 'config');
-    }
+	/**
+	 * Publish configuration file
+	 */
+	private function publishConfiguration()
+	{
+		$this->publishes([__DIR__ . '/../../resources/config/guardian.php' => config_path('guardian.php')], 'config');
+	}
 
-    private function publishMigrations()
-    {
-        $this->publishes([__DIR__.'/../../resources/migrations/' => base_path('database/migrations')], 'migrations');
-    }
+	private function publishMigrations()
+	{
+		$this->publishes([__DIR__ . '/../../resources/migrations/' => base_path('database/migrations')], 'migrations');
+	}
 
 }

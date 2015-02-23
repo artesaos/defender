@@ -10,31 +10,31 @@ use Illuminate\Database\Eloquent\Model;
  */
 abstract class AbstractEloquentRepository {
 
-    /**
-     * @var Application
-     */
-    protected $app;
+	/**
+	 * @var Application
+	 */
+	protected $app;
 
-    /**
-     * @var Model
-     */
-    protected $model;
+	/**
+	 * @var Model
+	 */
+	protected $model;
 
-    /**
-     * @param Application $app
-     * @param Model       $model
-     */
-    public function __construct(Application $app, Model $model)
+	/**
+	 * @param Application $app
+	 * @param Model       $model
+	 */
+	public function __construct(Application $app, Model $model)
 	{
 		$this->app   = $app;
 		$this->model = $model;
 	}
 
-    /**
-     * @param $id
-     * @return \Illuminate\Support\Collection|null|static
-     */
-    public function findById($id)
+	/**
+	 * @param $id
+	 * @return \Illuminate\Support\Collection|null|static
+	 */
+	public function findById($id)
 	{
 		return $this->model->find($id);
 	}
