@@ -15,6 +15,13 @@ class Permission extends Model {
 	protected $table;
 
 	/**
+	 * @var array
+	 */
+	protected $fillable = [
+		'name'
+	];
+
+	/**
 	 * @param array $attributes
 	 */
 	public function __construct(array $attributes = array())

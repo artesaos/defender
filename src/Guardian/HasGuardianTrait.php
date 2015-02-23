@@ -26,11 +26,56 @@ trait HasGuardianTrait {
 		)->withPivot('value');
 	}
 
+	/**
+	 * Returns if the given user has an specific role
+	 *
+	 * @param $role
+	 * @return bool
+	 */
 	public function hasRole($role)
 	{
 		$roles = $this->roles()->lists('name');
 
 		return in_array($role, $roles);
+	}
+
+	/**
+	 * @param $permission
+	 * @return bool
+	 */
+	public function can($permission)
+	{
+		$userPermissions = $this->permissions()->lists('value', 'name');
+
+		// Search in user permissions
+		if (array_key_exists($permission, $userPermissions))
+		{
+			$permissionValue = (int) $userPermissions[$permission];
+
+			if ($permissionValue !== 0)
+			{
+				return $permissionValue === 1 ? true : false;
+			}
+		}
+
+		// Search roles permission
+		$this->roles->each(function($role) use ($permission)
+		{
+			$rolePermissions = $role->permissions()->lists('value', 'name');
+
+			if (array_key_exists($permission, $rolePermissions))
+			{
+				$permissionValue = (int) $rolePermissions[$permission];
+
+				if ($permissionValue === 1)
+				{
+					return true;
+				}
+			}
+
+		});
+
+		return false;
 	}
 
 }
