@@ -43,9 +43,8 @@ class Role extends Model {
 	public function permissions()
 	{
 		return $this->belongsToMany(
-			config('guardian.permission_model'), config('guardian.permission_role_table'), config('guardian.role_key'),
-			config('guardian.permission_key')
-		);
+			config('guardian.permission_model'), config('guardian.permission_role_table'), config('guardian.role_key'), config('guardian.permission_key')
+		)->withPivot('value');
 	}
 
 }

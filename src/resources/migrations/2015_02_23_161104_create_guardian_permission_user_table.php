@@ -21,6 +21,8 @@ class CreateGuardianPermissionUserTable extends Migration {
 			$table->foreign(config('guardian.permission_key', 'permission_id'))->references('id')
 				  ->on(config('guardian.permission_table', 'permissions'))
 				  ->onDelete('cascade');
+
+			$table->tinyInteger('value')->default(-1);
 		});
 	}
 

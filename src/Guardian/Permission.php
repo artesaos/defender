@@ -31,9 +31,8 @@ class Permission extends Model {
 	public function roles()
 	{
 		return $this->belongsToMany(
-			config('guardian.role_model'), config('guardian.permission_role_table'), config('guardian.permission_key'),
-			config('guardian.role_key')
-		);
+			config('guardian.role_model'), config('guardian.permission_role_table'), config('guardian.permission_key'), config('guardian.role_key')
+		)->withPivot('value');
 	}
 
 	/**
@@ -45,7 +44,7 @@ class Permission extends Model {
 	{
 		return $this->belongsToMany(
 			config('auth.model'), config('guardian.permission_user_table'), config('guardian.permission_key'), 'user_id'
-		);
+		)->withPivot('value');
 	}
 
 }

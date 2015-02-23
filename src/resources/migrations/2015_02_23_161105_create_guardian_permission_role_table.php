@@ -23,6 +23,8 @@ class CreateGuardianPermissionRoleTable extends Migration {
 			$table->foreign(config('guardian.role_key', 'role_id'))->references('id')
 				  ->on(config('guardian.role_table', 'roles'))
 				  ->onDelete('cascade');
+
+			$table->tinyInteger('value')->default(-1);
 		});
 	}
 

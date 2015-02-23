@@ -22,9 +22,8 @@ trait HasGuardianTrait {
 	public function permissions()
 	{
 		return $this->belongsToMany(
-			config('guardian.permission_model'), config('guardian.permission_user_table'), 'user_id',
-			config('guardian.permission_key')
-		);
+			config('guardian.permission_model'), config('guardian.permission_user_table'), 'user_id', config('guardian.permission_key')
+		)->withPivot('value');
 	}
 
 }
