@@ -30,7 +30,7 @@ trait HasGuardianTrait {
 	{
 		$roles = $this->roles()->lists('name');
 
-		return $roles;
+		return in_array($role, $roles);
 	}
 
 }
