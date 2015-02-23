@@ -9,12 +9,12 @@ return [
 	/*
 	 * Default Role model used by Guardian.
 	 */
-	'role_model' => 'Artisans\Guardian\Role',
+	'role_model' => 'Artesaos\Guardian\Role',
 
 	/*
 	 * Default Permission model used by Guardian.
 	 */
-	'permission_model' => 'Artisans\Guardian\Permission',
+	'permission_model' => 'Artesaos\Guardian\Permission',
 
 	/*
 	 * Roles table name

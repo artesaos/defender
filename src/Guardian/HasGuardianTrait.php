@@ -26,4 +26,11 @@ trait HasGuardianTrait {
 		)->withPivot('value');
 	}
 
+	public function hasRole($role)
+	{
+		$roles = $this->roles()->lists('name');
+
+		return $roles;
+	}
+
 }
