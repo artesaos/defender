@@ -9,37 +9,37 @@ return [
 	/*
 	 * Default Role model used by Guardian.
 	 */
-	'role_model'            => 'Artisans\Guardian\Role',
+	'role_model' => 'Artisans\Guardian\Role',
 
 	/*
 	 * Default Permission model used by Guardian.
 	 */
-	'permission_model'      => 'Artisans\Guardian\Permission',
+	'permission_model' => 'Artisans\Guardian\Permission',
 
 	/*
 	 * Roles table name
 	 */
-	'role_table'            => 'roles',
+	'role_table' => 'roles',
 
 	/*
 	 *
 	 */
-	'role_key'              => 'role_id',
+	'role_key' => 'role_id',
 
 	/*
 	 * Permissions table name
 	 */
-	'permission_table'      => 'permissions',
+	'permission_table' => 'permissions',
 
 	/*
 	 *
 	 */
-	'permission_key'        => 'permission_id',
+	'permission_key' => 'permission_id',
 
 	/*
 	 * Pivot table for roles and users
 	 */
-	'role_user_table'       => 'role_user',
+	'role_user_table' => 'role_user',
 
 	/*
 	 * Pivot table for permissions and roles
