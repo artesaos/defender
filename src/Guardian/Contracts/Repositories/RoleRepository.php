@@ -1,4 +1,4 @@
-<?php namespace Artisans\Guardian\Repositories;
+<?php namespace Artisans\Guardian\Contracts\Repositories;
 
 interface RoleRepository {
 

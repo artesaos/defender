@@ -1,11 +1,11 @@
 <?php namespace Artisans\Guardian\Providers;
 
-use Artisans\Guardian\Role;
 use Artisans\Guardian\Guardian;
 use Artisans\Guardian\Permission;
-use Illuminate\Support\ServiceProvider;
-use Artisans\Guardian\Repositories\Eloquent\EloquentRoleRepository;
 use Artisans\Guardian\Repositories\Eloquent\EloquentPermissionRepository;
+use Artisans\Guardian\Repositories\Eloquent\EloquentRoleRepository;
+use Artisans\Guardian\Role;
+use Illuminate\Support\ServiceProvider;
 
 class GuardianServiceProvider extends ServiceProvider {
 
@@ -22,7 +22,7 @@ class GuardianServiceProvider extends ServiceProvider {
 	 */
 	public function boot()
 	{
-
+        // TODO: Register middlewares
 	}
 
 	/**
@@ -32,7 +32,7 @@ class GuardianServiceProvider extends ServiceProvider {
 	 */
 	public function register()
 	{
-		$this->app->bind('guardian', function($app)
+		$this->app->bindShared('guardian', function($app)
 		{
 			return new Guardian($app);
 		});
@@ -50,22 +50,21 @@ class GuardianServiceProvider extends ServiceProvider {
 		return [];
 	}
 
-	/**
-	 *
-	 * @return [type] [description]
-	 */
+    /**
+     * Bind repositories interfaces with their implementations
+     */
 	protected function registerEloquentBindings()
 	{
 
-		$this->app->bind(
-			'Artisans\Guardian\Repositories\RoleRepository',
-			'Artisans\Guardian\Repositories\Eloquent\EloquentRoleRepository'
-		);
+		$this->app->bindShared('Artisans\Guardian\Repositories\RoleRepository', function($app)
+        {
+            return new EloquentRoleRepository($app, new Role);
+        });
 
-		$this->app->bind(
-			'Artisans\Guardian\Repositories\PermissionRepository',
-			'Artisans\Guardian\Repositories\Eloquent\EloquentPermissionRepository'
-		);
+		$this->app->bindShared('Artisans\Guardian\Repositories\PermissionRepository', function($app)
+        {
+            return new EloquentPermissionRepository($app, new Permission);
+        });
 
 	}
 

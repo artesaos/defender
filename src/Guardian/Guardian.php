@@ -1,5 +1,6 @@
 <?php namespace Artisans\Guardian;
 
+use Illuminate\Contracts\Auth\Guard;
 use Illuminate\Contracts\Foundation\Application;
 
 /**
@@ -10,7 +11,7 @@ class Guardian {
 	/**
 	 * The Laravel Application
 	 *
-	 * @var \Illuminate\Foundation\Application
+	 * @var \Illuminate\Contracts\Foundation\Application
 	 */
 	protected $app;
 
@@ -24,19 +25,18 @@ class Guardian {
 		$this->app = $app;
 	}
 
-	/**
-	 * [user description]
-	 * @return [type] [description]
-	 */
-	protected function user()
+    /**
+     * [user description]
+     *
+     * @param Guard $auth
+     * @return \Illuminate\Contracts\Auth\Authenticatable|null
+     */
+	protected function user(Guard $auth)
 	{
-		return $this->app['auth']->user();
+		return $auth->user();
 	}
 
-	/**
-	 * [can description]
-	 * @return [type] [description]
-	 */
+
 	public function can()
 	{
 		return true;

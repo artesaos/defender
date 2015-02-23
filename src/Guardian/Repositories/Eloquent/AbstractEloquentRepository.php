@@ -1,20 +1,40 @@
 <?php namespace Artisans\Guardian\Repositories\Eloquent;
 
+use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Database\Eloquent\Model;
 
+/**
+ * Class AbstractEloquentRepository
+ *
+ * @package Artisans\Guardian\Repositories\Eloquent
+ */
 abstract class AbstractEloquentRepository {
 
-	protected $app;
+    /**
+     * @var Application
+     */
+    protected $app;
 
-	protected $model;
+    /**
+     * @var Model
+     */
+    protected $model;
 
-	public function __construct(Model $model)
+    /**
+     * @param Application $app
+     * @param Model       $model
+     */
+    public function __construct(Application $app, Model $model)
 	{
-		$this->app   = app();
+		$this->app   = $app;
 		$this->model = $model;
 	}
 
-	public function findById($id)
+    /**
+     * @param $id
+     * @return \Illuminate\Support\Collection|null|static
+     */
+    public function findById($id)
 	{
 		return $this->model->find($id);
 	}
