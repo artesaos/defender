@@ -35,10 +35,8 @@ class CreateGuardianPermissionRoleTable extends Migration {
 	{
 		Schema::table(config('guardian.permission_role_table', 'permission_role'), function (Blueprint $table)
 		{
-			$table->dropForeign(config('guardian.permission_role_table', 'permission_role') . '_' .
-								config('guardian.permission_key', 'permission_id') . '_foreign');
-			$table->dropForeign(config('guardian.permission_role_table', 'permission_role') . '_' .
-								config('guardian.role_key', 'role_id') . '_foreign');
+			$table->dropForeign(config('guardian.permission_role_table', 'permission_role').'_'.config('guardian.permission_key', 'permission_id') . '_foreign');
+			$table->dropForeign(config('guardian.permission_role_table', 'permission_role').'_'.config('guardian.role_key', 'role_id') . '_foreign');
 		});
 
 		Schema::drop(config('guardian.permission_role_table', 'permission_role'));
