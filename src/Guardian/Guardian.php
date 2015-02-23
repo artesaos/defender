@@ -31,11 +31,10 @@ class Guardian {
 	 * @param Guard $auth
 	 * @return \Illuminate\Contracts\Auth\Authenticatable|null
 	 */
-	protected function user(Guard $auth)
+	public function user(Guard $auth)
 	{
 		return $auth->user();
 	}
-
 
 	public function can()
 	{
