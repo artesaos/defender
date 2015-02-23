@@ -14,9 +14,4 @@ trait HasGuardianRolesTrait {
 
 	}
 
-	public function attachRole()
-	{
-
-	}
-
 }
