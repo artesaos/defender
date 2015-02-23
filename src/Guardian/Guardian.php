@@ -24,9 +24,22 @@ class Guardian {
 		$this->app = $app;
 	}
 
-	public function user()
+	/**
+	 * [user description]
+	 * @return [type] [description]
+	 */
+	protected function user()
 	{
 		return $this->app['auth']->user();
+	}
+
+	/**
+	 * [can description]
+	 * @return [type] [description]
+	 */
+	public function can()
+	{
+		return true;
 	}
 
 }

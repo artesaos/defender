@@ -19,4 +19,9 @@ class GuardianSpec extends ObjectBehavior
 		$this->shouldHaveType('Artisans\Guardian\Guardian');
 	}
 
+	function it_should_return_true_on_can_method(Application $app)
+	{
+		$this->can()->shouldReturn(true);
+	}
+
 }
