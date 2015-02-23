@@ -12,6 +12,15 @@ class GuardianServiceProvider extends Provider {
 	protected $defer = false;
 
 	/**
+	 *
+	 * @return void
+	 */
+	public function boot()
+	{
+
+	}
+
+	/**
 	 * Register the service provider.
 	 *
 	 * @return void
