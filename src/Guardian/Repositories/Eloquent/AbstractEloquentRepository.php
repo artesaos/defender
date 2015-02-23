@@ -1,4 +1,4 @@
-<?php namespace Artisans\Guardian\Repositories\Eloquent;
+<?php namespace Artesaos\Guardian\Repositories\Eloquent;
 
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Database\Eloquent\Model;
@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 /**
  * Class AbstractEloquentRepository
  *
- * @package Artisans\Guardian\Repositories\Eloquent
+ * @package Artesaos\Guardian\Repositories\Eloquent
  */
 abstract class AbstractEloquentRepository {
 

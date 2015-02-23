@@ -1,5 +1,5 @@
 {
-  "name": "artisans/guardian",
+  "name": "artesaos/guardian",
   "description": "ACL",
   "license": "MIT",
   "authors": [
@@ -32,7 +32,7 @@
   },
   "autoload": {
     "psr-4": {
-      "Artisans\\Guardian\\": "src/Guardian/"
+      "Artesaos\\Guardian\\": "src/Guardian/"
     }
   },
   "minimum-stability": "dev"

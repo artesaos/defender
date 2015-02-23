@@ -1,13 +1,13 @@
-<?php namespace Artisans\Guardian\Repositories\Eloquent;
+<?php namespace Artesaos\Guardian\Repositories\Eloquent;
 
-use Artisans\Guardian\Permission;
-use Artisans\Guardian\Contracts\Repositories\PermissionRepository;
+use Artesaos\Guardian\Permission;
+use Artesaos\Guardian\Contracts\Repositories\PermissionRepository;
 use Illuminate\Contracts\Foundation\Application;
 
 /**
  * Class EloquentPermissionRepository
  *
- * @package Artisans\Guardian\Repositories\Eloquent
+ * @package Artesaos\Guardian\Repositories\Eloquent
  */
 class EloquentPermissionRepository extends AbstractEloquentRepository implements PermissionRepository {
 

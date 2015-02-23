@@ -1,4 +1,4 @@
-<?php namespace Artisans\Guardian\Contracts\Repositories;
+<?php namespace Artesaos\Guardian\Contracts\Repositories;
 
 interface PermissionRepository {
 

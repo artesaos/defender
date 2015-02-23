@@ -1,4 +1,4 @@
-<?php namespace Artisans\Guardian;
+<?php namespace Artesaos\Guardian;
 
 use Illuminate\Contracts\Auth\Guard;
 use Illuminate\Contracts\Foundation\Application;

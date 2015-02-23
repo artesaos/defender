@@ -1,4 +1,4 @@
-<?php namespace Artisans\Guardian\Facades;
+<?php namespace Artesaos\Guardian\Facades;
 
 use Illuminate\Support\Facades\Facade;
 

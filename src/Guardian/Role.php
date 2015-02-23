@@ -1,11 +1,11 @@
-<?php namespace Artisans\Guardian;
+<?php namespace Artesaos\Guardian;
 
 use Illuminate\Database\Eloquent\Model;
 
 /**
  * Class Role
  *
- * @package Artisans\Guardian
+ * @package Artesaos\Guardian
  */
 class Role extends Model {
 

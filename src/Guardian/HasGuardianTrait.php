@@ -1,4 +1,4 @@
-<?php namespace Artisans\Guardian;
+<?php namespace Artesaos\Guardian;
 
 trait HasGuardianTrait {
 

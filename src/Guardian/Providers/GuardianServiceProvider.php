@@ -1,10 +1,10 @@
-<?php namespace Artisans\Guardian\Providers;
+<?php namespace Artesaos\Guardian\Providers;
 
-use Artisans\Guardian\Guardian;
-use Artisans\Guardian\Permission;
-use Artisans\Guardian\Repositories\Eloquent\EloquentPermissionRepository;
-use Artisans\Guardian\Repositories\Eloquent\EloquentRoleRepository;
-use Artisans\Guardian\Role;
+use Artesaos\Guardian\Guardian;
+use Artesaos\Guardian\Permission;
+use Artesaos\Guardian\Repositories\Eloquent\EloquentPermissionRepository;
+use Artesaos\Guardian\Repositories\Eloquent\EloquentRoleRepository;
+use Artesaos\Guardian\Role;
 use Illuminate\Support\ServiceProvider;
 
 class GuardianServiceProvider extends ServiceProvider {
@@ -57,12 +57,12 @@ class GuardianServiceProvider extends ServiceProvider {
 	protected function registerEloquentBindings()
 	{
 
-		$this->app->bindShared('Artisans\Guardian\Repositories\RoleRepository', function ($app)
+		$this->app->bindShared('Artesaos\Guardian\Repositories\RoleRepository', function ($app)
 		{
 			return new EloquentRoleRepository($app, new Role);
 		});
 
-		$this->app->bindShared('Artisans\Guardian\Repositories\PermissionRepository', function ($app)
+		$this->app->bindShared('Artesaos\Guardian\Repositories\PermissionRepository', function ($app)
 		{
 			return new EloquentPermissionRepository($app, new Permission);
 		});
