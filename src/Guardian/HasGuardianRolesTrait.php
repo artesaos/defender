@@ -1,7 +1,5 @@
 <?php namespace Artisans\Guardian;
 
-use Config;
-
 trait HasGuardianRolesTrait {
 
     /**
@@ -11,7 +9,9 @@ trait HasGuardianRolesTrait {
      */
 	public function roles()
 	{
-		return $this->belongsToMany(Config::get('guardian.role_model'));
+		return $this->belongsToMany(
+            config('guardian.role_model'), config('guardian.role_user_table'), 'user_id', config('guardian.role_key')
+        );
 	}
 
     /**
@@ -21,9 +21,9 @@ trait HasGuardianRolesTrait {
      */
     public function permissions()
     {
-        return $this->belongsToMany(Config::get('guardian.permission_model'));
+        return $this->belongsToMany(
+            config('guardian.permission_model'), config('guardian.permission_user_table'), 'user_id', config('guardian.permission_key')
+        );
     }
-
-
 
 }
