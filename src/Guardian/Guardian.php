@@ -28,12 +28,11 @@ class Guardian {
 	/**
 	 * [user description]
 	 *
-	 * @param Guard $auth
 	 * @return \Illuminate\Contracts\Auth\Authenticatable|null
 	 */
-	public function user(Guard $auth)
+	public function user()
 	{
-		return $auth->user();
+		return $this->app['auth']->user();
 	}
 
 	public function can()
