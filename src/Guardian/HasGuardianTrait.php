@@ -45,37 +45,44 @@ trait HasGuardianTrait {
 	 */
 	public function can($permission)
 	{
-		$userPermissions = $this->permissions()->lists('value', 'name');
+		$userPermission = $this->getPermission($permission);
 
-		// Search in user permissions
-		if (array_key_exists($permission, $userPermissions))
+		// 0 = inherit from roles
+		if ($userPermission !== 0)
 		{
-			$permissionValue = (int) $userPermissions[$permission];
-
-			if ($permissionValue !== 0)
-			{
-				return $permissionValue === 1 ? true : false;
-			}
+			return $userPermission > 0;
 		}
 
 		// Search roles permission
-		$this->roles->each(function($role) use ($permission)
+		foreach ($this->roles as $role)
 		{
-			$rolePermissions = $role->permissions()->lists('value', 'name');
+			$rolePermission = $role->getPermission($permission);
 
-			if (array_key_exists($permission, $rolePermissions))
+			if ($rolePermission > 0)
 			{
-				$permissionValue = (int) $rolePermissions[$permission];
-
-				if ($permissionValue === 1)
-				{
-					return true;
-				}
+				return true; // Return true if we find a role that can perform the given action
 			}
-
-		});
+		}
 
 		return false;
+	}
+
+	/**
+	 * Get the user permission using the permission name
+	 *
+	 * @param $permission
+	 * @return int|null
+	 */
+	public function getPermission($permission)
+	{
+		$userPermissions = $this->permissions()->lists('value', 'name');
+
+		if (array_key_exists($permission, $userPermissions))
+		{
+			return (int) $userPermissions[$permission];
+		}
+
+		return null;
 	}
 
 }
