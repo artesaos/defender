@@ -1,9 +1,13 @@
 <?php namespace Artisans\Guardian\Providers;
 
+use Artisans\Guardian\Role;
 use Artisans\Guardian\Guardian;
-use Illuminate\Support\ServiceProvider as Provider;
+use Artisans\Guardian\Permission;
+use Illuminate\Support\ServiceProvider;
+use Artisans\Guardian\Repositories\Eloquent\EloquentRoleRepository;
+use Artisans\Guardian\Repositories\Eloquent\EloquentPermissionRepository;
 
-class GuardianServiceProvider extends Provider {
+class GuardianServiceProvider extends ServiceProvider {
 
 	/**
 	 * Indicates if loading of the provider is deferred.
@@ -32,6 +36,8 @@ class GuardianServiceProvider extends Provider {
 		{
 			return new Guardian($app);
 		});
+
+		$this->registerEloquentBindings();
 	}
 
 	/**
@@ -42,6 +48,25 @@ class GuardianServiceProvider extends Provider {
 	public function provides()
 	{
 		return [];
+	}
+
+	/**
+	 *
+	 * @return [type] [description]
+	 */
+	protected function registerEloquentBindings()
+	{
+
+		$this->app->bind('Artisans\Guardian\Repositories\RoleRepository', function($app)
+		{
+			return new EloquentRoleRepository(new Role);
+		});
+
+		$this->app->bind('Artisans\Guardian\Repositories\PermissionRepository', function($app)
+		{
+			return new EloquentPermissionRepository(new Permission);
+		});
+
 	}
 
 }
