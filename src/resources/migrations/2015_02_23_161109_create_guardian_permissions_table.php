@@ -3,7 +3,7 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateGuardianRolesTable extends Migration {
+class CreateGuardianPermissionsTable extends Migration {
 
 	/**
 	 * Run the migrations.
@@ -12,7 +12,7 @@ class CreateGuardianRolesTable extends Migration {
 	 */
 	public function up()
 	{
-		Schema::create(config('guardian.role_table', 'roles'), function(Blueprint $table)
+		Schema::create(config('guardian.permission_table', 'permissions'), function(Blueprint $table)
         {
             $table->increments('id');
             $table->string('name')->unique();
@@ -27,7 +27,7 @@ class CreateGuardianRolesTable extends Migration {
 	 */
 	public function down()
 	{
-		Schema::drop(config('guardian.role_table', 'roles'));
+		Schema::drop(config('guardian.permission_table', 'permissions'));
 	}
 
 }

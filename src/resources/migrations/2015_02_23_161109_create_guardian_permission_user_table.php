@@ -12,15 +12,15 @@ class CreateGuardianPermissionUserTable extends Migration {
 	 */
 	public function up()
 	{
-		Schema::create(Config::get('guardian.permission_user_table'), function(Blueprint $table)
+		Schema::create(config('guardian.permission_user_table', 'permission_user'), function(Blueprint $table)
         {
-            $table->integer(Config::get('guardian.permission_key'))->unsigned()->index();
-            $table->foreign(Config::get('guardian.permission_key'))->references('id')
-                  ->on(Config::get('guardian.permission_table'))
+            $table->integer(config('guardian.permission_key', 'permission_id'))->unsigned()->index();
+            $table->foreign(config('guardian.permission_key', 'permission_id'))->references('id')
+                  ->on(config('guardian.permission_table', 'permissions'))
                   ->onDelete('cascade');
 
             $table->integer('user_id')->unsigned()->index();
-            $table->foreign('user_id')->references('id')->on(Config::get('auth.model'))->onDelete('cascade');
+            $table->foreign('user_id')->references('id')->on(config('auth.table', 'users'))->onDelete('cascade');
         });
 	}
 
@@ -31,13 +31,13 @@ class CreateGuardianPermissionUserTable extends Migration {
 	 */
 	public function down()
 	{
-        Schema::table(Config::get('guardian.permission_user_table'), function(Blueprint $table)
+        Schema::table(config('guardian.permission_user_table', 'permission_user'), function(Blueprint $table)
         {
-            $table->dropForeign(Config::get('guardian.permission_user_table').'_'.Config::get('guardian.permission_key').'_foreign');
-            $table->dropForeign(Config::get('guardian.permission_user_table').'_user_id_foreign');
+            $table->dropForeign(config('guardian.permission_user_table', 'permission_user').'_'.config('guardian.permission_key', 'permission_id').'_foreign');
+            $table->dropForeign(config('guardian.permission_user_table', 'permission_user').'_user_id_foreign');
         });
 
-		Schema::drop(Config::get('guardian.permission_user_table'));
+		Schema::drop(config('guardian.permission_user_table', 'permission_user'));
 	}
 
 }
