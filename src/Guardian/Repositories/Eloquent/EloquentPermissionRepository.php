@@ -1,5 +1,6 @@
 <?php namespace Artesaos\Guardian\Repositories\Eloquent;
 
+use Artesaos\Guardian\Exceptions\PermissionExistsException;
 use Artesaos\Guardian\Permission;
 use Artesaos\Guardian\Contracts\Repositories\PermissionRepository;
 use Illuminate\Contracts\Foundation\Application;
@@ -31,8 +32,8 @@ class EloquentPermissionRepository extends AbstractEloquentRepository implements
 	{
 		if ( ! is_null($this->findByName($permissionName)))
 		{
-			// TODO: add translation support and custom exception
-			throw new \Exception('A permission with the given name already exists');
+			// TODO: add translation support
+			throw new PermissionExistsException('A permission with the given name already exists');
 		}
 
 		return $permission = $this->model->newInstance(['name' => $permissionName]);

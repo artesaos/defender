@@ -1,5 +1,6 @@
 <?php namespace Artesaos\Guardian\Repositories\Eloquent;
 
+use Artesaos\Guardian\Exceptions\RoleExistsException;
 use Artesaos\Guardian\Role;
 use Artesaos\Guardian\Contracts\Repositories\RoleRepository;
 use Illuminate\Contracts\Foundation\Application;
@@ -30,8 +31,8 @@ class EloquentRoleRepository extends AbstractEloquentRepository implements RoleR
 	{
 		if ( ! is_null($this->findByName($roleName)))
 		{
-			// TODO: add translation support and custom exception
-			throw new \Exception('A role with the given name already exists');
+			// TODO: add translation support
+			throw new RoleExistsException('A role with the given name already exists');
 		}
 
 		return $role = $this->model->newInstance(['name' => $roleName]);
