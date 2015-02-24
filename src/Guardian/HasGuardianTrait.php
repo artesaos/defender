@@ -92,7 +92,7 @@ trait HasGuardianTrait {
 	 */
 	public function getPermission($permission, $inherit = true)
 	{
-		$userPermissions = $this->permissions->lists('value', 'name');
+		$userPermissions = $this->permissions->lists('pivot.value', 'name');
 
 		if (array_key_exists($permission, $userPermissions))
 		{
