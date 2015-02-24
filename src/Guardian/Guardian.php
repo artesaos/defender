@@ -60,6 +60,28 @@ class Guardian {
 	}
 
 	/**
+	 * Check if a role with the given name exists.
+	 *
+	 * @param $roleName
+	 * @return bool
+	 */
+	public function roleExists($roleName)
+	{
+		return $this->roleRepository->findByName($roleName) !== null;
+	}
+
+	/**
+	 * Check if a permission with the given name exists.
+	 *
+	 * @param $permissionName
+	 * @return bool
+	 */
+	public function permissionExists($permissionName)
+	{
+		return $this->permissionRepository->findByName($permissionName) !== null;
+	}
+
+	/**
 	 * Create a new role.
 	 * Uses a repository to actually create the role.
 	 *

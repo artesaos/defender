@@ -1,5 +1,9 @@
 <?php namespace Artesaos\Guardian;
 
+/**
+ * Class HasGuardianTrait
+ * @package Artesaos\Guardian
+ */
 trait HasGuardianTrait {
 
 	/**
@@ -96,6 +100,77 @@ trait HasGuardianTrait {
 		}
 
 		return $inherit ? 0 : null;
+	}
+
+	/**
+	 * Attach the given role.
+	 *
+	 * @param $role
+	 */
+	public function attachRole($role)
+	{
+		$roleModel = app()['config']->get('guardian.role_model');
+
+		if ($role instanceof $roleModel)
+		{
+			return $this->roles()->attach($role->id);
+		}
+
+		return $this->roles()->attach($role);
+	}
+
+	/**
+	 * Detach the given role from the model.
+	 *
+	 * @param $role
+	 * @return int
+	 */
+	public function detachRole($role)
+	{
+		$roleModel = app()['config']->get('guardian.role_model');
+
+		if ($role instanceof $roleModel)
+		{
+			return $this->roles()->detach($role->id);
+		}
+
+		return $this->roles()->detach($role);
+	}
+
+	/**
+	 * Attach the given permission.
+	 *
+	 * @param $permission
+	 * @param $value
+	 */
+	public function attachPermission($permission, $value)
+	{
+		$permissionModel = app()['config']->get('guardian.permission_model');
+
+		if ($permission instanceof $permissionModel)
+		{
+			return $this->permissions()->attach($permission->id, ['value' => $value]);
+		}
+
+		return $this->permissions()->attach($permission, ['value' => $value]);
+	}
+
+	/**
+	 * Detach the given permission from the model.
+	 *
+	 * @param $permission
+	 * @return int
+	 */
+	public function detachPermission($permission)
+	{
+		$permissionModel = app()['config']->get('guardian.permission_model');
+
+		if ($permissionModel instanceof $permissionModel)
+		{
+			$this->permissions()->detach($permission->id);
+		}
+
+		return $this->permissions()->detach($permission);
 	}
 
 }
