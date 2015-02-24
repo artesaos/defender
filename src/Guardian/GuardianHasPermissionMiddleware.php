@@ -50,7 +50,7 @@ class GuardianHasPermissionMiddleware {
 	 */
 	private function getPermission($request)
 	{
-		$routeActions = $request->getRoute()->getActions();
+		$routeActions = $request->route()->getAction();
 
 		return array_get($routeActions, 'permission', false);
 	}
