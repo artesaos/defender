@@ -7,7 +7,7 @@ use Illuminate\Contracts\Auth\Guard;
  * Class GuardianHasPermissionMiddleware
  * @package Artesaos\Guardian
  */
-class GuardianHasPermissionMiddleware {
+class NeedsPermissionMiddleware {
 
 	/**
 	 * @var
