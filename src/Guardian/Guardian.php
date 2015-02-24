@@ -17,9 +17,18 @@ class Guardian {
 	protected $app;
 
 	/**
+	 * The RoleRepository implementation
+	 *
 	 * @var RoleRepository
 	 */
 	private $roleRepository;
+
+	/**
+	 * The PermissionRepository implementation
+	 *
+	 * @var PermissionRepository
+	 */
+	protected $permissionRepository;
 
 	/**
 	 * Class constructor
@@ -36,7 +45,7 @@ class Guardian {
 	}
 
 	/**
-	 * [user description]
+	 * Get the current authenticated user
 	 *
 	 * @return \Illuminate\Contracts\Auth\Authenticatable|null
 	 */
@@ -46,6 +55,8 @@ class Guardian {
 	}
 
 	/**
+	 * Check if the authenticated user can has the given permission
+	 *
 	 * @param $permission
 	 * @return bool
 	 */
@@ -54,6 +65,22 @@ class Guardian {
 		if ( ! is_null($this->getUser()))
 		{
 			return $this->getUser()->can($permission);
+		}
+
+		return false;
+	}
+
+	/**
+	 * Return if the authenticated user has the given role
+	 *
+	 * @param $roleName
+	 * @return bool
+	 */
+	public function hasRole($roleName)
+	{
+		if ( ! is_null($this->getUser()))
+		{
+			return $this->getUser()->hasRole($roleName);
 		}
 
 		return false;
@@ -82,11 +109,33 @@ class Guardian {
 	}
 
 	/**
+	 * Get the role with the given name.
+	 *
+	 * @param $roleName
+	 * @return \Artesaos\Guardian\Role|null
+	 */
+	public function getRole($roleName)
+	{
+		return $this->roleRepository->findByName($roleName);
+	}
+
+	/**
+	 * Get the permission with the given name
+	 *
+	 * @param $permissionName
+	 * @return \Artesaos\Guardian\Permission|null
+	 */
+	public function getPermission($permissionName)
+	{
+		return $this->permissionRepository->findByName($permissionName);
+	}
+
+	/**
 	 * Create a new role.
 	 * Uses a repository to actually create the role.
 	 *
 	 * @param $roleName
-	 * @return mixed
+	 * @return \Artesaos\Guardian\Role
 	 */
 	public function createRole($roleName)
 	{
@@ -95,7 +144,7 @@ class Guardian {
 
 	/**
 	 * @param $permissionName
-	 * @return mixed
+	 * @return \Artesaos\Guardian\Permission
 	 */
 	public function createPermission($permissionName)
 	{

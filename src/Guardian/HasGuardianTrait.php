@@ -38,7 +38,7 @@ trait HasGuardianTrait {
 	 */
 	public function hasRole($role)
 	{
-		$roles = $this->roles()->lists('name');
+		$roles = $this->roles->lists('name');
 
 		return in_array($role, $roles);
 	}
@@ -92,7 +92,7 @@ trait HasGuardianTrait {
 	 */
 	public function getPermission($permission, $inherit = true)
 	{
-		$userPermissions = $this->permissions()->lists('value', 'name');
+		$userPermissions = $this->permissions->lists('value', 'name');
 
 		if (array_key_exists($permission, $userPermissions))
 		{

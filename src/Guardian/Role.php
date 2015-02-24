@@ -66,7 +66,7 @@ class Role extends Model {
 	 */
 	public function getPermission($permission)
 	{
-		$rolePermissions = $this->permissions()->lists('value', 'name');
+		$rolePermissions = $this->permissions->lists('value', 'name');
 
 		if (array_key_exists($permission, $rolePermissions))
 		{
