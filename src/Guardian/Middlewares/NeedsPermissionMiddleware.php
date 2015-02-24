@@ -1,4 +1,4 @@
-<?php  namespace Artesaos\Guardian;
+<?php  namespace Artesaos\Guardian\Middlewares;
 
 use Closure;
 use Illuminate\Contracts\Auth\Guard;
@@ -29,19 +29,17 @@ class GuardianHasPermissionMiddleware {
 	 */
 	public function handle($request, Closure $next)
 	{
-		//TODO: find a way to get the permission name
 		$permission = $this->getPermission($request);
 
 		if ($permission)
 		{
-			if ($this->auth->user()->can($permission))
+			if ( ! $this->auth->user()->can($permission))
 			{
-				return $next($request);
+				return response('Forbidden', 403); // TODO: Exception?
 			}
 		}
 
-		return response('Forbidden', 403);
-		//return $next($request);
+		return $next($request);
 	}
 
 	/**
