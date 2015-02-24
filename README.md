@@ -25,7 +25,7 @@ composer require artesaos/guardian
 ```
 
 ##### 2 - Provider
-You nees to update your application configuration in order to register the package so it can be loaded by Laravel, just update your `config/app.php` file adding the following code at the end of your `'providers'` section:
+You need to update your application configuration in order to register the package so it can be loaded by Laravel, just update your `config/app.php` file adding the following code at the end of your `'providers'` section:
 
 > `config/app.php`
 ```php
@@ -38,7 +38,7 @@ You nees to update your application configuration in order to register the packa
 ```
 
 ##### 3 - Facade (optional)
-In order to use the `Guardian` facade, you need to resiter it on the `config/app.php` file, you can do that the following way:
+In order to use the `Guardian` facade, you need to register it on the `config/app.php` file, you can do that the following way:
 
 > `config/app.php`
 ```php
