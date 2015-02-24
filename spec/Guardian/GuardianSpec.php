@@ -23,14 +23,14 @@ class GuardianSpec extends ObjectBehavior {
 	{
 		$auth->user()->shouldBeCalled()->willReturn(null);
 		$app->offsetGet('auth')->shouldBeCalled()->willReturn($auth);
-		$this->user()->shouldReturn(null);
+		$this->getUser()->shouldReturn(null);
 	}
 
 	function it_should_return_a_authenticable_user(ArrayAccess $app, Guard $auth, Authenticatable $user)
 	{
 		$auth->user()->shouldBeCalled()->willReturn($user);
 		$app->offsetGet('auth')->shouldBeCalled()->willReturn($auth);
-		$this->user()->shouldHaveType('Illuminate\Contracts\Auth\Authenticatable');
+		$this->getUser()->shouldHaveType('Illuminate\Contracts\Auth\Authenticatable');
 	}
 
 	function it_should_return_false_on_can_when_user_is_null(ArrayAccess $app, Guard $auth)

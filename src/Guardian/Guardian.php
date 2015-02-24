@@ -30,7 +30,7 @@ class Guardian {
 	 *
 	 * @return \Illuminate\Contracts\Auth\Authenticatable|null
 	 */
-	public function user()
+	public function getUser()
 	{
 		return $this->app['auth']->user();
 	}
@@ -41,9 +41,9 @@ class Guardian {
 	 */
 	public function can($permission)
 	{
-		if ( ! is_null($this->user()))
+		if ( ! is_null($this->getUser()))
 		{
-			return $this->user()->can($permission);
+			return $this->getUser()->can($permission);
 		}
 
 		return false;
