@@ -53,6 +53,18 @@ trait HasGuardianTrait {
 			return $userPermission > 0;
 		}
 
+		return $this->canWithRolesPermissions($permission);
+	}
+
+	/**
+	 * Check if the user has the given permission using
+	 * only his roles.
+	 *
+	 * @param $permission
+	 * @return bool
+	 */
+	public function canWithRolesPermissions($permission)
+	{
 		// Search roles permission
 		foreach ($this->roles as $role)
 		{
@@ -60,7 +72,7 @@ trait HasGuardianTrait {
 
 			if ($rolePermission > 0)
 			{
-				return true; // Return true if we find a role that can perform the given action
+				return true;
 			}
 		}
 
@@ -68,12 +80,13 @@ trait HasGuardianTrait {
 	}
 
 	/**
-	 * Get the user permission using the permission name
+	 * Get the user permission using the permission name.
 	 *
 	 * @param $permission
+	 * @param bool $inherit
 	 * @return int|null
 	 */
-	public function getPermission($permission)
+	public function getPermission($permission, $inherit = true)
 	{
 		$userPermissions = $this->permissions()->lists('value', 'name');
 
@@ -82,7 +95,7 @@ trait HasGuardianTrait {
 			return (int) $userPermissions[$permission];
 		}
 
-		return 0;
+		return $inherit ? 0 : null;
 	}
 
 }

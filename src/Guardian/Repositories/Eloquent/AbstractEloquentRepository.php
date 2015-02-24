@@ -39,4 +39,14 @@ abstract class AbstractEloquentRepository {
 		return $this->model->find($id);
 	}
 
+	/**
+	 *
+	 * @param $name
+	 * @return mixed
+	 */
+	public function findByName($name)
+	{
+		return $this->model->where('name', '=', $name)->first();
+	}
+
 }

@@ -10,9 +10,20 @@ use Illuminate\Database\Eloquent\Model;
 class Role extends Model {
 
 	/**
+	 * Table name
+	 *
 	 * @var string
 	 */
 	protected $table;
+
+	/**
+	 * Mass-assignment whitelist
+	 *
+	 * @var array
+	 */
+	protected $fillable = [
+		'name'
+	];
 
 	/**
 	 * @param array $attributes

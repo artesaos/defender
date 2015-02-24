@@ -4,4 +4,6 @@ interface RoleRepository {
 
 	public function findByName($roleName);
 
+	public function create($roleName);
+
 }

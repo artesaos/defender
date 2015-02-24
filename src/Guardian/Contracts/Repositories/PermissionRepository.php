@@ -2,5 +2,6 @@
 
 interface PermissionRepository {
 
+	public function create($permissionName);
 
 }

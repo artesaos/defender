@@ -33,12 +33,12 @@ class GuardianServiceProvider extends ServiceProvider {
 	 */
 	public function register()
 	{
-		$this->app->bindShared('guardian', function ($app)
+		$this->app->singleton('guardian', function($app)
 		{
-			return new Guardian($app);
+			return new Guardian($app, $app['guardian.role'], $app['guardian.permission']);
 		});
 
-		$this->registerEloquentBindings();
+		$this->registerRepositoryInterfaces();
 	}
 
 	/**
@@ -54,19 +54,27 @@ class GuardianServiceProvider extends ServiceProvider {
 	/**
 	 * Bind repositories interfaces with their implementations
 	 */
-	protected function registerEloquentBindings()
+	protected function registerRepositoryInterfaces()
 	{
-
-		$this->app->bindShared('Artesaos\Guardian\Repositories\RoleRepository', function ($app)
+		$this->app->bindShared('guardian.role', function($app)
 		{
 			return new EloquentRoleRepository($app, new Role);
 		});
 
-		$this->app->bindShared('Artesaos\Guardian\Repositories\PermissionRepository', function ($app)
+		$this->app->bindShared('Artesaos\Guardian\Repositories\RoleRepository', function($app)
+		{
+			return $app['guardian.role'];
+		});
+
+		$this->app->bindShared('guardian.permission', function ($app)
 		{
 			return new EloquentPermissionRepository($app, new Permission);
 		});
 
+		$this->app->bindShared('Artesaos\Guardian\Repositories\PermissionRepository', function($app)
+		{
+			return $app['guardian.permission'];
+		});
 	}
 
 	/**

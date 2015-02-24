@@ -20,4 +20,22 @@ class EloquentPermissionRepository extends AbstractEloquentRepository implements
 		parent::__construct($app, $model);
 	}
 
+	/**
+	 * Create a new permission using the given name
+	 *
+	 * @param $permissionName
+	 * @return static
+	 * @throws \Exception
+	 */
+	public function create($permissionName)
+	{
+		if ( ! is_null($this->findByName($permissionName)))
+		{
+			// TODO: add translation support and custom exception
+			throw new \Exception('A permission with the given name already exists');
+		}
+
+		return $permission = $this->model->newInstance(['name' => $permissionName]);
+	}
+
 }
