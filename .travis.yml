@@ -13,4 +13,5 @@ before_script:
 notifications:
   slack: laravel-br:cdt7z4D0Eybo0eJrH7tOErzh  
   
-script: phpunit
+script:
+  - vendor/bin/phpspec run -v

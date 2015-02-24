@@ -1,4 +1,4 @@
 suites:
     guardian_suite:
-        namespace: Artisans\Guardian
-        psr4_prefix: Artisans
+        namespace: Artesaos\Guardian
+        psr4_prefix: Artesaos

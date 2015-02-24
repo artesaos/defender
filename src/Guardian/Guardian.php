@@ -35,9 +35,18 @@ class Guardian {
 		return $this->app['auth']->user();
 	}
 
-	public function can()
+	/**
+	 * @param $permission
+	 * @return bool
+	 */
+	public function can($permission)
 	{
-		return true;
+		if ( ! is_null($this->user()))
+		{
+			return $this->user()->can($permission);
+		}
+
+		return false;
 	}
 
 }
