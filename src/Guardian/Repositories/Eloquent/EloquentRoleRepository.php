@@ -35,7 +35,7 @@ class EloquentRoleRepository extends AbstractEloquentRepository implements RoleR
 			throw new RoleExistsException('A role with the given name already exists');
 		}
 
-		return $role = $this->model->newInstance(['name' => $roleName]);
+		return $role = $this->model->create(['name' => $roleName]);
 	}
 
 }

@@ -36,7 +36,7 @@ class EloquentPermissionRepository extends AbstractEloquentRepository implements
 			throw new PermissionExistsException('A permission with the given name already exists');
 		}
 
-		return $permission = $this->model->newInstance(['name' => $permissionName]);
+		return $permission = $this->model->create(['name' => $permissionName]);
 	}
 
 }
