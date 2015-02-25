@@ -1,9 +1,7 @@
 <?php namespace Artesaos\Guardian\Contracts\Repositories;
 
-interface PermissionRepository {
+interface PermissionRepository extends AbstractRepository {
 
-	public function create($permissionName);
-
-	public function findByName($permissionName);
+	public function create($permissionName, $displayName = null);
 
 }

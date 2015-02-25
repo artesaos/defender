@@ -44,6 +44,9 @@ trait HasGuardianTrait {
 	}
 
 	/**
+	 * Returns if the current user has the given permission.
+	 * User permissions override role permissions.
+	 *
 	 * @param $permission
 	 * @return bool
 	 */
@@ -51,13 +54,7 @@ trait HasGuardianTrait {
 	{
 		$userPermission = $this->getPermission($permission);
 
-		// 0 = inherit from roles
-		if ($userPermission !== 0)
-		{
-			return $userPermission > 0;
-		}
-
-		return $this->canWithRolesPermissions($permission);
+		return is_null($userPermission) ? $this->canWithRolesPermissions($permission) : $userPermission;
 	}
 
 	/**
@@ -72,9 +69,7 @@ trait HasGuardianTrait {
 		// Search roles permission
 		foreach ($this->roles as $role)
 		{
-			$rolePermission = $role->getPermission($permission);
-
-			if ($rolePermission > 0)
+			if ($rolePermission = $role->getPermission($permission))
 			{
 				return true;
 			}
@@ -88,7 +83,7 @@ trait HasGuardianTrait {
 	 *
 	 * @param $permission
 	 * @param bool $inherit
-	 * @return int|null
+	 * @return bool|null
 	 */
 	public function getPermission($permission, $inherit = true)
 	{
@@ -96,10 +91,10 @@ trait HasGuardianTrait {
 
 		if (array_key_exists($permission, $userPermissions))
 		{
-			return (int) $userPermissions[$permission];
+			return (bool) $userPermissions[$permission];
 		}
 
-		return $inherit ? 0 : null;
+		return $inherit ? null : false;
 	}
 
 	/**

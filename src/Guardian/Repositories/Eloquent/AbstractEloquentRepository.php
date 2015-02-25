@@ -1,5 +1,6 @@
 <?php namespace Artesaos\Guardian\Repositories\Eloquent;
 
+use Artesaos\Guardian\Contracts\Repositories\AbstractRepository;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Database\Eloquent\Model;
 
@@ -8,7 +9,7 @@ use Illuminate\Database\Eloquent\Model;
  *
  * @package Artesaos\Guardian\Repositories\Eloquent
  */
-abstract class AbstractEloquentRepository {
+abstract class AbstractEloquentRepository implements AbstractRepository {
 
 	/**
 	 * @var Application
@@ -31,6 +32,17 @@ abstract class AbstractEloquentRepository {
 	}
 
 	/**
+	 * Return a new instance of the current model
+	 *
+	 * @param array $attributes
+	 * @return static
+	 */
+	public function newInstance(array $attributes = array())
+	{
+		return $this->model->newInstance($attributes);
+	}
+
+	/**
 	 * @param $id
 	 * @return \Illuminate\Support\Collection|null|static
 	 */
@@ -47,6 +59,16 @@ abstract class AbstractEloquentRepository {
 	public function findByName($name)
 	{
 		return $this->model->where('name', '=', $name)->first();
+	}
+
+	/**
+	 *
+	 * @param $value
+	 * @param $key
+	 */
+	public function getList($value, $key)
+	{
+		return $this->model->lists($value, $key);
 	}
 
 }

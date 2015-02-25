@@ -62,7 +62,7 @@ class Role extends Model {
 	 * Get role permission using the permission name
 	 *
 	 * @param $permission
-	 * @return int|null
+	 * @return bool
 	 */
 	public function getPermission($permission)
 	{
@@ -70,10 +70,10 @@ class Role extends Model {
 
 		if (array_key_exists($permission, $rolePermissions))
 		{
-			return (int) $rolePermissions[$permission];
+			return (bool) $rolePermissions[$permission];
 		}
 
-		return null;
+		return false;
 	}
 
 }

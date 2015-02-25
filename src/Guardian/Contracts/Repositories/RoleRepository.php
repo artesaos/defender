@@ -1,8 +1,6 @@
 <?php namespace Artesaos\Guardian\Contracts\Repositories;
 
-interface RoleRepository {
-
-	public function findByName($roleName);
+interface RoleRepository extends AbstractRepository {
 
 	public function create($roleName);
 

@@ -114,9 +114,14 @@ class Guardian {
 	 * @param $roleName
 	 * @return \Artesaos\Guardian\Role|null
 	 */
-	public function getRole($roleName)
+	public function findRole($roleName)
 	{
 		return $this->roleRepository->findByName($roleName);
+	}
+
+	public function findRoleById($roleId)
+	{
+		return $this->roleRepository->findById($roleId);
 	}
 
 	/**
@@ -128,6 +133,11 @@ class Guardian {
 	public function getPermission($permissionName)
 	{
 		return $this->permissionRepository->findByName($permissionName);
+	}
+
+	public function permissionsList()
+	{
+		return $this->permissionRepository->getList('name', 'id');
 	}
 
 	/**

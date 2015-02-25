@@ -25,18 +25,24 @@ class EloquentPermissionRepository extends AbstractEloquentRepository implements
 	 * Create a new permission using the given name
 	 *
 	 * @param $permissionName
+	 * @param null $displayName
 	 * @return static
-	 * @throws \Exception
+	 * @throws PermissionExistsException
 	 */
-	public function create($permissionName)
+	public function create($permissionName, $displayName = null)
 	{
 		if ( ! is_null($this->findByName($permissionName)))
 		{
-			// TODO: add translation support
-			throw new PermissionExistsException('A permission with the given name already exists');
+			throw new PermissionExistsException('The permission '.$permissionName.' already exists'); // TODO: add translation support
 		}
 
-		return $permission = $this->model->create(['name' => $permissionName]);
+		// Do we have a display_name set?
+		is_null($displayName) and $displayName = $permissionName;
+
+		return $permission = $this->model->create([
+			'name'  => $permissionName,
+			'display_name' => $displayName
+		]);
 	}
 
 }
