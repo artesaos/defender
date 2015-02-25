@@ -5,7 +5,7 @@ use Illuminate\Database\Eloquent\Relations\Pivot;
 class PermissionUserPivot extends Pivot {
 
 	protected $casts = [
-		'value'
+		'value' => 'integer'
 	];
 
 }
