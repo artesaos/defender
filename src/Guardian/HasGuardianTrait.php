@@ -92,7 +92,7 @@ trait HasGuardianTrait {
 
 		if (array_key_exists($permission, $userPermissions))
 		{
-			return (bool) $userPermissions[$permission];
+			return $userPermissions[$permission];
 		}
 
 		return $inherit ? null : false;
@@ -169,6 +169,13 @@ trait HasGuardianTrait {
 		return $this->permissions()->detach($permission);
 	}
 
+	/**
+	 * @param Model $parent
+	 * @param array $attributes
+	 * @param $table
+	 * @param $exists
+	 * @return PermissionUserPivot
+	 */
 	public function newPivot(Model $parent, array $attributes, $table, $exists)
 	{
 		$permissionModel = app()['config']->get('guardian.permission_model');

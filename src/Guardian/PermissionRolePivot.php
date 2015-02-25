@@ -3,10 +3,10 @@
 use Illuminate\Database\Eloquent\Relations\Pivot;
 
 /**
- * Class PermissionUserPivot
+ * Class PermissionRolePivot
  * @package Artesaos\Guardian
  */
-class PermissionUserPivot extends Pivot {
+class PermissionRolePivot extends Pivot {
 
 	/**
 	 * @var array

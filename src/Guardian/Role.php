@@ -70,10 +70,30 @@ class Role extends Model {
 
 		if (array_key_exists($permission, $rolePermissions))
 		{
-			return (bool) $rolePermissions[$permission];
+			return $rolePermissions[$permission];
 		}
 
 		return false;
 	}
+
+	/**
+	 * @param Model $parent
+	 * @param array $attributes
+	 * @param string $table
+	 * @param bool $exists
+	 * @return PermissionRolePivot|\Illuminate\Database\Eloquent\Relations\Pivot
+	 */
+	public function newPivot(Model $parent, array $attributes, $table, $exists)
+	{
+		$permissionModel = app()['config']->get('guardian.permission_model');
+
+		if ($parent instanceof $permissionModel)
+		{
+			return new PermissionRolePivot($parent, $attributes, $table, $exists);
+		}
+
+		return parent::newPivot($parent, $attributes, $table, $exists);
+	}
+
 
 }
