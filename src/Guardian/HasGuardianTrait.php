@@ -54,7 +54,7 @@ trait HasGuardianTrait {
 	{
 		$userPermission = $this->getPermission($permission);
 
-		return is_null($userPermission) ? $this->canWithRolesPermissions($permission) : $userPermission;
+		return is_null($userPermission) ? $this->canWithRolePermissions($permission) : $userPermission;
 	}
 
 	/**
@@ -64,7 +64,7 @@ trait HasGuardianTrait {
 	 * @param $permission
 	 * @return bool
 	 */
-	public function canWithRolesPermissions($permission)
+	public function canWithRolePermissions($permission)
 	{
 		// Search roles permission
 		foreach ($this->roles as $role)
