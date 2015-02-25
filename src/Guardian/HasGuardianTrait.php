@@ -1,4 +1,5 @@
 <?php namespace Artesaos\Guardian;
+use Illuminate\Database\Eloquent\Model;
 
 /**
  * Class HasGuardianTrait
@@ -166,6 +167,18 @@ trait HasGuardianTrait {
 		}
 
 		return $this->permissions()->detach($permission);
+	}
+
+	public function newPivot(Model $parent, array $attributes, $table, $exists)
+	{
+		$permissionModel = app()['config']->get('guardian.permission_model');
+
+		if ($parent instanceof $permissionModel)
+		{
+			return new PermissionUserPivot($parent, $attributes, $table, $exists);
+		}
+
+		return parent::newPivot($parent, $attributes, $table, $exists);
 	}
 
 }
