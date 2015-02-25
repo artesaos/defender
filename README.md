@@ -10,12 +10,15 @@ With Secutiry and Usability in mind, this project aims to provide you a safe way
 
 > Statistics
 
-<a href="http://zenhub.io" target="_blank"><img src="https://raw.githubusercontent.com/ZenHubIO/support/master/zenhub-badge.png" height="18px" alt="Powered by ZenHub"/></a>
 [![Latest Stable Version](https://poser.pugx.org/artesaos/guardian/v/stable.svg)](https://packagist.org/packages/artesaos/guardian)
 [![Latest Unstable Version](https://poser.pugx.org/artesaos/guardian/v/unstable.svg)](https://packagist.org/packages/artesaos/guardian) [![License](https://poser.pugx.org/artesaos/guardian/license.svg)](https://packagist.org/packages/artesaos/guardian)
 [![Total Downloads](https://poser.pugx.org/artesaos/guardian/downloads.svg)](https://packagist.org/packages/artesaos/guardian)
 [![Monthly Downloads](https://poser.pugx.org/artesaos/guardian/d/monthly.png)](https://packagist.org/packages/artesaos/guardian)
 [![Daily Downloads](https://poser.pugx.org/artesaos/guardian/d/daily.png)](https://packagist.org/packages/artesaos/guardian)
+
+> Tips
+
+<a href="http://zenhub.io" target="_blank"><img src="https://raw.githubusercontent.com/ZenHubIO/support/master/zenhub-badge.png" height="18px" alt="Powered by ZenHub"/></a>
 
 ### Install
 
