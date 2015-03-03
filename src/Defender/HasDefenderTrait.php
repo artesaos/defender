@@ -3,6 +3,7 @@ use Illuminate\Database\Eloquent\Model;
 
 /**
  * Class HasDefenderTrait
+ *
  * @package Artesaos\Defender
  */
 trait HasDefenderTrait {
@@ -105,13 +106,6 @@ trait HasDefenderTrait {
 	 */
 	public function attachRole($role)
 	{
-		$roleModel = app()['config']->get('defender.role_model');
-
-		if ($role instanceof $roleModel)
-		{
-			return $this->roles()->attach($role->id);
-		}
-
 		return $this->roles()->attach($role);
 	}
 
@@ -123,13 +117,6 @@ trait HasDefenderTrait {
 	 */
 	public function detachRole($role)
 	{
-		$roleModel = app()['config']->get('defender.role_model');
-
-		if ($role instanceof $roleModel)
-		{
-			return $this->roles()->detach($role->id);
-		}
-
 		return $this->roles()->detach($role);
 	}
 
@@ -141,13 +128,6 @@ trait HasDefenderTrait {
 	 */
 	public function attachPermission($permission, $value)
 	{
-		$permissionModel = app()['config']->get('defender.permission_model');
-
-		if ($permission instanceof $permissionModel)
-		{
-			return $this->permissions()->attach($permission->id, ['value' => $value]);
-		}
-
 		return $this->permissions()->attach($permission, ['value' => $value]);
 	}
 
@@ -159,13 +139,6 @@ trait HasDefenderTrait {
 	 */
 	public function detachPermission($permission)
 	{
-		$permissionModel = app()['config']->get('defender.permission_model');
-
-		if ($permissionModel instanceof $permissionModel)
-		{
-			$this->permissions()->detach($permission->id);
-		}
-
 		return $this->permissions()->detach($permission);
 	}
 

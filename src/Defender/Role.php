@@ -4,7 +4,7 @@ use Illuminate\Database\Eloquent\Model;
 
 /**
  * Class Role
- *
+ * @property $permissions
  * @package Artesaos\Defender
  */
 class Role extends Model {
@@ -60,13 +60,24 @@ class Role extends Model {
 
 	/**
 	 * Attach permission
-	 * TODO: add using ids
 	 *
 	 * @param $permission
+	 * @param $value
 	 */
-	public function attachPermission($permission)
+	public function attachPermission($permission, $value)
 	{
-		return $this->permissions()->attach($permission);
+		return $this->permissions()->attach($permission, ['value' => $value]);
+	}
+
+	/**
+	 * Detach the given permission from the model.
+	 *
+	 * @param $permission
+	 * @return int
+	 */
+	public function detachPermission($permission)
+	{
+		return $this->permissions()->detach($permission);
 	}
 
 	/**
