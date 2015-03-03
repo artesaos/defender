@@ -40,7 +40,7 @@ class Permission extends Model {
 	{
 		return $this->belongsToMany(
 			config('defender.role_model'), config('defender.permission_role_table'), config('defender.permission_key'), config('defender.role_key')
-		)->withPivot('value');
+		)->withPivot('value', 'expires');
 	}
 
 	/**
@@ -52,7 +52,7 @@ class Permission extends Model {
 	{
 		return $this->belongsToMany(
 			config('auth.model'), config('defender.permission_user_table'), config('defender.permission_key'), 'user_id'
-		)->withPivot('value');
+		)->withPivot('value', 'expires');
 	}
 
 	/**

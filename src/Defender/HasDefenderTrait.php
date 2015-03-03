@@ -28,7 +28,7 @@ trait HasDefenderTrait {
 	{
 		return $this->belongsToMany(
 			config('defender.permission_model'), config('defender.permission_user_table'), 'user_id', config('defender.permission_key')
-		)->withPivot('value');
+		)->withPivot('value', 'expires');
 	}
 
 	/**

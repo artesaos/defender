@@ -55,7 +55,7 @@ class Role extends Model {
 	{
 		return $this->belongsToMany(
 			config('defender.permission_model'), config('defender.permission_role_table'), config('defender.role_key'), config('defender.permission_key')
-		)->withPivot('value');
+		)->withPivot('value', 'expires');
 	}
 
 	/**
