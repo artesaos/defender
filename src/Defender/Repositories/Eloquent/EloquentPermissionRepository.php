@@ -25,11 +25,11 @@ class EloquentPermissionRepository extends AbstractEloquentRepository implements
 	 * Create a new permission using the given name
 	 *
 	 * @param $permissionName
-	 * @param null $displayName
+	 * @param null $readableName
 	 * @return static
 	 * @throws PermissionExistsException
 	 */
-	public function create($permissionName, $displayName = null)
+	public function create($permissionName, $readableName = null)
 	{
 		if ( ! is_null($this->findByName($permissionName)))
 		{
@@ -37,11 +37,11 @@ class EloquentPermissionRepository extends AbstractEloquentRepository implements
 		}
 
 		// Do we have a display_name set?
-		is_null($displayName) and $displayName = $permissionName;
+		is_null($readableName) and $readableName = $permissionName;
 
 		return $permission = $this->model->create([
 			'name'  => $permissionName,
-			'display_name' => $displayName
+			'readable_name' => $readableName
 		]);
 	}
 

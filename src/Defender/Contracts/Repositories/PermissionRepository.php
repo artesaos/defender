@@ -2,6 +2,6 @@
 
 interface PermissionRepository extends AbstractRepository {
 
-	public function create($permissionName, $displayName = null);
+	public function create($permissionName, $readableName = null);
 
 }
