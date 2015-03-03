@@ -121,6 +121,17 @@ trait HasDefenderTrait {
 	}
 
 	/**
+	 * Sync the given roles
+	 *
+	 * @param array $roles
+	 * @return array
+	 */
+	public function syncRoles(array $roles)
+	{
+		return $this->roles()->sync($roles);
+	}
+
+	/**
 	 * Attach the given permission.
 	 *
 	 * @param $permission
@@ -140,6 +151,27 @@ trait HasDefenderTrait {
 	public function detachPermission($permission)
 	{
 		return $this->permissions()->detach($permission);
+	}
+
+	/**
+	 * Sync the given permissions
+	 *
+	 * @param array $permissions
+	 * @return array
+	 */
+	public function syncPermissions(array $permissions)
+	{
+		return $this->permissions()->sync($permissions);
+	}
+
+	/**
+	 * Revoke all user permissions
+	 *
+	 * @return int
+	 */
+	public function revokePermissions()
+	{
+		return $this->permissions()->detach();
 	}
 
 	/**

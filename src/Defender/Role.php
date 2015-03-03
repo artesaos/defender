@@ -4,7 +4,6 @@ use Illuminate\Database\Eloquent\Model;
 
 /**
  * Class Role
- * @property $permissions
  * @package Artesaos\Defender
  */
 class Role extends Model {
@@ -78,6 +77,27 @@ class Role extends Model {
 	public function detachPermission($permission)
 	{
 		return $this->permissions()->detach($permission);
+	}
+
+	/**
+	 * Sync permissions
+	 *
+	 * @param array $permissions
+	 * @return array
+	 */
+	public function syncPermissions(array $permissions)
+	{
+		return $this->permissions()->sync($permissions);
+	}
+
+	/**
+	 * Revoke all role permissions
+	 *
+	 * @return int
+	 */
+	public function revokePermissions()
+	{
+		return $this->permissions()->detach();
 	}
 
 	/**
