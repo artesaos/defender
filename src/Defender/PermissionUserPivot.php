@@ -15,4 +15,11 @@ class PermissionUserPivot extends Pivot {
 		'value' => 'boolean'
 	];
 
+	/**
+	 * @var array
+	 */
+	protected $dates = [
+		'expires'
+	];
+
 }
