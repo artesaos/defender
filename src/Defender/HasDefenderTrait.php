@@ -1,11 +1,11 @@
-<?php namespace Artesaos\Guardian;
+<?php namespace Artesaos\Defender;
 use Illuminate\Database\Eloquent\Model;
 
 /**
- * Class HasGuardianTrait
- * @package Artesaos\Guardian
+ * Class HasDefenderTrait
+ * @package Artesaos\Defender
  */
-trait HasGuardianTrait {
+trait HasDefenderTrait {
 
 	/**
 	 * Many-to-many role-user relationship
@@ -15,7 +15,7 @@ trait HasGuardianTrait {
 	public function roles()
 	{
 		return $this->belongsToMany(
-			config('guardian.role_model'), config('guardian.role_user_table'), 'user_id', config('guardian.role_key')
+			config('defender.role_model'), config('defender.role_user_table'), 'user_id', config('defender.role_key')
 		);
 	}
 
@@ -27,7 +27,7 @@ trait HasGuardianTrait {
 	public function permissions()
 	{
 		return $this->belongsToMany(
-			config('guardian.permission_model'), config('guardian.permission_user_table'), 'user_id', config('guardian.permission_key')
+			config('defender.permission_model'), config('defender.permission_user_table'), 'user_id', config('defender.permission_key')
 		)->withPivot('value');
 	}
 
@@ -105,7 +105,7 @@ trait HasGuardianTrait {
 	 */
 	public function attachRole($role)
 	{
-		$roleModel = app()['config']->get('guardian.role_model');
+		$roleModel = app()['config']->get('defender.role_model');
 
 		if ($role instanceof $roleModel)
 		{
@@ -123,7 +123,7 @@ trait HasGuardianTrait {
 	 */
 	public function detachRole($role)
 	{
-		$roleModel = app()['config']->get('guardian.role_model');
+		$roleModel = app()['config']->get('defender.role_model');
 
 		if ($role instanceof $roleModel)
 		{
@@ -141,7 +141,7 @@ trait HasGuardianTrait {
 	 */
 	public function attachPermission($permission, $value)
 	{
-		$permissionModel = app()['config']->get('guardian.permission_model');
+		$permissionModel = app()['config']->get('defender.permission_model');
 
 		if ($permission instanceof $permissionModel)
 		{
@@ -159,7 +159,7 @@ trait HasGuardianTrait {
 	 */
 	public function detachPermission($permission)
 	{
-		$permissionModel = app()['config']->get('guardian.permission_model');
+		$permissionModel = app()['config']->get('defender.permission_model');
 
 		if ($permissionModel instanceof $permissionModel)
 		{
@@ -178,7 +178,7 @@ trait HasGuardianTrait {
 	 */
 	public function newPivot(Model $parent, array $attributes, $table, $exists)
 	{
-		$permissionModel = app()['config']->get('guardian.permission_model');
+		$permissionModel = app()['config']->get('defender.permission_model');
 
 		if ($parent instanceof $permissionModel)
 		{

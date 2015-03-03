@@ -1,13 +1,13 @@
-<?php namespace Artesaos\Guardian\Repositories\Eloquent;
+<?php namespace Artesaos\Defender\Repositories\Eloquent;
 
-use Artesaos\Guardian\Contracts\Repositories\AbstractRepository;
+use Artesaos\Defender\Contracts\Repositories\AbstractRepository;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Database\Eloquent\Model;
 
 /**
  * Class AbstractEloquentRepository
  *
- * @package Artesaos\Guardian\Repositories\Eloquent
+ * @package Artesaos\Defender\Repositories\Eloquent
  */
 abstract class AbstractEloquentRepository implements AbstractRepository {
 

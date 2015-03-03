@@ -1,11 +1,11 @@
-<?php  namespace Artesaos\Guardian\Middlewares;
+<?php  namespace Artesaos\Defender\Middlewares;
 
 use Closure;
 use Illuminate\Contracts\Auth\Guard;
 
 /**
- * Class GuardianHasPermissionMiddleware
- * @package Artesaos\Guardian
+ * Class DefenderHasPermissionMiddleware
+ * @package Artesaos\Defender
  */
 class NeedsPermissionMiddleware {
 

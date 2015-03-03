@@ -1,12 +1,12 @@
-<?php namespace Artesaos\Guardian\Facades;
+<?php namespace Artesaos\Defender\Facades;
 
 use Illuminate\Support\Facades\Facade;
 
-class Guardian extends Facade {
+class Defender extends Facade {
 
 	protected static function getFacadeAccessor()
 	{
-		return 'guardian';
+		return 'defender';
 	}
 
 }

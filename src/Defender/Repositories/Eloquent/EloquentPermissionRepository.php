@@ -1,14 +1,14 @@
-<?php namespace Artesaos\Guardian\Repositories\Eloquent;
+<?php namespace Artesaos\Defender\Repositories\Eloquent;
 
-use Artesaos\Guardian\Exceptions\PermissionExistsException;
-use Artesaos\Guardian\Permission;
-use Artesaos\Guardian\Contracts\Repositories\PermissionRepository;
+use Artesaos\Defender\Exceptions\PermissionExistsException;
+use Artesaos\Defender\Permission;
+use Artesaos\Defender\Contracts\Repositories\PermissionRepository;
 use Illuminate\Contracts\Foundation\Application;
 
 /**
  * Class EloquentPermissionRepository
  *
- * @package Artesaos\Guardian\Repositories\Eloquent
+ * @package Artesaos\Defender\Repositories\Eloquent
  */
 class EloquentPermissionRepository extends AbstractEloquentRepository implements PermissionRepository {
 

@@ -1,4 +1,4 @@
-<?php  namespace Artesaos\Guardian\Contracts\Repositories;
+<?php  namespace Artesaos\Defender\Contracts\Repositories;
 
 
 interface AbstractRepository {

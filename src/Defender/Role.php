@@ -1,11 +1,11 @@
-<?php namespace Artesaos\Guardian;
+<?php namespace Artesaos\Defender;
 
 use Illuminate\Database\Eloquent\Model;
 
 /**
  * Class Role
  *
- * @package Artesaos\Guardian
+ * @package Artesaos\Defender
  */
 class Role extends Model {
 
@@ -31,7 +31,7 @@ class Role extends Model {
 	public function __construct(array $attributes = array())
 	{
 		parent::__construct($attributes);
-		$this->table = config('guardian.role_table', 'roles');
+		$this->table = config('defender.role_table', 'roles');
 	}
 
 	/**
@@ -42,7 +42,7 @@ class Role extends Model {
 	public function users()
 	{
 		return $this->belongsToMany(
-			config('auth.model'), config('guardian.role_user_table'), config('guardian.role_key'), 'user_id'
+			config('auth.model'), config('defender.role_user_table'), config('defender.role_key'), 'user_id'
 		);
 	}
 
@@ -54,7 +54,7 @@ class Role extends Model {
 	public function permissions()
 	{
 		return $this->belongsToMany(
-			config('guardian.permission_model'), config('guardian.permission_role_table'), config('guardian.role_key'), config('guardian.permission_key')
+			config('defender.permission_model'), config('defender.permission_role_table'), config('defender.role_key'), config('defender.permission_key')
 		)->withPivot('value');
 	}
 
@@ -85,7 +85,7 @@ class Role extends Model {
 	 */
 	public function newPivot(Model $parent, array $attributes, $table, $exists)
 	{
-		$permissionModel = app()['config']->get('guardian.permission_model');
+		$permissionModel = app()['config']->get('defender.permission_model');
 
 		if ($parent instanceof $permissionModel)
 		{

@@ -1,13 +1,13 @@
-<?php namespace Artesaos\Guardian\Repositories\Eloquent;
+<?php namespace Artesaos\Defender\Repositories\Eloquent;
 
-use Artesaos\Guardian\Exceptions\RoleExistsException;
-use Artesaos\Guardian\Role;
-use Artesaos\Guardian\Contracts\Repositories\RoleRepository;
+use Artesaos\Defender\Exceptions\RoleExistsException;
+use Artesaos\Defender\Role;
+use Artesaos\Defender\Contracts\Repositories\RoleRepository;
 use Illuminate\Contracts\Foundation\Application;
 
 /**
  * Class EloquentRoleRepository
- * @package Artesaos\Guardian\Repositories\Eloquent
+ * @package Artesaos\Defender\Repositories\Eloquent
  */
 class EloquentRoleRepository extends AbstractEloquentRepository implements RoleRepository {
 

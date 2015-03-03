@@ -1,20 +1,20 @@
-# Guardian
+# Defender
 
-Guardian is a Access Control List (ACL) Solution for Laravel 5.
+Defender is a Access Control List (ACL) Solution for Laravel 5.
 With Secutiry and Usability in mind, this project aims to provide you a safe way to control your application access without losing the fun of coding.
 
 > Current Build Status
 
-[![Build Status](https://travis-ci.org/artesaos/guardian.svg?branch=develop)](https://travis-ci.org/artesaos/guardian)
-[![Code Climate](https://codeclimate.com/github/artesaos/guardian/badges/gpa.svg)](https://codeclimate.com/github/artesaos/guardian)
+[![Build Status](https://travis-ci.org/artesaos/defender.svg?branch=develop)](https://travis-ci.org/artesaos/defender)
+[![Code Climate](https://codeclimate.com/github/artesaos/defender/badges/gpa.svg)](https://codeclimate.com/github/artesaos/defender)
 
 > Statistics
 
-[![Latest Stable Version](https://poser.pugx.org/artesaos/guardian/v/stable.svg)](https://packagist.org/packages/artesaos/guardian)
-[![Latest Unstable Version](https://poser.pugx.org/artesaos/guardian/v/unstable.svg)](https://packagist.org/packages/artesaos/guardian) [![License](https://poser.pugx.org/artesaos/guardian/license.svg)](https://packagist.org/packages/artesaos/guardian)
-[![Total Downloads](https://poser.pugx.org/artesaos/guardian/downloads.svg)](https://packagist.org/packages/artesaos/guardian)
-[![Monthly Downloads](https://poser.pugx.org/artesaos/guardian/d/monthly.png)](https://packagist.org/packages/artesaos/guardian)
-[![Daily Downloads](https://poser.pugx.org/artesaos/guardian/d/daily.png)](https://packagist.org/packages/artesaos/guardian)
+[![Latest Stable Version](https://poser.pugx.org/artesaos/defender/v/stable.svg)](https://packagist.org/packages/artesaos/defender)
+[![Latest Unstable Version](https://poser.pugx.org/artesaos/defender/v/unstable.svg)](https://packagist.org/packages/artesaos/defender) [![License](https://poser.pugx.org/artesaos/defender/license.svg)](https://packagist.org/packages/artesaos/defender)
+[![Total Downloads](https://poser.pugx.org/artesaos/defender/downloads.svg)](https://packagist.org/packages/artesaos/defender)
+[![Monthly Downloads](https://poser.pugx.org/artesaos/defender/d/monthly.png)](https://packagist.org/packages/artesaos/defender)
+[![Daily Downloads](https://poser.pugx.org/artesaos/defender/d/daily.png)](https://packagist.org/packages/artesaos/defender)
 
 > Tips
 
@@ -25,7 +25,7 @@ With Secutiry and Usability in mind, this project aims to provide you a safe way
 ### 1 - Dependency
 The first step is using composer to install the package and automatically update your `composer.json` file, you can do this by running:
 ```shell
-composer require artesaos/guardian
+composer require artesaos/defender
 ```
 
 ### 2 - Provider
@@ -36,26 +36,26 @@ You need to update your application configuration in order to register the packa
 // file START ommited
     'providers' => [
         // other providers ommited
-        'Artesaos\Guardian\Providers\GuardianServiceProvider',
+        'Artesaos\Defender\Providers\DefenderServiceProvider',
     ],
 // file END ommited
 ```
 
 ### 3 - Facade (optional)
-In order to use the `Guardian` facade, you need to register it on the `config/app.php` file, you can do that the following way:
+In order to use the `Defender` facade, you need to register it on the `config/app.php` file, you can do that the following way:
 
 > `config/app.php`
 ```php
 // file START ommited
     'aliases' => [
         // other Facades ommited
-        'Guardian'  => 'Artesaos\Guardian\Facades\Guardian',
+        'Defender'  => 'Artesaos\Defender\Facades\Defender',
     ],
 // file END ommited
 ```
 
-### 4 - Guardian Middlewares (optional)
-Guardian provides middlewares to protect your routes.
+### 4 - Defender Middlewares (optional)
+Defender provides middlewares to protect your routes.
 
 #### 4.1 - Create your own middleware
 

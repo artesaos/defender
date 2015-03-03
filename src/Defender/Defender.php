@@ -1,13 +1,13 @@
-<?php namespace Artesaos\Guardian;
+<?php namespace Artesaos\Defender;
 
-use Artesaos\Guardian\Contracts\Repositories\PermissionRepository;
-use Artesaos\Guardian\Contracts\Repositories\RoleRepository;
+use Artesaos\Defender\Contracts\Repositories\PermissionRepository;
+use Artesaos\Defender\Contracts\Repositories\RoleRepository;
 use Illuminate\Contracts\Foundation\Application;
 
 /**
  *
  */
-class Guardian {
+class Defender {
 
 	/**
 	 * The Laravel Application
@@ -112,7 +112,7 @@ class Guardian {
 	 * Get the role with the given name.
 	 *
 	 * @param $roleName
-	 * @return \Artesaos\Guardian\Role|null
+	 * @return \Artesaos\Defender\Role|null
 	 */
 	public function findRole($roleName)
 	{
@@ -128,7 +128,7 @@ class Guardian {
 	 * Get the permission with the given name
 	 *
 	 * @param $permissionName
-	 * @return \Artesaos\Guardian\Permission|null
+	 * @return \Artesaos\Defender\Permission|null
 	 */
 	public function getPermission($permissionName)
 	{
@@ -145,7 +145,7 @@ class Guardian {
 	 * Uses a repository to actually create the role.
 	 *
 	 * @param $roleName
-	 * @return \Artesaos\Guardian\Role
+	 * @return \Artesaos\Defender\Role
 	 */
 	public function createRole($roleName)
 	{
@@ -154,7 +154,7 @@ class Guardian {
 
 	/**
 	 * @param $permissionName
-	 * @return \Artesaos\Guardian\Permission
+	 * @return \Artesaos\Defender\Permission
 	 */
 	public function createPermission($permissionName)
 	{

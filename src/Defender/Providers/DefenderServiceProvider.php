@@ -1,13 +1,13 @@
-<?php namespace Artesaos\Guardian\Providers;
+<?php namespace Artesaos\Defender\Providers;
 
-use Artesaos\Guardian\Guardian;
-use Artesaos\Guardian\Permission;
-use Artesaos\Guardian\Repositories\Eloquent\EloquentPermissionRepository;
-use Artesaos\Guardian\Repositories\Eloquent\EloquentRoleRepository;
-use Artesaos\Guardian\Role;
+use Artesaos\Defender\Defender;
+use Artesaos\Defender\Permission;
+use Artesaos\Defender\Repositories\Eloquent\EloquentPermissionRepository;
+use Artesaos\Defender\Repositories\Eloquent\EloquentRoleRepository;
+use Artesaos\Defender\Role;
 use Illuminate\Support\ServiceProvider;
 
-class GuardianServiceProvider extends ServiceProvider {
+class DefenderServiceProvider extends ServiceProvider {
 
 	/**
 	 * Indicates if loading of the provider is deferred.
@@ -33,9 +33,9 @@ class GuardianServiceProvider extends ServiceProvider {
 	 */
 	public function register()
 	{
-		$this->app->singleton('guardian', function($app)
+		$this->app->singleton('defender', function($app)
 		{
-			return new Guardian($app, $app['guardian.role'], $app['guardian.permission']);
+			return new Defender($app, $app['defender.role'], $app['defender.permission']);
 		});
 
 		$this->registerRepositoryInterfaces();
@@ -56,24 +56,24 @@ class GuardianServiceProvider extends ServiceProvider {
 	 */
 	protected function registerRepositoryInterfaces()
 	{
-		$this->app->bindShared('guardian.role', function($app)
+		$this->app->bindShared('defender.role', function($app)
 		{
 			return new EloquentRoleRepository($app, new Role);
 		});
 
-		$this->app->bindShared('Artesaos\Guardian\Repositories\RoleRepository', function($app)
+		$this->app->bindShared('Artesaos\Defender\Repositories\RoleRepository', function($app)
 		{
-			return $app['guardian.role'];
+			return $app['defender.role'];
 		});
 
-		$this->app->bindShared('guardian.permission', function ($app)
+		$this->app->bindShared('defender.permission', function ($app)
 		{
 			return new EloquentPermissionRepository($app, new Permission);
 		});
 
-		$this->app->bindShared('Artesaos\Guardian\Repositories\PermissionRepository', function($app)
+		$this->app->bindShared('Artesaos\Defender\Repositories\PermissionRepository', function($app)
 		{
-			return $app['guardian.permission'];
+			return $app['defender.permission'];
 		});
 	}
 
@@ -82,7 +82,7 @@ class GuardianServiceProvider extends ServiceProvider {
 	 */
 	private function publishConfiguration()
 	{
-		$this->publishes([__DIR__ . '/../../resources/config/guardian.php' => config_path('guardian.php')], 'config');
+		$this->publishes([__DIR__ . '/../../resources/config/defender.php' => config_path('defender.php')], 'config');
 	}
 
 	private function publishMigrations()

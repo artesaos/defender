@@ -1,6 +1,6 @@
 {
-  "name": "artesaos/guardian",
-  "description": "ACL",
+  "name": "artesaos/defender",
+  "description": "Roles & Permissions for Laravel 5",
   "license": "MIT",
   "authors": [
     {
@@ -32,7 +32,7 @@
   },
   "autoload": {
     "psr-4": {
-      "Artesaos\\Guardian\\": "src/Guardian/"
+      "Artesaos\\Defender\\": "src/Defender/"
     }
   },
   "minimum-stability": "dev"

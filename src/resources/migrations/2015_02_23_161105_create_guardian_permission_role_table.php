@@ -3,7 +3,7 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateGuardianPermissionRoleTable extends Migration {
+class CreateDefenderPermissionRoleTable extends Migration {
 
 	/**
 	 * Run the migrations.
@@ -12,16 +12,16 @@ class CreateGuardianPermissionRoleTable extends Migration {
 	 */
 	public function up()
 	{
-		Schema::create(config('guardian.permission_role_table', 'permission_role'), function (Blueprint $table)
+		Schema::create(config('defender.permission_role_table', 'permission_role'), function (Blueprint $table)
 		{
-			$table->integer(config('guardian.permission_key', 'permission_id'))->unsigned()->index();
-			$table->foreign(config('guardian.permission_key', 'permission_id'))->references('id')
-				  ->on(config('guardian.permission_table', 'permissions'))
+			$table->integer(config('defender.permission_key', 'permission_id'))->unsigned()->index();
+			$table->foreign(config('defender.permission_key', 'permission_id'))->references('id')
+				  ->on(config('defender.permission_table', 'permissions'))
 				  ->onDelete('cascade');
 
-			$table->integer(config('guardian.role_key', 'role_id'))->unsigned()->index();
-			$table->foreign(config('guardian.role_key', 'role_id'))->references('id')
-				  ->on(config('guardian.role_table', 'roles'))
+			$table->integer(config('defender.role_key', 'role_id'))->unsigned()->index();
+			$table->foreign(config('defender.role_key', 'role_id'))->references('id')
+				  ->on(config('defender.role_table', 'roles'))
 				  ->onDelete('cascade');
 
 			$table->tinyInteger('value')->default(-1);
@@ -35,13 +35,13 @@ class CreateGuardianPermissionRoleTable extends Migration {
 	 */
 	public function down()
 	{
-		Schema::table(config('guardian.permission_role_table', 'permission_role'), function (Blueprint $table)
+		Schema::table(config('defender.permission_role_table', 'permission_role'), function (Blueprint $table)
 		{
-			$table->dropForeign(config('guardian.permission_role_table', 'permission_role').'_'.config('guardian.permission_key', 'permission_id') . '_foreign');
-			$table->dropForeign(config('guardian.permission_role_table', 'permission_role').'_'.config('guardian.role_key', 'role_id') . '_foreign');
+			$table->dropForeign(config('defender.permission_role_table', 'permission_role').'_'.config('defender.permission_key', 'permission_id') . '_foreign');
+			$table->dropForeign(config('defender.permission_role_table', 'permission_role').'_'.config('defender.role_key', 'role_id') . '_foreign');
 		});
 
-		Schema::drop(config('guardian.permission_role_table', 'permission_role'));
+		Schema::drop(config('defender.permission_role_table', 'permission_role'));
 	}
 
 }

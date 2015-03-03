@@ -1,12 +1,12 @@
-<?php  namespace Artesaos\Guardian;
+<?php  namespace Artesaos\Defender;
 
 use Illuminate\Database\Eloquent\Relations\Pivot;
 
 /**
- * Class PermissionRolePivot
- * @package Artesaos\Guardian
+ * Class PermissionUserPivot
+ * @package Artesaos\Defender
  */
-class PermissionRolePivot extends Pivot {
+class PermissionUserPivot extends Pivot {
 
 	/**
 	 * @var array

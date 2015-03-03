@@ -1,20 +1,20 @@
 <?php
 
 /**
- * Guardian - Laravel 5 ACL Package
+ * Defender - Laravel 5 ACL Package
  * Author: PHPArtisans
  */
 return [
 
 	/*
-	 * Default Role model used by Guardian.
+	 * Default Role model used by Defender.
 	 */
-	'role_model' => 'Artesaos\Guardian\Role',
+	'role_model' => 'Artesaos\Defender\Role',
 
 	/*
-	 * Default Permission model used by Guardian.
+	 * Default Permission model used by Defender.
 	 */
-	'permission_model' => 'Artesaos\Guardian\Permission',
+	'permission_model' => 'Artesaos\Defender\Permission',
 
 	/*
 	 * Roles table name
