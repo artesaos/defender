@@ -119,6 +119,12 @@ class Defender {
 		return $this->roleRepository->findByName($roleName);
 	}
 
+	/**
+	 * * Find a role by its id
+	 *
+	 * @param $roleId
+	 * @return mixed
+	 */
 	public function findRoleById($roleId)
 	{
 		return $this->roleRepository->findById($roleId);
@@ -130,11 +136,25 @@ class Defender {
 	 * @param $permissionName
 	 * @return \Artesaos\Defender\Permission|null
 	 */
-	public function getPermission($permissionName)
+	public function findPermission($permissionName)
 	{
 		return $this->permissionRepository->findByName($permissionName);
 	}
 
+	/**
+	 * Find a permission by its id
+	 *
+	 * @param $permissionId
+	 * @return mixed
+	 */
+	public function findPermissionById($permissionId)
+	{
+		return $this->permissionRepository->findById($permissionId);
+	}
+
+	/**
+	 * @return mixed
+	 */
 	public function permissionsList()
 	{
 		return $this->permissionRepository->getList('name', 'id');
