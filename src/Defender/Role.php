@@ -59,6 +59,17 @@ class Role extends Model {
 	}
 
 	/**
+	 * Attach permission
+	 * TODO: add using ids
+	 *
+	 * @param $permission
+	 */
+	public function attachPermission($permission)
+	{
+		return $this->permissions()->attach($permission);
+	}
+
+	/**
 	 * Get role permission using the permission name
 	 *
 	 * @param $permission

@@ -7,7 +7,7 @@ use Illuminate\Contracts\Auth\Authenticatable;
  * Class DefenderHasPermissionMiddleware
  * @package Artesaos\Defender
  */
-class NeedsPermissionMiddleware {
+class NeedsPermissionMiddleware extends AbstractDefenderMiddleware {
 
 	/**
 	 * The current logged in user
@@ -31,7 +31,7 @@ class NeedsPermissionMiddleware {
 	 */
 	public function handle($request, Closure $next)
 	{
-		$permissions   = $this->getPermission($request);
+		$permissions   = $this->getPermissions($request);
 		$anyPermission = $this->getAny($request);
 
 		if (is_array($permissions) and count($permissions) > 0)
@@ -62,9 +62,9 @@ class NeedsPermissionMiddleware {
 
 	/**
 	 * @param \Illuminate\Contracts\Http\Request $request
-	 * @return mixed
+	 * @return array
 	 */
-	private function getPermission($request)
+	private function getPermissions($request)
 	{
 		$routeActions = $this->getActions($request);
 
@@ -73,26 +73,4 @@ class NeedsPermissionMiddleware {
 		return is_array($permissions) ? $permissions : [ $permissions ];
 	}
 
-	/**
-	 * @param $request
-	 * @return mixed
-	 */
-	private function getAny($request)
-	{
-		$routeActions = $this->getActions($request);
-
-		return array_get($routeActions, 'any', false);
-	}
-
-	/**
-	 * @param $request
-	 * @return mixed
-	 */
-	private function getActions($request)
-	{
-		$routeActions = $request->route()->getAction();
-
-		return $routeActions;
-	}
-	
 }

@@ -1,25 +1,25 @@
 <?php  namespace Artesaos\Defender\Middlewares;
 
 use Closure;
-use Illuminate\Contracts\Auth\Guard;
+use Illuminate\Contracts\Auth\Authenticatable;
 
 /**
  * Class DefenderHasPermissionMiddleware
  * @package Artesaos\Defender
  */
-class NeedsRoleMiddleware {
+class NeedsRoleMiddleware extends AbstractDefenderMiddleware {
 
 	/**
 	 * @var
 	 */
-	protected $auth;
+	protected $user;
 
 	/**
-	 * @param Guard $auth
+	 * @param Authenticatable $user
 	 */
-	public function __construct(Guard $auth)
+	public function __construct(Authenticatable $user)
 	{
-		$this->auth = $auth;
+		$this->user = $user;
 	}
 
 	/**
@@ -29,11 +29,27 @@ class NeedsRoleMiddleware {
 	 */
 	public function handle($request, Closure $next)
 	{
-		$role = $this->getRole($request);
+		$roles = $this->getRoles($request);
+		$anyRole = $this->getAny($request);
 
-		if ($role)
+		if (is_array($roles) and count($roles) > 0)
 		{
-			if ( ! $this->auth->user()->hasRole($role))
+			$hasResult = true;
+
+			foreach ($roles as $role)
+			{
+				$hasRole = $this->user->hasRole($role);
+
+				// Check if any role is enough
+				if ($anyRole and $hasRole)
+				{
+					return $next($request);
+				}
+
+				$hasResult = $hasResult & $hasRole;
+			}
+
+			if ( ! $hasResult )
 			{
 				return response('Forbidden', 403); // TODO: Exception?
 			}
@@ -44,13 +60,15 @@ class NeedsRoleMiddleware {
 
 	/**
 	 * @param \Illuminate\Contracts\Http\Request $request
-	 * @return mixed
+	 * @return array
 	 */
-	private function getRole($request)
+	private function getRoles($request)
 	{
-		$routeActions = $request->route()->getAction();
+		$routeActions = $this->getActions($request);
 
-		return array_get($routeActions, 'role', false);
+		$roles = array_get($routeActions, 'roles', []);
+
+		return is_array($roles) ? $roles : [ $roles ];
 	}
-	
+
 }
