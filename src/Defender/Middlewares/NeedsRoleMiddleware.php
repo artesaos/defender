@@ -68,7 +68,7 @@ class NeedsRoleMiddleware extends AbstractDefenderMiddleware {
 
 		$roles = array_get($routeActions, 'roles', []);
 
-		return is_array($roles) ? $roles : [ $roles ];
+		return is_array($roles) ? $roles : (array) $roles;
 	}
 
 }
