@@ -249,7 +249,7 @@ Esta trait, além de configurar os relacionamentos, adicionará os seguintes mé
 
 Este método verificar se o usuário logado no sistema possui a permissão `$permission`  
 
-No Defender existem 2 tipos de permissões: `Permissões de Usuário` e `Permissões de Grupo`. Por padrão as permissões o usuário herda as permissões dos grupos que ele pertence. Porém, sempre que uma permissão de usuário for definida, ela terá precedência sobre a permissão de grupo.
+No Defender existem 2 tipos de permissões: `Permissões de Usuário` e `Permissões de Grupo`. Por padrão as permissões que o usuário herda, são permissões dos grupos que ele pertence.. Porém, sempre que uma permissão de usuário for definida, ela terá precedência sobre a permissão de grupo.
 
 ```php
 public function foo(Authenticable $user)
@@ -314,7 +314,7 @@ public function foo(Authenticable $user)
 
 ##### `public function syncRoles(array $roles = array())`:
 
-Semelhante ao `attachRole()`, porém apenas os grupos presentes no array `$roles` estarão presentes no relacionamento após a execução desde método. `$roles` é um array de `ids` dos grupos desejados.
+Semelhante ao `attachRole()`, porém apenas os grupos presentes no array `$roles` estarão presentes no relacionamento após a execução deste método. `$roles` é um array de `ids` dos grupos desejados.
 
 ```php
 public function foo(Authenticable $user)
@@ -329,7 +329,7 @@ public function foo(Authenticable $user)
 
 ##### `public function attachPermission($permission, array $options = array())`:
 
-Vincula o usuário a permissão `$permission`. A variável `$permission` é ums instância da classe `Artesaos\Defender\Permission`.
+Vincula o usuário a permissão `$permission`. A variável `$permission` é uma instância da classe `Artesaos\Defender\Permission`.
 
 ```php
 public function foo(Authenticable $user)
@@ -365,7 +365,7 @@ public function foo(Authenticable $user)
 
 ##### `public function syncPermissions(array $permissions)`:
 
-Semelhante ao método `syncRoles`. Apenas as permissões presentes no array `$permissions` farão parte do relacionamente após a execução desde método.
+Semelhante ao método `syncRoles`. Apenas as permissões presentes no array `$permissions` farão parte do relacionamento após a execução deste método.
 
 ```php
 public function foo(Authenticable $user)
