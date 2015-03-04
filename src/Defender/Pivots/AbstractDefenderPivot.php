@@ -18,12 +18,4 @@ abstract class AbstractDefenderPivot extends Pivot {
 		'expires'
 	];
 
-	/**
-	 * @param $query
-	 */
-	public function scopeExpired($query)
-	{
-		return $query->where('expires', '<', Carbon::now());
-	}
-
 }

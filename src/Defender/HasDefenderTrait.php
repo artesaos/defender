@@ -1,5 +1,6 @@
 <?php namespace Artesaos\Defender;
 
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
 use Artesaos\Defender\Pivots\PermissionUserPivot;
 
@@ -32,6 +33,22 @@ trait HasDefenderTrait {
 		return $this->belongsToMany(
 			config('defender.permission_model'), config('defender.permission_user_table'), 'user_id', config('defender.permission_key')
 		)->withPivot('value', 'expires');
+	}
+
+	/**
+	 * Scope expired permissions
+	 *
+	 * @param $query
+	 * @return mixed
+	 */
+	public function scopeExpiredPermissions($query)
+	{
+		$pivot = $this->permissions()->getTable();
+
+		return $query->whereHas('permissions', function ($q) use ($pivot)
+		{
+			$q->where($pivot . '.expires', '<', Carbon::now());
+		});
 	}
 
 	/**
@@ -190,7 +207,7 @@ trait HasDefenderTrait {
 	 */
 	public function revokeExpiredPermissions()
 	{
-		$expiredPermissions = $this->permissions()->expired()->get();
+		$expiredPermissions = $this->expiredPermissions()->get();
 
 		if ($expiredPermissions->count() > 0)
 		{
