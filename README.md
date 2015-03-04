@@ -186,7 +186,45 @@ Route::get('foo', ['middleware' => 'needsPermission', 'is' => ['admin', 'member'
 
 ### Usando a Facade
 
-// TODO
+##### `Defender::can($permission)`:
+
+----------
+
+##### `Defender::hasRole($roleName)`:
+
+----------
+
+##### `Defender::roleExists($roleName)`:
+
+----------
+
+##### `Defender::permissionExists($permissionName)`:
+
+----------
+
+##### `Defender::findRole($roleName)`:
+
+----------
+
+##### `Defender::findRoleById($roleId)`:
+
+----------
+
+##### `Defender::findPermission($permissionName)`:
+
+----------
+
+##### `Defender::findPermissionById($permissionId)`:
+
+----------
+
+##### `Defender::createRole($roleName)`:
+
+----------
+
+##### `Defender::createPermission($permissionName)`:
+
+----------
 
 ### Usando a trait
 
