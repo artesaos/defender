@@ -1,6 +1,6 @@
 # Defender
 
-Defender um package ACL para Laravel 5 que utiliza grupos e permissões.
+Defender um package ACL para Laravel 5 que utiliza grupos e permissões.  
 Com Segurança e Usabilidade em mente, este projeto tem como objetivo prover o controle de acesso da sua aplicação.
 
 > Estado Atual do Package
