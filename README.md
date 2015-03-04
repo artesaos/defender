@@ -20,15 +20,28 @@ With Secutiry and Usability in mind, this project aims to provide you a safe way
 
 <a href="http://zenhub.io" target="_blank"><img src="https://raw.githubusercontent.com/ZenHubIO/support/master/zenhub-badge.png" height="18px" alt="Powered by ZenHub"/></a>
 
-### Install
+## Installation
 
-### 1 - Dependency
-The first step is using composer to install the package and automatically update your `composer.json` file, you can do this by running:
+### 1. Dependency
+
+Using composer, execute the following command to automatically update your `composer.json` :
+
 ```shell
 composer require artesaos/defender
 ```
 
-### 2 - Provider
+or manually update your `composer.json` file
+
+```json
+{
+	"require": {
+		"artesaos/defender": "dev-master"
+	}
+}
+```
+
+### 2. Provider
+
 You need to update your application configuration in order to register the package so it can be loaded by Laravel, just update your `config/app.php` file adding the following code at the end of your `'providers'` section:
 
 > `config/app.php`
@@ -41,23 +54,45 @@ You need to update your application configuration in order to register the packa
 // file END ommited
 ```
 
-### 3 - Facade (optional)
+#### 2.1 Publishing configuration file and migrations
+
+To publish our default configuration file and database migrations, execute the following command: 
+Execute the following command to publish Defender configuration file and migrations:
+
+```shell
+php artisan vendor:publish
+```
+
+You can also publish only the configuration file or the migrations:
+
+```shell
+php artisan vendor:publish --tag=config
+```
+Or
+```shell
+php artisan vendor:publish --tag=migrations
+```
+
+If you already published defender files, but for some reason your want to override previous published files, add the `--force` flag.
+
+### 3. Facade (optional)
 In order to use the `Defender` facade, you need to register it on the `config/app.php` file, you can do that the following way:
 
-> `config/app.php`
 ```php
+// config.php file
 // file START ommited
     'aliases' => [
         // other Facades ommited
-        'Defender'  => 'Artesaos\Defender\Facades\Defender',
+        'Defender' => 'Artesaos\Defender\Facades\Defender',
     ],
 // file END ommited
 ```
 
-### 4 - Defender Middlewares (optional)
+### 4. Defender Middlewares (optional)
 Defender provides middlewares to protect your routes.
 
 #### 4.1 - Create your own middleware
 
-### Usage
-@todo
+## Usage
+
+You can find a detailed usage guide in our [wiki](http://linktothewiki).
