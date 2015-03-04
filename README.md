@@ -94,7 +94,7 @@ Para usar a facade `Defender`, você precisa registrá-la no seu arquivo `config
 
 Caso você tenha a necessidade realizar o controle de acesso diretamente nas rotas, o Defender vem "de fábrica" com alguns middlewares que abordam os casos mais comuns. Para utilizá-los é necessário registrá-los no seu arquivo `app/Http/Kernel.php`.
 
-```
+```php
 protected $routeMiddleware = [
 	'auth'            => 'App\Http\Middleware\Authenticate',
 	'auth.basic'      => 'Illuminate\Auth\Middleware\AuthenticateWithBasicAuth',
@@ -128,7 +128,7 @@ O Defender realiza apenas o controle de acesso em sua aplicação, ou seja, a ta
 
 Para adicionar as funcionalidades do Defender, é necessário adicionar trait `HasDefenderTrait`no seu modelo de usuário (normalmente o `App\User`).
 
-```
+```php
 <?php namespace App;
 
 // Declaração dos outros namespaces omitida
@@ -304,3 +304,7 @@ public function foo(Authenticable $user)
     $user->revokeExpiredPermissions(); 
 }
 ```
+
+### Permissões Temporárias
+
+// TODO
