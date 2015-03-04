@@ -24,7 +24,8 @@ Com Segurança e Usabilidade em mente, este projeto tem como objetivo prover o c
 
 ### 1. Dependência
 
-Defender pode ser instalado através do composer. Para que o package seja adicionado automaticamente ao seu arquivo `composer.json` execute o seguinte comando:
+Defender pode ser instalado através do composer.
+Para que o package seja adicionado automaticamente ao seu arquivo `composer.json` execute o seguinte comando:
 
 ```shell
 composer require artesaos/defender
