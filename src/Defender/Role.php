@@ -111,11 +111,15 @@ class Role extends Model {
 	 */
 	public function getPermission($permission)
 	{
-		$rolePermissions = $this->permissions->lists('pivot.value', 'name');
-
-		if (array_key_exists($permission, $rolePermissions))
+		foreach ($this->permissions as $rolePermission)
 		{
-			return $rolePermissions[$permission];
+			if ($rolePermission->name === $permission)
+			{
+				if ($rolePermission->pivot->expires->isFutue() or is_null($rolePermission->pivot->expires))
+				{
+					return $rolePermission->pivot->value;
+				}
+			}
 		}
 
 		return false;
