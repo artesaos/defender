@@ -1,6 +1,6 @@
 # Defender
 
-Defender um package ACL para Laravel 5 que utilizar grupos e permissões.
+Defender um package ACL para Laravel 5 que utiliza grupos e permissões.  
 Com Segurança e Usabilidade em mente, este projeto tem como objetivo prover o controle de acesso da sua aplicação.
 
 > Estado Atual do Package
@@ -24,7 +24,7 @@ Com Segurança e Usabilidade em mente, este projeto tem como objetivo prover o c
 
 ### 1. Dependência
 
-Defender pode ser instalada através do composer.
+Defender pode ser instalada através do composer. 
 Para que o package seja adicionado automaticamente ao seu arquivo `composer.json` execute o seguinte comando:
 
 ```shell
