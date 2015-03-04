@@ -83,6 +83,7 @@ class DefenderServiceProvider extends ServiceProvider {
 	private function publishConfiguration()
 	{
 		$this->publishes([__DIR__ . '/../../resources/config/defender.php' => config_path('defender.php')], 'config');
+		$this->mergeConfigFrom(__DIR__ . '/../../resources/config/defender.php', 'defender');
 	}
 
 	private function publishMigrations()
