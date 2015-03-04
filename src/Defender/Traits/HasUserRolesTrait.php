@@ -1,6 +1,11 @@
 <?php  namespace Artesaos\Defender\Traits;
 
-trait HasRolesTrait {
+/**
+ * Class HasUserRolesTrait
+ *
+ * @package Artesaos\Defender\Traits
+ */
+trait HasUserRolesTrait {
 
 	/**
 	 * Many-to-many role-user relationship

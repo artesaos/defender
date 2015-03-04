@@ -1,8 +1,13 @@
 <?php  namespace Artesaos\Defender\Traits;
 
-use Artesaos\Defender\Pivots\PermissionUserPivot;
+use Artesaos\Defender\Pivots\PermissionRolePivot;
 
-trait HasPermissionsTrait {
+/**
+ * Class HasRolePermissionsTrait
+ *
+ * @package Artesaos\Defender\Traits
+ */
+trait HasRolePermissionsTrait {
 
 	/**
 	 * Many-to-many permission-user relationship
@@ -12,52 +17,15 @@ trait HasPermissionsTrait {
 	public function permissions()
 	{
 		return $this->belongsToMany(
-			config('defender.permission_model'), config('defender.permission_user_table'), 'user_id', config('defender.permission_key')
+			config('defender.permission_model'), config('defender.permission_role_table'), config('defender.role_key'), config('defender.permission_key')
 		)->withPivot('value', 'expires');
 	}
 
 	/**
-	 * Returns if the current user has the given permission.
-	 * User permissions override role permissions.
+	 * Attach permission
 	 *
-	 * @param $permission
-	 * @return bool
-	 */
-	public function can($permission)
-	{
-		$userPermission = $this->getPermission($permission);
-
-		return is_null($userPermission) ? $this->canWithRolePermissions($permission) : $userPermission;
-	}
-
-	/**
-	 * Get the user permission using the permission name.
-	 *
-	 * @param string $permission
-	 * @param bool $inherit
-	 * @return bool|null
-	 */
-	public function getPermission($permission, $inherit = true)
-	{
-		foreach ($this->permissions as $userPermission)
-		{
-			if ($userPermission->name === $permission)
-			{
-				if (is_null($userPermission->pivot->expires) or $userPermission->pivot->expires->isFuture())
-				{
-					return $userPermission->pivot->value;
-				}
-			}
-		}
-
-		return $inherit ? null : false;
-	}
-
-	/**
-	 * Attach the given permission.
-	 *
-	 * @param array|Permission $permission
-	 * @param array            $options
+	 * @param       $permission
+	 * @param array $options
 	 */
 	public function attachPermission($permission, array $options = array())
 	{
@@ -79,7 +47,7 @@ trait HasPermissionsTrait {
 	}
 
 	/**
-	 * Sync the given permissions
+	 * Sync permissions
 	 *
 	 * @param array $permissions
 	 * @return array
@@ -90,7 +58,7 @@ trait HasPermissionsTrait {
 	}
 
 	/**
-	 * Revoke all user permissions
+	 * Revoke all role permissions
 	 *
 	 * @return int
 	 */
@@ -100,7 +68,7 @@ trait HasPermissionsTrait {
 	}
 
 	/**
-	 * Revoke expired user permissions
+	 * Revoke expired role permissions
 	 *
 	 * @return int|null
 	 */
@@ -117,11 +85,33 @@ trait HasPermissionsTrait {
 	}
 
 	/**
+	 * Get role permission using the permission name
+	 *
+	 * @param $permission
+	 * @return bool
+	 */
+	public function getPermission($permission)
+	{
+		foreach ($this->permissions as $rolePermission)
+		{
+			if ($rolePermission->name === $permission)
+			{
+				if (is_null($rolePermission->pivot->expires) or $rolePermission->pivot->expires->isFuture())
+				{
+					return $rolePermission->pivot->value;
+				}
+			}
+		}
+
+		return false;
+	}
+
+	/**
 	 * @param Model $parent
 	 * @param array $attributes
-	 * @param $table
-	 * @param $exists
-	 * @return PermissionUserPivot
+	 * @param string $table
+	 * @param bool $exists
+	 * @return PermissionRolePivot|\Illuminate\Database\Eloquent\Relations\Pivot
 	 */
 	public function newPivot(Model $parent, array $attributes, $table, $exists)
 	{
@@ -129,7 +119,7 @@ trait HasPermissionsTrait {
 
 		if ($parent instanceof $permissionModel)
 		{
-			return new PermissionUserPivot($parent, $attributes, $table, $exists);
+			return new PermissionRolePivot($parent, $attributes, $table, $exists);
 		}
 
 		return parent::newPivot($parent, $attributes, $table, $exists);
