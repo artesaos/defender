@@ -60,12 +60,15 @@ class Role extends Model {
 	/**
 	 * Attach permission
 	 *
-	 * @param $permission
-	 * @param $value
+	 * @param       $permission
+	 * @param array $options
 	 */
-	public function attachPermission($permission, $value)
+	public function attachPermission($permission, array $options = array())
 	{
-		return $this->permissions()->attach($permission, ['value' => $value]);
+		return $this->permissions()->attach($permission, [
+			'value'   => array_get($options, 'value', true),
+			'expires' => array_get($options, 'expires', null)
+		]);
 	}
 
 	/**
