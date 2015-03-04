@@ -150,7 +150,7 @@ Este método verificar se o usuário logado no sistema possui a permissão `$per
 
 No Defender existem 2 tipos de permissões: `Permissões de Usuário` e `Permissões de Grupo`. Por padrão as permissões o usuário herda as permissões dos grupos que ele pertence. Porém, sempre que uma permissão de usuário for definida, ela terá precedência sobre a permissão de grupo.
 
-```
+```php
 public function foo(Authenticable $user)
 {
     if ($user->can('user.create');
@@ -163,7 +163,7 @@ public function foo(Authenticable $user)
 
 Este método funciona praticamente da mesma forma que o método anterior, a única diferença é que as permissões de usuário não são consideradas, ou seja, apenas as permissões dos grupos que usuário pertence são usadas na hora de verificar a permissão.
 
-```
+```php
 public function foo(Authenticable $user)
 {
     if ($user->canWithRolePermissions('user.create');
@@ -172,17 +172,11 @@ public function foo(Authenticable $user)
 
 ----------
 
-##### `public function getPermission($permission, $inherit = true)`:
-
-Verifica apenas usando as permissões de usuário. Utilizado no método `can`.
-
-----------
-
 ##### `public function attachRole($role)`:
 
 Adiciona o usuário no grupo `$role`. A variável `$role` pode ser um objeto do tipo `Artesaos\Defender\Role` ou um array de com os `ids` dos grupos.
 
-```
+```php
 public function foo(Authenticable $user)
 {
     $role = Defender::findRole('admin'); // Retorna um Artesao\Defender\Role
@@ -202,7 +196,7 @@ public function foo(Authenticable $user)
 
 Remove o grupo `$role` do usuário (método inverso ao `attachRole()`).
 
-```
+```php
 public function foo(Authenticable $user)
 {
     $role = Defender::findRole('admin'); // Retorna um Artesao\Defender\Role
@@ -221,7 +215,7 @@ public function foo(Authenticable $user)
 
 Semelhante ao `attachRole()`, porém apenas os grupos presentes no array `$roles` estarão presentes no relacionamento após a execução desde método. `$roles` é um array de `ids` dos grupos desejados.
 
-```
+```php
 public function foo(Authenticable $user)
 {
     $roles = [1, 2, 3]; // Usando array de ids
@@ -236,7 +230,7 @@ public function foo(Authenticable $user)
 
 Vincula o usuário a permissão `$permission`. A variável `$permission` é ums instância da classe `Artesaos\Defender\Permission`.
 
-```
+```php
 public function foo(Authenticable $user)
 {
     $permission = Defender::findPermission('user.create');
@@ -253,7 +247,7 @@ public function foo(Authenticable $user)
 
 Remove a permissão `$permission` do usuário. A variável `$permission` pode ser uma instância da classe `Artesaos\Defender\Permission` ou um array de `ids` com os ids das permissões a serem removidas.
 
-```
+```php
 public function foo(Authenticable $user)
 {
     $permission = Defender::findPermission('user.create');
@@ -272,7 +266,7 @@ public function foo(Authenticable $user)
 
 Semelhante ao método `syncRoles`. Apenas as permissões presentes no array `$permissions` farão parte do relacionamente após a execução desde método.
 
-```
+```php
 public function foo(Authenticable $user)
 {
     $permissions = [
@@ -291,7 +285,7 @@ public function foo(Authenticable $user)
 
 Remove todas as permissões de usuário do usuário.
 
-```
+```php
 public function foo(Authenticable $user)
 {
     $user->revokePermissions(); 
@@ -304,7 +298,7 @@ public function foo(Authenticable $user)
 
 Remove todas as permissões temporárias expiradas do usuário. Veja mais a respeito de permissões temporárias na próxima seção.
 
-```
+```php
 public function foo(Authenticable $user)
 {
     $user->revokeExpiredPermissions(); 
