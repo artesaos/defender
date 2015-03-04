@@ -1,6 +1,6 @@
 # Defender
 
-Defender um package ACL para Laravel 5 que utiliza grupos e permissões.  
+Defender um package ACL para Laravel 5 que utilizar grupos e permissões.
 Com Segurança e Usabilidade em mente, este projeto tem como objetivo prover o controle de acesso da sua aplicação.
 
 > Estado Atual do Package
@@ -24,7 +24,7 @@ Com Segurança e Usabilidade em mente, este projeto tem como objetivo prover o c
 
 ### 1. Dependência
 
-Defender pode ser instalada através do composer. 
+Defender pode ser instalada através do composer.
 Para que o package seja adicionado automaticamente ao seu arquivo `composer.json` execute o seguinte comando:
 
 ```shell
@@ -119,6 +119,70 @@ Caso os middlewares padrões do Defender não atendam as suas necessidades, voc�
 ## Usando o Defender
 
 O Defender realiza apenas o controle de acesso em sua aplicação, ou seja, a tarefa de autenticação é realizada pelo `Auth` que faz parte do core do Laravel.
+
+### Usando o Middleware
+
+Para proteger suas rotas, você pode utilizar os middlewares padrões do Defender.
+
+#### needsPermissionMiddleware
+
+```php
+Route::get('foo', ['middleware' => 'needsPermission', 'can' => 'user.create', function()
+{
+	return 'Yes we can!";
+}]);
+```
+
+Você também pode passar um array de permissões a serem checadas.
+
+```php
+Route::get('foo', ['middleware' => 'needsPermission', 'can' => ['user.index', 'user.create'], function()
+{
+	return 'Yes we can!';
+}]);
+```
+
+Quando você passa um array de permissões, a rota é executada apenas se o usuário possui todas as permissões. Caso você queira que a rota execute quando o usuário tem pelo menos uma das permissões, basta adicionar `'any' => true`.
+
+```php
+Route::get('foo', ['middleware' => 'needsPermission', 'can' => ['user.index', 'user.create'], 'any' => true, function()
+{
+	return 'Yes we can!';
+}]);
+```
+
+----------
+
+#### needsRoleMiddleware
+
+Funciona de maneira semelhante ao middleware anterior, porém apenas os grupos são verificados, ou seja, não leva em consideração as permissões.
+
+```php
+Route::get('foo', ['middleware' => 'needsPermission', 'is' => 'admin', function()
+{
+	return 'Yes I am!";
+}]);
+```
+
+Você também pode passar um array de permissões a serem checadas.
+
+```php
+Route::get('foo', ['middleware' => 'needsPermission', 'can' => ['admin', 'member'], function()
+{
+	return 'Yes I am!';
+}]);
+```
+
+Quando você passa um array de permissões, a rota é executada apenas se o usuário possui todas as permissões. Caso você queira que a rota execute quando o usuário tem pelo menos uma das permissões, basta adicionar `'any' => true`.
+
+```php
+Route::get('foo', ['middleware' => 'needsPermission', 'is' => ['admin', 'member'], 'any' => true, function()
+{
+	return 'Yes I am!';
+}]);
+```
+
+----------
 
 ### Usando a Facade
 
