@@ -239,7 +239,7 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
 
 	use Authenticatable, CanResetPassword, HasDefenderTrait;
 
-    // Restante da clase
+    // Restante da classe
 }
 ```
 
