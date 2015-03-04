@@ -25,7 +25,7 @@ class CreateDefenderPermissionRoleTable extends Migration {
 				  ->onDelete('cascade');
 
 			$table->tinyInteger('value')->default(-1);
-			$table->timestamp('expires');
+			$table->timestamp('expires')->nullable();
 		});
 	}
 

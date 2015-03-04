@@ -83,17 +83,21 @@ trait HasDefenderTrait {
 	/**
 	 * Get the user permission using the permission name.
 	 *
-	 * @param $permission
+	 * @param string $permission
 	 * @param bool $inherit
 	 * @return bool|null
 	 */
 	public function getPermission($permission, $inherit = true)
 	{
-		$userPermissions = $this->permissions->lists('pivot.value', 'name');
-
-		if (array_key_exists($permission, $userPermissions))
+		foreach ($this->permissions as $userPermission)
 		{
-			return $userPermissions[$permission];
+			if ($userPermission->name === $permission)
+			{
+				if ($userPermission->pivot->expires->isFutue() or is_null($userPermission->pivot->expires))
+				{
+					return $userPermission->pivot->value;
+				}
+			}
 		}
 
 		return $inherit ? null : false;
