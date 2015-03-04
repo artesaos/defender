@@ -44,7 +44,6 @@ or manually update your `composer.json` file
 
 You need to update your application configuration in order to register the package so it can be loaded by Laravel, just update your `config/app.php` file adding the following code at the end of your `'providers'` section:
 
-> `config/app.php`
 ```php
 // file START ommited
     'providers' => [

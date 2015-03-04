@@ -1,5 +1,7 @@
 <?php namespace Artesaos\Defender;
+
 use Illuminate\Database\Eloquent\Model;
+use Artesaos\Defender\Pivots\PermissionUserPivot;
 
 /**
  * Class HasDefenderTrait
@@ -182,11 +184,20 @@ trait HasDefenderTrait {
 	}
 
 	/**
-	 * Revoke expired user permissions.
+	 * Revoke expired user permissions
+	 *
+	 * @return int|null
 	 */
 	public function revokeExpiredPermissions()
 	{
-		// TODO
+		$expiredPermissions = $this->permissions()->expired()->get();
+
+		if ($expiredPermissions->count() > 0)
+		{
+			return $this->permissions()->detach($expiredPermissions->modelKeys());
+		}
+
+		return null;
 	}
 
 	/**

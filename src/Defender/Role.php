@@ -1,6 +1,7 @@
 <?php namespace Artesaos\Defender;
 
 use Illuminate\Database\Eloquent\Model;
+use Artesaos\Defender\Pivots\PermissionRolePivot;
 
 /**
  * Class Role
@@ -104,11 +105,20 @@ class Role extends Model {
 	}
 
 	/**
+	 * Revoke expired role permissions
 	 *
+	 * @return int|null
 	 */
 	public function revokeExpiredPermissions()
 	{
-		// TODO
+		$expiredPermissions = $this->permissions()->expired()->get();
+
+		if ($expiredPermissions->count() > 0)
+		{
+			return $this->permissions()->detach($expiredPermissions->modelKeys());
+		}
+
+		return null;
 	}
 
 	/**

@@ -1,6 +1,8 @@
 <?php namespace Artesaos\Defender;
 
 use Illuminate\Database\Eloquent\Model;
+use Artesaos\Defender\Pivots\PermissionRolePivot;
+use Artesaos\Defender\Pivots\PermissionUserPivot;
 
 /**
  * Class Permission

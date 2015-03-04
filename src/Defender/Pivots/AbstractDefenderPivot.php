@@ -1,12 +1,9 @@
-<?php  namespace Artesaos\Defender;
+<?php  namespace Artesaos\Defender\Pivots;
 
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Relations\Pivot;
 
-/**
- * Class PermissionRolePivot
- * @package Artesaos\Defender
- */
-class PermissionRolePivot extends Pivot {
+abstract class AbstractDefenderPivot extends Pivot {
 
 	/**
 	 * @var array
@@ -14,7 +11,6 @@ class PermissionRolePivot extends Pivot {
 	protected $casts = [
 		'value' => 'boolean'
 	];
-
 	/**
 	 * @var array
 	 */
@@ -27,7 +23,7 @@ class PermissionRolePivot extends Pivot {
 	 */
 	public function scopeExpired($query)
 	{
-		// TODO:
+		return $query->where('expires', '<', Carbon::now());
 	}
 
 }
