@@ -36,22 +36,6 @@ trait HasDefenderTrait {
 	}
 
 	/**
-	 * Scope expired permissions
-	 *
-	 * @param $query
-	 * @return mixed
-	 */
-	public function scopeExpiredPermissions($query)
-	{
-		$pivot = $this->permissions()->getTable();
-
-		return $query->whereHas('permissions', function ($q) use ($pivot)
-		{
-			$q->where($pivot . '.expires', '<', Carbon::now());
-		});
-	}
-
-	/**
 	 * Returns if the given user has an specific role
 	 *
 	 * @param $role
@@ -207,7 +191,7 @@ trait HasDefenderTrait {
 	 */
 	public function revokeExpiredPermissions()
 	{
-		$expiredPermissions = $this->expiredPermissions()->get();
+		$expiredPermissions = $this->permissions()->wherePivot('expires', '<', Carbon::now())->get();
 
 		if ($expiredPermissions->count() > 0)
 		{

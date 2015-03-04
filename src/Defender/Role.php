@@ -59,22 +59,6 @@ class Role extends Model {
 	}
 
 	/**
-	 * Scope expired permissions
-	 *
-	 * @param $query
-	 * @return mixed
-	 */
-	public function scopeExpiredPermissions($query)
-	{
-		$pivot = $this->permissions()->getTable();
-
-		return $query->whereHas('permissions', function ($q) use ($pivot)
-		{
-			$q->where($pivot . '.expires', '<', Carbon::now());
-		});
-	}
-
-	/**
 	 * Attach permission
 	 *
 	 * @param       $permission
@@ -127,7 +111,7 @@ class Role extends Model {
 	 */
 	public function revokeExpiredPermissions()
 	{
-		$expiredPermissions = $this->expiredPermissions()->get();
+		$expiredPermissions = $this->permissions()->wherePivot('expires', '<', Carbon::now())->get();
 
 		if ($expiredPermissions->count() > 0)
 		{
