@@ -1,6 +1,6 @@
 <?php  namespace Artesaos\Defender\Middlewares;
 
-use Illuminate\Contracts\Auth\Guard;
+use Illuminate\Contracts\Auth\Authenticatable;
 
 abstract class AbstractDefenderMiddleware {
 
@@ -12,11 +12,11 @@ abstract class AbstractDefenderMiddleware {
 	protected $user;
 
 	/**
-	 * @param Guard $auth
+	 * @param Authenticatable $user
 	 */
-	public function __construct(Guard $auth)
+	public function __construct(Authenticatable $user)
 	{
-		$this->user = $auth->user();
+		$this->user = $user;
 	}
 
 	/**

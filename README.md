@@ -123,10 +123,12 @@ O Defender realiza apenas o controle de acesso em sua aplicação, ou seja, a ta
 
 Para proteger suas rotas, você pode utilizar os middlewares padrões do Defender.
 
+> O Defender depende do Auth padrão do Laravel, portanto declare o middleware `auth` antes do middleware do Defender que você deseja usar.
+
 #### needsPermissionMiddleware
 
 ```php
-Route::get('foo', ['middleware' => 'needsPermission', 'can' => 'user.create', function()
+Route::get('foo', ['middleware' => ['auth', 'needsPermission'], 'can' => 'user.create', function()
 {
 	return 'Yes we can!";
 }]);
@@ -135,7 +137,7 @@ Route::get('foo', ['middleware' => 'needsPermission', 'can' => 'user.create', fu
 Você também pode passar um array de permissões a serem checadas.
 
 ```php
-Route::get('foo', ['middleware' => 'needsPermission', 'can' => ['user.index', 'user.create'], function()
+Route::get('foo', ['middleware' => ['auth', 'needsPermission'], 'can' => ['user.index', 'user.create'], function()
 {
 	return 'Yes we can!';
 }]);
@@ -144,7 +146,7 @@ Route::get('foo', ['middleware' => 'needsPermission', 'can' => ['user.index', 'u
 Quando você passa um array de permissões, a rota é executada apenas se o usuário possui todas as permissões. Caso você queira que a rota execute quando o usuário tem pelo menos uma das permissões, basta adicionar `'any' => true`.
 
 ```php
-Route::get('foo', ['middleware' => 'needsPermission', 'can' => ['user.index', 'user.create'], 'any' => true, function()
+Route::get('foo', ['middleware' => ['auth', 'needsPermission'], 'can' => ['user.index', 'user.create'], 'any' => true, function()
 {
 	return 'Yes we can!';
 }]);
@@ -157,7 +159,7 @@ Route::get('foo', ['middleware' => 'needsPermission', 'can' => ['user.index', 'u
 Funciona de maneira semelhante ao middleware anterior, porém apenas os grupos são verificados, ou seja, não leva em consideração as permissões.
 
 ```php
-Route::get('foo', ['middleware' => 'needsPermission', 'is' => 'admin', function()
+Route::get('foo', ['middleware' => ['auth', 'needsRole'], 'is' => 'admin', function()
 {
 	return 'Yes I am!";
 }]);
@@ -166,7 +168,7 @@ Route::get('foo', ['middleware' => 'needsPermission', 'is' => 'admin', function(
 Você também pode passar um array de permissões a serem checadas.
 
 ```php
-Route::get('foo', ['middleware' => 'needsPermission', 'can' => ['admin', 'member'], function()
+Route::get('foo', ['middleware' => ['auth', 'needsRole'], 'can' => ['admin', 'member'], function()
 {
 	return 'Yes I am!';
 }]);
@@ -175,7 +177,7 @@ Route::get('foo', ['middleware' => 'needsPermission', 'can' => ['admin', 'member
 Quando você passa um array de permissões, a rota é executada apenas se o usuário possui todas as permissões. Caso você queira que a rota execute quando o usuário tem pelo menos uma das permissões, basta adicionar `'any' => true`.
 
 ```php
-Route::get('foo', ['middleware' => 'needsPermission', 'is' => ['admin', 'member'], 'any' => true, function()
+Route::get('foo', ['middleware' => ['auth', 'needsRole'], 'is' => ['admin', 'member'], 'any' => true, function()
 {
 	return 'Yes I am!';
 }]);

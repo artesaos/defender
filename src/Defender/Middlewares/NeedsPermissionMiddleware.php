@@ -18,11 +18,6 @@ class NeedsPermissionMiddleware extends AbstractDefenderMiddleware {
 		$permissions   = $this->getPermissions($request);
 		$anyPermission = $this->getAny($request);
 
-		if (is_null($this->user))
-		{
-			return response('Forbidden', 403); // TODO: Exception?
-		}
-
 		if (is_array($permissions) and count($permissions) > 0)
 		{
 			$canResult = true;
