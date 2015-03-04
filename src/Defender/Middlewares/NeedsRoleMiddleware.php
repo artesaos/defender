@@ -1,7 +1,6 @@
 <?php  namespace Artesaos\Defender\Middlewares;
 
 use Closure;
-use Illuminate\Contracts\Auth\Guard;
 
 /**
  * Class DefenderHasPermissionMiddleware
