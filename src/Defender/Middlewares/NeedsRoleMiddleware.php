@@ -10,19 +10,6 @@ use Illuminate\Contracts\Auth\Guard;
 class NeedsRoleMiddleware extends AbstractDefenderMiddleware {
 
 	/**
-	 * @var
-	 */
-	protected $user;
-
-	/**
-	 * @param Guard $auth
-	 */
-	public function __construct(Guard $auth)
-	{
-		$this->user = $auth->user();
-	}
-
-	/**
 	 * @param \Illuminate\Contracts\Http\Request $request
 	 * @param callable $next
 	 * @return mixed

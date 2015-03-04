@@ -73,7 +73,7 @@ Ou
 php artisan vendor:publish --tag=migrations
 ```
 
-Se você já publicou os arquivos, mas por algum motivo precisa sobrescrevê-los, adicione a flag `--force` no final dos comandos antetiores.
+Se você já publicou os arquivos, mas por algum motivo precisa sobrescrevê-los, adicione a flag `--force` no final dos comandos anteriores.
 
 ### 3. Facade (optional)
 
@@ -293,7 +293,7 @@ public function foo(Authenticable $user)
 ----------
 
 
-##### `public function detachRole($role)`:
+##### `public function attachRole($role)`:
 
 Remove o grupo `$role` do usuário (método inverso ao `attachRole()`).
 
