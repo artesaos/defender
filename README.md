@@ -293,7 +293,7 @@ public function foo(Authenticable $user)
 ----------
 
 
-##### `public function attachRole($role)`:
+##### `public function detachRole($role)`:
 
 Remove o grupo `$role` do usuário (método inverso ao `attachRole()`).
 
