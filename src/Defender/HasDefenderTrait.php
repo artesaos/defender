@@ -93,7 +93,7 @@ trait HasDefenderTrait {
 		{
 			if ($userPermission->name === $permission)
 			{
-				if ($userPermission->pivot->expires->isFutue() or is_null($userPermission->pivot->expires))
+				if ($userPermission->pivot->expires->isFuture() or is_null($userPermission->pivot->expires))
 				{
 					return $userPermission->pivot->value;
 				}

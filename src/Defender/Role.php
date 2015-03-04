@@ -115,7 +115,7 @@ class Role extends Model {
 		{
 			if ($rolePermission->name === $permission)
 			{
-				if ($rolePermission->pivot->expires->isFutue() or is_null($rolePermission->pivot->expires))
+				if ($rolePermission->pivot->expires->isFuture() or is_null($rolePermission->pivot->expires))
 				{
 					return $rolePermission->pivot->value;
 				}
