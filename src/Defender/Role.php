@@ -104,6 +104,14 @@ class Role extends Model {
 	}
 
 	/**
+	 *
+	 */
+	public function revokeExpiredPermissions()
+	{
+		// TODO
+	}
+
+	/**
 	 * Get role permission using the permission name
 	 *
 	 * @param $permission
@@ -115,7 +123,7 @@ class Role extends Model {
 		{
 			if ($rolePermission->name === $permission)
 			{
-				if ($rolePermission->pivot->expires->isFuture() or is_null($rolePermission->pivot->expires))
+				if (is_null($rolePermission->pivot->expires) or $rolePermission->pivot->expires->isFuture())
 				{
 					return $rolePermission->pivot->value;
 				}

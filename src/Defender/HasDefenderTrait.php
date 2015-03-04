@@ -93,7 +93,7 @@ trait HasDefenderTrait {
 		{
 			if ($userPermission->name === $permission)
 			{
-				if ($userPermission->pivot->expires->isFuture() or is_null($userPermission->pivot->expires))
+				if (is_null($userPermission->pivot->expires) or $userPermission->pivot->expires->isFuture())
 				{
 					return $userPermission->pivot->value;
 				}
@@ -179,6 +179,14 @@ trait HasDefenderTrait {
 	public function revokePermissions()
 	{
 		return $this->permissions()->detach();
+	}
+
+	/**
+	 * Revoke expired user permissions.
+	 */
+	public function revokeExpiredPermissions()
+	{
+		// TODO
 	}
 
 	/**

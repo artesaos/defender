@@ -22,4 +22,12 @@ class PermissionUserPivot extends Pivot {
 		'expires'
 	];
 
+	/**
+	 * @param $query
+	 */
+	public function scopeExpired($query)
+	{
+		// TODO
+	}
+
 }
