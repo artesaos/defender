@@ -1,7 +1,7 @@
 <?php  namespace Artesaos\Defender\Middlewares;
 
 use Closure;
-use Illuminate\Contracts\Auth\Authenticatable;
+use Illuminate\Contracts\Auth\Guard;
 
 /**
  * Class DefenderHasPermissionMiddleware
@@ -17,11 +17,11 @@ class NeedsPermissionMiddleware extends AbstractDefenderMiddleware {
 	protected $user;
 
 	/**
-	 * @param Authenticatable $user
+	 * @param Guard $auth
 	 */
-	public function __construct(Authenticatable $user)
+	public function __construct(Guard $auth)
 	{
-		$this->user = $user;
+		$this->user = $auth->user();
 	}
 
 	/**
@@ -33,6 +33,11 @@ class NeedsPermissionMiddleware extends AbstractDefenderMiddleware {
 	{
 		$permissions   = $this->getPermissions($request);
 		$anyPermission = $this->getAny($request);
+
+		if (is_null($this->user))
+		{
+			return response('Forbidden', 403); // TODO: Exception?
+		}
 
 		if (is_array($permissions) and count($permissions) > 0)
 		{
