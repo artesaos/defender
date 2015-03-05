@@ -409,6 +409,52 @@ public function foo(Authenticable $user)
 }
 ```
 
+----------
+
+
 ### Permissões Temporárias
 
-// TODO
+Um dos recursos mais interessantes do Defender é possibilidade de atribuir permissões temporárias a um grupo ou um usuário em questão.
+
+#### Exemplos
+
+> *O usuário X é grupo 'admins', porém eu desejo remover temporariamente o poder dele de criar novos usuários*
+
+Neste caso precisamos atribuir um permissão de usuário com o valor `false`, explicitamente proibindo o usuário de executar aquela ação. É necessário adicionar esta permissão com o valor `false`, já que por padrão as permissões de usuário herdam os valores das permissões de seus grupos. Ao atribuir uma permissão de usuário, esta sempre terá precedência.
+
+No exemplo abaixo retiramos por 7 dias a permissão criar usuários (neste exemplo `user.create`) do admin em questão.
+
+```php
+public function foo()
+{
+    $userX = App\User::find(3); // considere '3' a ID do usuário 'X'
+    $permission = Defender::findPermission('user.create');
+
+	
+	$userX->attachPermission($permission, [
+		'value' => false, // false significa que ele não terá essa permissão,
+		'expires' => \Carbon\Carbon::now()->addDays(7) // Daqui a quanto tempo essa permissão irá expirar
+	]);
+
+}
+```
+
+Após passados 7 dias, o usuário em questão terá a permissão restabelecida.
+
+----------
+
+> *Permitir que um usuário realize determinada ação temporariamente.*
+
+Para permitir temporariamente que um usuário realize determinada ação, basta informar o valor do campo `expires`. O campo `value` é considerado `true` por padrão.
+
+```php
+public function foo()
+{
+	$user = App\User::find(1);
+    $permission = Defender::findPermission('user.create');
+
+	$user->attachPermission($permission, [
+		'expires' => \Carbon\Carbon::now()->addDays(7)
+	];
+}
+```
