@@ -1,5 +1,6 @@
 <?php  namespace Artesaos\Defender\Traits;
 
+use Illuminate\Database\Eloquent\Model;
 use Artesaos\Defender\Pivots\PermissionUserPivot;
 
 /**
