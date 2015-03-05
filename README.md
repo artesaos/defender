@@ -24,7 +24,7 @@ Com Segurança e Usabilidade em mente, este projeto tem como objetivo prover o c
 
 ### 1. Dependência
 
-Defender pode ser instalado através do <a href="http://zenhub.io" target="_blank">composer</a>.
+Defender pode ser instalado através do <a href="https://getcomposer.org/" target="_blank">composer</a>.
 Para que o package seja adicionado automaticamente ao seu arquivo `composer.json` execute o seguinte comando:
 
 ```shell
@@ -90,7 +90,7 @@ Para usar a facade `Defender`, você precisa registrá-la no seu arquivo `config
 // file END ommited
 ```
 
-### 4. Defender Middlewares (optional)
+### 4. Middlewares do Defender
 
 Caso você tenha a necessidade de realizar o controle de acesso diretamente nas rotas, o Defender possui alguns middlewares (nativos) que abordam os casos mais comuns. Para utilizá-los é necessário registrá-los no seu arquivo `app/Http/Kernel.php`.
 
@@ -110,7 +110,7 @@ protected $routeMiddleware = [
 
 A utilização desses middlewares é explicada na próxima seção.
 
-#### 4.1 - Create your own middleware (Crie o seu próprio middleware)
+#### 4.1 - Crie o seu próprio middleware
 
 Caso os middlewares padrões do Defender não atendam as suas necessidades, você pode criar seu próprio middleware e utilizar a API do Defender para realizar o controle de acesso. 
 
