@@ -78,7 +78,7 @@ php artisan vendor:publish --tag=migrations
 
 Se você já publicou os arquivos, mas por algum motivo precisa sobrescrevê-los, adicione a flag `--force` no final dos comandos anteriores.
 
-### 3. Facade (optional)
+### 3. Facade (opcional)
 
 Para usar a facade `Defender`, você precisa registrá-la no seu arquivo `config/app.php` adicionando o seguinte código na seção `aliases`:
 
