@@ -49,6 +49,13 @@ return [
 	/*
 	 * Pivot table for permissions and users
 	 */
-	'permission_user_table' => 'permission_user'
+	'permission_user_table' => 'permission_user',
+
+	/**
+	 * Forbidden callback
+	 */
+	'forbidden_callback' => function() {
+		throw new \Artesaos\Defender\Exceptions\ForbiddenException;
+	}
 
 ];

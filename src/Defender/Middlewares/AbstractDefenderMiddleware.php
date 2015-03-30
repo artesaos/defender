@@ -41,4 +41,16 @@ abstract class AbstractDefenderMiddleware {
 		return $routeActions;
 	}
 
+	/**
+	 * Handles the forbidden response
+	 *
+	 * @return mixed
+	 */
+	protected function forbiddenResponse()
+	{
+		return call_user_func(config('defender.forbidden_callback', function() {
+			return response('Forbidden', 403);
+		}));
+	}
+
 }

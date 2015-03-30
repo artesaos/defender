@@ -9,7 +9,7 @@ use Closure;
 class NeedsPermissionMiddleware extends AbstractDefenderMiddleware {
 
 	/**
-	 * @param \Illuminate\Contracts\Http\Request $request
+	 * @param \Illuminate\Http\Request $request
 	 * @param callable $next
 	 * @return mixed
 	 */
@@ -37,7 +37,7 @@ class NeedsPermissionMiddleware extends AbstractDefenderMiddleware {
 
 			if ( ! $canResult )
 			{
-				return response('Forbidden', 403); // TODO: Exception?
+				return $this->forbiddenResponse();
 			}
 		}
 
@@ -45,7 +45,7 @@ class NeedsPermissionMiddleware extends AbstractDefenderMiddleware {
 	}
 
 	/**
-	 * @param \Illuminate\Contracts\Http\Request $request
+	 * @param \Illuminate\Http\Request $request
 	 * @return array
 	 */
 	private function getPermissions($request)
