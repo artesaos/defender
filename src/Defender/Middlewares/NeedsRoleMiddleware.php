@@ -18,6 +18,11 @@ class NeedsRoleMiddleware extends AbstractDefenderMiddleware {
 		$roles = $this->getRoles($request);
 		$anyRole = $this->getAny($request);
 
+		if (is_null($this->user))
+		{
+			return $this->forbiddenResponse();
+		}
+
 		if (is_array($roles) and count($roles) > 0)
 		{
 			$hasResult = true;
