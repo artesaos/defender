@@ -114,9 +114,7 @@ A utilização desses middlewares é explicada na próxima seção.
 
 #### 4.1 - Crie o seu próprio middleware
 
-Caso os middlewares padrões do Defender não atendam as suas necessidades, você pode criar seu próprio middleware e utilizar a API do Defender para realizar o controle de acesso. 
-
-//TODO: Link para api
+Caso os middlewares padrões do Defender não atendam as suas necessidades, você pode criar seu próprio middleware e utilizar a [API do Defender](#usando-a-facade) para realizar o controle de acesso. 
 
 ## Usando o Defender
 
@@ -133,7 +131,7 @@ Para proteger suas rotas, você pode utilizar os middlewares padrões do Defende
 ```php
 Route::get('foo', ['middleware' => ['auth', 'needsPermission'], 'can' => 'user.create', function()
 {
-	return 'Yes we can!";
+	return 'Sim eu posso!";
 }]);
 ```
 
@@ -142,7 +140,7 @@ Você também pode passar um array de permissões a serem checadas.
 ```php
 Route::get('foo', ['middleware' => ['auth', 'needsPermission'], 'can' => ['user.index', 'user.create'], function()
 {
-	return 'Yes we can!';
+	return 'Sim eu posso!';
 }]);
 ```
 
@@ -151,7 +149,7 @@ Quando você passa um array de permissões, a rota é executada apenas se o usu�
 ```php
 Route::get('foo', ['middleware' => ['auth', 'needsPermission'], 'can' => ['user.index', 'user.create'], 'any' => true, function()
 {
-	return 'Yes we can!';
+	return 'Sim eu posso!';
 }]);
 ```
 
@@ -164,7 +162,7 @@ Funciona de maneira semelhante ao middleware anterior, porém apenas os grupos s
 ```php
 Route::get('foo', ['middleware' => ['auth', 'needsRole'], 'is' => 'admin', function()
 {
-	return 'Yes I am!";
+	return 'Sim eu sou!";
 }]);
 ```
 
@@ -173,7 +171,7 @@ Você também pode passar um array de permissões a serem checadas.
 ```php
 Route::get('foo', ['middleware' => ['auth', 'needsRole'], 'can' => ['admin', 'member'], function()
 {
-	return 'Yes I am!';
+	return 'Sim eu sou!';
 }]);
 ```
 
@@ -182,7 +180,7 @@ Quando você passa um array de permissões, a rota é executada apenas se o usu�
 ```php
 Route::get('foo', ['middleware' => ['auth', 'needsRole'], 'is' => ['admin', 'member'], 'any' => true, function()
 {
-	return 'Yes I am!';
+	return 'Sim eu sou!';
 }]);
 ```
 
@@ -190,43 +188,72 @@ Route::get('foo', ['middleware' => ['auth', 'needsRole'], 'is' => ['admin', 'mem
 
 ### Usando a Facade
 
+Com a facade do defender você pode acessar a API e utilizá-la em qualquer parte de sua aplicação.
+
+----------
+
 ##### `Defender::can($permission)`:
+
+Verifica se o usuário logado possui a permissão `$permission`.
+
+----------
+
+##### `Defender::canWithRolePermissions($permission)`:
+
+Verifica se o usuário logado possui a permissão `$permission` utilizando apenas os grupos.
 
 ----------
 
 ##### `Defender::hasRole($roleName)`:
 
+Verifica se o usuário logado pertence ao grupo `$roleName`.
+
 ----------
 
 ##### `Defender::roleExists($roleName)`:
+
+Verifica se o grupo `$roleName` existe no banco de dados.
 
 ----------
 
 ##### `Defender::permissionExists($permissionName)`:
 
+Verifica se a permissão `$permissionName` existe no banco de dados.
+
 ----------
 
 ##### `Defender::findRole($roleName)`:
+
+Busca no banco de dados o grupo de nome `$roleName`.
 
 ----------
 
 ##### `Defender::findRoleById($roleId)`:
 
+Busca no banco de dados o grupo de ID `roleId`.
+
 ----------
 
 ##### `Defender::findPermission($permissionName)`:
+
+Busca no banco de dados a permissão de nome `$permissionName`.
 
 ----------
 
 ##### `Defender::findPermissionById($permissionId)`:
 
+Busca no banco de dados a permissão de ID `$permissionId`.
 ----------
 
 ##### `Defender::createRole($roleName)`:
 
+Cria um novo grupo no banco de dados
+
 ----------
 
 ##### `Defender::createPermission($permissionName)`:
+
+Cria uma nova permissão no banco de dados.
 
 ----------
 

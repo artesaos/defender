@@ -55,7 +55,7 @@ class Defender {
 	}
 
 	/**
-	 * Check if the authenticated user can has the given permission
+	 * Check if the authenticated user has the given permission
 	 *
 	 * @param $permission
 	 * @return bool
@@ -65,6 +65,23 @@ class Defender {
 		if ( ! is_null($this->getUser()))
 		{
 			return $this->getUser()->can($permission);
+		}
+
+		return false;
+	}
+
+	/**
+	 * Check if the authenticated user has the given permission
+	 * using only the roles.
+	 *
+	 * @param $permission
+	 * @return bool
+	 */
+	public function canWithRolePermissions($permission)
+	{
+		if ( ! is_null($this->getUser()))
+		{
+			return $this->getUser()->canWithRolePermissions($permission);
 		}
 
 		return false;
