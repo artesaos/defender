@@ -243,6 +243,7 @@ Busca no banco de dados a permissão de nome `$permissionName`.
 ##### `Defender::findPermissionById($permissionId)`:
 
 Busca no banco de dados a permissão de ID `$permissionId`.
+
 ----------
 
 ##### `Defender::createRole($roleName)`:
