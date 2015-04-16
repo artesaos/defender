@@ -176,9 +176,9 @@ class Defender {
 	 * @param $permissionName
 	 * @return \Artesaos\Defender\Permission
 	 */
-	public function createPermission($permissionName)
+	public function createPermission($permissionName, $readableName = null)
 	{
-		return $this->permissionRepository->create($permissionName);
+		return $this->permissionRepository->create($permissionName, $readableName);
 	}
 
 }
