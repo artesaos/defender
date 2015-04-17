@@ -120,6 +120,46 @@ Caso os middlewares padrões do Defender não atendam as suas necessidades, voc�
 
 O Defender realiza apenas o controle de acesso em sua aplicação, ou seja, a tarefa de autenticação é realizada pelo `Auth` que faz parte do core do Laravel.
 
+### Tornando o User denfensível
+Na sua classe User, você precisa adicionar a trait `Artesaos\Defender\HasDefenderTrait` para que sejá possível que crie permissões e grupos para os usuários:
+
+```php
+<?php namespace App;
+
+use Artesaos\Defender\HasDefenderTrait;
+use Illuminate\Auth\Authenticatable;
+use Illuminate\Database\Eloquent\Model;
+use Illuminate\Auth\Passwords\CanResetPassword;
+use Illuminate\Contracts\Auth\Authenticatable as AuthenticatableContract;
+use Illuminate\Contracts\Auth\CanResetPassword as CanResetPasswordContract;
+
+class User extends Model implements AuthenticatableContract, CanResetPasswordContract {
+
+	use Authenticatable, CanResetPassword, HasDefenderTrait;
+...
+```
+### Criando Grupos e Permissões
+
+```php
+use Artesaos\Defender\Role;
+use Artesaos\Defender\Permission;
+use \App\User;
+
+$grupoAdmin = Role::create(["name" => "admin"]);
+
+$permissaoCriarUsuario =  Permission::create(["name" => "user.create", "readable_name" => "Criar usuários"]);
+
+// Aqui eu posso atribuir essa permissão diretamente para um usuário
+User::find(1)->attachPermission($permissaoCriarUsuario);
+
+// ou posso adicionar o usuário a um grupo e esse grupo tem a regra de poder criar usuários
+$grupoAdmin->attachPermission($permissaoCriarUsuario);
+
+//Agora esse usuário está no grupo dos Administradores 
+User::find(1)->attachRole($grupoAdmin);   
+```
+
+
 ### Usando o Middleware
 
 Para proteger suas rotas, você pode utilizar os middlewares padrões do Defender.
