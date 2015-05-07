@@ -140,23 +140,27 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
 ```
 ### Criando Grupos e Permissões
 
+Para criar os grupos e as permissões para a sua aplicação, basta utilizar a API do defender. Você pode realizar esse processo em um seeder ou diretamente no `php artisan tinker` por exemplo.
+
 ```php
-use Artesaos\Defender\Role;
-use Artesaos\Defender\Permission;
-use \App\User;
 
-$grupoAdmin = Role::create(["name" => "admin"]);
+use App\User;
 
-$permissaoCriarUsuario =  Permission::create(["name" => "user.create", "readable_name" => "Criar usuários"]);
+$grupoAdmin = Defender::createRole('admin');
+
+// O primeiro parâmetro é o nome da permissão
+// O segundo é a "versão amigável" desse nome. (geralmente para você mostrar ela na sua aplicação).
+$permissaoCriarUsuario =  Defender::createPermission('user.create', 'Criar usuários');
 
 // Aqui eu posso atribuir essa permissão diretamente para um usuário
-User::find(1)->attachPermission($permissaoCriarUsuario);
+$user = User::find(1);
+$user->attachPermission($permissaoCriarUsuario);
 
 // ou posso adicionar o usuário a um grupo e esse grupo tem a regra de poder criar usuários
 $grupoAdmin->attachPermission($permissaoCriarUsuario);
 
 //Agora esse usuário está no grupo dos Administradores 
-User::find(1)->attachRole($grupoAdmin);   
+$user->attachRole($grupoAdmin);
 ```
 
 
