@@ -175,7 +175,7 @@ Para proteger suas rotas, você pode utilizar os middlewares padrões do Defende
 ```php
 Route::get('foo', ['middleware' => ['auth', 'needsPermission'], 'can' => 'user.create', function()
 {
-	return 'Sim eu posso!";
+	return 'Sim eu posso!';
 }]);
 ```
 
@@ -206,7 +206,7 @@ Funciona de maneira semelhante ao middleware anterior, porém apenas os grupos s
 ```php
 Route::get('foo', ['middleware' => ['auth', 'needsRole'], 'is' => 'admin', function()
 {
-	return 'Sim eu sou!";
+	return 'Sim eu sou!';
 }]);
 ```
 
