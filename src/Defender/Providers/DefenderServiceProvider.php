@@ -40,7 +40,10 @@ class DefenderServiceProvider extends ServiceProvider {
 
 		$this->registerRepositoryInterfaces();
 		
-		$this->registerBladeExtensions();
+        if ($this->app['config']->get('defender.template_helpers', true)) 
+        {
+            $this->registerBladeExtensions();
+        }
 	}
 
 	/**
@@ -50,7 +53,7 @@ class DefenderServiceProvider extends ServiceProvider {
 	 */
 	public function provides()
 	{
-		return [];
+		return ['defender', 'defender.role', 'defender.permission'];
 	}
 
 	/**
@@ -82,7 +85,7 @@ class DefenderServiceProvider extends ServiceProvider {
     /**
      * Register new blade extensions
      */ 
-	public function registerBladeExtensions()
+	protected function registerBladeExtensions()
     {
         $this->app->afterResolving('blade.compiler', function()
         {
@@ -91,12 +94,12 @@ class DefenderServiceProvider extends ServiceProvider {
              */
             $this->app['blade.compiler']->extend(function($view, $compiler)
             {
-                $open = $compiler->createOpenMatcher('can');
+                $open  = $compiler->createOpenMatcher('can');
                 $close = $compiler->createPlainMatcher('endcan');
 
-                $view = preg_replace([$open, $close], ['$1<?php if(app(\'defender\')->can$2)): ?>', '$1<?php endif; ?>'], $view);
+                $template = ['$1<?php if(app(\'defender\')->can$2)): ?>', '$1<?php endif; ?>'];
 
-                return $view;
+                return preg_replace([$open, $close], $template, $view);
             });
 
             /**
@@ -104,12 +107,12 @@ class DefenderServiceProvider extends ServiceProvider {
              */
             $this->app['blade.compiler']->extend(function($view, $compiler)
             {
-                $open = $compiler->createOpenMatcher('is');
+                $open  = $compiler->createOpenMatcher('is');
                 $close = $compiler->createPlainMatcher('endis');
 
-                $view = preg_replace([$open, $close], ['$1<?php if(app(\'defender\')->hasRole$2)): ?>', '$1<?php endif; ?>'], $view);
+                $template = ['$1<?php if(app(\'defender\')->hasRole$2)): ?>', '$1<?php endif; ?>'];
 
-                return $view;
+                return preg_replace([$open, $close], $template, $view);
             });
         });
     }
@@ -123,6 +126,9 @@ class DefenderServiceProvider extends ServiceProvider {
 		$this->mergeConfigFrom(__DIR__ . '/../../resources/config/defender.php', 'defender');
 	}
 
+    /**
+     * Publish migration file
+     */
 	private function publishMigrations()
 	{
 		$this->publishes([__DIR__ . '/../../resources/migrations/' => base_path('database/migrations')], 'migrations');
