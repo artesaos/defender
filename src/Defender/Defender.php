@@ -102,6 +102,17 @@ class Defender {
 
 		return false;
 	}
+	
+	/**
+	 * Return if the authenticated user has the given role
+	 *
+	 * @param $roleName
+	 * @return bool
+	 */ 
+	public function is($roleName)
+	{
+		return $this->hasRole($roleName);
+	}
 
 	/**
 	 * Check if a role with the given name exists.
