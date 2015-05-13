@@ -239,7 +239,7 @@ Extensões do Blade para facilitar o uso do defender.
 ```
 @can('user.index')
     aqui mostra algo relacionado a essa permissão 
-@endif
+@endcan
 ```
 
 ```
@@ -247,7 +247,7 @@ Extensões do Blade para facilitar o uso do defender.
     aqui mostra algo relacionado ao usuário a essa permissão
 @else
     aqui mostra as informações pra quem não tem a permissão user.index
-@endif
+@endcan
 ```
 
 #### @is
