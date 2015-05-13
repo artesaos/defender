@@ -230,6 +230,44 @@ Route::get('foo', ['middleware' => ['auth', 'needsRole'], 'is' => ['admin', 'mem
 
 ----------
 
+### Usando nas Views
+
+Extensões do Blade para facilitar o uso do defender.
+
+#### @can
+
+```
+@can('user.index')
+    aqui mostra algo relacionado a essa permissão 
+@endif
+```
+
+```
+@can('user.index')
+    aqui mostra algo relacionado ao usuário a essa permissão
+@else
+    aqui mostra as informações pra quem não tem a permissão user.index
+@endif
+```
+
+#### @is
+
+```
+@is('admin')
+    Mostra informações para o usuário logado e que esteja no grupo admin
+@endis
+```
+
+```
+@is('admin')
+    Mostra informações para o usuário logado e que esteja no grupo admin
+@else 
+    Aqui mostra um bloqueio ou qualquer coisa não relacionada ao grupo admin
+@endis
+```
+
+----------
+
 ### Usando a Facade
 
 Com a facade do defender você pode acessar a API e utilizá-la em qualquer parte de sua aplicação.
