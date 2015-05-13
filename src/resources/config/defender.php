@@ -56,6 +56,11 @@ return [
 	 */
 	'forbidden_callback' => function() {
 		throw new \Artesaos\Defender\Exceptions\ForbiddenException;
-	}
+	},
+
+    /**
+     * Use template helpers
+     */
+    'template_helpers' => true
 
 ];

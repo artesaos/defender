@@ -18,13 +18,17 @@
     {
       "name": "Gilvan Júnio",
       "email": "packages@gilvancosta.com"
+    },
+    {
+      "name": "Vagner do Carmo",
+      "email": "vluzrmos@gmail.com"
     }
   ],
   "require": {
     "php": ">=5.4.0",
-    "illuminate/contracts": "5.0.x",
-    "illuminate/support": "5.0.x",
-    "illuminate/database": "5.0.x"
+    "illuminate/contracts": "~5.0|~5.1@dev",
+    "illuminate/support": "~5.0|~5.1@dev",
+    "illuminate/database": "~5.0|~5.1@dev"
   },
   "require-dev": {
     "phpunit/phpunit": "4.*",
