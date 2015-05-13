@@ -81,43 +81,39 @@ class DefenderServiceProvider extends ServiceProvider {
 			return $app['defender.permission'];
 		});
 	}
-    
+
     /**
      * Register new blade extensions
-     */ 
-	protected function registerBladeExtensions()
+     */
+    protected function registerBladeExtensions()
     {
-        $this->app->afterResolving('blade.compiler', function()
-        {
+        $this->app->afterResolving('blade.compiler', function () {
 
             if (str_contains($this->app->version(), '5.0')) {
-				/**
-	             * add @can and @endcan to blade compiler
-	             */
-	            $this->app['blade.compiler']->extend(function($view, $compiler)
-	            {
-	                $open  = $compiler->createOpenMatcher('can');
-	                $close = $compiler->createPlainMatcher('endcan');
-	
-	                $template = ['$1<?php if(app(\'defender\')->can$2)): ?>', '$1<?php endif; ?>'];
-	
-	                return preg_replace([$open, $close], $template, $view);
-	            });
-	
-	            /**
-	             * Add @is and @endis to blade compiler
-	             */
-	            $this->app['blade.compiler']->extend(function($view, $compiler)
-	            {
-	                $open  = $compiler->createOpenMatcher('is');
-	                $close = $compiler->createPlainMatcher('endis');
-	
-	                $template = ['$1<?php if(app(\'defender\')->hasRole$2)): ?>', '$1<?php endif; ?>'];
-	
-	                return preg_replace([$open, $close], $template, $view);
-	            });
-			}
-            else {
+                /**
+                 * add @can and @endcan to blade compiler
+                 */
+                $this->app['blade.compiler']->extend(function ($view, $compiler) {
+                    $open  = $compiler->createOpenMatcher('can');
+                    $close = $compiler->createPlainMatcher('endcan');
+
+                    $template = ['$1<?php if(app(\'defender\')->can$2)): ?>', '$1<?php endif; ?>'];
+
+                    return preg_replace([$open, $close], $template, $view);
+                });
+
+                /**
+                 * Add @is and @endis to blade compiler
+                 */
+                $this->app['blade.compiler']->extend(function ($view, $compiler) {
+                    $open  = $compiler->createOpenMatcher('is');
+                    $close = $compiler->createPlainMatcher('endis');
+
+                    $template = ['$1<?php if(app(\'defender\')->hasRole$2)): ?>', '$1<?php endif; ?>'];
+
+                    return preg_replace([$open, $close], $template, $view);
+                });
+            } else {
                 /**
                  * add @can and @endcan to blade compiler
                  */
