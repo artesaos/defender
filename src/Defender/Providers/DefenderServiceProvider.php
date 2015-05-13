@@ -89,9 +89,8 @@ class DefenderServiceProvider extends ServiceProvider {
     {
         $this->app->afterResolving('blade.compiler', function()
         {
-			
-			if(str_contains($this->app->version(), '5.0'))
-			{
+
+            if (str_contains($this->app->version(), '5.0')) {
 				/**
 	             * add @can and @endcan to blade compiler
 	             */
