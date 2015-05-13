@@ -118,30 +118,29 @@ class DefenderServiceProvider extends ServiceProvider {
 	                return preg_replace([$open, $close], $template, $view);
 	            });
 			}
-			else
-			{
+			else {
                 /**
                  * add @can and @endcan to blade compiler
                  */
-				$this->app['blade.compiler']->directive('can', function($expression){
-					return "<?php if(app('defender')->can{$expression}): ?>";
-				});
-				
-				$this->app['blade.compiler']->directive('endcan', function($expression){
-					return "<?php endif; ?>";
-				});
+                $this->app['blade.compiler']->directive('can', function ($expression) {
+                    return "<?php if(app('defender')->can{$expression}): ?>";
+                });
+
+                $this->app['blade.compiler']->directive('endcan', function ($expression) {
+                    return "<?php endif; ?>";
+                });
 
                 /**
                  * add @is and @endis to blade compiler
                  */
-                $this->app['blade.compiler']->directive('is', function($expression){
+                $this->app['blade.compiler']->directive('is', function ($expression) {
                     return "<?php if(app('defender')->hasRole{$expression}): ?>";
                 });
 
-                $this->app['blade.compiler']->directive('endis', function($expression){
+                $this->app['blade.compiler']->directive('endis', function ($expression) {
                     return "<?php endif; ?>";
                 });
-			}
+            }
         });
     }
     
