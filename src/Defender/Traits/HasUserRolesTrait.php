@@ -29,7 +29,7 @@ trait HasUserRolesTrait {
 	{
 		$roles = $this->roles->lists('name');
 
-		return in_array($role, $roles);
+		return in_array($role, $roles->toArray());
 	}
 
 	/**
