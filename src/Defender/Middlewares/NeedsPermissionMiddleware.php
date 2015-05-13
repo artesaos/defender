@@ -1,65 +1,62 @@
-<?php  namespace Artesaos\Defender\Middlewares;
+<?php
+
+namespace Artesaos\Defender\Middlewares;
 
 use Closure;
 
 /**
- * Class DefenderHasPermissionMiddleware
- * @package Artesaos\Defender
+ * Class DefenderHasPermissionMiddleware.
  */
-class NeedsPermissionMiddleware extends AbstractDefenderMiddleware {
+class NeedsPermissionMiddleware extends AbstractDefenderMiddleware
+{
+    /**
+     * @param \Illuminate\Http\Request $request
+     * @param callable                 $next
+     *
+     * @return mixed
+     */
+    public function handle($request, Closure $next)
+    {
+        $permissions = $this->getPermissions($request);
+        $anyPermission = $this->getAny($request);
 
-	/**
-	 * @param \Illuminate\Http\Request $request
-	 * @param callable $next
-	 * @return mixed
-	 */
-	public function handle($request, Closure $next)
-	{
-		$permissions   = $this->getPermissions($request);
-		$anyPermission = $this->getAny($request);
+        if (is_null($this->user)) {
+            return $this->forbiddenResponse();
+        }
 
-		if (is_null($this->user))
-		{
-			return $this->forbiddenResponse();
-		}
+        if (is_array($permissions) and count($permissions) > 0) {
+            $canResult = true;
 
-		if (is_array($permissions) and count($permissions) > 0)
-		{
-			$canResult = true;
+            foreach ($permissions as $permission) {
+                $canPermission = $this->user->can($permission);
 
-			foreach($permissions as $permission)
-			{
-				$canPermission = $this->user->can($permission);
+                // Check if any permission is enough
+                if ($anyPermission and $canPermission) {
+                    return $next($request);
+                }
 
-				// Check if any permission is enough
-				if ($anyPermission and $canPermission)
-				{
-					return $next($request);
-				}
+                $canResult = $canResult & $canPermission;
+            }
 
-				$canResult = $canResult & $canPermission;
-			}
+            if (!$canResult) {
+                return $this->forbiddenResponse();
+            }
+        }
 
-			if ( ! $canResult )
-			{
-				return $this->forbiddenResponse();
-			}
-		}
+        return $next($request);
+    }
 
-		return $next($request);
-	}
+    /**
+     * @param \Illuminate\Http\Request $request
+     *
+     * @return array
+     */
+    private function getPermissions($request)
+    {
+        $routeActions = $this->getActions($request);
 
-	/**
-	 * @param \Illuminate\Http\Request $request
-	 * @return array
-	 */
-	private function getPermissions($request)
-	{
-		$routeActions = $this->getActions($request);
+        $permissions = array_get($routeActions, 'can', []);
 
-		$permissions = array_get($routeActions, 'can', []);
-
-		return is_array($permissions) ? $permissions : (array) $permissions;
-	}
-
+        return is_array($permissions) ? $permissions : (array) $permissions;
+    }
 }

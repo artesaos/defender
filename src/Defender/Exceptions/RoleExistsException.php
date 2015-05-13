@@ -1,3 +1,7 @@
-<?php  namespace Artesaos\Defender\Exceptions;
+<?php
 
-class RoleExistsException extends  DefenderException {}
+namespace Artesaos\Defender\Exceptions;
+
+class RoleExistsException extends  DefenderException
+{
+}
