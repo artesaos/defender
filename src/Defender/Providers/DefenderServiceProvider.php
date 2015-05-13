@@ -118,7 +118,7 @@ class DefenderServiceProvider extends ServiceProvider {
 	                return preg_replace([$open, $close], $template, $view);
 	            });
 			}
-			else {
+            else {
                 /**
                  * add @can and @endcan to blade compiler
                  */
