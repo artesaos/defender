@@ -1,3 +1,7 @@
-<?php  namespace Artesaos\Defender\Exceptions;
+<?php
 
-class PermissionExistsException extends DefenderException {}
+namespace Artesaos\Defender\Exceptions;
+
+class PermissionExistsException extends DefenderException
+{
+}
