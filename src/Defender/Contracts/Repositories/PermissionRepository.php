@@ -1,7 +1,8 @@
-<?php namespace Artesaos\Defender\Contracts\Repositories;
+<?php
 
-interface PermissionRepository extends AbstractRepository {
+namespace Artesaos\Defender\Contracts\Repositories;
 
-	public function create($permissionName, $readableName = null);
-
+interface PermissionRepository extends AbstractRepository
+{
+    public function create($permissionName, $readableName = null);
 }

@@ -1,4 +1,6 @@
-<?php namespace Artesaos\Defender;
+<?php
+
+namespace Artesaos\Defender;
 
 use Artesaos\Defender\Contracts\Defender as DefenderContract;
 use Artesaos\Defender\Contracts\Repositories\PermissionRepository;
@@ -203,11 +205,12 @@ class Defender implements DefenderContract {
 
 	/**
 	 * @param $permissionName
-	 * @return \Artesaos\Defender\Permission
+	 * @param null $readableName
+	 * @return Permission
 	 */
 	public function createPermission($permissionName, $readableName = null)
 	{
 		return $this->permissionRepository->create($permissionName, $readableName);
 	}
-
+    
 }

@@ -1,12 +1,12 @@
-<?php  namespace Artesaos\Defender\Contracts\Repositories;
+<?php
 
+namespace Artesaos\Defender\Contracts\Repositories;
 
-interface AbstractRepository {
+interface AbstractRepository
+{
+    public function findById($id);
 
-	public function findById($id);
+    public function findByName($name);
 
-	public function findByName($name);
-
-	public function getList($value, $key);
-
+    public function getList($value, $key);
 }

@@ -1,7 +1,8 @@
-<?php namespace Artesaos\Defender\Contracts\Repositories;
+<?php
 
-interface RoleRepository extends AbstractRepository {
+namespace Artesaos\Defender\Contracts\Repositories;
 
-	public function create($roleName);
-
+interface RoleRepository extends AbstractRepository
+{
+    public function create($roleName);
 }
