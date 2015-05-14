@@ -1,15 +1,14 @@
-<?php namespace Artesaos\Defender;
+<?php
 
-use Artesaos\Defender\Traits\HasUserRolesTrait;
+namespace Artesaos\Defender;
+
 use Artesaos\Defender\Traits\HasUserPermissionsTrait;
+use Artesaos\Defender\Traits\HasUserRolesTrait;
 
 /**
- * Class HasDefenderTrait
- *
- * @package Artesaos\Defender
+ * Class HasDefenderTrait.
  */
-trait HasDefenderTrait {
-
-	use HasUserRolesTrait, HasUserPermissionsTrait;
-
+trait HasDefenderTrait
+{
+    use HasUserRolesTrait, HasUserPermissionsTrait;
 }

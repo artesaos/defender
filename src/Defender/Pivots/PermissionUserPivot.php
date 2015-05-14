@@ -1,7 +1,10 @@
-<?php  namespace Artesaos\Defender\Pivots;
+<?php
+
+namespace Artesaos\Defender\Pivots;
 
 /**
- * Class PermissionUserPivot
- * @package Artesaos\Defender
+ * Class PermissionUserPivot.
  */
-class PermissionUserPivot extends AbstractDefenderPivot {}
+class PermissionUserPivot extends AbstractDefenderPivot
+{
+}
