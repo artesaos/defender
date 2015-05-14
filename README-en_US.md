@@ -223,6 +223,44 @@ Route::get('foo', ['middleware' => ['auth', 'needsRole'], 'is' => ['admin', 'mem
 
 ----------
 
+### Using in Views
+
+Laravel's Blade extension for using Defender.
+
+#### @can
+
+```
+@can('user.index')
+    shows your protected stuff
+@endcan
+```
+
+```
+@can('user.index')
+    shows your protected stuff
+@else
+    shows the data for those who doesn't have the user.index permission
+@endcan
+```
+
+#### @is
+
+```
+@is('admin')
+    Shows data for the logged user and that belongs to the admin role
+@endis
+```
+
+```
+@is('admin')
+    Shows data for the logged user and that belongs to the admin role
+@else 
+    shows the data for those who doesn't have the admin permission
+@endis
+```
+
+----------
+
 ### Using the Facade
 
 With the Defender's Facade you can access the API and use it at any part of your application.
