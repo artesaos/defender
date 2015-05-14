@@ -19,7 +19,6 @@ class DefenderServiceProvider extends ServiceProvider
     protected $defer = false;
 
     /**
-     * @return void
      */
     public function boot()
     {
@@ -29,15 +28,13 @@ class DefenderServiceProvider extends ServiceProvider
 
     /**
      * Register the service provider.
-     *
-     * @return void
      */
     public function register()
     {
         $this->app->singleton('defender', function ($app) {
             return new Defender($app, $app['defender.role'], $app['defender.permission']);
         });
-        
+
         $this->alias('defender', 'Artesaos\Defender\Contracts\Defender');
 
         $this->registerRepositoryInterfaces();

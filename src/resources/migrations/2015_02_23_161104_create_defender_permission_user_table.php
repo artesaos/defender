@@ -7,8 +7,6 @@ class CreateDefenderPermissionUserTable extends Migration
 {
     /**
      * Run the migrations.
-     *
-     * @return void
      */
     public function up()
     {
@@ -28,8 +26,6 @@ class CreateDefenderPermissionUserTable extends Migration
 
     /**
      * Reverse the migrations.
-     *
-     * @return void
      */
     public function down()
     {

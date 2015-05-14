@@ -67,7 +67,7 @@ trait HasUserPermissionsTrait
     public function attachPermission($permission, array $options = [])
     {
         return $this->permissions()->attach($permission, [
-            'value'   => array_get($options, 'value', true),
+            'value' => array_get($options, 'value', true),
             'expires' => array_get($options, 'expires', null),
         ]);
     }
