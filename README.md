@@ -1,16 +1,16 @@
 # Defender
 
-[Readme on English](https://github.com/artesaos/defender/blob/master/README-en_US.md).
+[Readme em Português](https://github.com/artesaos/defender/blob/master/README-pt_BR.md).
 
-Defender é um package ACL para Laravel 5 que utiliza grupos e permissões.
-Com Segurança e Usabilidade em mente, este projeto tem como objetivo prover o controle de acesso da sua aplicação.
+Defender is a Access Control List (ACL) Solution for Laravel 5.
+With security and usability in mind, this project aims to provide you a safe way to control your application access without losing the fun of coding.
 
-> Estado Atual do Package
+> Current Build Status
 
 [![Build Status](https://travis-ci.org/artesaos/defender.svg?branch=develop)](https://travis-ci.org/artesaos/defender)
 [![Code Climate](https://codeclimate.com/github/artesaos/defender/badges/gpa.svg)](https://codeclimate.com/github/artesaos/defender)
 
-> Estatísticas
+> Statistics
 
 [![Latest Stable Version](https://poser.pugx.org/artesaos/defender/v/stable.svg)](https://packagist.org/packages/artesaos/defender)
 [![Latest Unstable Version](https://poser.pugx.org/artesaos/defender/v/unstable.svg)](https://packagist.org/packages/artesaos/defender) [![License](https://poser.pugx.org/artesaos/defender/license.svg)](https://packagist.org/packages/artesaos/defender)
@@ -18,34 +18,33 @@ Com Segurança e Usabilidade em mente, este projeto tem como objetivo prover o c
 [![Monthly Downloads](https://poser.pugx.org/artesaos/defender/d/monthly.png)](https://packagist.org/packages/artesaos/defender)
 [![Daily Downloads](https://poser.pugx.org/artesaos/defender/d/daily.png)](https://packagist.org/packages/artesaos/defender)
 
-> Dicas
+> Tips
 
 <a href="http://zenhub.io" target="_blank"><img src="https://raw.githubusercontent.com/ZenHubIO/support/master/zenhub-badge.png" height="18px" alt="Powered by ZenHub"/></a>
 
-## Instalação
+## Installation
 
-### 1. Dependência
+### 1. Dependency
 
-Defender pode ser instalado através do <a href="https://getcomposer.org/" target="_blank">composer</a>.
-Para que o package seja adicionado automaticamente ao seu arquivo `composer.json` execute o seguinte comando:
+Using <a href="https://getcomposer.org/" target="_blank">composer</a>, execute the following command to automatically update your `composer.json`:
 
 ```shell
 composer require artesaos/defender
 ```
 
-ou se preferir, adicione o seguinte trecho manualmente:
+or manually update your `composer.json` file
 
 ```json
 {
 	"require": {
-		"artesaos/defender": "0.2.x"
+		"artesaos/defender": "dev-master"
 	}
 }
 ```
 
 ### 2. Provider
 
-Para usar o Defender em sua aplicação Laravel, é necessário registrar o package no seu arquivo `config/app.php`. Adicione o seguinte código no fim da seção `providers`
+You need to update your application configuration in order to register the package, so it can be loaded by Laravel. Just update your `config/app.php` file adding the following code at the end of your `'providers'` section:
 
 ```php
 // file START ommited
@@ -56,31 +55,28 @@ Para usar o Defender em sua aplicação Laravel, é necessário registrar o pack
 // file END ommited
 ```
 
-#### 2.1 Publicando o arquivo de configuração e as migrations
+#### 2.1 Publishing configuration file and migrations
 
-Para publicar o arquivo de configuração padrão e as migrations que acompanham o package, execute o seguinte comando:
+To publish the default configuration file and database migrations, execute the following command: 
 
 ```shell
 php artisan vendor:publish
 ```
 
-Você também pode publicar separadamente utilizando a flag `--tag`
+You can also publish only the configuration file or the migrations:
 
 ```shell
 php artisan vendor:publish --tag=config
 ```
-
-Ou
-
+Or
 ```shell
 php artisan vendor:publish --tag=migrations
 ```
 
-Se você já publicou os arquivos, mas por algum motivo precisa sobrescrevê-los, adicione a flag `--force` no final dos comandos anteriores.
+If you already published defender files, but for some reason you want to override previous published files, add the `--force` flag.
 
-### 3. Facade (opcional)
-
-Para usar a facade `Defender`, você precisa registrá-la no seu arquivo `config/app.php` adicionando o seguinte código na seção `aliases`:
+### 3. Facade (optional)
+In order to use the `Defender` facade, you need to register it on the `config/app.php` file, you can do that the following way:
 
 ```php
 // config.php file
@@ -92,36 +88,36 @@ Para usar a facade `Defender`, você precisa registrá-la no seu arquivo `config
 // file END ommited
 ```
 
-### 4. Middlewares do Defender
-
-Caso você tenha a necessidade de realizar o controle de acesso diretamente nas rotas, o Defender possui alguns middlewares (nativos) que abordam os casos mais comuns. Para utilizá-los é necessário registrá-los no seu arquivo `app/Http/Kernel.php`.
+### 4. Defender Middlewares (optional)
+If you have to control the access Defender provides middlewares to protect your routes.
+If you have to control the access through the Laravel routes, Defender has some built-in middlewares for the trivial tasks. To use them, just put it in your `app/Http/Kernel.php` file.
 
 ```php
 protected $routeMiddleware = [
-	'auth'            => 'App\Http\Middleware\Authenticate',
-	'auth.basic'      => 'Illuminate\Auth\Middleware\AuthenticateWithBasicAuth',
-	'guest'           => 'App\Http\Middleware\RedirectIfAuthenticated',
+    'auth'            => 'App\Http\Middleware\Authenticate',
+    'auth.basic'      => 'Illuminate\Auth\Middleware\AuthenticateWithBasicAuth',
+    'guest'           => 'App\Http\Middleware\RedirectIfAuthenticated',
 
     // Controle de acesso usando permissões
-	'needsPermission' => 'Artesaos\Defender\Middlewares\NeedsPermissionMiddleware',
+    'needsPermission' => 'Artesaos\Defender\Middlewares\NeedsPermissionMiddleware',
 
     // Controle de acesso mais simples, utiliza apenas os grupos
     'needsRole' => 'Artesaos\Defender\Middlewares\NeedsRoleMiddleware'
 ];
 ```
 
-A utilização desses middlewares é explicada na próxima seção.
+You'll see how to use the middlewares below.
 
-#### 4.1 - Crie o seu próprio middleware
+#### 4.1 - Create your own middleware
 
-Caso os middlewares padrões do Defender não atendam as suas necessidades, você pode criar seu próprio middleware e utilizar a [API do Defender](#usando-a-facade) para realizar o controle de acesso. 
+If the built-in middlewares doesn't fit your needs, you can make your own by using [Defender's API](#usando-a-facade) to control the access. 
 
-## Usando o Defender
+## Usage
 
-O Defender realiza apenas o controle de acesso em sua aplicação, ou seja, a tarefa de autenticação é realizada pelo `Auth` que faz parte do core do Laravel.
+Defender handles only access control. The authentication is still made by Laravel's `Auth`.
 
-### Tornando o User denfensível
-Na sua classe User, você precisa adicionar a trait `Artesaos\Defender\HasDefenderTrait` para que sejá possível que crie permissões e grupos para os usuários:
+### Put a shield on my saber I must
+On your User class, you need to add the trait `Artesaos\Defender\HasDefenderTrait` to enable the permission creation and roles creation for the users:
 
 ```php
 <?php namespace App;
@@ -135,12 +131,12 @@ use Illuminate\Contracts\Auth\CanResetPassword as CanResetPasswordContract;
 
 class User extends Model implements AuthenticatableContract, CanResetPasswordContract {
 
-	use Authenticatable, CanResetPassword, HasDefenderTrait;
+    use Authenticatable, CanResetPassword, HasDefenderTrait;
 ...
 ```
-### Criando Grupos e Permissões
+### Creating roles and permissions
 
-Para criar os grupos e as permissões para a sua aplicação, basta utilizar a API do defender. Você pode realizar esse processo em um seeder ou diretamente no `php artisan tinker` por exemplo.
+To create roles and permissions for your application, just use the Defender's API. You can create a Laravel Seeder or use `php artisan tinker`.
 
 ```php
 
@@ -163,37 +159,36 @@ $grupoAdmin->attachPermission($permissaoCriarUsuario);
 $user->attachRole($grupoAdmin);
 ```
 
+### Using the middleware
 
-### Usando o Middleware
+To protect your routes, you can use the built-in middlewares.
 
-Para proteger suas rotas, você pode utilizar os middlewares padrões do Defender.
-
-> O Defender depende do Auth padrão do Laravel, portanto declare o middleware `auth` antes do middleware do Defender que você deseja usar.
+> Defender requires Laravel's Auth, so, use the `auth` middleware before the Defender's middleware that you intend to use.
 
 #### needsPermissionMiddleware
 
 ```php
 Route::get('foo', ['middleware' => ['auth', 'needsPermission'], 'can' => 'user.create', function()
 {
-	return 'Sim eu posso!';
+    return 'Yes I can!';
 }]);
 ```
 
-Você também pode passar um array de permissões a serem checadas.
+You can pass an array of permissions to check on.
 
 ```php
 Route::get('foo', ['middleware' => ['auth', 'needsPermission'], 'can' => ['user.index', 'user.create'], function()
 {
-	return 'Sim eu posso!';
+    return 'Yes I can!';
 }]);
 ```
 
-Quando você passa um array de permissões, a rota é executada apenas se o usuário possui todas as permissões. Caso você queira que a rota execute quando o usuário tem pelo menos uma das permissões, basta adicionar `'any' => true`.
+When you pass an array of permissions, the route will be fired only if the user has all the permissions. However, if you want to allow the access to the route when the user has at least one of the permissions, just add `'any' => true`.
 
 ```php
 Route::get('foo', ['middleware' => ['auth', 'needsPermission'], 'can' => ['user.index', 'user.create'], 'any' => true, function()
 {
-	return 'Sim eu posso!';
+    return 'Yes I can!';
 }]);
 ```
 
@@ -201,52 +196,52 @@ Route::get('foo', ['middleware' => ['auth', 'needsPermission'], 'can' => ['user.
 
 #### needsRoleMiddleware
 
-Funciona de maneira semelhante ao middleware anterior, porém apenas os grupos são verificados, ou seja, não leva em consideração as permissões.
+This is similar to the previous middleware, but only the roles are checked, it means that it doesn't check the permissions.
 
 ```php
 Route::get('foo', ['middleware' => ['auth', 'needsRole'], 'is' => 'admin', function()
 {
-	return 'Sim eu sou!';
+    return 'Yes I can!';
 }]);
 ```
 
-Você também pode passar um array de permissões a serem checadas.
+You can pass an array of permissions to check on.
 
 ```php
 Route::get('foo', ['middleware' => ['auth', 'needsRole'], 'can' => ['admin', 'member'], function()
 {
-	return 'Sim eu sou!';
+    return 'Yes I can!';
 }]);
 ```
 
-Quando você passa um array de permissões, a rota é executada apenas se o usuário possui todas as permissões. Caso você queira que a rota execute quando o usuário tem pelo menos uma das permissões, basta adicionar `'any' => true`.
+When you pass an array of permissions, the route will be fired only if the user has all the permissions. However, if you want to allow the access to the route when the user has at least one of the permissions, just add `'any' => true`.
 
 ```php
 Route::get('foo', ['middleware' => ['auth', 'needsRole'], 'is' => ['admin', 'member'], 'any' => true, function()
 {
-	return 'Sim eu sou!';
+    return 'Sim eu sou!';
 }]);
 ```
 
 ----------
 
-### Usando nas Views
+### Using in Views
 
-Extensões do Blade para facilitar o uso do defender.
+Laravel's Blade extension for using Defender.
 
 #### @can
 
 ```
 @can('user.index')
-    aqui mostra algo relacionado a essa permissão 
+    shows your protected stuff
 @endcan
 ```
 
 ```
 @can('user.index')
-    aqui mostra algo relacionado ao usuário a essa permissão
+    shows your protected stuff
 @else
-    aqui mostra as informações pra quem não tem a permissão user.index
+    shows the data for those who doesn't have the user.index permission
 @endcan
 ```
 
@@ -254,95 +249,95 @@ Extensões do Blade para facilitar o uso do defender.
 
 ```
 @is('admin')
-    Mostra informações para o usuário logado e que esteja no grupo admin
+    Shows data for the logged user and that belongs to the admin role
 @endis
 ```
 
 ```
 @is('admin')
-    Mostra informações para o usuário logado e que esteja no grupo admin
+    Shows data for the logged user and that belongs to the admin role
 @else 
-    Aqui mostra um bloqueio ou qualquer coisa não relacionada ao grupo admin
+    shows the data for those who doesn't have the admin permission
 @endis
 ```
 
 ----------
 
-### Usando a Facade
+### Using the Facade
 
-Com a facade do defender você pode acessar a API e utilizá-la em qualquer parte de sua aplicação.
+With the Defender's Facade you can access the API and use it at any part of your application.
 
 ----------
 
 ##### `Defender::can($permission)`:
 
-Verifica se o usuário logado possui a permissão `$permission`.
+Check if the logged user has the `$permission`.
 
 ----------
 
 ##### `Defender::canWithRolePermissions($permission)`:
 
-Verifica se o usuário logado possui a permissão `$permission` utilizando apenas os grupos.
+Check if the logged user has the `$permission` checking only the role permissions.
 
 ----------
 
 ##### `Defender::hasRole($roleName)`:
 
-Verifica se o usuário logado pertence ao grupo `$roleName`.
+Check if the logged user belongs to the role `$roleName`.
 
 ----------
 
 ##### `Defender::roleExists($roleName)`:
 
-Verifica se o grupo `$roleName` existe no banco de dados.
+Check if the role `$roleName` exists in the database.
 
 ----------
 
 ##### `Defender::permissionExists($permissionName)`:
 
-Verifica se a permissão `$permissionName` existe no banco de dados.
+Check if the permission `$permissionName` exists in the database.
 
 ----------
 
 ##### `Defender::findRole($roleName)`:
 
-Busca no banco de dados o grupo de nome `$roleName`.
+Find the role in the database by the name `$roleName`.
 
 ----------
 
 ##### `Defender::findRoleById($roleId)`:
 
-Busca no banco de dados o grupo de ID `roleId`.
+Find the role in the database by the role ID `roleId`.
 
 ----------
 
 ##### `Defender::findPermission($permissionName)`:
 
-Busca no banco de dados a permissão de nome `$permissionName`.
+Find the permission in the database by the name `$permissionName`.
 
 ----------
 
 ##### `Defender::findPermissionById($permissionId)`:
 
-Busca no banco de dados a permissão de ID `$permissionId`.
+Find the permission in the database by the ID `$permissionId`.
 
 ----------
 
 ##### `Defender::createRole($roleName)`:
 
-Cria um novo grupo no banco de dados
+Create a new role in the database.
 
 ----------
 
 ##### `Defender::createPermission($permissionName)`:
 
-Cria uma nova permissão no banco de dados.
+Create a new permission in the database.
 
 ----------
 
-### Usando a trait
+### Using the trait
 
-Para adicionar as funcionalidades do Defender, é necessário adicionar trait `HasDefenderTrait` no seu modelo de usuário (normalmente o `App\User`).
+To add the Defender's features, you need to add the trait `HasDefenderTrait` in you User model (usually `App\User`).
 
 ```php
 <?php namespace App;
@@ -352,19 +347,19 @@ use Artesaos\Defender\HasDefenderTrait;
 
 class User extends Model implements AuthenticatableContract, CanResetPasswordContract {
 
-	use Authenticatable, CanResetPassword, HasDefenderTrait;
+    use Authenticatable, CanResetPassword, HasDefenderTrait;
 
     // Restante da classe
 }
 ```
 
-Esta trait, além de configurar os relacionamentos, adicionará os seguintes métodos no seu object `App\User`:
+This trait, beyond configuring the relationships, will add the following methods to your object `App\User`:
 
 #####`public function can($permission)`:
 
-Este método verifica se o usuário logado no sistema possui a permissão `$permission`  
+This method checks if the logged user has the permission `$permission`  
 
-No Defender, existem 2 tipos de permissões: `Permissões de Usuário` e `Permissões de Grupo`. Por padrão as permissões que o usuário herda, são permissões dos grupos que ele pertence. Porém, sempre que uma permissão de usuário for definida, ela terá precedência sobre a permissão de grupo.
+In Defender, there are 2 kind of permissions: `User permissions` and `Role permissions`. By default, the permissions that the user inherits, are permissions of the roles that it belongs to. However, always that a user pemission is set, it will take precedence of role permission.
 
 ```php
 public function foo(Authenticable $user)
@@ -377,7 +372,7 @@ public function foo(Authenticable $user)
 
 ##### `public function canWithRolePermissions($permission)`:
 
-Este método funciona praticamente da mesma forma que o método anterior, a única diferença é que as permissões de usuário não são consideradas, ou seja, apenas as permissões dos grupos que o usuário pertence são usadas na hora de verificar a permissão.
+This method works the same way the previous one, the only diference is that the user permissions are not considered, however, only the role's permissions that the user belongs are used to check the access.
 
 ```php
 public function foo(Authenticable $user)
@@ -390,17 +385,17 @@ public function foo(Authenticable $user)
 
 ##### `public function attachRole($role)`:
 
-Adiciona o usuário no grupo `$role`. A variável `$role` pode ser um objeto do tipo `Artesaos\Defender\Role` ou um array de com os `ids` dos grupos.
+Attach the user to the role `$role`. The `$role` variable might be an object of the type `Artesaos\Defender\Role` or an array containing the `ids` of the roles.
 
 ```php
 public function foo(Authenticable $user)
 {
-    $role = Defender::findRole('admin'); // Retorna um Artesao\Defender\Role
-	$user->attachRole($role);
+    $role = Defender::findRole('admin'); // Returns an Artesao\Defender\Role
+    $user->attachRole($role);
 
-    // ou
+    // or
 
-    $roles = [1, 2, 3]; // Usando array de ids
+    $roles = [1, 2, 3]; // Using an array of ids
     $user->attachRole($roles); 
 }
 ```
@@ -410,17 +405,17 @@ public function foo(Authenticable $user)
 
 ##### `public function detachRole($role)`:
 
-Remove o grupo `$role` do usuário (método inverso ao `attachRole()`).
+Deatach the role `$role` from the user (inverse to `attachRole()`).
 
 ```php
 public function foo(Authenticable $user)
 {
-    $role = Defender::findRole('admin'); // Retorna um Artesao\Defender\Role
-	$user->detachRole($role);
+    $role = Defender::findRole('admin'); // Returns an Artesao\Defender\Role
+    $user->detachRole($role);
 
     // ou
 
-    $roles = [1, 2, 3]; // Usando array de ids
+    $roles = [1, 2, 3]; // Using an array of ids
     $user->detachRole($roles); 
 }
 ```
@@ -429,12 +424,12 @@ public function foo(Authenticable $user)
 
 ##### `public function syncRoles(array $roles = array())`:
 
-Semelhante ao `attachRole()`, porém apenas os grupos presentes no array `$roles` estarão presentes no relacionamento após a execução deste método. `$roles` é um array de `ids` dos grupos desejados.
+This is like the `attachRole()` method, but only the roles in the array `$roles` will be on the relationship after the method runs. `$roles` it's an array of `ids` for the needed roles.
 
 ```php
 public function foo(Authenticable $user)
 {
-    $roles = [1, 2, 3]; // Usando array de ids
+    $roles = [1, 2, 3]; // Using an array of ids
     
     $user->syncRoles($roles); 
 }
@@ -444,7 +439,7 @@ public function foo(Authenticable $user)
 
 ##### `public function attachPermission($permission, array $options = array())`:
 
-Vincula o usuário a permissão `$permission`. A variável `$permission` é uma instância da classe `Artesaos\Defender\Permission`.
+Attach the user to the permission `$permission`. The `$permission` variable is an instance of the `Artesaos\Defender\Permission` class.
 
 ```php
 public function foo(Authenticable $user)
@@ -452,8 +447,8 @@ public function foo(Authenticable $user)
     $permission = Defender::findPermission('user.create');
     
     $user->attachPermission($permission, [
-	    'value' => true // true = tem a permissão, false = não tem a permissão,
-	]); 
+        'value' => true // true = has the permission, false = doesn't have the permission,
+    ]); 
 }
 ```
 
@@ -461,7 +456,7 @@ public function foo(Authenticable $user)
 
 ##### `public function detachPermission($permission)`:
 
-Remove a permissão `$permission` do usuário. A variável `$permission` pode ser uma instância da classe `Artesaos\Defender\Permission` ou um array de `ids` com os ids das permissões a serem removidas.
+Remove the permission `$permission` from the user. The `$permission` variable might be an instance of the `Artesaos\Defender\Permission` class or an array of `ids` with the ids of the permissions to be removed.
 
 ```php
 public function foo(Authenticable $user)
@@ -469,10 +464,10 @@ public function foo(Authenticable $user)
     $permission = Defender::findPermission('user.create');
     $user->detachPermission($permission);
 
-	// ou
+    // or
 
-	$permissions = [1, 3];
-	$user->detachPermission($permissions);
+    $permissions = [1, 3];
+    $user->detachPermission($permissions);
 }
 ```
 
@@ -480,15 +475,15 @@ public function foo(Authenticable $user)
 
 ##### `public function syncPermissions(array $permissions)`:
 
-Semelhante ao método `syncRoles`. Apenas as permissões presentes no array `$permissions` farão parte do relacionamento após a execução deste método.
+This is like the method `syncRoles`. but only the roles in the array `$permissions` be on the relationship after the method runs.
 
 ```php
 public function foo(Authenticable $user)
 {
     $permissions = [
-	    1 => ['value' => false],
-	    2 => ['value' => true,
-	    3 => ['value' => true]
+        1 => ['value' => false],
+        2 => ['value' => true,
+        3 => ['value' => true]
     ];
     
     $user->syncPermissions($permissions); 
@@ -499,7 +494,7 @@ public function foo(Authenticable $user)
 
 ##### `public function revokePermissions()`:
 
-Remove todas as permissões do usuário.
+Remove all the user permissions.
 
 ```php
 public function foo(Authenticable $user)
@@ -512,7 +507,7 @@ public function foo(Authenticable $user)
 
 ##### `public function revokeExpiredPermissions()`:
 
-Remove todas as permissões temporárias expiradas do usuário. Veja mais a respeito de permissões temporárias na próxima seção.
+Remove all the temporary expired pemissions from the user. More about temporary permissions below.
 
 ```php
 public function foo(Authenticable $user)
@@ -523,50 +518,49 @@ public function foo(Authenticable $user)
 
 ----------
 
+### Temporary permissions
 
-### Permissões Temporárias
+One of the coolest Defender's features it's to add temporary permissions to a group or an user.
 
-Um dos recursos mais interessantes do Defender é possibilidade de atribuir permissões temporárias a um grupo ou um usuário em questão.
+#### For example
 
-#### Exemplos
+> *The user John belongs to the role 'admins', however I want to temporaly remove the John's permission to create new users*
 
-> *O usuário X é grupo 'admins', porém eu desejo remover temporariamente o poder dele de criar novos usuários*
+In this case we need to attach an permission with the value equal to `false`, explicitly prohibiting the user to perform that action. You must add this permission, with the `false` value, since by default, the user permissions are inherited of the permissions of their roles. When you assign a user permission, this will always take precedence.
 
-Neste caso precisamos atribuir um permissão de usuário com o valor `false`, explicitamente proibindo o usuário de executar aquela ação. É necessário adicionar esta permissão com o valor `false`, já que por padrão as permissões de usuário herdam os valores das permissões de seus grupos. Ao atribuir uma permissão de usuário, esta sempre terá precedência.
-
-No exemplo abaixo retiramos por 7 dias a permissão criar usuários (neste exemplo `user.create`) do admin em questão.
+For instance. Below we revoke the permission `user.create` for the user during 7 days.
 
 ```php
 public function foo()
 {
-    $userX = App\User::find(3); // considere '3' a ID do usuário 'X'
+    $userX = App\User::find(3);
     $permission = Defender::findPermission('user.create');
 
-	
-	$userX->attachPermission($permission, [
-		'value' => false, // false significa que ele não terá essa permissão,
-		'expires' => \Carbon\Carbon::now()->addDays(7) // Daqui a quanto tempo essa permissão irá expirar
-	]);
+    
+    $userX->attachPermission($permission, [
+        'value' => false, // false means that he will not have the permission,
+        'expires' => \Carbon\Carbon::now()->addDays(7) // Daqui a quanto tempo essa permissão irá expirar
+    ]);
 
 }
 ```
 
-Após passados 7 dias, o usuário em questão terá a permissão restabelecida.
+After 7 days, the user will take the permission again.
 
 ----------
 
-> *Permitir que um usuário realize determinada ação temporariamente.*
+> *Allow that a user can perform some action by a period of time.*
 
-Para permitir temporariamente que um usuário realize determinada ação, basta informar o valor do campo `expires`. O campo `value` é considerado `true` por padrão.
+To allow that a user have temporary access to perform a given action, just set the `expires` key. The `value` key will be `true` by default.
 
 ```php
 public function foo()
 {
-	$user = App\User::find(1);
+    $user = App\User::find(1);
     $permission = Defender::findPermission('user.create');
 
-	$user->attachPermission($permission, [
-		'expires' => \Carbon\Carbon::now()->addDays(7)
-	];
+    $user->attachPermission($permission, [
+        'expires' => \Carbon\Carbon::now()->addDays(7)
+    ];
 }
 ```
