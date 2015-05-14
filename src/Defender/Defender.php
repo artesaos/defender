@@ -1,5 +1,6 @@
 <?php namespace Artesaos\Defender;
 
+use Artesaos\Defender\Contracts\Defender as DefenderContract;
 use Artesaos\Defender\Contracts\Repositories\PermissionRepository;
 use Artesaos\Defender\Contracts\Repositories\RoleRepository;
 use Illuminate\Contracts\Foundation\Application;
@@ -7,7 +8,7 @@ use Illuminate\Contracts\Foundation\Application;
 /**
  *
  */
-class Defender {
+class Defender implements DefenderContract {
 
 	/**
 	 * The Laravel Application

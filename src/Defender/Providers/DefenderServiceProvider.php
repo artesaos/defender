@@ -1,10 +1,10 @@
 <?php namespace Artesaos\Defender\Providers;
 
+use Artesaos\Defender\Role;
 use Artesaos\Defender\Defender;
 use Artesaos\Defender\Permission;
 use Artesaos\Defender\Repositories\Eloquent\EloquentPermissionRepository;
 use Artesaos\Defender\Repositories\Eloquent\EloquentRoleRepository;
-use Artesaos\Defender\Role;
 use Illuminate\Support\ServiceProvider;
 
 class DefenderServiceProvider extends ServiceProvider {
@@ -37,6 +37,8 @@ class DefenderServiceProvider extends ServiceProvider {
 		{
 			return new Defender($app, $app['defender.role'], $app['defender.permission']);
 		});
+		
+		$this->alias('defender', 'Artesaos\Defender\Contracts\Defender');
 
 		$this->registerRepositoryInterfaces();
 		
