@@ -1,4 +1,4 @@
-<?php namespace Artesaos\Defender\Contracts\Defender;
+<?php namespace Artesaos\Defender\Contracts;
 
 interface Defender {
 
