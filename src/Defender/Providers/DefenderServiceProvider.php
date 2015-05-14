@@ -35,7 +35,7 @@ class DefenderServiceProvider extends ServiceProvider
             return new Defender($app, $app['defender.role'], $app['defender.permission']);
         });
 
-        $this->alias('defender', 'Artesaos\Defender\Contracts\Defender');
+        $this->app->alias('defender', 'Artesaos\Defender\Contracts\Defender');
 
         $this->registerRepositoryInterfaces();
 
