@@ -99,20 +99,23 @@ trait HasPermissionsTrait
         return;
     }
 
-    /**
-     * Extend an existing temporary permission.
-     *
-     * @param $permissionName
-     * @param array $options
-     */
-    public function extendPermission($permissionName, array $options)
+	/**
+	 * Extend an existing temporary permission.
+	 *
+	 * @param $permission
+	 * @param array $options
+	 * @return bool|null
+	 */
+    public function extendPermission($permission, array $options)
     {
-        $permission = $this->getPermission($permissionName);
+		foreach ($this->permissions as $_permission) {
+			if ($_permission->name === $permission) {
+				return $this->permissions()->updateExistingPivot($permission->id,
+					array_only($options, ['value', 'expires']
+				));
+			}
+		}
 
-        if ($permission) {
-            $this->permissions()->updateExistingPivot($permission->id,
-                array_only($options, ['value', 'expires']
-                ));
-        }
+		return null;
     }
 }
