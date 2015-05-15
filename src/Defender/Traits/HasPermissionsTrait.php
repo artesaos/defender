@@ -110,7 +110,7 @@ trait HasPermissionsTrait
     {
 		foreach ($this->permissions as $_permission) {
 			if ($_permission->name === $permission) {
-				return $this->permissions()->updateExistingPivot($permission->id,
+				return $this->permissions()->updateExistingPivot($_permission->id,
 					array_only($options, ['value', 'expires']
 				));
 			}
