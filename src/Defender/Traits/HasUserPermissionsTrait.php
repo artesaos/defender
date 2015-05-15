@@ -10,6 +10,8 @@ use Illuminate\Database\Eloquent\Model;
  */
 trait HasUserPermissionsTrait
 {
+    use HasPermissionsTrait;
+
     /**
      * Many-to-many permission-user relationship.
      *
@@ -35,91 +37,6 @@ trait HasUserPermissionsTrait
         $userPermission = $this->getPermission($permission);
 
         return is_null($userPermission) ? $this->canWithRolePermissions($permission) : $userPermission;
-    }
-
-    /**
-     * Get the user permission using the permission name.
-     *
-     * @param string $permission
-     * @param bool   $inherit
-     *
-     * @return bool|null
-     */
-    public function getPermission($permission, $inherit = true)
-    {
-        foreach ($this->permissions as $userPermission) {
-            if ($userPermission->name === $permission) {
-                if (is_null($userPermission->pivot->expires) or $userPermission->pivot->expires->isFuture()) {
-                    return $userPermission->pivot->value;
-                }
-            }
-        }
-
-        return $inherit ? null : false;
-    }
-
-    /**
-     * Attach the given permission.
-     *
-     * @param array|Permission $permission
-     * @param array            $options
-     */
-    public function attachPermission($permission, array $options = [])
-    {
-        return $this->permissions()->attach($permission, [
-            'value' => array_get($options, 'value', true),
-            'expires' => array_get($options, 'expires', null),
-        ]);
-    }
-
-    /**
-     * Detach the given permission from the model.
-     *
-     * @param $permission
-     *
-     * @return int
-     */
-    public function detachPermission($permission)
-    {
-        return $this->permissions()->detach($permission);
-    }
-
-    /**
-     * Sync the given permissions.
-     *
-     * @param array $permissions
-     *
-     * @return array
-     */
-    public function syncPermissions(array $permissions)
-    {
-        return $this->permissions()->sync($permissions);
-    }
-
-    /**
-     * Revoke all user permissions.
-     *
-     * @return int
-     */
-    public function revokePermissions()
-    {
-        return $this->permissions()->detach();
-    }
-
-    /**
-     * Revoke expired user permissions.
-     *
-     * @return int|null
-     */
-    public function revokeExpiredPermissions()
-    {
-        $expiredPermissions = $this->permissions()->wherePivot('expires', '<', Carbon::now())->get();
-
-        if ($expiredPermissions->count() > 0) {
-            return $this->permissions()->detach($expiredPermissions->modelKeys());
-        }
-
-        return;
     }
 
     /**

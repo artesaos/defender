@@ -10,6 +10,8 @@ use Illuminate\Database\Eloquent\Model;
  */
 trait HasRolePermissionsTrait
 {
+    use HasPermissionsTrait;
+
     /**
      * Many-to-many permission-user relationship.
      *
@@ -20,90 +22,6 @@ trait HasRolePermissionsTrait
         return $this->belongsToMany(
             config('defender.permission_model'), config('defender.permission_role_table'), config('defender.role_key'), config('defender.permission_key')
         )->withPivot('value', 'expires');
-    }
-
-    /**
-     * Attach permission.
-     *
-     * @param       $permission
-     * @param array $options
-     */
-    public function attachPermission($permission, array $options = [])
-    {
-        return $this->permissions()->attach($permission, [
-            'value' => array_get($options, 'value', true),
-            'expires' => array_get($options, 'expires', null),
-        ]);
-    }
-
-    /**
-     * Detach the given permission from the model.
-     *
-     * @param $permission
-     *
-     * @return int
-     */
-    public function detachPermission($permission)
-    {
-        return $this->permissions()->detach($permission);
-    }
-
-    /**
-     * Sync permissions.
-     *
-     * @param array $permissions
-     *
-     * @return array
-     */
-    public function syncPermissions(array $permissions)
-    {
-        return $this->permissions()->sync($permissions);
-    }
-
-    /**
-     * Revoke all role permissions.
-     *
-     * @return int
-     */
-    public function revokePermissions()
-    {
-        return $this->permissions()->detach();
-    }
-
-    /**
-     * Revoke expired role permissions.
-     *
-     * @return int|null
-     */
-    public function revokeExpiredPermissions()
-    {
-        $expiredPermissions = $this->permissions()->wherePivot('expires', '<', Carbon::now())->get();
-
-        if ($expiredPermissions->count() > 0) {
-            return $this->permissions()->detach($expiredPermissions->modelKeys());
-        }
-
-        return;
-    }
-
-    /**
-     * Get role permission using the permission name.
-     *
-     * @param $permission
-     *
-     * @return bool
-     */
-    public function getPermission($permission)
-    {
-        foreach ($this->permissions as $rolePermission) {
-            if ($rolePermission->name === $permission) {
-                if (is_null($rolePermission->pivot->expires) or $rolePermission->pivot->expires->isFuture()) {
-                    return $rolePermission->pivot->value;
-                }
-            }
-        }
-
-        return false;
     }
 
     /**
