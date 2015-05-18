@@ -63,7 +63,7 @@ class DefenderServiceProvider extends ServiceProvider
             return new EloquentRoleRepository($app, new Role());
         });
 
-        $this->app->bindShared('Artesaos\Defender\Repositories\RoleRepository', function ($app) {
+        $this->app->bindShared('Artesaos\Defender\Contracts\Repositories\RoleRepository', function ($app) {
             return $app['defender.role'];
         });
 
@@ -71,7 +71,7 @@ class DefenderServiceProvider extends ServiceProvider
             return new EloquentPermissionRepository($app, new Permission());
         });
 
-        $this->app->bindShared('Artesaos\Defender\Repositories\PermissionRepository', function ($app) {
+        $this->app->bindShared('Artesaos\Defender\Contracts\Repositories\PermissionRepository', function ($app) {
             return $app['defender.permission'];
         });
     }
