@@ -2,11 +2,11 @@
 
 namespace Artesaos\Defender\Providers;
 
-use Artesaos\Defender\Role;
 use Artesaos\Defender\Defender;
 use Artesaos\Defender\Permission;
 use Artesaos\Defender\Repositories\Eloquent\EloquentPermissionRepository;
 use Artesaos\Defender\Repositories\Eloquent\EloquentRoleRepository;
+use Artesaos\Defender\Role;
 use Illuminate\Support\ServiceProvider;
 
 class DefenderServiceProvider extends ServiceProvider

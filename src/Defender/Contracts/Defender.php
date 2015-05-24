@@ -106,11 +106,11 @@ interface Defender
      * @return mixed
      */
     public function permissionsList();
-    
+
     /**
      * @return mixed
      */
-    public function rolesList();  
+    public function rolesList();
 
     /**
      * Create a new role.
@@ -129,5 +129,4 @@ interface Defender
      * @return \Artesaos\Defender\Permission
      */
     public function createPermission($permissionName, $readableName = null);
-
 }

@@ -199,7 +199,7 @@ class Defender implements DefenderContract
     {
         return $this->permissionRepository->getList('name', 'id');
     }
-    
+
     /**
      * Returns a list of existing roles.
      *
@@ -233,5 +233,4 @@ class Defender implements DefenderContract
     {
         return $this->permissionRepository->create($permissionName, $readableName);
     }
-
 }
