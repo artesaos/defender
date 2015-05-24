@@ -8,5 +8,5 @@ interface AbstractRepository
 
     public function findByName($name);
 
-    public function getList($value, $key);
+    public function getList($value, $key = 'id');
 }
