@@ -47,8 +47,10 @@ trait HasUserRolesTrait
     public function canWithRolePermissions($permission)
     {
         // If has superuser role
-        if(in_array(config('defender.superuser_role', 'superuser'))) return true;
-        
+        if (in_array(config('defender.superuser_role', 'superuser'))) {
+            return true;
+        }
+
         // Search roles permission
         foreach ($this->roles as $role) {
             if ($rolePermission = $role->getPermission($permission)) {
