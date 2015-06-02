@@ -37,12 +37,16 @@ class EloquentPermissionRepository extends AbstractEloquentRepository implements
             throw new PermissionExistsException('The permission '.$permissionName.' already exists'); // TODO: add translation support
         }
 
-        // Do we have a display_name set?
-        $readableName = is_null($readableName) ? $permissionName : $readableName;
+        $columns = [
+            'name' => $permissionName,
+            'readable_name' => is_null($readableName) ? $permissionName : $readableName // Do we have a display_name set?
+        ];
 
-        return $permission = $this->model->create([
-            'name'          => $permissionName,
-            'readable_name' => $readableName,
-        ]);
+        // Extras columns?
+        if (is_array($readableName)){
+            $columns = array_merge($columns, $readableName);
+        }
+
+        return $permission = $this->model->create($columns);
     }
 }
