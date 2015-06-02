@@ -14,9 +14,11 @@ trait HasUserRolesTrait
      */
     public function roles()
     {
-        return $this->belongsToMany(
-            config('defender.role_model'), config('defender.role_user_table'), 'user_id', config('defender.role_key')
-        );
+        $roleModel     = config('defender.role_model', 'Artesaos\Defender\Role');
+        $roleUserTable = config('defender.role_user_table', 'role_user');
+        $roleKey       = config('defender.role_key', 'role_id');
+        
+        return $this->belongsToMany($roleModel, $roleUserTable, 'user_id', $roleKey);
     }
 
     /**
@@ -47,12 +49,15 @@ trait HasUserRolesTrait
     public function canWithRolePermissions($permission)
     {
         // If has superuser role
-        if (in_array(config('defender.superuser_role', 'superuser'))) {
+        if ($this->hasRole(config('defender.superuser_role', 'superuser'))) {
             return true;
         }
+        
+        $roles = $this->roles;
+        $roles->load('permissions');
 
         // Search roles permission
-        foreach ($this->roles as $role) {
+        foreach ($roles as $role) {
             if ($rolePermission = $role->getPermission($permission)) {
                 return true;
             }

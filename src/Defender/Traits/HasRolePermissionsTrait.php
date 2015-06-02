@@ -19,9 +19,12 @@ trait HasRolePermissionsTrait
      */
     public function permissions()
     {
-        return $this->belongsToMany(
-            config('defender.permission_model'), config('defender.permission_role_table'), config('defender.role_key'), config('defender.permission_key')
-        )->withPivot('value', 'expires');
+        $permissionModel     = config('defender.permission_model');
+        $permissionRoleTable = config('defender.permission_role_table');
+        $roleKey             = config('defender.role_key');
+        $permissionKey       = config('defender.permission_key');
+        
+        return $this->belongsToMany($permissionModel, $permissionRoleTable, $roleKey, $permissionKey)->withPivot('value', 'expires');
     }
 
     /**
