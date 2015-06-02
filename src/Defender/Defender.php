@@ -203,12 +203,13 @@ class Defender implements DefenderContract
      * Uses a repository to actually create the role.
      *
      * @param $roleName
+     * @param array $extraColumns
      *
      * @return \Artesaos\Defender\Role
      */
-    public function createRole($roleName)
+    public function createRole($roleName, $extraColumns = [])
     {
-        return $this->roleRepository->create($roleName);
+        return $this->roleRepository->create($roleName, $extraColumns);
     }
 
     /**
