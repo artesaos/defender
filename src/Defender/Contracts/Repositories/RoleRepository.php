@@ -4,5 +4,5 @@ namespace Artesaos\Defender\Contracts\Repositories;
 
 interface RoleRepository extends AbstractRepository
 {
-    public function create($roleName);
+    public function create($roleName, $extraColumns = []);
 }

@@ -191,6 +191,8 @@ class Defender implements DefenderContract
     }
 
     /**
+     * Returns a list of existing permissions.
+     *
      * @return mixed
      */
     public function permissionsList()
@@ -199,16 +201,27 @@ class Defender implements DefenderContract
     }
 
     /**
+     * Returns a list of existing roles.
+     *
+     * @return mixed
+     */
+    public function rolesList()
+    {
+        return $this->roleRepository->getList('name', 'id');
+    }
+
+    /**
      * Create a new role.
      * Uses a repository to actually create the role.
      *
      * @param $roleName
+     * @param array $extraColumns
      *
      * @return \Artesaos\Defender\Role
      */
-    public function createRole($roleName)
+    public function createRole($roleName, $extraColumns = [])
     {
-        return $this->roleRepository->create($roleName);
+        return $this->roleRepository->create($roleName, $extraColumns);
     }
 
     /**

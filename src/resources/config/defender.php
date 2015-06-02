@@ -63,4 +63,9 @@ return [
      */
     'template_helpers' => true,
 
+    /*
+     * Super User role name
+     */
+    'superuser_role' => 'superuser',
+
 ];

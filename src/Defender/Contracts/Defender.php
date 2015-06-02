@@ -108,6 +108,11 @@ interface Defender
     public function permissionsList();
 
     /**
+     * @return mixed
+     */
+    public function rolesList();
+
+    /**
      * Create a new role.
      * Uses a repository to actually create the role.
      *

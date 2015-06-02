@@ -67,7 +67,7 @@ abstract class AbstractEloquentRepository implements AbstractRepository
      * @param $value
      * @param $key
      */
-    public function getList($value, $key)
+    public function getList($value, $key = 'id')
     {
         return $this->model->lists($value, $key);
     }
