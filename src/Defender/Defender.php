@@ -191,11 +191,23 @@ class Defender implements DefenderContract
     }
 
     /**
+     * Returns a list of existing permissions.
+     *
      * @return mixed
      */
     public function permissionsList()
     {
         return $this->permissionRepository->getList('name', 'id');
+    }
+
+    /**
+     * Returns a list of existing roles.
+     *
+     * @return mixed
+     */
+    public function rolesList()
+    {
+        return $this->roleRepository->getList('name', 'id');
     }
 
     /**

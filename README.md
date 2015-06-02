@@ -117,12 +117,12 @@ If the built-in middlewares doesn't fit your needs, you can make your own by usi
 Defender handles only access control. The authentication is still made by Laravel's `Auth`.
 
 ### Put a shield on my saber I must
-On your User class, you need to add the trait `Artesaos\Defender\HasDefenderTrait` to enable the permission creation and roles creation for the users:
+On your User class, you need to add the trait `Artesaos\Defender\Traits\HasDefenderTrait` to enable the permission creation and roles creation for the users:
 
 ```php
 <?php namespace App;
 
-use Artesaos\Defender\HasDefenderTrait;
+use Artesaos\Defender\Traits\HasDefenderTrait;
 use Illuminate\Auth\Authenticatable;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Auth\Passwords\CanResetPassword;
@@ -343,7 +343,7 @@ To add the Defender's features, you need to add the trait `HasDefenderTrait` in 
 <?php namespace App;
 
 // Declaração dos outros namespaces omitida
-use Artesaos\Defender\HasDefenderTrait;
+use Artesaos\Defender\Traits\HasDefenderTrait;
 
 class User extends Model implements AuthenticatableContract, CanResetPasswordContract {
 
