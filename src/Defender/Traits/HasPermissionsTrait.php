@@ -106,7 +106,6 @@ trait HasPermissionsTrait
      *
      * @param $permission
      * @param array $options
-     *
      * @return bool|null
      */
     public function extendPermission($permission, array $options)
@@ -118,7 +117,7 @@ trait HasPermissionsTrait
                 ));
             }
         }
-
+        
         return;
     }
 }

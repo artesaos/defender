@@ -15,10 +15,14 @@ class NeedsRoleMiddleware extends AbstractDefenderMiddleware
      *
      * @return mixed
      */
-    public function handle($request, Closure $next)
+    public function handle($request, Closure $next, $roles = null, $any = false)
     {
-        $roles = $this->getRoles($request);
-        $anyRole = $this->getAny($request);
+        if (is_null($roles)) {
+            $roles = $this->getRoles($request);
+            $anyRole = $this->getAny($request);
+        } else {
+            $roles = explode('|', $roles); // Laravel 5.1 - Using parameters
+        }
 
         if (is_null($this->user)) {
             return $this->forbiddenResponse();
