@@ -15,10 +15,14 @@ class NeedsPermissionMiddleware extends AbstractDefenderMiddleware
      *
      * @return mixed
      */
-    public function handle($request, Closure $next)
+    public function handle($request, Closure $next, $permissions = null, $any = false)
     {
-        $permissions = $this->getPermissions($request);
-        $anyPermission = $this->getAny($request);
+        if (is_null($permissions)) {
+            $permissions   = $this->getPermissions($request);
+            $anyPermission = $this->getAny($request);
+        } else {
+            $permissions = explode('|', $permissions); // Laravel 5.1 - Using parameters
+        }
 
         if (is_null($this->user)) {
             return $this->forbiddenResponse();
