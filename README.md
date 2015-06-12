@@ -165,13 +165,27 @@ To protect your routes, you can use the built-in middlewares.
 
 > Defender requires Laravel's Auth, so, use the `auth` middleware before the Defender's middleware that you intend to use.
 
-#### needsPermissionMiddleware
+#### Checking Permissions: needsPermissionMiddleware
 
 ```php
 Route::get('foo', ['middleware' => ['auth', 'needsPermission'], 'can' => 'user.create', function()
 {
     return 'Yes I can!';
 }]);
+```
+
+If you're using Laravel 5.1 it's possible to use Middleware Parameters.
+
+```php
+Route::get('foo', ['middleware' => ['auth', 'needsPermission:user.index'], function() {
+	return 'Yes I can!';
+}]);
+```
+
+With this syntax it's also possible to use the middlewaren within your controllers.
+
+```php
+$this->middeware('needsPermission:user.index');
 ```
 
 You can pass an array of permissions to check on.
@@ -183,6 +197,20 @@ Route::get('foo', ['middleware' => ['auth', 'needsPermission'], 'can' => ['user.
 }]);
 ```
 
+When using middleware parameters, use a `|` to separate multiple permissions.
+
+```php
+Route::get('foo', ['middleware' => ['auth', 'needsPermission:user.index|user.create'], function() {
+	return 'Yes I can!';
+}]);
+```
+
+Or within controllers:
+
+```php
+$this->middleware('needsPermission:user.index|user.create');
+```
+
 When you pass an array of permissions, the route will be fired only if the user has all the permissions. However, if you want to allow the access to the route when the user has at least one of the permissions, just add `'any' => true`.
 
 ```php
@@ -192,17 +220,45 @@ Route::get('foo', ['middleware' => ['auth', 'needsPermission'], 'can' => ['user.
 }]);
 ```
 
+Or, with middleware parameters, pass it as the 2nd parameter
+
+```php
+Route::get('foo', ['middleware' => ['auth', 'needsPermission:user.index|user.create,true'], function() {
+	return 'Yes I can!';
+}]);
+```
+
+Or within controllers:
+
+```php
+$this->middleware('needsPermission:user.index|user.create,true');
+```
+
 ----------
 
-#### needsRoleMiddleware
+#### Checking Roles: needsRoleMiddleware
 
 This is similar to the previous middleware, but only the roles are checked, it means that it doesn't check the permissions.
 
 ```php
 Route::get('foo', ['middleware' => ['auth', 'needsRole'], 'is' => 'admin', function()
 {
-    return 'Yes I can!';
+    return 'Yes I am!';
 }]);
+```
+
+If you're using Laravel 5.1 it's possible to use Middleware Parameters.
+
+```php
+Route::get('foo', ['middleware' => ['auth', 'needsRole:admin'], function() {
+	return 'Yes I am!';
+}]);
+```
+
+With this syntax it's also possible to use the middlewaren within your controllers.
+
+```php
+$this->middeware('needsRole:admin');
 ```
 
 You can pass an array of permissions to check on.
@@ -210,8 +266,22 @@ You can pass an array of permissions to check on.
 ```php
 Route::get('foo', ['middleware' => ['auth', 'needsRole'], 'can' => ['admin', 'member'], function()
 {
-    return 'Yes I can!';
+    return 'Yes I am!';
 }]);
+```
+
+When using middleware parameters, use a `|` to separate multiple roles.
+
+```php
+Route::get('foo', ['middleware' => ['auth', 'needsRole:admin|editor'], function() {
+	return 'Yes I am!';
+}]);
+```
+
+Or within controllers:
+
+```php
+$this->middleware('needsRole:admin|editor');
 ```
 
 When you pass an array of permissions, the route will be fired only if the user has all the permissions. However, if you want to allow the access to the route when the user has at least one of the permissions, just add `'any' => true`.
@@ -219,8 +289,22 @@ When you pass an array of permissions, the route will be fired only if the user 
 ```php
 Route::get('foo', ['middleware' => ['auth', 'needsRole'], 'is' => ['admin', 'member'], 'any' => true, function()
 {
-    return 'Sim eu sou!';
+    return 'Yes I am!';
 }]);
+```
+
+Or, with middleware parameters, pass it as the 2nd parameter
+
+```php
+Route::get('foo', ['middleware' => ['auth', 'needsRole:admin|editor,true'], function() {
+	return 'Yes I am!';
+}]);
+```
+
+Or within controllers:
+
+```php
+$this->middleware('needsRole:admin|editor,true');
 ```
 
 ----------
@@ -564,3 +648,6 @@ public function foo()
     ];
 }
 ```
+
+It's also possible to extend an existing temporary:
+Just use the `$user->extendPermission($permissionName, array $options)` method.
