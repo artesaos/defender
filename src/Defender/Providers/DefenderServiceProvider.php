@@ -59,19 +59,19 @@ class DefenderServiceProvider extends ServiceProvider
      */
     protected function registerRepositoryInterfaces()
     {
-        $this->app->bindShared('defender.role', function ($app) {
+        $this->app->singleton('defender.role', function ($app) {
             return new EloquentRoleRepository($app, new Role());
         });
 
-        $this->app->bindShared('Artesaos\Defender\Contracts\Repositories\RoleRepository', function ($app) {
+        $this->app->singleton('Artesaos\Defender\Contracts\Repositories\RoleRepository', function ($app) {
             return $app['defender.role'];
         });
 
-        $this->app->bindShared('defender.permission', function ($app) {
+        $this->app->singleton('defender.permission', function ($app) {
             return new EloquentPermissionRepository($app, new Permission());
         });
 
-        $this->app->bindShared('Artesaos\Defender\Contracts\Repositories\PermissionRepository', function ($app) {
+        $this->app->singleton('Artesaos\Defender\Contracts\Repositories\PermissionRepository', function ($app) {
             return $app['defender.permission'];
         });
     }
@@ -81,13 +81,13 @@ class DefenderServiceProvider extends ServiceProvider
      */
     protected function registerBladeExtensions()
     {
-        $this->app->afterResolving('blade.compiler', function () {
+        $this->app->afterResolving('blade.compiler', function ($bladeCompiler) {
 
             if (str_contains($this->app->version(), '5.0')) {
                 /*
                  * add @can and @endcan to blade compiler
                  */
-                $this->app['blade.compiler']->extend(function ($view, $compiler) {
+                $bladeCompiler->extend(function ($view, $compiler) {
                     $open = $compiler->createOpenMatcher('can');
                     $close = $compiler->createPlainMatcher('endcan');
 
@@ -99,7 +99,7 @@ class DefenderServiceProvider extends ServiceProvider
                 /*
                  * Add @is and @endis to blade compiler
                  */
-                $this->app['blade.compiler']->extend(function ($view, $compiler) {
+                $bladeCompiler->extend(function ($view, $compiler) {
                     $open = $compiler->createOpenMatcher('is');
                     $close = $compiler->createPlainMatcher('endis');
 
@@ -111,22 +111,22 @@ class DefenderServiceProvider extends ServiceProvider
                 /*
                  * add @can and @endcan to blade compiler
                  */
-                $this->app['blade.compiler']->directive('can', function ($expression) {
+                $bladeCompiler->directive('can', function ($expression) {
                     return "<?php if(app('defender')->can{$expression}): ?>";
                 });
 
-                $this->app['blade.compiler']->directive('endcan', function ($expression) {
+                $bladeCompiler->directive('endcan', function ($expression) {
                     return '<?php endif; ?>';
                 });
 
                 /*
                  * add @is and @endis to blade compiler
                  */
-                $this->app['blade.compiler']->directive('is', function ($expression) {
+                $bladeCompiler->directive('is', function ($expression) {
                     return "<?php if(app('defender')->hasRole{$expression}): ?>";
                 });
 
-                $this->app['blade.compiler']->directive('endis', function ($expression) {
+                $bladeCompiler->directive('endis', function ($expression) {
                     return '<?php endif; ?>';
                 });
             }
