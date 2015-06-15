@@ -103,7 +103,7 @@ class DefenderServiceProvider extends ServiceProvider
                     $open = $compiler->createOpenMatcher('is');
                     $close = $compiler->createPlainMatcher('endis');
 
-                    $template = ['$1<?php if(app(\'defender\')->hasRole$2)): ?>', '$1<?php endif; ?>'];
+                    $template = ['$1<?php if(app(\'defender\')->hasRoles$2)): ?>', '$1<?php endif; ?>'];
 
                     return preg_replace([$open, $close], $template, $view);
                 });
@@ -123,7 +123,7 @@ class DefenderServiceProvider extends ServiceProvider
                  * add @is and @endis to blade compiler
                  */
                 $bladeCompiler->directive('is', function ($expression) {
-                    return "<?php if(app('defender')->hasRole{$expression}): ?>";
+                    return "<?php if(app('defender')->hasRoles{$expression}): ?>";
                 });
 
                 $bladeCompiler->directive('endis', function ($expression) {
