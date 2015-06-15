@@ -120,7 +120,7 @@ trait HasPermissionsTrait
                 ));
             }
         }
-        
+
         return;
     }
 }
