@@ -14,9 +14,9 @@ trait HasUserRolesTrait
      */
     public function roles()
     {
-        $roleModel     = config('defender.role_model', 'Artesaos\Defender\Role');
+        $roleModel = config('defender.role_model', 'Artesaos\Defender\Role');
         $roleUserTable = config('defender.role_user_table', 'role_user');
-        $roleKey       = config('defender.role_key', 'role_id');
+        $roleKey = config('defender.role_key', 'role_id');
 
         return $this->belongsToMany($roleModel, $roleUserTable, 'user_id', $roleKey);
     }
@@ -55,8 +55,7 @@ trait HasUserRolesTrait
             }
 
             return false;
-        }
-        else {
+        } else {
             return $this->hasRole($roles);
         }
     }
@@ -96,7 +95,7 @@ trait HasUserRolesTrait
      */
     public function attachRole($role)
     {
-        if (! $this->hasRole($role)) {
+        if (!$this->hasRole($role)) {
             return $this->roles()->attach($role);
         }
     }

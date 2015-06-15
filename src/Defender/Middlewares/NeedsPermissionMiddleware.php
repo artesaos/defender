@@ -18,7 +18,7 @@ class NeedsPermissionMiddleware extends AbstractDefenderMiddleware
     public function handle($request, Closure $next, $permissions = null, $any = false)
     {
         if (is_null($permissions)) {
-            $permissions   = $this->getPermissions($request);
+            $permissions = $this->getPermissions($request);
             $anyPermission = $this->getAny($request);
         } else {
             $permissions = explode('|', $permissions); // Laravel 5.1 - Using parameters

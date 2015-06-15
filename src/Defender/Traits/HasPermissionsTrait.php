@@ -33,7 +33,7 @@ trait HasPermissionsTrait
      */
     public function attachPermission($permission, array $options = [])
     {
-        if (! $this->getPermission($permission)) {
+        if (!$this->getPermission($permission)) {
             return $this->permissions()->attach($permission, [
                 'value'   => array_get($options, 'value', true),
                 'expires' => array_get($options, 'expires', null),
@@ -108,6 +108,7 @@ trait HasPermissionsTrait
      *
      * @param $permission
      * @param array $options
+     *
      * @return bool|null
      */
     public function extendPermission($permission, array $options)
