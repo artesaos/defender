@@ -7,7 +7,7 @@ use Artesaos\Defender\Traits\HasDefenderTrait as DefenderTrait;
 /**
  * @deprecated Use \Artesaos\Defender\Traits\HasDefenderTrait instead.
  */
-trait HasDefenderTrait extends DefenderTrait
+trait HasDefenderTrait
 {
-    // Semver fix
+    use DefenderTrait; // Semver fix
 }
