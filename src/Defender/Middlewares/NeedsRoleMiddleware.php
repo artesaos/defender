@@ -22,6 +22,7 @@ class NeedsRoleMiddleware extends AbstractDefenderMiddleware
             $anyRole = $this->getAny($request);
         } else {
             $roles = explode('|', $roles); // Laravel 5.1 - Using parameters
+            $anyRole = $any;
         }
 
         if (is_null($this->user)) {
