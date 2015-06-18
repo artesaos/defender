@@ -73,7 +73,9 @@ trait HasUserRolesTrait
      */
     public function attachRole($role)
     {
-        return $this->roles()->attach($role);
+        if (! $this->hasRole($role)) {
+            return $this->roles()->attach($role);
+        }
     }
 
     /**
