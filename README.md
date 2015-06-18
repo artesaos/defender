@@ -37,7 +37,7 @@ or manually update your `composer.json` file
 ```json
 {
 	"require": {
-		"artesaos/defender": "^0.2.x"
+		"artesaos/defender": "0.2.x"
 	}
 }
 ```
