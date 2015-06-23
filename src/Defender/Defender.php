@@ -107,6 +107,22 @@ class Defender implements DefenderContract
     }
 
     /**
+     * Return if the authenticated user has any of the given roles.
+     *
+     * @param $roleName
+     *
+     * @return bool
+     */
+    public function hasRoles($roles)
+    {
+        if (!is_null($this->getUser())) {
+            return $this->getUser()->hasRoles($roles);
+        }
+
+        return false;
+    }
+
+    /**
      * Return if the authenticated user has the given role.
      *
      * @param $roleName

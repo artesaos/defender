@@ -14,10 +14,10 @@ trait HasUserRolesTrait
      */
     public function roles()
     {
-        $roleModel     = config('defender.role_model', 'Artesaos\Defender\Role');
+        $roleModel = config('defender.role_model', 'Artesaos\Defender\Role');
         $roleUserTable = config('defender.role_user_table', 'role_user');
-        $roleKey       = config('defender.role_key', 'role_id');
-        
+        $roleKey = config('defender.role_key', 'role_id');
+
         return $this->belongsToMany($roleModel, $roleUserTable, 'user_id', $roleKey);
     }
 
@@ -39,6 +39,26 @@ trait HasUserRolesTrait
     }
 
     /**
+     * Returns true if the given user has any of the given roles.
+     *
+     * @param $roles
+     *
+     * @return bool
+     */
+    public function hasRoles($roles)
+    {
+        $roles = is_array($roles) ? $roles : func_get_args();
+
+        foreach ($roles as $role) {
+            if ($this->hasRole($role)) {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    /**
      * Check if the user has the given permission using
      * only his roles.
      *
@@ -52,7 +72,7 @@ trait HasUserRolesTrait
         if ($this->hasRole(config('defender.superuser_role', 'superuser'))) {
             return true;
         }
-        
+
         $roles = $this->roles;
         $roles->load('permissions');
 
@@ -73,7 +93,7 @@ trait HasUserRolesTrait
      */
     public function attachRole($role)
     {
-        if (! $this->hasRole($role)) {
+        if (!$this->hasRole($role)) {
             return $this->roles()->attach($role);
         }
     }
