@@ -47,17 +47,15 @@ trait HasUserRolesTrait
      */
     public function hasRoles($roles)
     {
-        if (is_array($roles)) {
-            foreach ($roles as $role) {
-                if ($this->hasRole($role)) {
-                    return true;
-                }
-            }
+        $roles = is_array($roles) ? $roles : func_get_args();
 
-            return false;
-        } else {
-            return $this->hasRole($roles);
+        foreach ($roles as $role) {
+            if ($this->hasRole($role)) {
+                return true;
+            }
         }
+
+        return false;
     }
 
     /**
