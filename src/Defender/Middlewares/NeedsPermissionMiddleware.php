@@ -22,6 +22,7 @@ class NeedsPermissionMiddleware extends AbstractDefenderMiddleware
             $anyPermission = $this->getAny($request);
         } else {
             $permissions = explode('|', $permissions); // Laravel 5.1 - Using parameters
+            $anyPermission = $any;
         }
 
         if (is_null($this->user)) {
