@@ -4,6 +4,12 @@ namespace Artesaos\Defender\Contracts\Repositories;
 
 interface AbstractRepository
 {
+    public function all();
+
+    public function paginate($perPage = 10);
+
+    public function make(array $with = []);
+
     /**
      * @param int $id
      *

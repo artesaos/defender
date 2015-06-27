@@ -32,6 +32,27 @@ abstract class AbstractEloquentRepository implements AbstractRepository
     }
 
     /**
+     * Returns all from the current model.
+     * 
+     * @return static
+     */
+    public function all()
+    {
+        return $this->model->all();
+    }
+
+    /**
+     * Return paginated results
+     * 
+     * @param  integer $perPage Number of results per page
+     * @return static
+     */
+    public function paginate($perPage = 10)
+    {
+        return $this->model->paginate($perPage);
+    }
+
+    /**
      * Return a new instance of the current model.
      *
      * @param array $attributes
@@ -72,5 +93,14 @@ abstract class AbstractEloquentRepository implements AbstractRepository
     public function getList($value, $key = 'id')
     {
         return $this->model->lists($value, $key);
+    }
+
+    /**
+     * 
+     * @param  array  $with Relationships
+     */
+    public function make(array $with = [])
+    {
+        return $this->model->with($with);
     }
 }
