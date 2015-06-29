@@ -17,7 +17,7 @@ abstract class AbstractEloquentRepository implements AbstractRepository
     protected $app;
 
     /**
-     * @var Model
+     * @var Model|\Illuminate\Database\Eloquent\Builder
      */
     protected $model;
 
@@ -27,7 +27,7 @@ abstract class AbstractEloquentRepository implements AbstractRepository
      */
     public function __construct(Application $app, Model $model)
     {
-        $this->app = $app;
+        $this->app   = $app;
         $this->model = $model;
     }
 
@@ -44,9 +44,9 @@ abstract class AbstractEloquentRepository implements AbstractRepository
     }
 
     /**
-     * @param $id
+     * @param int $id
      *
-     * @return \Illuminate\Support\Collection|null|static
+     * @return Model|null
      */
     public function findById($id)
     {
@@ -54,9 +54,9 @@ abstract class AbstractEloquentRepository implements AbstractRepository
     }
 
     /**
-     * @param $name
+     * @param string $name
      *
-     * @return mixed
+     * @return \Illuminate\Database\Eloquent\Model|null
      */
     public function findByName($name)
     {
@@ -64,8 +64,10 @@ abstract class AbstractEloquentRepository implements AbstractRepository
     }
 
     /**
-     * @param $value
-     * @param $key
+     * @param string|int $value
+     * @param string     $key
+     *
+     * @return \Illuminate\Database\Eloquent\Collection
      */
     public function getList($value, $key = 'id')
     {
