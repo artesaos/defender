@@ -80,7 +80,7 @@ interface Defender
      *
      * @param $roleId
      *
-     * @return mixed
+     * @return \Artesaos\Defender\Role|null
      */
     public function findRoleById($roleId);
 
@@ -98,17 +98,17 @@ interface Defender
      *
      * @param $permissionId
      *
-     * @return mixed
+     * @return \Artesaos\Defender\Permission|null
      */
     public function findPermissionById($permissionId);
 
     /**
-     * @return mixed
+     * @return \Illuminate\Database\Eloquent\Collection
      */
     public function permissionsList();
 
     /**
-     * @return mixed
+     * @return \Illuminate\Database\Eloquent\Collection
      */
     public function rolesList();
 
