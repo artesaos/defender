@@ -14,7 +14,7 @@ interface Defender
     /**
      * Check if the authenticated user has the given permission.
      *
-     * @param $permission
+     * @param string $permission
      *
      * @return bool
      */
@@ -24,7 +24,7 @@ interface Defender
      * Check if the authenticated user has the given permission
      * using only the roles.
      *
-     * @param $permission
+     * @param string $permission
      *
      * @return bool
      */
@@ -33,7 +33,7 @@ interface Defender
     /**
      * Return if the authenticated user has the given role.
      *
-     * @param $roleName
+     * @param string $roleName
      *
      * @return bool
      */
@@ -42,7 +42,7 @@ interface Defender
     /**
      * Return if the authenticated user has the given role.
      *
-     * @param $roleName
+     * @param string $roleName
      *
      * @return bool
      */
@@ -51,7 +51,7 @@ interface Defender
     /**
      * Check if a role with the given name exists.
      *
-     * @param $roleName
+     * @param string $roleName
      *
      * @return bool
      */
@@ -60,7 +60,7 @@ interface Defender
     /**
      * Check if a permission with the given name exists.
      *
-     * @param $permissionName
+     * @param string $permissionName
      *
      * @return bool
      */
@@ -69,7 +69,7 @@ interface Defender
     /**
      * Get the role with the given name.
      *
-     * @param $roleName
+     * @param string $roleName
      *
      * @return \Artesaos\Defender\Role|null
      */
@@ -87,7 +87,7 @@ interface Defender
     /**
      * Get the permission with the given name.
      *
-     * @param $permissionName
+     * @param string $permissionName
      *
      * @return \Artesaos\Defender\Permission|null
      */
@@ -96,7 +96,7 @@ interface Defender
     /**
      * Find a permission by its id.
      *
-     * @param $permissionId
+     * @param int $permissionId
      *
      * @return \Artesaos\Defender\Permission|null
      */
@@ -116,15 +116,15 @@ interface Defender
      * Create a new role.
      * Uses a repository to actually create the role.
      *
-     * @param $roleName
+     * @param string $roleName
      *
      * @return \Artesaos\Defender\Role
      */
     public function createRole($roleName);
 
     /**
-     * @param $permissionName
-     * @param $readableName
+     * @param string $permissionName
+     * @param string $readableName
      *
      * @return \Artesaos\Defender\Permission
      */
