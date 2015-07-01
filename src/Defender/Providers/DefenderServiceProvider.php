@@ -142,6 +142,6 @@ class DefenderServiceProvider extends ServiceProvider
             return;
         }
 
-        require_once __DIR__."../helpers.php";
+        require_once __DIR__.'/../helpers.php';
     }
 }
