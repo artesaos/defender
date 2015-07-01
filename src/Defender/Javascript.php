@@ -30,7 +30,6 @@ class Javascript implements JavascriptContract
         return view('defender::javascript', compact('roles', 'permissions'));
     }
 
-
     /**
      * @return \Illuminate\Support\Collection
      */

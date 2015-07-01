@@ -4,20 +4,12 @@
   "license": "MIT",
   "authors": [
     {
-      "name": "Vinicius",
-      "email": "luiz.vinicius73@gmail.com"
-    },
-    {
       "name": "Andreo Vieira",
       "email": "andreoav@gmail.com"
     },
     {
-      "name": "Oberaldo Büll Jr",
-      "email": "oberaldo@gmail.com"
-    },
-    {
-      "name": "Gilvan Júnio",
-      "email": "packages@gilvancosta.com"
+      "name": "Luiz Vinicius Reis",
+      "email": "luiz.vinicius73@gmail.com"
     },
     {
       "name": "Vagner do Carmo",
@@ -41,7 +33,7 @@
   },
   "extra": {
     "branch-alias": {
-      "dev-master": "0.2-dev"
+      "dev-master": "dev-master"
     }
   },
   "minimum-stability": "dev"
