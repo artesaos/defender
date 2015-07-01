@@ -59,34 +59,6 @@ trait HasUserRolesTrait
     }
 
     /**
-     * Check if the user has the given permission using
-     * only his roles.
-     *
-     * @param $permission
-     *
-     * @return bool
-     */
-    public function canWithRolePermissions($permission)
-    {
-        // If has superuser role
-        if ($this->hasRole(config('defender.superuser_role', 'superuser'))) {
-            return true;
-        }
-
-        $roles = $this->roles;
-        $roles->load('permissions');
-
-        // Search roles permission
-        foreach ($roles as $role) {
-            if ($rolePermission = $role->getPermission($permission)) {
-                return true;
-            }
-        }
-
-        return false;
-    }
-
-    /**
      * Attach the given role.
      *
      * @param $role

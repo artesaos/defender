@@ -2,8 +2,6 @@
 
 namespace Artesaos\Defender\Traits;
 
-use Illuminate\Support\Collection;
-
 /**
  * Class HasDefenderTrait.
  */
@@ -12,23 +10,71 @@ trait HasDefenderTrait
     use HasUserRolesTrait, HasUserPermissionsTrait;
 
     /**
-     * Retrieve all user permissions.
-     *
-     * @return Collection
+     * @var \Illuminate\Support\Collection
      */
-    public function getPermissions()
+    private $_permissions;
+
+    /**
+     * Retrieve all user permissions
+     *
+     * @param bool $force
+     *
+     * @return \Illuminate\Support\Collection
+     */
+    public function getPermissions($force = false)
     {
-        $roles = $this->roles()->get()->lists('id')->toArray();
+        if(empty($this->_permissions) or true === $force)
+        {
+            $roles = $this->roles()->get()->lists('id')->toArray();
 
-        $permissionsRoles = app('defender.permission')->getByRoles($roles)->toBase();
+            $permissionsRoles = app('defender.permission')->getByRoles($roles)->toBase();
 
-        $permissions = $this->permissions()->get()->toBase()->merge($permissionsRoles);
+            $permissions =  $this->permissions()->get()->toBase()->merge($permissionsRoles);
 
-        return $permissions->map(function ($perm) {
+            $this->_permissions = $permissions->map(function($perm){
 
-            unset($perm->pivot, $perm->created_at, $perm->updated_at);
+                unset($perm->pivot, $perm->created_at, $perm->updated_at);
 
-            return $perm;
-        });
+                return $perm;
+            });
+        }
+
+        return $this->_permissions;
+    }
+
+    /**
+     * Check if the user has the given permission using
+     * only his roles.
+     *
+     * @param $permission
+     *
+     * @return bool
+     */
+    public function canWithRolePermissions($permission)
+    {
+        // If has superuser role
+        if ($this->hasRole(config('defender.superuser_role', 'superuser'))) {
+            return true;
+        }
+
+        $permissions = $this->getPermissions()->lists('name');
+
+        return $permissions->has($permission);
+    }
+
+
+    /**
+     * Returns if the current user has the given permission.
+     * User permissions override role permissions.
+     *
+     * @param $permission
+     *
+     * @return bool
+     */
+    public function can($permission)
+    {
+        $userPermission = $this->getPermission($permission);
+
+        return is_null($userPermission) ? $this->canWithRolePermissions($permission) : $userPermission;
     }
 }

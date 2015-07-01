@@ -7,38 +7,45 @@ trait HasPermissionsTrait
     /**
      * Get the a permission using the permission name.
      *
-     * @param string $permission
-     * @param bool   $inherit
+     * @param string $permissionName
      *
-     * @return bool|null
+     * @return bool
      */
-    public function getPermission($permission, $inherit = true)
+    public function hasPermission($permissionName)
     {
-        foreach ($this->permissions as $_permission) {
-            if ($_permission->name === $permission) {
-                if (is_null($_permission->pivot->expires) or $_permission->pivot->expires->isFuture()) {
-                    return $_permission->pivot->value;
-                }
-            }
+        $permission = $this->permissions->first(function($key, $value) use ($permissionName){
+            return $value->name == $permissionName;
+        });
+
+        if(!empty($permission))
+        {
+            return (is_null($permission->pivot->expires) or $permission->pivot->expires->isFuture());
         }
 
-        return $inherit ? null : false;
+        return false;
     }
 
     /**
      * Attach the given permission.
      *
-     * @param array|Permission $permission
+     * @param array|\Artesaos\Defender\Permission $permission
      * @param array            $options
      */
     public function attachPermission($permission, array $options = [])
     {
-        if (!$this->getPermission($permission)) {
-            return $this->permissions()->attach($permission, [
-                'value'   => array_get($options, 'value', true),
-                'expires' => array_get($options, 'expires', null),
-            ]);
+
+        if(!is_array($permission))
+        {
+            if(!$this->hasPermission($permission->name)){
+                return;
+            }
         }
+
+        $this->permissions()->attach($permission, [
+            'value'   => array_get($options, 'value', true),
+            'expires' => array_get($options, 'expires', null),
+        ]);
+
     }
 
     /**

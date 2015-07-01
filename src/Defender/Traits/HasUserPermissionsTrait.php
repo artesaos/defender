@@ -25,21 +25,6 @@ trait HasUserPermissionsTrait
     }
 
     /**
-     * Returns if the current user has the given permission.
-     * User permissions override role permissions.
-     *
-     * @param $permission
-     *
-     * @return bool
-     */
-    public function can($permission)
-    {
-        $userPermission = $this->getPermission($permission);
-
-        return is_null($userPermission) ? $this->canWithRolePermissions($permission) : $userPermission;
-    }
-
-    /**
      * @param Model $parent
      * @param array $attributes
      * @param $table
