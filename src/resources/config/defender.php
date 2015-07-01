@@ -68,4 +68,9 @@ return [
      */
     'superuser_role' => 'superuser',
 
+    /*
+     * js var name
+     */
+    'js_var_name' => 'defender',
+
 ];

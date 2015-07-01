@@ -24,17 +24,17 @@ class EloquentPermissionRepository extends AbstractEloquentRepository implements
     /**
      * Create a new permission using the given name.
      *
-     * @param $permissionName
-     * @param null $readableName
+     * @param string $permissionName
+     * @param string $readableName
      *
      * @throws PermissionExistsException
      *
-     * @return static
+     * @return Permission
      */
     public function create($permissionName, $readableName = null)
     {
         if (!is_null($this->findByName($permissionName))) {
-            throw new PermissionExistsException('The permission '.$permissionName.' already exists'); // TODO: add translation support
+            throw new PermissionExistsException('The permission ' . $permissionName . ' already exists'); // TODO: add translation support
         }
 
         // Do we have a display_name set?
@@ -44,5 +44,17 @@ class EloquentPermissionRepository extends AbstractEloquentRepository implements
             'name'          => $permissionName,
             'readable_name' => $readableName,
         ]);
+    }
+
+    /**
+     * @param array $rolesIds
+     *
+     * @return \Illuminate\Database\Eloquent\Collection
+     */
+    public function getByRoles(array $rolesIds)
+    {
+        return $this->model->whereHas('roles', function ($query) use ($rolesIds) {
+            $query->whereIn('id', $rolesIds);
+        })->get();
     }
 }

@@ -28,7 +28,7 @@ class EloquentRoleRepository extends AbstractEloquentRepository implements RoleR
      *
      * @throws \Exception
      *
-     * @return static
+     * @return Role
      */
     public function create($roleName)
     {

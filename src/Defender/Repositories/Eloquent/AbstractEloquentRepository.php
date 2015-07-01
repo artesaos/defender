@@ -17,7 +17,7 @@ abstract class AbstractEloquentRepository implements AbstractRepository
     protected $app;
 
     /**
-     * @var Model
+     * @var Model|\Illuminate\Database\Eloquent\Builder
      */
     protected $model;
 
@@ -27,8 +27,29 @@ abstract class AbstractEloquentRepository implements AbstractRepository
      */
     public function __construct(Application $app, Model $model)
     {
-        $this->app = $app;
+        $this->app   = $app;
         $this->model = $model;
+    }
+
+    /**
+     * Returns all from the current model.
+     * 
+     * @return static
+     */
+    public function all()
+    {
+        return $this->model->all();
+    }
+
+    /**
+     * Return paginated results
+     * 
+     * @param  integer $perPage Number of results per page
+     * @return static
+     */
+    public function paginate($perPage = 10)
+    {
+        return $this->model->paginate($perPage);
     }
 
     /**
@@ -44,9 +65,9 @@ abstract class AbstractEloquentRepository implements AbstractRepository
     }
 
     /**
-     * @param $id
+     * @param int $id
      *
-     * @return \Illuminate\Support\Collection|null|static
+     * @return Model|null
      */
     public function findById($id)
     {
@@ -54,9 +75,9 @@ abstract class AbstractEloquentRepository implements AbstractRepository
     }
 
     /**
-     * @param $name
+     * @param string $name
      *
-     * @return mixed
+     * @return \Illuminate\Database\Eloquent\Model|null
      */
     public function findByName($name)
     {
@@ -64,11 +85,22 @@ abstract class AbstractEloquentRepository implements AbstractRepository
     }
 
     /**
-     * @param $value
-     * @param $key
+     * @param string|int $value
+     * @param string     $key
+     *
+     * @return \Illuminate\Database\Eloquent\Collection
      */
     public function getList($value, $key = 'id')
     {
         return $this->model->lists($value, $key);
+    }
+
+    /**
+     * 
+     * @param  array  $with Relationships
+     */
+    public function make(array $with = [])
+    {
+        return $this->model->with($with);
     }
 }
