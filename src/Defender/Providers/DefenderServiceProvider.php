@@ -3,6 +3,7 @@
 namespace Artesaos\Defender\Providers;
 
 use Artesaos\Defender\Defender;
+use Artesaos\Defender\Javascript;
 use Artesaos\Defender\Permission;
 use Artesaos\Defender\Repositories\Eloquent\EloquentPermissionRepository;
 use Artesaos\Defender\Repositories\Eloquent\EloquentRoleRepository;
@@ -22,7 +23,7 @@ class DefenderServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        $this->publishConfiguration();
+        $this->publishResources();
         $this->publishMigrations();
     }
 
@@ -35,13 +36,15 @@ class DefenderServiceProvider extends ServiceProvider
             return new Defender($app, $app['defender.role'], $app['defender.permission']);
         });
 
+        $this->app->singleton('defender.javascript', function ($app) {
+            return new Javascript($app['defender']);
+        });
+
         $this->app->alias('defender', 'Artesaos\Defender\Contracts\Defender');
 
         $this->registerRepositoryInterfaces();
 
-        if ($this->app['config']->get('defender.template_helpers', true)) {
-            $this->registerBladeExtensions();
-        }
+        $this->registerBladeExtensions();
     }
 
     /**
@@ -81,6 +84,9 @@ class DefenderServiceProvider extends ServiceProvider
      */
     protected function registerBladeExtensions()
     {
+
+        if(false === $this->app['config']->get('defender.template_helpers', true)) return;
+
         $this->app->afterResolving('blade.compiler', function ($bladeCompiler) {
 
             if (str_contains($this->app->version(), '5.0')) {
@@ -136,10 +142,11 @@ class DefenderServiceProvider extends ServiceProvider
     /**
      * Publish configuration file.
      */
-    private function publishConfiguration()
+    private function publishResources()
     {
         $this->publishes([__DIR__.'/../../resources/config/defender.php' => config_path('defender.php')], 'config');
         $this->mergeConfigFrom(__DIR__.'/../../resources/config/defender.php', 'defender');
+        $this->loadViewsFrom(__DIR__.'/../../resources/views', 'defender');
     }
 
     /**

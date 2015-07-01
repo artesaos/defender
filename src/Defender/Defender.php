@@ -245,4 +245,12 @@ class Defender implements DefenderContract
     {
         return $this->permissionRepository->create($permissionName, $readableName);
     }
+    
+    /**
+     * @return Javascript
+     */
+    public function javascript()
+    {
+        return $this->app['defender.javascript'];
+    }
 }
