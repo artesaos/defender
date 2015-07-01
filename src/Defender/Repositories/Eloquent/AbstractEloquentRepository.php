@@ -27,7 +27,7 @@ abstract class AbstractEloquentRepository implements AbstractRepository
      */
     public function __construct(Application $app, Model $model)
     {
-        $this->app   = $app;
+        $this->app = $app;
         $this->model = $model;
     }
 
@@ -42,9 +42,10 @@ abstract class AbstractEloquentRepository implements AbstractRepository
     }
 
     /**
-     * Return paginated results
+     * Return paginated results.
      *
-     * @param  integer $perPage Number of results per page
+     * @param int $perPage Number of results per page
+     *
      * @return static
      */
     public function paginate($perPage = 10)
@@ -96,8 +97,7 @@ abstract class AbstractEloquentRepository implements AbstractRepository
     }
 
     /**
-     *
-     * @param  array  $with Relationships
+     * @param array $with Relationships
      */
     public function make(array $with = [])
     {

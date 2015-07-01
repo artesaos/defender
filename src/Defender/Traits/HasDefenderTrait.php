@@ -11,9 +11,8 @@ trait HasDefenderTrait
 {
     use HasUserRolesTrait, HasUserPermissionsTrait;
 
-
     /**
-     * Retrieve all user permissions
+     * Retrieve all user permissions.
      *
      * @return Collection
      */
@@ -23,7 +22,7 @@ trait HasDefenderTrait
 
         $permissionsRoles = app('defender.permission')->getByRoles($roles)->toBase();
 
-        $permissions =  $this->permissions()->get()->toBase()->merge($permissionsRoles);
+        $permissions = $this->permissions()->get()->toBase()->merge($permissionsRoles);
 
         return $permissions->map(function ($perm) {
 

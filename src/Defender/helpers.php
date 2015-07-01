@@ -19,7 +19,7 @@ if (!function_exists('can')) {
     /**
      * Check if the current user has some permissions.
      *
-     * @param  string|array $permissions
+     * @param string|array $permissions
      *
      * @return bool
      */
@@ -43,14 +43,12 @@ if (!function_exists('can')) {
     }
 }
 
-    
-
 if (!function_exists('roles')) {
 
     /**
      * Check if the user has some of roles.
      *
-     * @param  string|array $roles
+     * @param string|array $roles
      *
      * @return bool
      */
