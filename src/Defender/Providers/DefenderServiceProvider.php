@@ -3,6 +3,7 @@
 namespace Artesaos\Defender\Providers;
 
 use Artesaos\Defender\Defender;
+use Artesaos\Defender\Javascript;
 use Artesaos\Defender\Permission;
 use Artesaos\Defender\Repositories\Eloquent\EloquentPermissionRepository;
 use Artesaos\Defender\Repositories\Eloquent\EloquentRoleRepository;
@@ -22,7 +23,7 @@ class DefenderServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        $this->publishConfiguration();
+        $this->publishResources();
         $this->publishMigrations();
     }
 
@@ -35,13 +36,15 @@ class DefenderServiceProvider extends ServiceProvider
             return new Defender($app, $app['defender.role'], $app['defender.permission']);
         });
 
+        $this->app->singleton('defender.javascript', function ($app) {
+            return new Javascript($app['defender']);
+        });
+
         $this->app->alias('defender', 'Artesaos\Defender\Contracts\Defender');
 
         $this->registerRepositoryInterfaces();
 
-        if ($this->app['config']->get('defender.template_helpers', true)) {
-            $this->registerBladeExtensions();
-        }
+        $this->registerBladeExtensions();
     }
 
     /**
@@ -59,19 +62,19 @@ class DefenderServiceProvider extends ServiceProvider
      */
     protected function registerRepositoryInterfaces()
     {
-        $this->app->bindShared('defender.role', function ($app) {
+        $this->app->singleton('defender.role', function ($app) {
             return new EloquentRoleRepository($app, new Role());
         });
 
-        $this->app->bindShared('Artesaos\Defender\Repositories\RoleRepository', function ($app) {
+        $this->app->singleton('Artesaos\Defender\Contracts\Repositories\RoleRepository', function ($app) {
             return $app['defender.role'];
         });
 
-        $this->app->bindShared('defender.permission', function ($app) {
+        $this->app->singleton('defender.permission', function ($app) {
             return new EloquentPermissionRepository($app, new Permission());
         });
 
-        $this->app->bindShared('Artesaos\Defender\Repositories\PermissionRepository', function ($app) {
+        $this->app->singleton('Artesaos\Defender\Contracts\Repositories\PermissionRepository', function ($app) {
             return $app['defender.permission'];
         });
     }
@@ -81,13 +84,16 @@ class DefenderServiceProvider extends ServiceProvider
      */
     protected function registerBladeExtensions()
     {
-        $this->app->afterResolving('blade.compiler', function () {
+
+        if(false === $this->app['config']->get('defender.template_helpers', true)) return;
+
+        $this->app->afterResolving('blade.compiler', function ($bladeCompiler) {
 
             if (str_contains($this->app->version(), '5.0')) {
                 /*
                  * add @can and @endcan to blade compiler
                  */
-                $this->app['blade.compiler']->extend(function ($view, $compiler) {
+                $bladeCompiler->extend(function ($view, $compiler) {
                     $open = $compiler->createOpenMatcher('can');
                     $close = $compiler->createPlainMatcher('endcan');
 
@@ -99,11 +105,11 @@ class DefenderServiceProvider extends ServiceProvider
                 /*
                  * Add @is and @endis to blade compiler
                  */
-                $this->app['blade.compiler']->extend(function ($view, $compiler) {
+                $bladeCompiler->extend(function ($view, $compiler) {
                     $open = $compiler->createOpenMatcher('is');
                     $close = $compiler->createPlainMatcher('endis');
 
-                    $template = ['$1<?php if(app(\'defender\')->hasRole$2)): ?>', '$1<?php endif; ?>'];
+                    $template = ['$1<?php if(app(\'defender\')->hasRoles$2)): ?>', '$1<?php endif; ?>'];
 
                     return preg_replace([$open, $close], $template, $view);
                 });
@@ -111,22 +117,22 @@ class DefenderServiceProvider extends ServiceProvider
                 /*
                  * add @can and @endcan to blade compiler
                  */
-                $this->app['blade.compiler']->directive('can', function ($expression) {
+                $bladeCompiler->directive('can', function ($expression) {
                     return "<?php if(app('defender')->can{$expression}): ?>";
                 });
 
-                $this->app['blade.compiler']->directive('endcan', function ($expression) {
+                $bladeCompiler->directive('endcan', function ($expression) {
                     return '<?php endif; ?>';
                 });
 
                 /*
                  * add @is and @endis to blade compiler
                  */
-                $this->app['blade.compiler']->directive('is', function ($expression) {
-                    return "<?php if(app('defender')->hasRole{$expression}): ?>";
+                $bladeCompiler->directive('is', function ($expression) {
+                    return "<?php if(app('defender')->hasRoles{$expression}): ?>";
                 });
 
-                $this->app['blade.compiler']->directive('endis', function ($expression) {
+                $bladeCompiler->directive('endis', function ($expression) {
                     return '<?php endif; ?>';
                 });
             }
@@ -136,10 +142,11 @@ class DefenderServiceProvider extends ServiceProvider
     /**
      * Publish configuration file.
      */
-    private function publishConfiguration()
+    private function publishResources()
     {
         $this->publishes([__DIR__.'/../../resources/config/defender.php' => config_path('defender.php')], 'config');
         $this->mergeConfigFrom(__DIR__.'/../../resources/config/defender.php', 'defender');
+        $this->loadViewsFrom(__DIR__.'/../../resources/views', 'defender');
     }
 
     /**

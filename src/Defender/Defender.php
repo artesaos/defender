@@ -107,9 +107,25 @@ class Defender implements DefenderContract
     }
 
     /**
+     * Return if the authenticated user has any of the given roles.
+     *
+     * @param string $roles
+     *
+     * @return bool
+     */
+    public function hasRoles($roles)
+    {
+        if (!is_null($this->getUser())) {
+            return $this->getUser()->hasRoles($roles);
+        }
+
+        return false;
+    }
+
+    /**
      * Return if the authenticated user has the given role.
      *
-     * @param $roleName
+     * @param string $roleName
      *
      * @return bool
      */
@@ -121,7 +137,7 @@ class Defender implements DefenderContract
     /**
      * Check if a role with the given name exists.
      *
-     * @param $roleName
+     * @param string $roleName
      *
      * @return bool
      */
@@ -133,7 +149,7 @@ class Defender implements DefenderContract
     /**
      * Check if a permission with the given name exists.
      *
-     * @param $permissionName
+     * @param string $permissionName
      *
      * @return bool
      */
@@ -145,7 +161,7 @@ class Defender implements DefenderContract
     /**
      * Get the role with the given name.
      *
-     * @param $roleName
+     * @param string $roleName
      *
      * @return \Artesaos\Defender\Role|null
      */
@@ -169,7 +185,7 @@ class Defender implements DefenderContract
     /**
      * Get the permission with the given name.
      *
-     * @param $permissionName
+     * @param string $permissionName
      *
      * @return \Artesaos\Defender\Permission|null
      */
@@ -181,9 +197,9 @@ class Defender implements DefenderContract
     /**
      * Find a permission by its id.
      *
-     * @param $permissionId
+     * @param int $permissionId
      *
-     * @return mixed
+     * @return \Artesaos\Defender\Permission|null
      */
     public function findPermissionById($permissionId)
     {
@@ -191,9 +207,7 @@ class Defender implements DefenderContract
     }
 
     /**
-     * Returns a list of existing permissions.
-     *
-     * @return mixed
+     * @return \Illuminate\Database\Eloquent\Collection
      */
     public function permissionsList()
     {
@@ -201,9 +215,7 @@ class Defender implements DefenderContract
     }
 
     /**
-     * Returns a list of existing roles.
-     *
-     * @return mixed
+     * @return \Illuminate\Database\Eloquent\Collection
      */
     public function rolesList()
     {
@@ -232,5 +244,13 @@ class Defender implements DefenderContract
     public function createPermission($permissionName, $readableName = null)
     {
         return $this->permissionRepository->create($permissionName, $readableName);
+    }
+    
+    /**
+     * @return Javascript
+     */
+    public function javascript()
+    {
+        return $this->app['defender.javascript'];
     }
 }
