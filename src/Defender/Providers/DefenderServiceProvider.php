@@ -84,8 +84,9 @@ class DefenderServiceProvider extends ServiceProvider
      */
     protected function registerBladeExtensions()
     {
-
-        if(false === $this->app['config']->get('defender.template_helpers', true)) return;
+        if (false === $this->app['config']->get('defender.template_helpers', true)) {
+            return;
+        }
 
         $this->app->afterResolving('blade.compiler', function ($bladeCompiler) {
 

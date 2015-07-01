@@ -33,7 +33,7 @@ abstract class AbstractEloquentRepository implements AbstractRepository
 
     /**
      * Returns all from the current model.
-     * 
+     *
      * @return static
      */
     public function all()
@@ -43,7 +43,7 @@ abstract class AbstractEloquentRepository implements AbstractRepository
 
     /**
      * Return paginated results
-     * 
+     *
      * @param  integer $perPage Number of results per page
      * @return static
      */
@@ -96,7 +96,7 @@ abstract class AbstractEloquentRepository implements AbstractRepository
     }
 
     /**
-     * 
+     *
      * @param  array  $with Relationships
      */
     public function make(array $with = [])
