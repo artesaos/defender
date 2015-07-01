@@ -15,4 +15,11 @@ interface PermissionRepository extends AbstractRepository
      * @return \Artesaos\Defender\Permission;
      */
     public function create($permissionName, $readableName = null);
+
+    /**
+     * @param array $rolesIds
+     *
+     * @return \Illuminate\Database\Eloquent\Collection
+     */
+    public function getByRoles(array $rolesIds);
 }

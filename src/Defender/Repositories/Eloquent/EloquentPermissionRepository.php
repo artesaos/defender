@@ -45,4 +45,16 @@ class EloquentPermissionRepository extends AbstractEloquentRepository implements
             'readable_name' => $readableName,
         ]);
     }
+
+    /**
+     * @param array $rolesIds
+     *
+     * @return \Illuminate\Database\Eloquent\Collection
+     */
+    public function getByRoles(array $rolesIds)
+    {
+        return $this->model->whereHas('roles', function ($query) use ($rolesIds) {
+            $query->whereIn('id', $rolesIds);
+        })->get();
+    }
 }
