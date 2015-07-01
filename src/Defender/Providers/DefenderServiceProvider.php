@@ -45,6 +45,8 @@ class DefenderServiceProvider extends ServiceProvider
         $this->registerRepositoryInterfaces();
 
         $this->registerBladeExtensions();
+
+        $this->loadHelpers();
     }
 
     /**
@@ -89,54 +91,27 @@ class DefenderServiceProvider extends ServiceProvider
         }
 
         $this->app->afterResolving('blade.compiler', function ($bladeCompiler) {
+            /*
+             * add @can and @endcan to blade compiler
+             */
+            $bladeCompiler->directive('can', function ($expression) {
+                return "<?php if(app('defender')->can{$expression}): ?>";
+            });
 
-            if (str_contains($this->app->version(), '5.0')) {
-                /*
-                 * add @can and @endcan to blade compiler
-                 */
-                $bladeCompiler->extend(function ($view, $compiler) {
-                    $open = $compiler->createOpenMatcher('can');
-                    $close = $compiler->createPlainMatcher('endcan');
+            $bladeCompiler->directive('endcan', function ($expression) {
+                return '<?php endif; ?>';
+            });
 
-                    $template = ['$1<?php if(app(\'defender\')->can$2)): ?>', '$1<?php endif; ?>'];
+            /*
+             * add @is and @endis to blade compiler
+             */
+            $bladeCompiler->directive('is', function ($expression) {
+                return "<?php if(app('defender')->hasRoles{$expression}): ?>";
+            });
 
-                    return preg_replace([$open, $close], $template, $view);
-                });
-
-                /*
-                 * Add @is and @endis to blade compiler
-                 */
-                $bladeCompiler->extend(function ($view, $compiler) {
-                    $open = $compiler->createOpenMatcher('is');
-                    $close = $compiler->createPlainMatcher('endis');
-
-                    $template = ['$1<?php if(app(\'defender\')->hasRoles$2)): ?>', '$1<?php endif; ?>'];
-
-                    return preg_replace([$open, $close], $template, $view);
-                });
-            } else {
-                /*
-                 * add @can and @endcan to blade compiler
-                 */
-                $bladeCompiler->directive('can', function ($expression) {
-                    return "<?php if(app('defender')->can{$expression}): ?>";
-                });
-
-                $bladeCompiler->directive('endcan', function ($expression) {
-                    return '<?php endif; ?>';
-                });
-
-                /*
-                 * add @is and @endis to blade compiler
-                 */
-                $bladeCompiler->directive('is', function ($expression) {
-                    return "<?php if(app('defender')->hasRoles{$expression}): ?>";
-                });
-
-                $bladeCompiler->directive('endis', function ($expression) {
-                    return '<?php endif; ?>';
-                });
-            }
+            $bladeCompiler->directive('endis', function ($expression) {
+                return '<?php endif; ?>';
+            });
         });
     }
 
@@ -156,5 +131,17 @@ class DefenderServiceProvider extends ServiceProvider
     private function publishMigrations()
     {
         $this->publishes([__DIR__.'/../../resources/migrations/' => base_path('database/migrations')], 'migrations');
+    }
+
+    /**
+     * Load the helpers file.
+     */
+    private function loadHelpers()
+    {
+        if (false === $this->app['config']->get('defender.helpers', true)) {
+            return;
+        }
+
+        require_once __DIR__."../helpers.php";
     }
 }

@@ -59,9 +59,14 @@ return [
     },
 
     /*
-     * Use template helpers
+     * Use blade template helpers
      */
     'template_helpers' => true,
+
+    /*
+     * Use helper functions
+     */
+    'helpers' => true,
 
     /*
      * Super User role name
