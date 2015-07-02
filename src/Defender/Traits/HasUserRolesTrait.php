@@ -30,10 +30,7 @@ trait HasUserRolesTrait
      */
     public function hasRole($role)
     {
-        $roles = $this->roles->lists('name');
-
-        // compatible with Laravel 5 and Laravel 5.1
-        $roles = is_array($roles) ? $roles : $roles->toArray();
+        $roles = $this->roles->toBase()->lists('name')->toArray();
 
         return in_array($role, $roles);
     }

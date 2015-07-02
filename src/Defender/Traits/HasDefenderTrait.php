@@ -2,6 +2,8 @@
 
 namespace Artesaos\Defender\Traits;
 
+use Carbon\Carbon;
+
 /**
  * Class HasDefenderTrait.
  */
@@ -29,7 +31,9 @@ trait HasDefenderTrait
 
             $permissionsRoles = app('defender.permission')->getByRoles($roles)->toBase();
 
-            $permissions =  $this->permissions()->get()->toBase()->merge($permissionsRoles);
+            $permissions =  $this->permissions()->wherePivot('value', true)->wherePivot('expires', '>=', Carbon::now())->get()->toBase();
+
+            $permissions = $permissions->merge($permissionsRoles);
 
             $this->_permissions = $permissions->map(function($perm){
 
@@ -57,9 +61,9 @@ trait HasDefenderTrait
             return true;
         }
 
-        $permissions = $this->getPermissions()->lists('name');
+        $permissions = $this->getPermissions()->lists('name')->toArray();
 
-        return $permissions->has($permission);
+        return in_array($permission, $permissions);
     }
 
 
@@ -67,14 +71,12 @@ trait HasDefenderTrait
      * Returns if the current user has the given permission.
      * User permissions override role permissions.
      *
-     * @param $permission
+     * @param string $permission
      *
      * @return bool
      */
     public function can($permission)
     {
-        $userPermission = $this->getPermission($permission);
-
-        return is_null($userPermission) ? $this->canWithRolePermissions($permission) : $userPermission;
+        return $this->canWithRolePermissions($permission);
     }
 }

@@ -14,12 +14,17 @@ trait HasPermissionsTrait
     public function hasPermission($permissionName)
     {
         $permission = $this->permissions->first(function($key, $value) use ($permissionName){
-            return $value->name == $permissionName;
+            return ($value->name == $permissionName);
         });
 
         if(!empty($permission))
         {
-            return (is_null($permission->pivot->expires) or $permission->pivot->expires->isFuture());
+            $active = (is_null($permission->pivot->expires) or $permission->pivot->expires->isFuture());
+
+            if($active)
+            {
+                return (bool) $permission->pivot->value;
+            }
         }
 
         return false;
@@ -36,10 +41,11 @@ trait HasPermissionsTrait
 
         if(!is_array($permission))
         {
-            if(!$this->hasPermission($permission->name)){
+            if($this->hasPermission($permission->name))
+            {
                 return;
             }
-        }
+        } 
 
         $this->permissions()->attach($permission, [
             'value'   => array_get($options, 'value', true),
