@@ -31,10 +31,5 @@
       "Artesaos\\Defender\\": "src/Defender/"
     }
   },
-  "extra": {
-    "branch-alias": {
-      "dev-master": "dev-master"
-    }
-  },
   "minimum-stability": "dev"
 }
