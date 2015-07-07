@@ -52,7 +52,7 @@ class DefenderServiceProviderTest extends AbstractTestCase
      */
     public function testDefenderBladeDirectives()
     {
-        $view = __DIR__.'/stubs/view_with_defender.blade.php';
+        $view = __DIR__.'/stubs/view_with_defender.blade.txt';
         $expected = __DIR__.'/stubs/view_with_defender.blade.output.txt';
 
         $compiled = Blade::compileString(file_get_contents($view));
