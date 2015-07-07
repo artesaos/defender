@@ -70,7 +70,7 @@ class DefenderServiceProviderTest extends AbstractTestCase
     /**
      * {@inheritdoc}
      */
-    protected function getPackageProviders()
+    protected function getPackageProviders($app)
     {
         return [
             'Artesaos\Defender\Providers\DefenderServiceProvider',
