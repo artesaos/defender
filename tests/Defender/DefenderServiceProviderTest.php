@@ -16,6 +16,7 @@ class DefenderServiceProviderTest extends AbstractTestCase
      */
     protected $dotNotRegisterForThatTestCases = [
         'testShouldNotCompileDefenderTemplateHelpers',
+        'testShouldNotLoadHelpers',
     ];
 
     /**
@@ -97,6 +98,75 @@ class DefenderServiceProviderTest extends AbstractTestCase
         $this->assertContains('@endis', $compiled);
 
         $this->assertStringNotEqualsFile($expected, $compiled);
+    }
+
+    /**
+     * Verify if the Defender function helpers are loaded.
+     */
+    public function testShouldLoadHelpers()
+    {
+        $this->assertTrue(function_exists('defender'), 'Helper \'defender()\' not loaded.');
+        $this->assertTrue(function_exists('can'), 'Helper \'can()\'  not loaded.');
+        $this->assertTrue(function_exists('roles'), 'Helper \'roles()\'  not loaded.');
+    }
+
+    /**
+     * Verify if the Defender function helpers are loaded.
+     * Note: The service provider should not be register before that test.
+     * Note:That test needs to be runned in isolation. Because it depends of helpers.php
+     * (file with functions which are always loaded)
+     */
+    public function testShouldNotLoadHelpers()
+    {
+        $this->assertFalse(isset($this->app['defender']));
+
+        $this->app['config']->set('defender.helpers', false);
+
+        $this->app->register('Artesaos\Defender\Providers\DefenderServiceProvider');
+
+        if ($this->isInIsolation()) {
+            $this->assertFalse(function_exists('defender'), 'Helper \'defender()\' loaded.');
+            $this->assertFalse(function_exists('can'), 'Helper \'can()\'  loaded.');
+            $this->assertFalse(function_exists('roles'), 'Helper \'roles()\'  loaded.');
+        }
+    }
+
+    /**
+     * Publishes the configuration and migrations.
+     */
+    public function testShouldPublishConfigAndMigrations()
+    {
+        //dd(config_path());
+
+        $this->artisan('vendor:publish');
+
+        $resourcesPath = __DIR__.'/../../src/resources';
+
+        $migrations = [
+            $resourcesPath.'/migrations/2015_02_23_161101_create_defender_roles_table.php',
+            $resourcesPath.'/migrations/2015_02_23_161102_create_defender_permissions_table.php',
+            $resourcesPath.'/migrations/2015_02_23_161103_create_defender_role_user_table.php',
+            $resourcesPath.'/migrations/2015_02_23_161104_create_defender_permission_user_table.php',
+            $resourcesPath.'/migrations/2015_02_23_161105_create_defender_permission_role_table.php',
+        ];
+
+        /*
+         * Being sure the number of migrations described is the total expected.
+         */
+        $this->assertEquals(
+            count(glob($resourcesPath.'/migrations/*.php')),
+            count(array_unique($migrations))
+        );
+
+        $config = $resourcesPath.'/config/defender.php';
+
+        foreach ($migrations as $migration) {
+            $this->assertFileExists($migration);
+
+            $this->assertFileExists(base_path('database/migrations/'.basename($migration)));
+        }
+
+        $this->assertFileExists(config_path(basename($config)));
     }
 
     /**

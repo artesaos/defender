@@ -144,10 +144,12 @@ class DefenderServiceProvider extends ServiceProvider
      */
     private function loadHelpers()
     {
-        if (false === $this->app['config']->get('defender.helpers', true)) {
-            return;
+        if ($this->app['config']->get('defender.helpers', true)) {
+            /*
+             * That needs to be required inside that condition,
+             * otherwise will have a side effect, will be always required.
+             */
+            require_once __DIR__.'/../helpers.php';
         }
-
-        require_once __DIR__.'/../helpers.php';
     }
 }
