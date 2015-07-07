@@ -1,16 +1,19 @@
 <?php
 
-namespace Artesaos\Defender\Traits;
+namespace Artesaos\Defender\Traits\Users;
 
 use Artesaos\Defender\Pivots\PermissionUserPivot;
 use Illuminate\Database\Eloquent\Model;
+use Artesaos\Defender\Traits\Permissions\InteractsWithPermissions;
 
 /**
- * Class HasUserPermissionsTrait.
+ * Trait HasPermissions
+ *
+ * @package Artesaos\Defender\Traits\Users
  */
-trait HasUserPermissionsTrait
+trait HasPermissions
 {
-    use HasPermissionsTrait;
+    use InteractsWithPermissions;
 
     /**
      * Many-to-many permission-user relationship.

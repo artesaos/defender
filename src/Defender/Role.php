@@ -2,7 +2,7 @@
 
 namespace Artesaos\Defender;
 
-use Artesaos\Defender\Traits\HasRolePermissionsTrait;
+use Artesaos\Defender\Traits\Permissions\RoleHasPermissions;
 use Illuminate\Database\Eloquent\Model;
 
 /**
@@ -10,7 +10,7 @@ use Illuminate\Database\Eloquent\Model;
  */
 class Role extends Model
 {
-    use HasRolePermissionsTrait;
+    use RoleHasPermissions;
 
     /**
      * Table name.

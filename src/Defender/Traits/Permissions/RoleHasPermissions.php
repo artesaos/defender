@@ -1,16 +1,18 @@
 <?php
 
-namespace Artesaos\Defender\Traits;
+namespace Artesaos\Defender\Traits\Permissions;
 
 use Artesaos\Defender\Pivots\PermissionRolePivot;
 use Illuminate\Database\Eloquent\Model;
 
 /**
- * Class HasRolePermissionsTrait.
+ * Trait RoleHasPermissions
+ *
+ * @package Artesaos\Defender\Traits\Permissions
  */
-trait HasRolePermissionsTrait
+trait RoleHasPermissions
 {
-    use HasPermissionsTrait;
+    use InteractsWithPermissions;
 
     /**
      * Many-to-many permission-user relationship.

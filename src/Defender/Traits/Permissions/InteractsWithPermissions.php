@@ -1,11 +1,13 @@
 <?php
 
-namespace Artesaos\Defender\Traits;
+namespace Artesaos\Defender\Traits\Permissions;
 
 /**
- * Class HasPermissionsTrait
+ * Trait InteractsWithPermissions
+ *
+ * @package Artesaos\Defender\Traits\Permissions
  */
-trait HasPermissionsTrait
+trait InteractsWithPermissions
 {
     /**
      * Attach the given permission.

@@ -121,12 +121,12 @@ Caso os middlewares padrões do Defender não atendam as suas necessidades, voc�
 O Defender realiza apenas o controle de acesso em sua aplicação, ou seja, a tarefa de autenticação é realizada pelo `Auth` que faz parte do core do Laravel.
 
 ### Tornando o User denfensível
-Na sua classe User, você precisa adicionar a trait `Artesaos\Defender\HasDefenderTrait` para que sejá possível que crie permissões e grupos para os usuários:
+Na sua classe User, você precisa adicionar a trait `Artesaos\Defender\HasDefender` para que sejá possível que crie permissões e grupos para os usuários:
 
 ```php
 <?php namespace App;
 
-use Artesaos\Defender\HasDefenderTrait;
+use Artesaos\Defender\HasDefender;
 use Illuminate\Auth\Authenticatable;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Auth\Passwords\CanResetPassword;
@@ -135,7 +135,7 @@ use Illuminate\Contracts\Auth\CanResetPassword as CanResetPasswordContract;
 
 class User extends Model implements AuthenticatableContract, CanResetPasswordContract {
 
-	use Authenticatable, CanResetPassword, HasDefenderTrait;
+	use Authenticatable, CanResetPassword, HasDefender;
 ...
 ```
 ### Criando Grupos e Permissões
@@ -342,17 +342,17 @@ Cria uma nova permissão no banco de dados.
 
 ### Usando a trait
 
-Para adicionar as funcionalidades do Defender, é necessário adicionar trait `HasDefenderTrait` no seu modelo de usuário (normalmente o `App\User`).
+Para adicionar as funcionalidades do Defender, é necessário adicionar trait `HasDefender` no seu modelo de usuário (normalmente o `App\User`).
 
 ```php
 <?php namespace App;
 
 // Declaração dos outros namespaces omitida
-use Artesaos\Defender\HasDefenderTrait;
+use Artesaos\Defender\HasDefender;
 
 class User extends Model implements AuthenticatableContract, CanResetPasswordContract {
 
-	use Authenticatable, CanResetPassword, HasDefenderTrait;
+	use Authenticatable, CanResetPassword, HasDefender;
 
     // Restante da classe
 }

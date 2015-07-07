@@ -1,11 +1,13 @@
 <?php
 
-namespace Artesaos\Defender\Traits;
+namespace Artesaos\Defender\Traits\Users;
 
 /**
- * Class HasUserRolesTrait.
+ * Trait HasRoles
+ *
+ * @package Artesaos\Defender\Traits\Users
  */
-trait HasUserRolesTrait
+trait HasRoles
 {
     /**
      * Returns true if the given user has any of the given roles.

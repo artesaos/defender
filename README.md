@@ -118,12 +118,12 @@ If the built-in middlewares doesn't fit your needs, you can make your own by usi
 Defender handles only access control. The authentication is still made by Laravel's `Auth`.
 
 ### Put a shield on my saber I must
-On your User class, you need to add the trait `Artesaos\Defender\Traits\HasDefenderTrait` to enable the permission creation and roles creation for the users:
+On your User class, you need to add the trait `Artesaos\Defender\Traits\HasDefender` to enable the permission creation and roles creation for the users:
 
 ```php
 <?php namespace App;
 
-use Artesaos\Defender\Traits\HasDefenderTrait;
+use Artesaos\Defender\Traits\HasDefender;
 use Illuminate\Auth\Authenticatable;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Auth\Passwords\CanResetPassword;
@@ -132,7 +132,7 @@ use Illuminate\Contracts\Auth\CanResetPassword as CanResetPasswordContract;
 
 class User extends Model implements AuthenticatableContract, CanResetPasswordContract {
 
-    use Authenticatable, CanResetPassword, HasDefenderTrait;
+    use Authenticatable, CanResetPassword, HasDefender;
 ...
 ```
 ### Creating roles and permissions
@@ -422,17 +422,17 @@ Create a new permission in the database.
 
 ### Using the trait
 
-To add the Defender's features, you need to add the trait `HasDefenderTrait` in you User model (usually `App\User`).
+To add the Defender's features, you need to add the trait `HasDefender` in you User model (usually `App\User`).
 
 ```php
 <?php namespace App;
 
 // Declaração dos outros namespaces omitida
-use Artesaos\Defender\Traits\HasDefenderTrait;
+use Artesaos\Defender\Traits\HasDefender;
 
 class User extends Model implements AuthenticatableContract, CanResetPasswordContract {
 
-    use Authenticatable, CanResetPassword, HasDefenderTrait;
+    use Authenticatable, CanResetPassword, HasDefender;
 
     // Restante da classe
 }

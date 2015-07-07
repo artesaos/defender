@@ -3,13 +3,17 @@
 namespace Artesaos\Defender\Traits;
 
 use Carbon\Carbon;
+use Artesaos\Defender\Traits\Users\HasRoles;
+use Artesaos\Defender\Traits\Users\HasPermissions;
 
 /**
- * Class HasDefenderTrait.
+ * Trait HasDefender
+ *
+ * @package Artesaos\Defender\Traits
  */
-trait HasDefenderTrait
+trait HasDefender
 {
-    use HasUserRolesTrait, HasUserPermissionsTrait;
+    use HasRoles, HasPermissions;
 
     /**
      * @var \Illuminate\Support\Collection
