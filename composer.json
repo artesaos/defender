@@ -25,12 +25,18 @@
     "illuminate/view": "~5.1"
   },
   "require-dev": {
-    "phpunit/phpunit": "4.*",
-    "phpspec/phpspec": "2.1.x"
+    "phpunit/phpunit": "~4.0",
+    "phpspec/phpspec": "~2.1",
+    "orchestra/testbench": "~3.0"
   },
   "autoload": {
     "psr-4": {
       "Artesaos\\Defender\\": "src/Defender/"
+    }
+  },
+  "autoload-dev": {
+    "psr-4": {
+      "Artesaos\\Defender\\": "tests/Defender/"
     }
   },
   "minimum-stability": "dev"

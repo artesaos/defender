@@ -9,6 +9,7 @@ use Artesaos\Defender\Repositories\Eloquent\EloquentPermissionRepository;
 use Artesaos\Defender\Repositories\Eloquent\EloquentRoleRepository;
 use Artesaos\Defender\Role;
 use Illuminate\Support\ServiceProvider;
+use Illuminate\View\Compilers\BladeCompiler;
 
 /**
  * Class DefenderServiceProvider
@@ -44,6 +45,8 @@ class DefenderServiceProvider extends ServiceProvider
         });
 
         $this->app->alias('defender', 'Artesaos\Defender\Contracts\Defender');
+
+        $this->app->alias('defender.javascript', 'Artesaos\Defender\Contracts\Javascript');
 
         $this->registerRepositoryInterfaces();
 
@@ -93,7 +96,7 @@ class DefenderServiceProvider extends ServiceProvider
             return;
         }
 
-        $this->app->afterResolving('blade.compiler', function ($bladeCompiler) {
+        $this->app->afterResolving('blade.compiler', function (BladeCompiler $bladeCompiler) {
             /*
              * add @can and @endcan to blade compiler
              */
