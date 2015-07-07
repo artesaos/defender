@@ -2,6 +2,9 @@
 
 namespace Artesaos\Defender\Contracts;
 
+/**
+ * Interface Defender
+ */
 interface Defender
 {
     /**
@@ -78,7 +81,7 @@ interface Defender
     /**
      * * Find a role by its id.
      *
-     * @param $roleId
+     * @param int $roleId
      *
      * @return \Artesaos\Defender\Role|null
      */

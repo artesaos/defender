@@ -4,6 +4,9 @@ namespace Artesaos\Defender\Middlewares;
 
 use Illuminate\Contracts\Auth\Guard;
 
+/**
+ * Class AbstractDefenderMiddleware
+ */
 abstract class AbstractDefenderMiddleware
 {
     /**
@@ -14,7 +17,7 @@ abstract class AbstractDefenderMiddleware
     protected $user;
 
     /**
-     * @param Guard $user
+     * @param Guard $auth
      */
     public function __construct(Guard $auth)
     {
@@ -22,7 +25,7 @@ abstract class AbstractDefenderMiddleware
     }
 
     /**
-     * @param $request
+     * @param \Illuminate\Http\Request $request
      *
      * @return mixed
      */
@@ -34,7 +37,7 @@ abstract class AbstractDefenderMiddleware
     }
 
     /**
-     * @param $request
+     * @param \Illuminate\Http\Request $request
      *
      * @return mixed
      */

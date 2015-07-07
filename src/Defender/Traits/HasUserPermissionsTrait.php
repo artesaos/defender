@@ -20,15 +20,18 @@ trait HasUserPermissionsTrait
     public function permissions()
     {
         return $this->belongsToMany(
-            config('defender.permission_model'), config('defender.permission_user_table'), 'user_id', config('defender.permission_key')
+            config('defender.permission_model'),
+            config('defender.permission_user_table'),
+            'user_id',
+            config('defender.permission_key')
         )->withPivot('value', 'expires');
     }
 
     /**
-     * @param Model $parent
-     * @param array $attributes
-     * @param $table
-     * @param $exists
+     * @param Model  $parent
+     * @param array  $attributes
+     * @param string $table
+     * @param bool   $exists
      *
      * @return PermissionUserPivot
      */

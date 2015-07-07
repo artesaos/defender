@@ -10,6 +10,9 @@ use Artesaos\Defender\Repositories\Eloquent\EloquentRoleRepository;
 use Artesaos\Defender\Role;
 use Illuminate\Support\ServiceProvider;
 
+/**
+ * Class DefenderServiceProvider
+ */
 class DefenderServiceProvider extends ServiceProvider
 {
     /**

@@ -41,7 +41,7 @@ class EloquentPermissionRepository extends AbstractEloquentRepository implements
         $readableName = is_null($readableName) ? $permissionName : $readableName;
 
         return $permission = $this->model->create([
-            'name'          => $permissionName,
+            'name' => $permissionName,
             'readable_name' => $readableName,
         ]);
     }

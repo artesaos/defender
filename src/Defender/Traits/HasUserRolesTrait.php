@@ -8,37 +8,9 @@ namespace Artesaos\Defender\Traits;
 trait HasUserRolesTrait
 {
     /**
-     * Many-to-many role-user relationship.
-     *
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
-     */
-    public function roles()
-    {
-        $roleModel = config('defender.role_model', 'Artesaos\Defender\Role');
-        $roleUserTable = config('defender.role_user_table', 'role_user');
-        $roleKey = config('defender.role_key', 'role_id');
-
-        return $this->belongsToMany($roleModel, $roleUserTable, 'user_id', $roleKey);
-    }
-
-    /**
-     * Returns if the given user has an specific role.
-     *
-     * @param $role
-     *
-     * @return bool
-     */
-    public function hasRole($role)
-    {
-        $roles = $this->roles->toBase()->lists('name')->toArray();
-
-        return in_array($role, $roles);
-    }
-
-    /**
      * Returns true if the given user has any of the given roles.
      *
-     * @param $roles
+     * @param string|array $roles array or many strings of role name
      *
      * @return bool
      */
@@ -56,21 +28,49 @@ trait HasUserRolesTrait
     }
 
     /**
+     * Returns if the given user has an specific role.
+     *
+     * @param string $role
+     *
+     * @return bool
+     */
+    public function hasRole($role)
+    {
+        return $this->roles
+            ->where('name', $role)
+            ->first() != null;
+    }
+
+    /**
      * Attach the given role.
      *
-     * @param $role
+     * @param \Artesaos\Defender\Role $role
      */
     public function attachRole($role)
     {
         if (!$this->hasRole($role)) {
-            return $this->roles()->attach($role);
+            $this->roles()->attach($role);
         }
+    }
+
+    /**
+     * Many-to-many role-user relationship.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+     */
+    public function roles()
+    {
+        $roleModel = config('defender.role_model', 'Artesaos\Defender\Role');
+        $roleUserTable = config('defender.role_user_table', 'role_user');
+        $roleKey = config('defender.role_key', 'role_id');
+
+        return $this->belongsToMany($roleModel, $roleUserTable, 'user_id', $roleKey);
     }
 
     /**
      * Detach the given role from the model.
      *
-     * @param $role
+     * @param \Artesaos\Defender\Role $role
      *
      * @return int
      */

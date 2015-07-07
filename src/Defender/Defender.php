@@ -8,7 +8,7 @@ use Artesaos\Defender\Contracts\Repositories\RoleRepository;
 use Illuminate\Contracts\Foundation\Application;
 
 /**
- *
+ * Class Defender
  */
 class Defender implements DefenderContract
 {
@@ -36,7 +36,7 @@ class Defender implements DefenderContract
     /**
      * Class constructor.
      *
-     * @param Application          $app                  Laravel Application
+     * @param Application          $app
      * @param RoleRepository       $roleRepository
      * @param PermissionRepository $permissionRepository
      */
@@ -60,7 +60,7 @@ class Defender implements DefenderContract
     /**
      * Check if the authenticated user has the given permission.
      *
-     * @param $permission
+     * @param string $permission
      *
      * @return bool
      */
@@ -77,7 +77,7 @@ class Defender implements DefenderContract
      * Check if the authenticated user has the given permission
      * using only the roles.
      *
-     * @param $permission
+     * @param string $permission
      *
      * @return bool
      */
@@ -93,7 +93,7 @@ class Defender implements DefenderContract
     /**
      * Return if the authenticated user has the given role.
      *
-     * @param $roleName
+     * @param string $roleName
      *
      * @return bool
      */
@@ -173,7 +173,7 @@ class Defender implements DefenderContract
     /**
      * * Find a role by its id.
      *
-     * @param $roleId
+     * @param int $roleId
      *
      * @return mixed
      */
@@ -226,7 +226,7 @@ class Defender implements DefenderContract
      * Create a new role.
      * Uses a repository to actually create the role.
      *
-     * @param $roleName
+     * @param string $roleName
      *
      * @return \Artesaos\Defender\Role
      */
@@ -236,8 +236,8 @@ class Defender implements DefenderContract
     }
 
     /**
-     * @param $permissionName
-     * @param null $readableName
+     * @param string $permissionName
+     * @param string $readableName
      *
      * @return Permission
      */

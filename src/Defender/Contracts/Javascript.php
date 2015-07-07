@@ -2,6 +2,9 @@
 
 namespace Artesaos\Defender\Contracts;
 
+/**
+ * Interface Javascript
+ */
 interface Javascript
 {
     /**

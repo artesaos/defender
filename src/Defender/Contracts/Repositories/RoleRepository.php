@@ -2,12 +2,15 @@
 
 namespace Artesaos\Defender\Contracts\Repositories;
 
+/**
+ * Interface RoleRepository
+ */
 interface RoleRepository extends AbstractRepository
 {
     /**
      * Create a new role with the given name.
      *
-     * @param $roleName
+     * @param string $roleName
      *
      * @throws \Exception
      *

@@ -2,8 +2,33 @@
 
 namespace Artesaos\Defender\Traits;
 
+/**
+ * Class HasPermissionsTrait
+ */
 trait HasPermissionsTrait
 {
+    /**
+     * Attach the given permission.
+     *
+     * @param array|\Artesaos\Defender\Permission $permission
+     * @param array                               $options
+     */
+    public function attachPermission($permission, array $options = [])
+    {
+
+        if (!is_array($permission)) {
+            if ($this->hasPermission($permission->name)) {
+                return;
+            }
+        }
+
+        $this->permissions()->attach($permission, [
+            'value' => array_get($options, 'value', true),
+            'expires' => array_get($options, 'expires', null),
+        ]);
+
+    }
+
     /**
      * Get the a permission using the permission name.
      *
@@ -13,16 +38,14 @@ trait HasPermissionsTrait
      */
     public function hasPermission($permissionName)
     {
-        $permission = $this->permissions->first(function($key, $value) use ($permissionName){
+        $permission = $this->permissions->first(function ($key, $value) use ($permissionName) {
             return ($value->name == $permissionName);
         });
 
-        if(!empty($permission))
-        {
+        if (!empty($permission)) {
             $active = (is_null($permission->pivot->expires) or $permission->pivot->expires->isFuture());
 
-            if($active)
-            {
+            if ($active) {
                 return (bool) $permission->pivot->value;
             }
         }
@@ -31,51 +54,27 @@ trait HasPermissionsTrait
     }
 
     /**
-     * Attach the given permission.
-     *
-     * @param array|\Artesaos\Defender\Permission $permission
-     * @param array            $options
-     */
-    public function attachPermission($permission, array $options = [])
-    {
-
-        if(!is_array($permission))
-        {
-            if($this->hasPermission($permission->name))
-            {
-                return;
-            }
-        } 
-
-        $this->permissions()->attach($permission, [
-            'value'   => array_get($options, 'value', true),
-            'expires' => array_get($options, 'expires', null),
-        ]);
-
-    }
-
-    /**
-     * Detach the given permission from the model.
-     *
-     * @param $permission
-     *
-     * @return int
-     */
-    public function detachPermission($permission)
-    {
-        return $this->permissions()->detach($permission);
-    }
-
-    /**
      * Alias to the detachPermission method.
      *
-     * @param $permission
+     * @param \Artesaos\Defender\Permission $permission
      *
      * @return int
      */
     public function revokePermission($permission)
     {
         return $this->detachPermission($permission);
+    }
+
+    /**
+     * Detach the given permission from the model.
+     *
+     * @param \Artesaos\Defender\Permission $permission
+     *
+     * @return int
+     */
+    public function detachPermission($permission)
+    {
+        return $this->permissions()->detach($permission);
     }
 
     /**
@@ -119,8 +118,8 @@ trait HasPermissionsTrait
     /**
      * Extend an existing temporary permission.
      *
-     * @param $permission
-     * @param array $options
+     * @param string $permission
+     * @param array  $options
      *
      * @return bool|null
      */
@@ -128,9 +127,10 @@ trait HasPermissionsTrait
     {
         foreach ($this->permissions as $_permission) {
             if ($_permission->name === $permission) {
-                return $this->permissions()->updateExistingPivot($_permission->id,
-                    array_only($options, ['value', 'expires']
-                ));
+                return $this->permissions()->updateExistingPivot(
+                    $_permission->id,
+                    array_only($options, ['value', 'expires'])
+                );
             }
         }
 

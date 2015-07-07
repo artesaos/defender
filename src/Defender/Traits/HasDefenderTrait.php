@@ -14,43 +14,26 @@ trait HasDefenderTrait
     /**
      * @var \Illuminate\Support\Collection
      */
-    private $_permissions;
+    private $cachedPermissions;
 
     /**
-     * Retrieve all user permissions
+     * Returns if the current user has the given permission.
+     * User permissions override role permissions.
      *
-     * @param bool $force
+     * @param string $permission
      *
-     * @return \Illuminate\Support\Collection
+     * @return bool
      */
-    public function getPermissions($force = false)
+    public function can($permission)
     {
-        if(empty($this->_permissions) or true === $force)
-        {
-            $roles = $this->roles()->get()->lists('id')->toArray();
-
-            $permissionsRoles = app('defender.permission')->getByRoles($roles)->toBase();
-
-            $permissions =  $this->permissions()->wherePivot('value', true)->wherePivot('expires', '>=', Carbon::now())->get()->toBase();
-
-            $permissions = $permissions->merge($permissionsRoles);
-
-            $this->_permissions = $permissions->map(function($perm){
-
-                unset($perm->pivot, $perm->created_at, $perm->updated_at);
-
-                return $perm;
-            });
-        }
-
-        return $this->_permissions;
+        return $this->canWithRolePermissions($permission);
     }
 
     /**
      * Check if the user has the given permission using
      * only his roles.
      *
-     * @param $permission
+     * @param string $permission
      *
      * @return bool
      */
@@ -66,17 +49,50 @@ trait HasDefenderTrait
         return in_array($permission, $permissions);
     }
 
+    /**
+     * Retrieve all user permissions
+     *
+     * @param bool $force
+     *
+     * @return \Illuminate\Support\Collection
+     */
+    public function getPermissions($force = false)
+    {
+        if (empty($this->cachedPermissions) or $force) {
+            $this->cachedPermissions = $this->getFreshPermissions();
+        }
+
+        return $this->cachedPermissions;
+    }
 
     /**
-     * Returns if the current user has the given permission.
-     * User permissions override role permissions.
+     * Get fresh permissions from database.
      *
-     * @param string $permission
-     *
-     * @return bool
+     * @return \Illuminate\Support\Collection
      */
-    public function can($permission)
+    protected function getFreshPermissions()
     {
-        return $this->canWithRolePermissions($permission);
+        $roles = $this->roles()->get()->lists('id')->toArray();
+
+        $permissionsRoles = app('defender.permission')->getByRoles($roles);
+
+        $table = $this->permissions()->getTable();
+
+        $permissions = $this->permissions()
+            ->where($table.'.value', true)
+            ->where(function ($q) use ($table) {
+                $q->where($table.'.expires', '>=', Carbon::now());
+                $q->orWhereNull($table.'.expires');
+            })
+            ->get();
+
+        $permissions = $permissions->merge($permissionsRoles)
+            ->map(function ($permission) {
+                unset($permission->pivot, $permission->created_at, $permission->updated_at);
+
+                return $permission;
+            });
+
+        return $permissions->toBase();
     }
 }

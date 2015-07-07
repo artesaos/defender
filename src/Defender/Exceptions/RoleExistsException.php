@@ -2,6 +2,9 @@
 
 namespace Artesaos\Defender\Exceptions;
 
-class RoleExistsException extends  DefenderException
+/**
+ * Class RoleExistsException
+ */
+class RoleExistsException extends DefenderException
 {
 }

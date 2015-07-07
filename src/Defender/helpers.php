@@ -2,7 +2,6 @@
 
 
 if (!function_exists('defender')) {
-
     /**
      * Get a defender instance.
      *
@@ -15,7 +14,6 @@ if (!function_exists('defender')) {
 }
 
 if (!function_exists('can')) {
-
     /**
      * Check if the current user has some permissions.
      *
@@ -44,7 +42,6 @@ if (!function_exists('can')) {
 }
 
 if (!function_exists('roles')) {
-
     /**
      * Check if the user has some of roles.
      *
@@ -56,4 +53,4 @@ if (!function_exists('roles')) {
     {
         return defender()->hasRoles(is_array($roles) ? $roles : func_get_args());
     }
-};
+}
