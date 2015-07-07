@@ -428,7 +428,7 @@ To add the Defender's features, you need to add the trait `HasDefenderTrait` in 
 <?php namespace App;
 
 // Declaração dos outros namespaces omitida
-use Artesaos\Defender\Traits\HasDefenderTrait;
+use Artesaos\Defender\HasDefenderTrait;
 
 class User extends Model implements AuthenticatableContract, CanResetPasswordContract {
 
