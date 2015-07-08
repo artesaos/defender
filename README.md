@@ -10,6 +10,7 @@ With security and usability in mind, this project aims to provide you a safe way
 
 [![Build Status](https://travis-ci.org/artesaos/defender.svg?branch=develop)](https://travis-ci.org/artesaos/defender)
 [![Code Climate](https://codeclimate.com/github/artesaos/defender/badges/gpa.svg)](https://codeclimate.com/github/artesaos/defender)
+[![StyleCI](https://styleci.io/repos/31179862/shield)](https://styleci.io/repos/31179862)
 
 > Statistics
 

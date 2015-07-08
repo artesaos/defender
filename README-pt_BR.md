@@ -9,6 +9,7 @@ Com Segurança e Usabilidade em mente, este projeto tem como objetivo prover o c
 
 [![Build Status](https://travis-ci.org/artesaos/defender.svg?branch=develop)](https://travis-ci.org/artesaos/defender)
 [![Code Climate](https://codeclimate.com/github/artesaos/defender/badges/gpa.svg)](https://codeclimate.com/github/artesaos/defender)
+[![StyleCI](https://styleci.io/repos/31179862/shield)](https://styleci.io/repos/31179862)
 
 > Estatísticas
 
