@@ -38,6 +38,5 @@
     "psr-4": {
       "Artesaos\\Defender\\": "tests/Defender/"
     }
-  },
-  "minimum-stability": "dev"
+  }
 }

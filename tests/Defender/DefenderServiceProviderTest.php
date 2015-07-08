@@ -60,8 +60,8 @@ class DefenderServiceProviderTest extends AbstractTestCase
      */
     public function testShouldCompileDefenderTemplateHelpers()
     {
-        $view = __DIR__.'/stubs/view_with_defender.blade.txt';
-        $expected = __DIR__.'/stubs/view_with_defender.blade.output.txt';
+        $view = $this->stubsPath('views/defender.blade.txt');
+        $expected = $this->stubsPath('views/defender.blade.output.txt');
 
         $compiled = Blade::compileString(file_get_contents($view));
 
@@ -85,8 +85,8 @@ class DefenderServiceProviderTest extends AbstractTestCase
 
         $this->app->register('Artesaos\Defender\Providers\DefenderServiceProvider');
 
-        $view = __DIR__.'/stubs/view_with_defender.blade.txt';
-        $expected = __DIR__.'/stubs/view_with_defender.blade.output.txt';
+        $view = $this->stubsPath('views/defender.blade.txt');
+        $expected = $this->stubsPath('views/defender.blade.output.txt');
 
         $compiled = Blade::compileString(file_get_contents($view));
 

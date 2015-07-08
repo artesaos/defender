@@ -97,7 +97,9 @@ abstract class AbstractEloquentRepository implements AbstractRepository
     }
 
     /**
+     * Set Relationships.
      * @param array $with Relationships
+     * @return \Illuminate\Database\Eloquent\Builder
      */
     public function make(array $with = [])
     {
