@@ -62,7 +62,7 @@ class MigrationsTest extends AbstractTestCase
      * Package service provider
      * @return array
      */
-    public function getPackageProviders()
+    public function getPackageProviders($app)
     {
         return [
             'Artesaos\Defender\Providers\DefenderServiceProvider',
