@@ -37,8 +37,11 @@
   },
   "autoload-dev": {
     "psr-4": {
-      "Artesaos\\Defender\\": "tests/Defender/"
-    }
+      "Artesaos\\Defender\\Testing\\": "tests/Defender/"
+    },
+    "classmap":[
+      "tests/stubs/database"
+    ]
   },
   "config":{
     "preferred-install": "dist"

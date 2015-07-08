@@ -1,6 +1,6 @@
 <?php
 
-namespace Artesaos\Defender;
+namespace Artesaos\Defender\Testing;
 
 use Illuminate\Support\Facades\Blade;
 

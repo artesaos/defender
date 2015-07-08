@@ -1,6 +1,6 @@
 <?php
 
-namespace Artesaos\Defender;
+namespace Artesaos\Defender\Testing;
 
 /**
  * Class DefenderTest.
@@ -14,21 +14,10 @@ class MigrationsTest extends AbstractTestCase
     {
         parent::setUp();
 
-        /* Migrate stubs tables (users) */
-        $code = $this->artisan(
-            'migrate',
-            ['--realpath' => $this->stubsPath('migrations')]
-        );
-
-        $this->assertEquals(0, $code);
-
-        /* Migrate defender tables*/
-        $code = $this->artisan(
-            'migrate',
-            ['--realpath' => $this->resourcePath('migrations')]
-        );
-
-        $this->assertEquals(0, $code);
+        $this->migrate([
+            $this->stubsPath('database/migrations'),
+            $this->resourcePath('migrations'),
+        ]);
     }
 
     /**
