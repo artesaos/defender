@@ -27,6 +27,7 @@
   "require-dev": {
     "phpunit/phpunit": "~4.0",
     "phpspec/phpspec": "~2.1",
+    "fabpot/php-cs-fixer": "~2.0",
     "orchestra/testbench": "~3.0"
   },
   "autoload": {
@@ -38,5 +39,9 @@
     "psr-4": {
       "Artesaos\\Defender\\": "tests/Defender/"
     }
-  }
+  },
+  "config":{
+    "preferred-install": "dist"
+  },
+  "minimum-stability" : "dev"
 }
