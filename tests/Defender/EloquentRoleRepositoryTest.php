@@ -4,6 +4,7 @@ namespace Artesaos\Defender\Testing;
 
 use Artesaos\Defender\Contracts\Repositories\RoleRepository;
 use Artesaos\Defender\Role;
+use Illuminate\Database\Eloquent\Collection;
 
 /**
  * Class RepositoriesTest.
@@ -38,19 +39,15 @@ class EloquentRoleRepositoryTest extends AbstractTestCase
      */
     public function testShouldAttachRoleToUserAdmin()
     {
-        $role = $this->createRole('superuser');
 
-        $user = User::where('name', 'admin')->first();
+        /** @var Role $role */
+        /** @var User $user */
+        list($role, $user) = $this->createAndAttachRole('superuser', ['name' => 'admin']);
 
-        $role->users()->attach($user);
+        /** @var Collection $users */
+        $users = $role->users;
 
-        $this->seeInDatabase(
-            config('defender.role_user_table', 'role_user'),
-            [
-                config('defender.role_key', 'role_id') => $role->id,
-                'user_id' => $user->id,
-            ]
-        );
+        $this->assertTrue($users->contains($user->id));
 
         $this->createRole('anotherCoolRole');
 
@@ -66,7 +63,7 @@ class EloquentRoleRepositoryTest extends AbstractTestCase
      * @param string $rolename
      * @return Role
      */
-    public function createRole($rolename)
+    protected function createRole($rolename)
     {
         /** @var RoleRepository $repository */
         $repository = $this->app['defender.role'];
@@ -79,11 +76,38 @@ class EloquentRoleRepositoryTest extends AbstractTestCase
     }
 
     /**
+     * Create and Attach a Role to User.
+     * @param string     $role Role name.
+     * @param User|array $user User or array of where clausules.
+     * @return array Array containing $role and $user created.
+     */
+    protected function createAndAttachRole($role, $user)
+    {
+        $role = $this->createRole($role);
+
+        if (!($user instanceof User)) {
+            $user = User::where($user)->first();
+        }
+
+        $role->users()->attach($user);
+
+        $this->seeInDatabase(
+            config('defender.role_user_table', 'role_user'),
+            [
+                config('defender.role_key', 'role_id') => $role->id,
+                'user_id' => $user->id,
+            ]
+        );
+
+        return [$role, $user];
+    }
+
+    /**
      * @inheritdoc
      * @param \Illuminate\Foundation\Application $app
      * @return array
      */
-    public function getPackageProviders($app)
+    protected function getPackageProviders($app)
     {
         return [
             'Artesaos\Defender\Providers\DefenderServiceProvider',
