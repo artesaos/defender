@@ -3,7 +3,7 @@
 namespace Artesaos\Defender\Contracts;
 
 /**
- * Interface Defender
+ * Interface Defender.
  */
 interface Defender
 {

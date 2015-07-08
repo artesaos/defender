@@ -5,13 +5,13 @@ namespace Artesaos\Defender;
 use Illuminate\Support\Facades\Blade;
 
 /**
- * Class DefenderServiceProviderTest
- * @package Artesaos\Defender
+ * Class DefenderServiceProviderTest.
  */
 class DefenderServiceProviderTest extends AbstractTestCase
 {
     /**
      * TestCases that should not register the service provider.
+     *
      * @var array
      */
     protected $dotNotRegisterForThatTestCases = [
@@ -26,24 +26,24 @@ class DefenderServiceProviderTest extends AbstractTestCase
     {
         $contracts = [
             [
-              "interface" => 'Artesaos\Defender\Contracts\Defender',
-              "implementation" => 'Artesaos\Defender\Defender',
-              "alias"=>'defender',
+              'interface'      => 'Artesaos\Defender\Contracts\Defender',
+              'implementation' => 'Artesaos\Defender\Defender',
+              'alias'          => 'defender',
             ],
             [
-                "interface" => 'Artesaos\Defender\Contracts\Javascript',
-                "implementation" => 'Artesaos\Defender\Javascript',
-                "alias"=>'defender.javascript',
+                'interface'      => 'Artesaos\Defender\Contracts\Javascript',
+                'implementation' => 'Artesaos\Defender\Javascript',
+                'alias'          => 'defender.javascript',
             ],
             [
-                "interface" => 'Artesaos\Defender\Contracts\Repositories\PermissionRepository',
-                "implementation" => 'Artesaos\Defender\Repositories\Eloquent\EloquentPermissionRepository',
-                "alias"=>'defender.permission',
+                'interface'      => 'Artesaos\Defender\Contracts\Repositories\PermissionRepository',
+                'implementation' => 'Artesaos\Defender\Repositories\Eloquent\EloquentPermissionRepository',
+                'alias'          => 'defender.permission',
             ],
             [
-                "interface" => 'Artesaos\Defender\Contracts\Repositories\RoleRepository',
-                "implementation" => 'Artesaos\Defender\Repositories\Eloquent\EloquentRoleRepository',
-                "alias"=>'defender.role',
+                'interface'      => 'Artesaos\Defender\Contracts\Repositories\RoleRepository',
+                'implementation' => 'Artesaos\Defender\Repositories\Eloquent\EloquentRoleRepository',
+                'alias'          => 'defender.role',
             ],
         ];
 
@@ -114,7 +114,7 @@ class DefenderServiceProviderTest extends AbstractTestCase
      * Verify if the Defender function helpers are loaded.
      * Note: The service provider should not be register before that test.
      * Note:That test needs to be runned in isolation. Because it depends of helpers.php
-     * (file with functions which are always loaded)
+     * (file with functions which are always loaded).
      */
     public function testShouldNotLoadHelpers()
     {

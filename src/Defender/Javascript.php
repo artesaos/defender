@@ -5,7 +5,7 @@ namespace Artesaos\Defender;
 use Artesaos\Defender\Contracts\Javascript as JavascriptContract;
 
 /**
- * Class Javascript
+ * Class Javascript.
  */
 class Javascript implements JavascriptContract
 {

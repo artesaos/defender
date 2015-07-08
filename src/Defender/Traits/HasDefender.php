@@ -2,14 +2,12 @@
 
 namespace Artesaos\Defender\Traits;
 
-use Carbon\Carbon;
-use Artesaos\Defender\Traits\Users\HasRoles;
 use Artesaos\Defender\Traits\Users\HasPermissions;
+use Artesaos\Defender\Traits\Users\HasRoles;
+use Carbon\Carbon;
 
 /**
- * Trait HasDefender
- *
- * @package Artesaos\Defender\Traits
+ * Trait HasDefender.
  */
 trait HasDefender
 {
@@ -54,7 +52,7 @@ trait HasDefender
     }
 
     /**
-     * Retrieve all user permissions
+     * Retrieve all user permissions.
      *
      * @param bool $force
      *

@@ -6,9 +6,7 @@ use Artesaos\Defender\Pivots\PermissionRolePivot;
 use Illuminate\Database\Eloquent\Model;
 
 /**
- * Trait RoleHasPermissions
- *
- * @package Artesaos\Defender\Traits\Permissions
+ * Trait RoleHasPermissions.
  */
 trait RoleHasPermissions
 {

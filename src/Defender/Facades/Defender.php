@@ -5,7 +5,7 @@ namespace Artesaos\Defender\Facades;
 use Illuminate\Support\Facades\Facade;
 
 /**
- * Class Defender
+ * Class Defender.
  */
 class Defender extends Facade
 {

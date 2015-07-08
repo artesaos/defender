@@ -3,12 +3,10 @@
 namespace Artesaos\Defender;
 
 /**
- * Class DefenderTest
- * @package Artesaos\Defender
+ * Class DefenderTest.
  */
 class MigrationsTest extends AbstractTestCase
 {
-
     /**
      * Should migrate.
      */
@@ -125,7 +123,9 @@ class MigrationsTest extends AbstractTestCase
 
     /**
      * Package service provider.
+     *
      * @param \Illuminate\Contracts\Foundation\Application $app
+     *
      * @return array
      */
     public function getPackageProviders($app)

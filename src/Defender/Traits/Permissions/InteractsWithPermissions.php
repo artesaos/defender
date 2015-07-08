@@ -3,9 +3,7 @@
 namespace Artesaos\Defender\Traits\Permissions;
 
 /**
- * Trait InteractsWithPermissions
- *
- * @package Artesaos\Defender\Traits\Permissions
+ * Trait InteractsWithPermissions.
  */
 trait InteractsWithPermissions
 {
@@ -17,7 +15,6 @@ trait InteractsWithPermissions
      */
     public function attachPermission($permission, array $options = [])
     {
-
         if (!is_array($permission)) {
             if ($this->hasPermission($permission->name)) {
                 return;
@@ -25,10 +22,9 @@ trait InteractsWithPermissions
         }
 
         $this->permissions()->attach($permission, [
-            'value' => array_get($options, 'value', true),
+            'value'   => array_get($options, 'value', true),
             'expires' => array_get($options, 'expires', null),
         ]);
-
     }
 
     /**

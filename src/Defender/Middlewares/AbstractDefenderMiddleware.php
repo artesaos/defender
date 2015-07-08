@@ -5,7 +5,7 @@ namespace Artesaos\Defender\Middlewares;
 use Illuminate\Contracts\Auth\Guard;
 
 /**
- * Class AbstractDefenderMiddleware
+ * Class AbstractDefenderMiddleware.
  */
 abstract class AbstractDefenderMiddleware
 {

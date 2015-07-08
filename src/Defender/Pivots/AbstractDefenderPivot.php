@@ -5,7 +5,7 @@ namespace Artesaos\Defender\Pivots;
 use Illuminate\Database\Eloquent\Relations\Pivot;
 
 /**
- * Class AbstractDefenderPivot
+ * Class AbstractDefenderPivot.
  */
 abstract class AbstractDefenderPivot extends Pivot
 {

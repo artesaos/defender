@@ -12,7 +12,7 @@ use Illuminate\Support\ServiceProvider;
 use Illuminate\View\Compilers\BladeCompiler;
 
 /**
- * Class DefenderServiceProvider
+ * Class DefenderServiceProvider.
  */
 class DefenderServiceProvider extends ServiceProvider
 {

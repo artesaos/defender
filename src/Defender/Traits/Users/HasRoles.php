@@ -3,9 +3,7 @@
 namespace Artesaos\Defender\Traits\Users;
 
 /**
- * Trait HasRoles
- *
- * @package Artesaos\Defender\Traits\Users
+ * Trait HasRoles.
  */
 trait HasRoles
 {

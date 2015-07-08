@@ -8,7 +8,7 @@ use Artesaos\Defender\Contracts\Repositories\RoleRepository;
 use Illuminate\Contracts\Foundation\Application;
 
 /**
- * Class Defender
+ * Class Defender.
  */
 class Defender implements DefenderContract
 {

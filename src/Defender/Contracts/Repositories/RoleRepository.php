@@ -3,7 +3,7 @@
 namespace Artesaos\Defender\Contracts\Repositories;
 
 /**
- * Interface RoleRepository
+ * Interface RoleRepository.
  */
 interface RoleRepository extends AbstractRepository
 {

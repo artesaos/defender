@@ -3,7 +3,7 @@
 namespace Artesaos\Defender\Exceptions;
 
 /**
- * Class ForbiddenException
+ * Class ForbiddenException.
  */
 class ForbiddenException extends DefenderException
 {

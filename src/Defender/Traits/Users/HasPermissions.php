@@ -3,13 +3,11 @@
 namespace Artesaos\Defender\Traits\Users;
 
 use Artesaos\Defender\Pivots\PermissionUserPivot;
-use Illuminate\Database\Eloquent\Model;
 use Artesaos\Defender\Traits\Permissions\InteractsWithPermissions;
+use Illuminate\Database\Eloquent\Model;
 
 /**
- * Trait HasPermissions
- *
- * @package Artesaos\Defender\Traits\Users
+ * Trait HasPermissions.
  */
 trait HasPermissions
 {

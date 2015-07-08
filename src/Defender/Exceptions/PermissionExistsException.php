@@ -3,7 +3,7 @@
 namespace Artesaos\Defender\Exceptions;
 
 /**
- * Class PermissionExistsException
+ * Class PermissionExistsException.
  */
 class PermissionExistsException extends DefenderException
 {

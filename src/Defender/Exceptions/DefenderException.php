@@ -5,7 +5,7 @@ namespace Artesaos\Defender\Exceptions;
 use Exception;
 
 /**
- * Class DefenderException
+ * Class DefenderException.
  */
 abstract class DefenderException extends Exception
 {

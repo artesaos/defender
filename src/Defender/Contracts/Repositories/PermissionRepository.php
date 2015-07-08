@@ -3,7 +3,7 @@
 namespace Artesaos\Defender\Contracts\Repositories;
 
 /**
- * Interface PermissionRepository
+ * Interface PermissionRepository.
  */
 interface PermissionRepository extends AbstractRepository
 {
