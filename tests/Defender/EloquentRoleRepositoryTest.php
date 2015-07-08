@@ -44,6 +44,8 @@ class EloquentRoleRepositoryTest extends AbstractTestCase
         /** @var User $user */
         list($role, $user) = $this->createAndAttachRole('superuser', ['name' => 'admin']);
 
+        $this->notSeeRoleAttachedToUserInDatabase($role, User::where('name', 'normal')->first());
+
         /** @var Collection $users */
         $users = $role->users;
 
@@ -91,6 +93,18 @@ class EloquentRoleRepositoryTest extends AbstractTestCase
 
         $role->users()->attach($user);
 
+        $this->seeRoleAttachedToUserInDatabase($role, $user);
+
+        return [$role, $user];
+    }
+
+    /**
+     * Assert to see in Database a Role attached to User.
+     * @param Role $role
+     * @param User $user
+     */
+    protected function seeRoleAttachedToUserInDatabase(Role $role, User $user)
+    {
         $this->seeInDatabase(
             config('defender.role_user_table', 'role_user'),
             [
@@ -98,8 +112,22 @@ class EloquentRoleRepositoryTest extends AbstractTestCase
                 'user_id' => $user->id,
             ]
         );
+    }
 
-        return [$role, $user];
+    /**
+     * Assert to not see in Database a Role attached to User.
+     * @param Role $role
+     * @param User $user
+     */
+    protected function notSeeRoleAttachedToUserInDatabase(Role $role, User $user)
+    {
+        $this->notSeeInDatabase(
+            config('defender.role_user_table', 'role_user'),
+            [
+                config('defender.role_key', 'role_id') => $role->id,
+                'user_id' => $user->id,
+            ]
+        );
     }
 
     /**
