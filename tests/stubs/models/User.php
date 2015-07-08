@@ -13,4 +13,13 @@ use Illuminate\Database\Eloquent\Model;
 class User extends Model
 {
     use Authenticatable, CanResetPassword, HasDefender;
+
+    /**
+     * @inheritdoc
+     * @return string
+     */
+    public function getTable()
+    {
+        return config('auth.table', 'users');
+    }
 }

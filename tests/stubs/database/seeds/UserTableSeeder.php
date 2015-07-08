@@ -3,7 +3,6 @@
 namespace Artesaos\Defender\Testing;
 
 use Illuminate\Database\Seeder;
-use Artesaos\Defender\Testing\User;
 
 /**
  * Class UserTableSeeder.
@@ -16,8 +15,6 @@ class UserTableSeeder extends Seeder
     public function run()
     {
         User::unguard();
-
-        User::truncate();
 
         User::create([
             'name' => 'admin',

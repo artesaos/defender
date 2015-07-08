@@ -31,7 +31,7 @@ abstract class AbstractTestCase extends TestCase
      * Seed database.
      * @param string|array $seeder String or Array of classes to seed.
      */
-    public function dbSeed($seeder)
+    public function seed($seeder)
     {
         $seeders = is_array($seeder) ? $seeder : [$seeder];
 
@@ -91,10 +91,13 @@ abstract class AbstractTestCase extends TestCase
     protected function getEnvironmentSetUp($app)
     {
         $app['config']->set('database.default', 'testing');
+
         $app['config']->set('database.connections.testing', [
             'driver' => 'sqlite',
             'database' => ':memory:',
             'prefix' => '',
         ]);
+
+        $app['config']->set('auth.model', 'Artesaos\Defender\Testing\User');
     }
 }
