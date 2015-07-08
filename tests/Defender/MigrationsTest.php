@@ -45,9 +45,9 @@ class MigrationsTest extends AbstractTestCase
             config('auth.table', 'users'),
             config('defender.role_table', 'roles'),
             config('defender.permission_table', 'permissions'),
-            config('defender.role_user_table', 'role_user'),
             config('defender.permission_user_table', 'permission_user'),
             config('defender.permission_role_table', 'permission_role'),
+            config('defender.role_user_table', 'role_user'),
         ];
 
         foreach ($tables as $table) {
