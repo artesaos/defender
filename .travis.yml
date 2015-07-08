@@ -15,4 +15,4 @@ notifications:
   
 script:
 #  - vendor/bin/phpspec run -v
-  - phpunit
+  - "phpunit --process-isolation"
