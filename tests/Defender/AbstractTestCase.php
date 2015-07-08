@@ -31,7 +31,7 @@ abstract class AbstractTestCase extends TestCase
      * Seed database.
      * @param string|array $seeder String or Array of classes to seed.
      */
-    public function seed($seeder)
+    public function seed($seeder = 'DatabaseSeeder')
     {
         $seeders = is_array($seeder) ? $seeder : [$seeder];
 
