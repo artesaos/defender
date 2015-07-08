@@ -7,7 +7,7 @@ use Artesaos\Defender\Role;
 use Illuminate\Database\Eloquent\Collection;
 
 /**
- * Class RepositoriesTest.
+ * Class EloquentRoleRepositoryTest.
  */
 class EloquentRoleRepositoryTest extends AbstractTestCase
 {
@@ -24,6 +24,32 @@ class EloquentRoleRepositoryTest extends AbstractTestCase
         ]);
 
         $this->seed('UserTableSeeder');
+    }
+
+    /**
+     * Asserting if the User and Role model has traits.
+     */
+    public function testUserShouldHasRolesTrait()
+    {
+        $this->assertUsingTrait(
+            'Artesaos\Defender\Traits\HasDefender',
+            'Artesaos\Defender\Testing\User'
+        );
+
+        $this->assertUsingTrait(
+            'Artesaos\Defender\Traits\Users\HasRoles',
+            'Artesaos\Defender\Testing\User'
+        );
+
+        $this->assertUsingTrait(
+            'Artesaos\Defender\Traits\Permissions\RoleHasPermissions',
+            'Artesaos\Defender\Role'
+        );
+
+        $this->assertUsingTrait(
+            'Artesaos\Defender\Traits\Permissions\InteractsWithPermissions',
+            'Artesaos\Defender\Role'
+        );
     }
 
     /**
@@ -72,7 +98,10 @@ class EloquentRoleRepositoryTest extends AbstractTestCase
 
         $role = $repository->create($rolename);
 
-        $this->seeInDatabase(config('defender.role_table', 'roles'), ['name' => $rolename]);
+        $this->seeInDatabase(
+            config('defender.role_table', 'roles'),
+            ['name' => $rolename]
+        );
 
         return $role;
     }

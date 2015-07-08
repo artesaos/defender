@@ -23,7 +23,14 @@ abstract class AbstractTestCase extends TestCase
                 ['--realpath' => $path]
             );
 
-            $this->assertEquals(0, $code, sprintf('Something went wrong when migrating %s.', str_replace(realpath($this->srcPath('..')), '', realpath($path))));
+            $this->assertEquals(
+                0,
+                $code,
+                sprintf(
+                    'Something went wrong when migrating %s.',
+                    str_replace(realpath($this->srcPath('..')), '', realpath($path))
+                )
+            );
         }
     }
 
@@ -43,6 +50,23 @@ abstract class AbstractTestCase extends TestCase
 
             $this->assertEquals(0, $code, sprintf('Something went wrong when seeding %s.', $seeder));
         }
+    }
+
+    /**
+     * Assert if the instance or classname uses a trait.
+     * @param string $trait    Name of the trait (namespaced)
+     * @param mixed  $instance Instance or name of the class
+     */
+    public function assertUsingTrait($trait, $instance)
+    {
+        $this->assertTrue(
+            in_array($trait, class_uses_recursive($instance)),
+            sprintf(
+                'Fail to assert the class %s uses trait %s.',
+                is_string($instance) ? $instance : get_class($instance),
+                $trait
+            )
+        );
     }
 
     /**

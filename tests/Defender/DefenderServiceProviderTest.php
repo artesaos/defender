@@ -26,24 +26,24 @@ class DefenderServiceProviderTest extends AbstractTestCase
     {
         $contracts = [
             [
-              'interface'      => 'Artesaos\Defender\Contracts\Defender',
-              'implementation' => 'Artesaos\Defender\Defender',
-              'alias'          => 'defender',
+                'interface' => 'Artesaos\Defender\Contracts\Defender',
+                'implementation' => 'Artesaos\Defender\Defender',
+                'alias' => 'defender',
             ],
             [
-                'interface'      => 'Artesaos\Defender\Contracts\Javascript',
+                'interface' => 'Artesaos\Defender\Contracts\Javascript',
                 'implementation' => 'Artesaos\Defender\Javascript',
-                'alias'          => 'defender.javascript',
+                'alias' => 'defender.javascript',
             ],
             [
-                'interface'      => 'Artesaos\Defender\Contracts\Repositories\PermissionRepository',
+                'interface' => 'Artesaos\Defender\Contracts\Repositories\PermissionRepository',
                 'implementation' => 'Artesaos\Defender\Repositories\Eloquent\EloquentPermissionRepository',
-                'alias'          => 'defender.permission',
+                'alias' => 'defender.permission',
             ],
             [
-                'interface'      => 'Artesaos\Defender\Contracts\Repositories\RoleRepository',
+                'interface' => 'Artesaos\Defender\Contracts\Repositories\RoleRepository',
                 'implementation' => 'Artesaos\Defender\Repositories\Eloquent\EloquentRoleRepository',
-                'alias'          => 'defender.role',
+                'alias' => 'defender.role',
             ],
         ];
 
