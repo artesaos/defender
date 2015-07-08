@@ -24,7 +24,7 @@ class MigrationsTest extends AbstractTestCase
 
         $this->assertEquals(0, $code);
 
-        /* Migrate defende tables*/
+        /* Migrate defender tables*/
         $code = $this->artisan(
             'migrate',
             ['--realpath' => $this->resourcePath('migrations')]
