@@ -5,6 +5,7 @@ $finder = Symfony\Component\Finder\Finder::create()
     ->in(__DIR__)
     ->exclude('vendor')
     ->notName("*.txt")
+    ->notName("*.phar")
     ->ignoreDotFiles(true)
     ->ignoreVCS(true);
 
