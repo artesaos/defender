@@ -38,9 +38,9 @@ or manually update your `composer.json` file
 
 ```json
 {
-	"require": {
-		"artesaos/defender": "0.2.x"
-	}
+    "require": {
+        "artesaos/defender": "~0.3.1"
+    }
 }
 ```
 
@@ -59,7 +59,7 @@ You need to update your application configuration in order to register the packa
 
 #### 2.1 Publishing configuration file and migrations
 
-To publish the default configuration file and database migrations, execute the following command: 
+To publish the default configuration file and database migrations, execute the following command:
 
 ```shell
 php artisan vendor:publish
@@ -112,7 +112,7 @@ You'll see how to use the middlewares below.
 
 #### 4.1 - Create your own middleware
 
-If the built-in middlewares doesn't fit your needs, you can make your own by using [Defender's API](#usando-a-facade) to control the access. 
+If the built-in middlewares doesn't fit your needs, you can make your own by using [Defender's API](#usando-a-facade) to control the access.
 
 ## Usage
 
@@ -144,21 +144,21 @@ To create roles and permissions for your application, just use the Defender's AP
 
 use App\User;
 
-$grupoAdmin = Defender::createRole('admin');
+$roleAdmin = Defender::createRole('admin');
 
-// O primeiro parâmetro é o nome da permissão
-// O segundo é a "versão amigável" desse nome. (geralmente para você mostrar ela na sua aplicação).
-$permissaoCriarUsuario =  Defender::createPermission('user.create', 'Criar usuários');
+// The first parameter is the permission name
+// The second is the "friendly" version of the name. (usually for you to show it in your application).
+$permission =  Defender::createPermission('user.create', 'Create Users');
 
-// Aqui eu posso atribuir essa permissão diretamente para um usuário
+// You can assign permission directly to a user.
 $user = User::find(1);
-$user->attachPermission($permissaoCriarUsuario);
+$user->attachPermission($permission);
 
-// ou posso adicionar o usuário a um grupo e esse grupo tem a regra de poder criar usuários
+// or you can add the user to a group and that group has the power to rule create users.
 $grupoAdmin->attachPermission($permissaoCriarUsuario);
 
-//Agora esse usuário está no grupo dos Administradores 
-$user->attachRole($grupoAdmin);
+// Now this user is in the Administrators group.
+$user->attachRole($roleAdmin);
 ```
 
 ### Using the middleware
@@ -180,7 +180,7 @@ If you're using Laravel 5.1 it's possible to use Middleware Parameters.
 
 ```php
 Route::get('foo', ['middleware' => ['auth', 'needsPermission:user.index'], function() {
-	return 'Yes I can!';
+    return 'Yes I can!';
 }]);
 ```
 
@@ -203,7 +203,7 @@ When using middleware parameters, use a `|` to separate multiple permissions.
 
 ```php
 Route::get('foo', ['middleware' => ['auth', 'needsPermission:user.index|user.create'], function() {
-	return 'Yes I can!';
+    return 'Yes I can!';
 }]);
 ```
 
@@ -226,7 +226,7 @@ Or, with middleware parameters, pass it as the 2nd parameter
 
 ```php
 Route::get('foo', ['middleware' => ['auth', 'needsPermission:user.index|user.create,true'], function() {
-	return 'Yes I can!';
+    return 'Yes I can!';
 }]);
 ```
 
@@ -253,7 +253,7 @@ If you're using Laravel 5.1 it's possible to use Middleware Parameters.
 
 ```php
 Route::get('foo', ['middleware' => ['auth', 'needsRole:admin'], function() {
-	return 'Yes I am!';
+    return 'Yes I am!';
 }]);
 ```
 
@@ -276,7 +276,7 @@ When using middleware parameters, use a `|` to separate multiple roles.
 
 ```php
 Route::get('foo', ['middleware' => ['auth', 'needsRole:admin|editor'], function() {
-	return 'Yes I am!';
+    return 'Yes I am!';
 }]);
 ```
 
@@ -299,7 +299,7 @@ Or, with middleware parameters, pass it as the 2nd parameter
 
 ```php
 Route::get('foo', ['middleware' => ['auth', 'needsRole:admin|editor,true'], function() {
-	return 'Yes I am!';
+    return 'Yes I am!';
 }]);
 ```
 
@@ -342,7 +342,15 @@ Laravel's Blade extension for using Defender.
 ```
 @is('admin')
     Shows data for the logged user and that belongs to the admin role
-@else 
+@else
+    shows the data for those who doesn't have the admin permission
+@endis
+```
+
+```
+@is(['role1', 'role2'])
+    Shows data for the logged user and that belongs to the admin role
+@else
     shows the data for those who doesn't have the admin permission
 @endis
 ```
@@ -419,6 +427,15 @@ Create a new role in the database.
 
 Create a new permission in the database.
 
+##### `Defender::is($roleName)`:
+
+Check whether the current user belongs to the role.
+
+##### `Defender::javascript()->render()`:
+
+Returns a javascript script with a list of all roles and permissions of the current user.
+The variable name can be modified.
+
 ----------
 
 ### Using the trait
@@ -428,14 +445,14 @@ To add the Defender's features, you need to add the trait `HasDefender` in you U
 ```php
 <?php namespace App;
 
-// Declaração dos outros namespaces omitida
+// Declaration of other omitted namespaces
 use Artesaos\Defender\Traits\HasDefender;
 
 class User extends Model implements AuthenticatableContract, CanResetPasswordContract {
 
     use Authenticatable, CanResetPassword, HasDefender;
 
-    // Restante da classe
+    // Rest of the class
 }
 ```
 
@@ -443,14 +460,14 @@ This trait, beyond configuring the relationships, will add the following methods
 
 #####`public function can($permission)`:
 
-This method checks if the logged user has the permission `$permission`  
+This method checks if the logged user has the permission `$permission`
 
 In Defender, there are 2 kind of permissions: `User permissions` and `Role permissions`. By default, the permissions that the user inherits, are permissions of the roles that it belongs to. However, always that a user pemission is set, it will take precedence of role permission.
 
 ```php
 public function foo(Authenticable $user)
 {
-    if ($user->can('user.create');
+    if ($user->can('user.create'));
 }
 ```
 
@@ -482,7 +499,7 @@ public function foo(Authenticable $user)
     // or
 
     $roles = [1, 2, 3]; // Using an array of ids
-    $user->attachRole($roles); 
+    $user->attachRole($roles);
 }
 ```
 
@@ -502,7 +519,7 @@ public function foo(Authenticable $user)
     // ou
 
     $roles = [1, 2, 3]; // Using an array of ids
-    $user->detachRole($roles); 
+    $user->detachRole($roles);
 }
 ```
 
@@ -516,8 +533,8 @@ This is like the `attachRole()` method, but only the roles in the array `$roles`
 public function foo(Authenticable $user)
 {
     $roles = [1, 2, 3]; // Using an array of ids
-    
-    $user->syncRoles($roles); 
+
+    $user->syncRoles($roles);
 }
 ```
 
@@ -531,10 +548,10 @@ Attach the user to the permission `$permission`. The `$permission` variable is a
 public function foo(Authenticable $user)
 {
     $permission = Defender::findPermission('user.create');
-    
+
     $user->attachPermission($permission, [
         'value' => true // true = has the permission, false = doesn't have the permission,
-    ]); 
+    ]);
 }
 ```
 
@@ -571,8 +588,8 @@ public function foo(Authenticable $user)
         2 => ['value' => true,
         3 => ['value' => true]
     ];
-    
-    $user->syncPermissions($permissions); 
+
+    $user->syncPermissions($permissions);
 }
 ```
 
@@ -585,7 +602,7 @@ Remove all the user permissions.
 ```php
 public function foo(Authenticable $user)
 {
-    $user->revokePermissions(); 
+    $user->revokePermissions();
 }
 ```
 
@@ -598,7 +615,7 @@ Remove all the temporary expired pemissions from the user. More about temporary 
 ```php
 public function foo(Authenticable $user)
 {
-    $user->revokeExpiredPermissions(); 
+    $user->revokeExpiredPermissions();
 }
 ```
 
@@ -622,7 +639,7 @@ public function foo()
     $userX = App\User::find(3);
     $permission = Defender::findPermission('user.create');
 
-    
+
     $userX->attachPermission($permission, [
         'value' => false, // false means that he will not have the permission,
         'expires' => \Carbon\Carbon::now()->addDays(7) // Daqui a quanto tempo essa permissão irá expirar
