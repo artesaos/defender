@@ -2,8 +2,6 @@
 
 namespace Artesaos\Defender\Middlewares;
 
-use Illuminate\Contracts\Auth\Guard;
-
 /**
  * Class AbstractDefenderMiddleware.
  */
@@ -12,16 +10,13 @@ abstract class AbstractDefenderMiddleware
     /**
      * The current logged in user.
      *
-     * @var
+     * @var \Illuminate\Contracts\Auth\Authenticatable
      */
     protected $user;
 
-    /**
-     * @param Guard $auth
-     */
-    public function __construct(Guard $auth)
+    public function __construct()
     {
-        $this->user = $auth->user();
+        $this->user = app('defender.auth')->user();
     }
 
     /**
