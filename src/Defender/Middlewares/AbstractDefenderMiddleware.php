@@ -16,7 +16,7 @@ abstract class AbstractDefenderMiddleware
 
     public function __construct()
     {
-        $this->user = app('defender.auth')->user();
+        $this->user = app('defender')->getUser();
     }
 
     /**
