@@ -40,7 +40,7 @@ class DefenderServiceProvider extends ServiceProvider
             return new Defender($app, $app['defender.role'], $app['defender.permission']);
         });
 
-        $this->app->singleton('defender.auth', function($app){
+        $this->app->singleton('defender.auth', function ($app) {
             return $app['auth'];
         });
 
