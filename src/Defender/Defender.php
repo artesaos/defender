@@ -125,12 +125,16 @@ class Defender implements DefenderContract
     /**
      * Return if the authenticated user has the given role.
      *
-     * @param string $roleName
+     * @param string|array $roleName
      *
      * @return bool
      */
     public function is($roleName)
     {
+        if (is_array($roleName)) {
+            return $this->hasRoles($roleName);
+        }
+
         return $this->hasRole($roleName);
     }
 
