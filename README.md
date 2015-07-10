@@ -112,7 +112,7 @@ You'll see how to use the middlewares below.
 
 #### 4.1 - Create your own middleware
 
-If the built-in middlewares doesn't fit your needs, you can make your own by using [Defender's API](#usando-a-facade) to control the access.
+If the built-in middlewares doesn't fit your needs, you can make your own by using [Defender's API](#using-the-facade) to control the access.
 
 ## Usage
 
@@ -354,6 +354,20 @@ Laravel's Blade extension for using Defender.
     shows the data for those who doesn't have the admin permission
 @endis
 ```
+
+#### Using javascript helper
+
+The stand provides helper for when you need to interact with the user permissions on the front-end.
+
+```php
+echo Defender::javascript()->render();
+// or
+echo app('defender')->javascript()->render();
+// or
+echo app('defender.javascript')->render();
+```
+
+This helper injects a javascript code with all permissions and roles of the current user.
 
 ----------
 
