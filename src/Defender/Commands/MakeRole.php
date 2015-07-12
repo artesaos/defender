@@ -6,31 +6,24 @@ use Illuminate\Console\Command;
 use Artesaos\Defender\Contracts\Repositories\RoleRepository;
 use Artesaos\Defender\Contracts\User as UserContract;
 
+/**
+ * Class MakeRole.
+ */
 class MakeRole extends Command
 {
     /**
+     * Defender Roles Repository.
+     *
      * @var RoleRepository
      */
     protected $roleRepository;
 
     /**
+     * User which implements UseContract.
+     *
      * @var UserContract
      */
     protected $user;
-
-    /**
-     * Create a new command instance.
-     *
-     * @param RoleRepository $roleRepository
-     * @param UserContrat    $user
-     */
-    public function __construct(RoleRepository $roleRepository, UserContract $user)
-    {
-        parent::__construct();
-
-        $this->roleRepository = $roleRepository;
-        $this->user = $user;
-    }
 
     /**
      * The name and signature of the console command.
@@ -49,46 +42,62 @@ class MakeRole extends Command
     protected $description = 'Create a role';
 
     /**
+     * Create a new command instance.
+     *
+     * @param RoleRepository $roleRepository
+     * @param UserContract   $user
+     */
+    public function __construct(RoleRepository $roleRepository, UserContract $user)
+    {
+        parent::__construct();
+
+        $this->roleRepository = $roleRepository;
+        $this->user = $user;
+    }
+
+    /**
      * Execute the command.
      */
     public function handle()
     {
         $roleName = $this->argument('name');
-        $userId   = $this->option('user');
-        $role     = $this->createRole($roleName);
-        
+        $userId = $this->option('user');
+        $role = $this->createRole($roleName);
+
         if ($userId) {
             $this->attachRoleToUser($role, $userId);
         }
     }
 
     /**
-     * Create role
+     * Create role.
      *
      * @param string $roleName
      *
      * @return \Artesaos\Defender\Role
      */
-    protected function createRole($roleName) {
+    protected function createRole($roleName)
+    {
         // No need to check is_null($role) as create() throwsException
         $role = $this->roleRepository->create($roleName);
         $this->info('Permission created successfully');
+
         return $role;
     }
 
     /**
-     * Attach role to user
+     * Attach role to user.
      *
      * @param \Artesaos\Defender\Role $role
      * @param int                     $userId
      */
-    protected function attachRoleToUser($role, $userId) {
+    protected function attachRoleToUser($role, $userId)
+    {
         // Check if user exists
-        if($user = $this->user->findById($userId)) {
+        if ($user = $this->user->findById($userId)) {
             $user->attachRole($role);
             $this->info('Role attached successfully to user');
-        }
-        else {
+        } else {
             $this->error('Not possible to attach role. User not found');
         }
     }

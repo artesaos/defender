@@ -7,38 +7,31 @@ use Artesaos\Defender\Contracts\Repositories\PermissionRepository;
 use Artesaos\Defender\Contracts\Repositories\RoleRepository;
 use Artesaos\Defender\Contracts\User as UserContract;
 
+/**
+ * Class MakePermission.
+ */
 class MakePermission extends Command
 {
     /**
+     * Defender Permissions Repository.
+     *
      * @var PermissionRepository
      */
     protected $permissionRepository;
 
     /**
+     * Defender Roles Repository.
+     *
      * @var RoleRepository
      */
     protected $roleRepository;
 
     /**
+     * User which implements UserContract.
+     *
      * @var UserContract
      */
     protected $user;
-
-    /**
-     * Create a new command instance.
-     *
-     * @param PermissionRepository $permissionRepository
-     * @param RoleRepository       $roleRepository
-     * @param User                 $user
-     */
-    public function __construct(PermissionRepository $permissionRepository, RoleRepository $roleRepository, UserContract $user)
-    {
-        parent::__construct();
-
-        $this->permissionRepository = $permissionRepository;
-        $this->roleRepository       = $roleRepository;
-        $this->user                 = $user;
-    }
 
     /**
      * The name and signature of the console command.
@@ -59,29 +52,47 @@ class MakePermission extends Command
     protected $description = 'Create a permission';
 
     /**
+     * Create a new command instance.
+     *
+     * @param PermissionRepository $permissionRepository
+     * @param RoleRepository       $roleRepository
+     * @param UserContract         $user
+     */
+    public function __construct(PermissionRepository $permissionRepository, RoleRepository $roleRepository, UserContract $user)
+    {
+        parent::__construct();
+
+        $this->permissionRepository = $permissionRepository;
+        $this->roleRepository = $roleRepository;
+        $this->user = $user;
+    }
+
+    /**
      * Execute the command.
      */
     public function handle()
     {
-        $name         = $this->argument('name');
+        $name = $this->argument('name');
         $readableName = $this->argument('readableName');
-        $userId       = $this->option('user');
-        $roleName     = $this->option('role');
-        $permission   = $this->createPermission($name, $readableName);
+        $userId = $this->option('user');
+        $roleName = $this->option('role');
+        $permission = $this->createPermission($name, $readableName);
 
-        if ($userId)
+        if ($userId) {
             $this->attachPermissionToUser($permission, $userId);
-        
-        if ($roleName)
+        }
+
+        if ($roleName) {
             $this->attachPermissionToRole($permission, $roleName);
+        }
     }
 
     /**
-     * Create permission
+     * Create permission.
      *
      * @param string $name
      * @param string $readableName
-     * 
+     *
      * @return \Artesaos\Defender\Permission
      */
     protected function createPermission($name, $readableName)
@@ -89,22 +100,23 @@ class MakePermission extends Command
         // No need to check is_null($permission) as create() throwsException
         $permission = $this->permissionRepository->create($name, $readableName);
         $this->info('Permission created successfully');
+
         return $permission;
     }
 
     /**
-     * Attach Permission to user
+     * Attach Permission to user.
      *
      * @param \Artesaos\Defender\Permission $permission
      * @param int                           $userId
      */
-    protected function attachPermissionToUser($permission, $userId) {
+    protected function attachPermissionToUser($permission, $userId)
+    {
         // Check if user exists
-        if($user = $this->user->findById($userId)) {
+        if ($user = $this->user->findById($userId)) {
             $user->attachPermission($permission);
             $this->info('Permission attached successfully to user');
-        }
-        else {
+        } else {
             $this->error('Not possible to attach permission. User not found');
         }
     }
@@ -113,13 +125,13 @@ class MakePermission extends Command
      * @param \Artesaos\Defender\Permission $permission
      * @param string                           $roleName
      */
-    protected function attachPermissionToRole($permission, $roleName) {
+    protected function attachPermissionToRole($permission, $roleName)
+    {
         // Check if role exists
-        if($role = $this->roleRepository->findByName($roleName)) {
+        if ($role = $this->roleRepository->findByName($roleName)) {
             $role->attachPermission($permission);
             $this->info('Permission attached successfully to role');
-        }
-        else {
+        } else {
             $this->error('Not possible to attach permission. Role not found');
         }
     }

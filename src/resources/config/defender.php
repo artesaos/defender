@@ -7,11 +7,6 @@
 return [
 
     /*
-     * Default User model used by Defender
-     */
-    'user_model' => 'App\User',
-
-    /*
      * Default Role model used by Defender.
      */
     'role_model' => 'Artesaos\Defender\Role',

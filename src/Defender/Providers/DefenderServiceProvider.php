@@ -59,7 +59,9 @@ class DefenderServiceProvider extends ServiceProvider
         $this->loadHelpers();
 
         $this->app->bind('Artesaos\Defender\Contracts\User', function () {
-            return new $this->app['config']['defender.user_model'];
+            $model = $this->app['config']->get('auth.model', 'App\User');
+
+            return new $model();
         });
 
         $this->registerCommands();
@@ -164,7 +166,7 @@ class DefenderServiceProvider extends ServiceProvider
     }
 
     /**
-     * Register the commands
+     * Register the commands.
      */
     private function registerCommands()
     {
