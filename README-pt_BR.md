@@ -57,12 +57,42 @@ Para usar o Defender em sua aplicação Laravel, é necessário registrar o pack
 // file END ommited
 ```
 
-#### 2.1 Publicando o arquivo de configuração e as migrations
+### 3. User Class
+
+Na sua classe de usuário, ela precisa implementar a interface 'Artesaos\Defender\Contracts\User' e adicionar a trait `Artesaos\Defender\Traits\HasDefender` para disponibilizar a criação de grupos e permissões:
+
+```php
+<?php
+
+namespace App;
+
+use Illuminate\Auth\Authenticatable;
+use Illuminate\Database\Eloquent\Model;
+use Illuminate\Auth\Passwords\CanResetPassword;
+use Illuminate\Contracts\Auth\Authenticatable as AuthenticatableContract;
+use Illuminate\Contracts\Auth\CanResetPassword as CanResetPasswordContract;
+
+use Artesaos\Defender\Contracts\User as DefenderUserContract;
+use Artesaos\Defender\Traits\HasDefender;
+
+class User extends Model implements AuthenticatableContract, CanResetPasswordContract, DefenderUserContract
+{
+    use Authenticatable, CanResetPassword, HasDefender;
+...
+```
+
+#### 4 Publicando o arquivo de configuração e as migrations
 
 Para publicar o arquivo de configuração padrão e as migrations que acompanham o package, execute o seguinte comando:
 
 ```shell
 php artisan vendor:publish
+```
+
+Execute as migrations, para que sejam criadas as tabelas no banco de dados:
+
+```shell
+php artisan migrate
 ```
 
 Você também pode publicar separadamente utilizando a flag `--tag`
@@ -79,7 +109,7 @@ php artisan vendor:publish --tag=migrations
 
 Se você já publicou os arquivos, mas por algum motivo precisa sobrescrevê-los, adicione a flag `--force` no final dos comandos anteriores.
 
-### 3. Facade (opcional)
+### 5. Facade (opcional)
 
 Para usar a facade `Defender`, você precisa registrá-la no seu arquivo `config/app.php` adicionando o seguinte código na seção `aliases`:
 
@@ -93,7 +123,7 @@ Para usar a facade `Defender`, você precisa registrá-la no seu arquivo `config
 // file END ommited
 ```
 
-### 4. Middlewares do Defender
+### 6. Middlewares do Defender
 
 Caso você tenha a necessidade de realizar o controle de acesso diretamente nas rotas, o Defender possui alguns middlewares (nativos) que abordam os casos mais comuns. Para utilizá-los é necessário registrá-los no seu arquivo `app/Http/Kernel.php`.
 
@@ -113,7 +143,7 @@ protected $routeMiddleware = [
 
 A utilização desses middlewares é explicada na próxima seção.
 
-#### 4.1 - Crie o seu próprio middleware
+#### 6.1 - Crie o seu próprio middleware
 
 Caso os middlewares padrões do Defender não atendam as suas necessidades, você pode criar seu próprio middleware e utilizar a [API do Defender](#usando-a-facade) para realizar o controle de acesso. 
 
@@ -121,25 +151,23 @@ Caso os middlewares padrões do Defender não atendam as suas necessidades, voc�
 
 O Defender realiza apenas o controle de acesso em sua aplicação, ou seja, a tarefa de autenticação é realizada pelo `Auth` que faz parte do core do Laravel.
 
-### Tornando o User denfensível
-Na sua classe User, você precisa adicionar a trait `Artesaos\Defender\HasDefender` para que sejá possível que crie permissões e grupos para os usuários:
-
-```php
-<?php namespace App;
-
-use Artesaos\Defender\HasDefender;
-use Illuminate\Auth\Authenticatable;
-use Illuminate\Database\Eloquent\Model;
-use Illuminate\Auth\Passwords\CanResetPassword;
-use Illuminate\Contracts\Auth\Authenticatable as AuthenticatableContract;
-use Illuminate\Contracts\Auth\CanResetPassword as CanResetPasswordContract;
-
-class User extends Model implements AuthenticatableContract, CanResetPasswordContract {
-
-	use Authenticatable, CanResetPassword, HasDefender;
-...
-```
 ### Criando Grupos e Permissões
+
+O Defender lida apenas com o acesso à sua aplicação. A autenticação ainda é feita pelo Laravel Auth.
+
+#### Através de comandos
+
+Para criar grupos e permissões estão disponíveis os seguintes comandos:
+
+```shell
+php artisan defender:make:role admin  # creates the role admin
+php artisan defender:make:role member --user=1 # creates the role admin and attaches this role to the user where id=1
+php artisan defender:make:permission users.index "List all the users" # creates the permission
+php artisan defender:make:permission users.create "Create user" --user=1 # creates the permission and attaches it to user where id=1
+php artisan defender:make:permission users.destroy "Delete user" --role=admin # creates the permission and attaches it to the role admin
+```
+
+#### Através de um seeder ou o artisan tinker
 
 Para criar os grupos e as permissões para a sua aplicação, basta utilizar a API do defender. Você pode realizar esse processo em um seeder ou diretamente no `php artisan tinker` por exemplo.
 

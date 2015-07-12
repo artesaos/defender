@@ -97,4 +97,15 @@ trait HasDefender
 
         return $permissions->toBase();
     }
+
+    /**
+     * Find a user by its id
+     *
+     * @param int $id
+     *
+     * @return Artesaos\Defender\Contracts\User
+     */
+    public function findById($id) {
+        return $this->find($id);
+    }
 }
