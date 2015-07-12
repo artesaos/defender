@@ -36,7 +36,7 @@ class CommandsTest extends AbstractTestCase
      * @inheritdoc
      * @return array
      */
-    public function getPackageProviders()
+    public function getPackageProviders($app)
     {
         return [
             'Artesaos\Defender\Providers\DefenderServiceProvider',
