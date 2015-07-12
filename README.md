@@ -57,12 +57,42 @@ You need to update your application configuration in order to register the packa
 // file END ommited
 ```
 
-#### 2.1 Publishing configuration file and migrations
+### 3. User Class
+
+On your User class, you need to make the user implement the interface 'Artesaos\Defender\Contracts\User' and add the trait `Artesaos\Defender\Traits\HasDefender` to enable the creation of permissions and roles:
+
+```php
+<?php
+
+namespace App;
+
+use Illuminate\Auth\Authenticatable;
+use Illuminate\Database\Eloquent\Model;
+use Illuminate\Auth\Passwords\CanResetPassword;
+use Illuminate\Contracts\Auth\Authenticatable as AuthenticatableContract;
+use Illuminate\Contracts\Auth\CanResetPassword as CanResetPasswordContract;
+
+use Artesaos\Defender\Contracts\User as DefenderUserContract;
+use Artesaos\Defender\Traits\HasDefender;
+
+class User extends Model implements AuthenticatableContract, CanResetPasswordContract, DefenderUserContract
+{
+    use Authenticatable, CanResetPassword, HasDefender;
+...
+```
+
+#### 4. Publishing configuration file and migrations
 
 To publish the default configuration file and database migrations, execute the following command:
 
 ```shell
 php artisan vendor:publish
+```
+
+Execute the migrations, so that the tables on you database are created:
+
+```shell
+php artisan migrate
 ```
 
 You can also publish only the configuration file or the migrations:
@@ -77,7 +107,7 @@ php artisan vendor:publish --tag=migrations
 
 If you already published defender files, but for some reason you want to override previous published files, add the `--force` flag.
 
-### 3. Facade (optional)
+### 5. Facade (optional)
 In order to use the `Defender` facade, you need to register it on the `config/app.php` file, you can do that the following way:
 
 ```php
@@ -90,7 +120,7 @@ In order to use the `Defender` facade, you need to register it on the `config/ap
 // file END ommited
 ```
 
-### 4. Defender Middlewares (optional)
+### 6. Defender Middlewares (optional)
 If you have to control the access Defender provides middlewares to protect your routes.
 If you have to control the access through the Laravel routes, Defender has some built-in middlewares for the trivial tasks. To use them, just put it in your `app/Http/Kernel.php` file.
 
@@ -110,7 +140,7 @@ protected $routeMiddleware = [
 
 You'll see how to use the middlewares below.
 
-#### 4.1 - Create your own middleware
+#### 6.1 - Create your own middleware
 
 If the built-in middlewares doesn't fit your needs, you can make your own by using [Defender's API](#using-the-facade) to control the access.
 
@@ -118,27 +148,23 @@ If the built-in middlewares doesn't fit your needs, you can make your own by usi
 
 Defender handles only access control. The authentication is still made by Laravel's `Auth`.
 
-### Put a shield on my saber I must
-On your User class, you need to add the trait `Artesaos\Defender\Traits\HasDefender` to enable the permission creation and roles creation for the users:
-
-```php
-<?php namespace App;
-
-use Artesaos\Defender\Traits\HasDefender;
-use Illuminate\Auth\Authenticatable;
-use Illuminate\Database\Eloquent\Model;
-use Illuminate\Auth\Passwords\CanResetPassword;
-use Illuminate\Contracts\Auth\Authenticatable as AuthenticatableContract;
-use Illuminate\Contracts\Auth\CanResetPassword as CanResetPasswordContract;
-
-class User extends Model implements AuthenticatableContract, CanResetPasswordContract {
-
-    use Authenticatable, CanResetPassword, HasDefender;
-...
-```
 ### Creating roles and permissions
 
-To create roles and permissions for your application, just use the Defender's API. You can create a Laravel Seeder or use `php artisan tinker`.
+#### With commands
+
+You can use these commands to create the roles and permissions for you application.
+
+```shell
+php artisan defender:make:role admin  # creates the role admin
+php artisan defender:make:role member --user=1 # creates the role admin and attaches this role to the user where id=1
+php artisan defender:make:permission users.index "List all the users" # creates the permission
+php artisan defender:make:permission users.create "Create user" --user=1 # creates the permission and attaches it to user where id=1
+php artisan defender:make:permission users.destroy "Delete user" --role=admin # creates the permission and attaches it to the role admin
+```
+
+#### With the seeder or artisan tinker
+
+You can also use the Defender's API. You can create a Laravel Seeder or use `php artisan tinker`.
 
 ```php
 
