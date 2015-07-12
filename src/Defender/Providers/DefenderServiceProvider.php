@@ -33,6 +33,8 @@ class DefenderServiceProvider extends ServiceProvider
 
     /**
      * Register the service provider.
+     *
+     * @return void
      */
     public function register()
     {
@@ -44,8 +46,8 @@ class DefenderServiceProvider extends ServiceProvider
             return $app['auth'];
         });
 
-        $this->app->singleton('defender.javascript', function ($app) {
-            return new Javascript($app['defender']);
+        $this->app->bind('defender.javascript', function ($app) {
+            return $app['defender']->javascript();
         });
 
         $this->app->alias('defender', 'Artesaos\Defender\Contracts\Defender');

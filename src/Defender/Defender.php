@@ -34,6 +34,11 @@ class Defender implements DefenderContract
     protected $permissionRepository;
 
     /**
+     * @var Javascript
+     */
+    protected $javascript;
+
+    /**
      * Class constructor.
      *
      * @param Application          $app
@@ -255,6 +260,10 @@ class Defender implements DefenderContract
      */
     public function javascript()
     {
-        return $this->app['defender.javascript'];
+        if (!$this->javascript) {
+            $this->javascript = new Javascript($this);
+        }
+
+        return $this->javascript;
     }
 }

@@ -1,0 +1,10 @@
+<script>
+    (function(w){
+        var defender = {};
+
+        defender.roles = ["js.role"];
+        defender.permissions = [];
+
+        w.defender = defender;
+    })(window);
+</script>

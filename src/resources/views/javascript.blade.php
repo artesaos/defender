@@ -1,9 +1,9 @@
 <script>
     (function(w){
-        var defender = new Object();
+        var defender = {};
 
-        defender.roles = <?php echo $roles->lists('name')->toJson(); ?>;
-        defender.permissions = <?php echo $permissions->lists('name')->toJson(); ?>;
+        defender.roles = <?php echo $roles; ?>;
+        defender.permissions = <?php echo $permissions; ?>;
 
         w.<?php echo config('defender.js_var_name', 'defender'); ?> = defender;
     })(window);

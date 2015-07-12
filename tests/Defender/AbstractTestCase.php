@@ -153,7 +153,7 @@ abstract class AbstractTestCase extends TestCase
 
     /**
      * Trim slashes of path and return prefixed by DIRECTORY_SEPARATOR.
-     * @param $path
+     * @param string $path
      * @return string
      */
     protected function parseSubPath($path)

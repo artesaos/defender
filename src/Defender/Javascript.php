@@ -3,6 +3,7 @@
 namespace Artesaos\Defender;
 
 use Artesaos\Defender\Contracts\Javascript as JavascriptContract;
+use Artesaos\Defender\Traits\HasDefender;
 
 /**
  * Class Javascript.
@@ -30,7 +31,10 @@ class Javascript implements JavascriptContract
         $roles = $this->getRoles();
         $permissions = $this->getPermissions();
 
-        return view('defender::javascript', compact('roles', 'permissions'));
+        return view('defender::javascript', [
+            'roles' => $roles ? $roles->lists('name')->toJson() : '[]',
+            'permissions' => $permissions ? $permissions->lists('name')->toJson() : '[]',
+        ]);
     }
 
     /**
@@ -38,7 +42,11 @@ class Javascript implements JavascriptContract
      */
     protected function getRoles()
     {
-        return $this->defender->getUser()->roles()->get()->toBase();
+        $user = $this->defender->getUser();
+
+        $roles = $user ? $user->roles()->get()->toBase() : null;
+
+        return $roles;
     }
 
     /**
@@ -46,6 +54,11 @@ class Javascript implements JavascriptContract
      */
     protected function getPermissions()
     {
-        return $this->defender->getUser()->getPermissions();
+        /** @var HasDefender $user */
+        $user = $this->defender->getUser();
+
+        $permissions = $user ? $user->getPermissions() : null;
+
+        return $permissions;
     }
 }
