@@ -7,6 +7,15 @@ namespace Artesaos\Defender\Testing;
  */
 class MigrationsTest extends AbstractTestCase
 {
+
+    /**
+     * Array of service providers.
+     * @var array
+     */
+    protected $providers = [
+        'Artesaos\Defender\Providers\DefenderServiceProvider',
+    ];
+
     /**
      * Should migrate.
      */
@@ -108,19 +117,5 @@ class MigrationsTest extends AbstractTestCase
                 );
             }
         }
-    }
-
-    /**
-     * Package service provider.
-     *
-     * @param \Illuminate\Contracts\Foundation\Application $app
-     *
-     * @return array
-     */
-    public function getPackageProviders($app)
-    {
-        return [
-            'Artesaos\Defender\Providers\DefenderServiceProvider',
-        ];
     }
 }

@@ -12,6 +12,14 @@ use Illuminate\Database\Eloquent\Collection;
 class EloquentRoleRepositoryTest extends AbstractTestCase
 {
     /**
+     * Array of service providers.
+     * @var array
+     */
+    protected $providers = [
+        'Artesaos\Defender\Providers\DefenderServiceProvider',
+    ];
+
+    /**
      * @inheritdoc
      */
     public function setUp()
@@ -157,17 +165,5 @@ class EloquentRoleRepositoryTest extends AbstractTestCase
                 'user_id' => $user->id,
             ]
         );
-    }
-
-    /**
-     * @inheritdoc
-     * @param \Illuminate\Foundation\Application $app
-     * @return array
-     */
-    protected function getPackageProviders($app)
-    {
-        return [
-            'Artesaos\Defender\Providers\DefenderServiceProvider',
-        ];
     }
 }

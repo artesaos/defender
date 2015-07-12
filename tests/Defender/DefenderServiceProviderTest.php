@@ -10,11 +10,18 @@ use Illuminate\Support\Facades\Blade;
 class DefenderServiceProviderTest extends AbstractTestCase
 {
     /**
-     * TestCases that should not register the service provider.
-     *
+     * Array of service providers.
      * @var array
      */
-    protected $dotNotRegisterForThatTestCases = [
+    protected $providers = [
+        'Artesaos\Defender\Providers\DefenderServiceProvider',
+    ];
+
+    /**
+     * TestCases that should not register the service provider.
+     * @var array
+     */
+    protected $skipProvidersFor = [
         'testShouldNotCompileDefenderTemplateHelpers',
         'testShouldNotLoadHelpers',
     ];
@@ -167,19 +174,5 @@ class DefenderServiceProviderTest extends AbstractTestCase
         }
 
         $this->assertFileExists(config_path(basename($config)));
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    protected function getPackageProviders($app)
-    {
-        if (in_array($this->getName(), $this->dotNotRegisterForThatTestCases)) {
-            return [];
-        }
-
-        return [
-            'Artesaos\Defender\Providers\DefenderServiceProvider',
-        ];
     }
 }
