@@ -12,7 +12,7 @@ interface User
      *
      * @param int $id
      *
-     * @return Artesaos\Defender\Contracts\User
+     * @return \Artesaos\Defender\Contracts\User
      */
     public function findById($id);
 

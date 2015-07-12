@@ -2,7 +2,6 @@
 
 namespace Artesaos\Defender\Traits;
 
-use Artesaos\Defender\Contracts\User;
 use Artesaos\Defender\Traits\Users\HasPermissions;
 use Artesaos\Defender\Traits\Users\HasRoles;
 use Carbon\Carbon;
@@ -104,7 +103,7 @@ trait HasDefender
      *
      * @param int $id
      *
-     * @return Artesaos\Defender\Contracts\User
+     * @return \Artesaos\Defender\Contracts\User
      */
     public function findById($id)
     {
