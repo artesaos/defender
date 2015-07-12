@@ -7,7 +7,6 @@ namespace Artesaos\Defender\Testing;
  */
 class MigrationsTest extends AbstractTestCase
 {
-
     /**
      * Array of service providers.
      * @var array
