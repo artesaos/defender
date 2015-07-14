@@ -96,15 +96,15 @@ If you have to control the access through the Laravel routes, Defender has some 
 
 ```php
 protected $routeMiddleware = [
-    'auth'            => 'App\Http\Middleware\Authenticate',
-    'auth.basic'      => 'Illuminate\Auth\Middleware\AuthenticateWithBasicAuth',
-    'guest'           => 'App\Http\Middleware\RedirectIfAuthenticated',
+    'auth'            => \App\Http\Middleware\Authenticate::class,
+    'auth.basic'      => \Illuminate\Auth\Middleware\AuthenticateWithBasicAuth::class,
+    'guest'           => \App\Http\Middleware\RedirectIfAuthenticated::class,
 
-    // Controle de acesso usando permissões
-    'needsPermission' => 'Artesaos\Defender\Middlewares\NeedsPermissionMiddleware',
+    // Access control using permissions
+    'needsPermission' => \Artesaos\Defender\Middlewares\NeedsPermissionMiddleware::class,
 
-    // Controle de acesso mais simples, utiliza apenas os grupos
-    'needsRole' => 'Artesaos\Defender\Middlewares\NeedsRoleMiddleware'
+    // Simpler access control, uses only the groups
+    'needsRole' => \Artesaos\Defender\Middlewares\NeedsRoleMiddleware::class
 ];
 ```
 
