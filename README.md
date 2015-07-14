@@ -52,7 +52,7 @@ You need to update your application configuration in order to register the packa
 // file START ommited
     'providers' => [
         // other providers ommited
-        'Artesaos\Defender\Providers\DefenderServiceProvider',
+        \Artesaos\Defender\Providers\DefenderServiceProvider::class,
     ],
 // file END ommited
 ```
@@ -85,7 +85,7 @@ In order to use the `Defender` facade, you need to register it on the `config/ap
 // file START ommited
     'aliases' => [
         // other Facades ommited
-        'Defender' => 'Artesaos\Defender\Facades\Defender',
+        'Defender' => \Artesaos\Defender\Facades\Defender::class,
     ],
 // file END ommited
 ```
