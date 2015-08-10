@@ -115,7 +115,7 @@ A utilização desses middlewares é explicada na próxima seção.
 
 #### 4.1 - Crie o seu próprio middleware
 
-Caso os middlewares padrões do Defender não atendam as suas necessidades, você pode criar seu próprio middleware e utilizar a [API do Defender](#usando-a-facade) para realizar o controle de acesso. 
+Caso os middlewares padrões do Defender não atendam as suas necessidades, você pode criar seu próprio middleware e utilizar a [API do Defender](#usando-a-facade) para realizar o controle de acesso.
 
 ## Usando o Defender
 
@@ -127,7 +127,7 @@ Na sua classe User, você precisa adicionar a trait `Artesaos\Defender\HasDefend
 ```php
 <?php namespace App;
 
-use Artesaos\Defender\HasDefender;
+use Artesaos\Defender\Traits\HasDefender;
 use Illuminate\Auth\Authenticatable;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Auth\Passwords\CanResetPassword;
@@ -160,7 +160,7 @@ $user->attachPermission($permissaoCriarUsuario);
 // ou posso adicionar o usuário a um grupo e esse grupo tem a regra de poder criar usuários
 $grupoAdmin->attachPermission($permissaoCriarUsuario);
 
-//Agora esse usuário está no grupo dos Administradores 
+//Agora esse usuário está no grupo dos Administradores
 $user->attachRole($grupoAdmin);
 ```
 
@@ -239,7 +239,7 @@ Extensões do Blade para facilitar o uso do defender.
 
 ```
 @can('user.index')
-    aqui mostra algo relacionado a essa permissão 
+    aqui mostra algo relacionado a essa permissão
 @endcan
 ```
 
@@ -262,7 +262,7 @@ Extensões do Blade para facilitar o uso do defender.
 ```
 @is('admin')
     Mostra informações para o usuário logado e que esteja no grupo admin
-@else 
+@else
     Aqui mostra um bloqueio ou qualquer coisa não relacionada ao grupo admin
 @endis
 ```
@@ -363,7 +363,7 @@ Esta trait, além de configurar os relacionamentos, adicionará os seguintes mé
 
 #####`public function can($permission)`:
 
-Este método verifica se o usuário logado no sistema possui a permissão `$permission`  
+Este método verifica se o usuário logado no sistema possui a permissão `$permission`
 
 No Defender, existem 2 tipos de permissões: `Permissões de Usuário` e `Permissões de Grupo`. Por padrão as permissões que o usuário herda, são permissões dos grupos que ele pertence. Porém, sempre que uma permissão de usuário for definida, ela terá precedência sobre a permissão de grupo.
 
@@ -402,7 +402,7 @@ public function foo(Authenticable $user)
     // ou
 
     $roles = [1, 2, 3]; // Usando array de ids
-    $user->attachRole($roles); 
+    $user->attachRole($roles);
 }
 ```
 
@@ -422,7 +422,7 @@ public function foo(Authenticable $user)
     // ou
 
     $roles = [1, 2, 3]; // Usando array de ids
-    $user->detachRole($roles); 
+    $user->detachRole($roles);
 }
 ```
 
@@ -436,8 +436,8 @@ Semelhante ao `attachRole()`, porém apenas os grupos presentes no array `$roles
 public function foo(Authenticable $user)
 {
     $roles = [1, 2, 3]; // Usando array de ids
-    
-    $user->syncRoles($roles); 
+
+    $user->syncRoles($roles);
 }
 ```
 
@@ -451,10 +451,10 @@ Vincula o usuário a permissão `$permission`. A variável `$permission` é uma 
 public function foo(Authenticable $user)
 {
     $permission = Defender::findPermission('user.create');
-    
+
     $user->attachPermission($permission, [
 	    'value' => true // true = tem a permissão, false = não tem a permissão,
-	]); 
+	]);
 }
 ```
 
@@ -491,8 +491,8 @@ public function foo(Authenticable $user)
 	    2 => ['value' => true,
 	    3 => ['value' => true]
     ];
-    
-    $user->syncPermissions($permissions); 
+
+    $user->syncPermissions($permissions);
 }
 ```
 
@@ -505,7 +505,7 @@ Remove todas as permissões do usuário.
 ```php
 public function foo(Authenticable $user)
 {
-    $user->revokePermissions(); 
+    $user->revokePermissions();
 }
 ```
 
@@ -518,7 +518,7 @@ Remove todas as permissões temporárias expiradas do usuário. Veja mais a resp
 ```php
 public function foo(Authenticable $user)
 {
-    $user->revokeExpiredPermissions(); 
+    $user->revokeExpiredPermissions();
 }
 ```
 
@@ -543,7 +543,7 @@ public function foo()
     $userX = App\User::find(3); // considere '3' a ID do usuário 'X'
     $permission = Defender::findPermission('user.create');
 
-	
+
 	$userX->attachPermission($permission, [
 		'value' => false, // false significa que ele não terá essa permissão,
 		'expires' => \Carbon\Carbon::now()->addDays(7) // Daqui a quanto tempo essa permissão irá expirar
