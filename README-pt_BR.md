@@ -1,5 +1,7 @@
 # Defender
 
+#### A documentação em pt_BR esta desatualizada, dê preferencia para a en_US.
+
 [Readme on English](https://github.com/artesaos/defender/blob/master/README.md).
 
 Defender é um package ACL para Laravel 5 que utiliza grupos e permissões.
