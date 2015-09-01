@@ -2,7 +2,7 @@
 
 /**
  * Defender - Laravel 5 ACL Package
- * Author: PHPArtisans.
+ * Author: PHP Artesãos.
  */
 return [
 

@@ -2,8 +2,8 @@
 
 namespace Artesaos\Defender\Traits\Permissions;
 
-use Artesaos\Defender\Pivots\PermissionRolePivot;
 use Illuminate\Database\Eloquent\Model;
+use Artesaos\Defender\Pivots\PermissionRolePivot;
 
 /**
  * Trait RoleHasPermissions.

@@ -2,10 +2,10 @@
 
 namespace Artesaos\Defender\Repositories\Eloquent;
 
-use Artesaos\Defender\Contracts\Repositories\RoleRepository;
-use Artesaos\Defender\Exceptions\RoleExistsException;
 use Artesaos\Defender\Role;
 use Illuminate\Contracts\Foundation\Application;
+use Artesaos\Defender\Exceptions\RoleExistsException;
+use Artesaos\Defender\Contracts\Repositories\RoleRepository;
 
 /**
  * Class EloquentRoleRepository.

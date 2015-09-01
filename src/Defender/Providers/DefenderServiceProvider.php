@@ -2,14 +2,14 @@
 
 namespace Artesaos\Defender\Providers;
 
+use Artesaos\Defender\Role;
 use Artesaos\Defender\Defender;
 use Artesaos\Defender\Javascript;
 use Artesaos\Defender\Permission;
-use Artesaos\Defender\Repositories\Eloquent\EloquentPermissionRepository;
-use Artesaos\Defender\Repositories\Eloquent\EloquentRoleRepository;
-use Artesaos\Defender\Role;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\View\Compilers\BladeCompiler;
+use Artesaos\Defender\Repositories\Eloquent\EloquentRoleRepository;
+use Artesaos\Defender\Repositories\Eloquent\EloquentPermissionRepository;
 
 /**
  * Class DefenderServiceProvider.

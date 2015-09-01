@@ -2,10 +2,10 @@
 
 namespace Artesaos\Defender;
 
+use Illuminate\Contracts\Foundation\Application;
+use Artesaos\Defender\Contracts\Repositories\RoleRepository;
 use Artesaos\Defender\Contracts\Defender as DefenderContract;
 use Artesaos\Defender\Contracts\Repositories\PermissionRepository;
-use Artesaos\Defender\Contracts\Repositories\RoleRepository;
-use Illuminate\Contracts\Foundation\Application;
 
 /**
  * Class Defender.

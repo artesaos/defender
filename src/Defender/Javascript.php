@@ -2,8 +2,8 @@
 
 namespace Artesaos\Defender;
 
-use Artesaos\Defender\Contracts\Javascript as JavascriptContract;
 use Artesaos\Defender\Traits\HasDefender;
+use Artesaos\Defender\Contracts\Javascript as JavascriptContract;
 
 /**
  * Class Javascript.

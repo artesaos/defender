@@ -2,8 +2,8 @@
 
 namespace Artesaos\Defender;
 
-use Artesaos\Defender\Traits\Permissions\RoleHasPermissions;
 use Illuminate\Database\Eloquent\Model;
+use Artesaos\Defender\Traits\Permissions\RoleHasPermissions;
 
 /**
  * Class Role.
@@ -34,6 +34,7 @@ class Role extends Model
     public function __construct(array $attributes = [])
     {
         parent::__construct($attributes);
+
         $this->table = config('defender.role_table', 'roles');
     }
 

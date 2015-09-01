@@ -2,9 +2,9 @@
 
 namespace Artesaos\Defender\Repositories\Eloquent;
 
-use Artesaos\Defender\Contracts\Repositories\AbstractRepository;
-use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Contracts\Foundation\Application;
+use Artesaos\Defender\Contracts\Repositories\AbstractRepository;
 
 /**
  * Class AbstractEloquentRepository.
