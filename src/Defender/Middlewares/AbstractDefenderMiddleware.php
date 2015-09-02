@@ -2,6 +2,8 @@
 
 namespace Artesaos\Defender\Middlewares;
 
+use Artesaos\Defender\Contracts\ForbiddenHandler;
+
 /**
  * Class AbstractDefenderMiddleware.
  */
@@ -50,8 +52,12 @@ abstract class AbstractDefenderMiddleware
      */
     protected function forbiddenResponse()
     {
-        return call_user_func(config('defender.forbidden_callback', function () {
-            return response('Forbidden', 403);
-        }));
+        $handler = app()->make(config('defender.forbidden_callback'));
+
+        if ($handler instanceof ForbiddenHandler) {
+            return app()->make($handler)->handle();
+        }
+
+        return response('Forbidden', 403);
     }
 }

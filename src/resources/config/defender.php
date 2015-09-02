@@ -54,9 +54,7 @@ return [
     /*
      * Forbidden callback
      */
-    'forbidden_callback' => function () {
-        throw new \Artesaos\Defender\Exceptions\ForbiddenException();
-    },
+    'forbidden_callback' => '\Artesaos\Defender\Handlers\ForbiddenHandler',
 
     /*
      * Use blade template helpers
