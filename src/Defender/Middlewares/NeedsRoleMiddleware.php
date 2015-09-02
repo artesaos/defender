@@ -43,7 +43,7 @@ class NeedsRoleMiddleware extends AbstractDefenderMiddleware
                 $hasResult = $hasResult & $hasRole;
             }
 
-            if (!$hasResult) {
+            if (! $hasResult) {
                 return $this->forbiddenResponse();
             }
         }

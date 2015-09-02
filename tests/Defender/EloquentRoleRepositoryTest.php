@@ -20,7 +20,7 @@ class EloquentRoleRepositoryTest extends AbstractTestCase
     ];
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function setUp()
     {
@@ -124,7 +124,7 @@ class EloquentRoleRepositoryTest extends AbstractTestCase
     {
         $role = $this->createRole($role);
 
-        if (!($user instanceof User)) {
+        if (! ($user instanceof User)) {
             $user = User::where($user)->first();
         }
 

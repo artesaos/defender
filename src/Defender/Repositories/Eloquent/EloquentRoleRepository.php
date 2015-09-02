@@ -32,7 +32,7 @@ class EloquentRoleRepository extends AbstractEloquentRepository implements RoleR
      */
     public function create($roleName)
     {
-        if (!is_null($this->findByName($roleName))) {
+        if (! is_null($this->findByName($roleName))) {
             // TODO: add translation support
             throw new RoleExistsException('A role with the given name already exists');
         }

@@ -22,7 +22,7 @@ if (! function_exists('can')) {
      */
     function can($permissions)
     {
-        if (!is_array($permissions)) {
+        if (! is_array($permissions)) {
             $permissions = func_get_args();
         }
 

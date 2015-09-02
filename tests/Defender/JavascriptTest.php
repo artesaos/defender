@@ -22,7 +22,7 @@ class JavascriptTest extends AbstractTestCase
     protected $defender;
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function setUp()
     {
