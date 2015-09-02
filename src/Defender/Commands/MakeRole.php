@@ -80,7 +80,7 @@ class MakeRole extends Command
     {
         // No need to check is_null($role) as create() throwsException
         $role = $this->roleRepository->create($roleName);
-        $this->info('Permission created successfully');
+        $this->info('Role created successfully');
 
         return $role;
     }
