@@ -54,10 +54,6 @@ abstract class AbstractDefenderMiddleware
     {
         $handler = app()->make(config('defender.forbidden_callback'));
 
-        if ($handler instanceof ForbiddenHandler) {
-            return app()->make($handler)->handle();
-        }
-
-        return response('Forbidden', 403);
+        return ($handler instanceof ForbiddenHandler) ? $handler->handle() : response('Forbidden', 403);
     }
 }
