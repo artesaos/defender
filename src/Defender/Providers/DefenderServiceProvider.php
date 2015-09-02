@@ -59,6 +59,14 @@ class DefenderServiceProvider extends ServiceProvider
         $this->registerBladeExtensions();
 
         $this->loadHelpers();
+
+        $this->app->bind('Artesaos\Defender\Contracts\User', function () {
+            $model = $this->app['config']->get('auth.model', 'App\User');
+
+            return new $model();
+        });
+
+        $this->registerCommands();
     }
 
     /**
@@ -157,5 +165,14 @@ class DefenderServiceProvider extends ServiceProvider
              */
             require_once __DIR__.'/../helpers.php';
         }
+    }
+
+    /**
+     * Register the commands.
+     */
+    private function registerCommands()
+    {
+        $this->commands('Artesaos\Defender\Commands\MakeRole');
+        $this->commands('Artesaos\Defender\Commands\MakePermission');
     }
 }
