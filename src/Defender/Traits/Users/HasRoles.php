@@ -48,7 +48,7 @@ trait HasRoles
      */
     public function attachRole($role)
     {
-        if (!$this->hasRole($role)) {
+        if (! $this->hasRole($role)) {
             $this->roles()->attach($role);
         }
     }

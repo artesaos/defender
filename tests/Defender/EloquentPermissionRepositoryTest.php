@@ -2,11 +2,9 @@
 
 namespace Artesaos\Defender\Testing;
 
-use Artesaos\Defender\Contracts\Repositories\RoleRepository;
 use Artesaos\Defender\Permission;
 use Artesaos\Defender\Repositories\Eloquent\EloquentPermissionRepository;
 use Artesaos\Defender\Role;
-use Illuminate\Database\Eloquent\Collection;
 
 /**
  * Class EloquentPermissionRepositoryTest.
@@ -22,7 +20,7 @@ class EloquentPermissionRepositoryTest extends AbstractTestCase
     ];
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function setUp()
     {
@@ -146,7 +144,7 @@ class EloquentPermissionRepositoryTest extends AbstractTestCase
     {
         $permission = $this->createPermission($permission, $readableName);
 
-        if (!($user instanceof User)) {
+        if (! ($user instanceof User)) {
             $user = User::where($user)->first();
         }
 
@@ -168,7 +166,7 @@ class EloquentPermissionRepositoryTest extends AbstractTestCase
     {
         $permission = $this->createPermission($permission, $readableName);
 
-        if (!($role instanceof Role)) {
+        if (! ($role instanceof Role)) {
             $role = User::where($role)->first();
         }
 

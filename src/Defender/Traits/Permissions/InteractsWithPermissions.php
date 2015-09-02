@@ -15,7 +15,7 @@ trait InteractsWithPermissions
      */
     public function attachPermission($permission, array $options = [])
     {
-        if (!is_array($permission)) {
+        if (! is_array($permission)) {
             if ($this->hasPermission($permission->name)) {
                 return;
             }
@@ -40,7 +40,7 @@ trait InteractsWithPermissions
             return ($value->name == $permissionName);
         });
 
-        if (!empty($permission)) {
+        if (! empty($permission)) {
             $active = (is_null($permission->pivot->expires) or $permission->pivot->expires->isFuture());
 
             if ($active) {

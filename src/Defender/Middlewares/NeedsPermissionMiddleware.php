@@ -43,7 +43,7 @@ class NeedsPermissionMiddleware extends AbstractDefenderMiddleware
                 $canResult = $canResult & $canPermission;
             }
 
-            if (!$canResult) {
+            if (! $canResult) {
                 return $this->forbiddenResponse();
             }
         }

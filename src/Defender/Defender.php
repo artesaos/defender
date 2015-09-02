@@ -71,7 +71,7 @@ class Defender implements DefenderContract
      */
     public function can($permission)
     {
-        if (!is_null($this->getUser())) {
+        if (! is_null($this->getUser())) {
             return $this->getUser()->can($permission);
         }
 
@@ -88,7 +88,7 @@ class Defender implements DefenderContract
      */
     public function canWithRolePermissions($permission)
     {
-        if (!is_null($this->getUser())) {
+        if (! is_null($this->getUser())) {
             return $this->getUser()->canWithRolePermissions($permission);
         }
 
@@ -104,7 +104,7 @@ class Defender implements DefenderContract
      */
     public function hasRole($roleName)
     {
-        if (!is_null($this->getUser())) {
+        if (! is_null($this->getUser())) {
             return $this->getUser()->hasRole($roleName);
         }
 
@@ -120,7 +120,7 @@ class Defender implements DefenderContract
      */
     public function hasRoles($roles)
     {
-        if (!is_null($this->getUser())) {
+        if (! is_null($this->getUser())) {
             return $this->getUser()->hasRoles($roles);
         }
 
@@ -260,7 +260,7 @@ class Defender implements DefenderContract
      */
     public function javascript()
     {
-        if (!$this->javascript) {
+        if (! $this->javascript) {
             $this->javascript = new Javascript($this);
         }
 

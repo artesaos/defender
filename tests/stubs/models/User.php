@@ -17,7 +17,7 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
     use Authenticatable, CanResetPassword, HasDefender;
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      * @return string
      */
     public function getTable()
