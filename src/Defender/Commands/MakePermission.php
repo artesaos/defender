@@ -3,9 +3,9 @@
 namespace Artesaos\Defender\Commands;
 
 use Illuminate\Console\Command;
-use Artesaos\Defender\Contracts\Repositories\PermissionRepository;
+use Artesaos\Defender\Contracts\Repositories\UserRepository;
 use Artesaos\Defender\Contracts\Repositories\RoleRepository;
-use Artesaos\Defender\Contracts\User as UserContract;
+use Artesaos\Defender\Contracts\Repositories\PermissionRepository;
 
 /**
  * Class MakePermission.
@@ -27,11 +27,11 @@ class MakePermission extends Command
     protected $roleRepository;
 
     /**
-     * User which implements UserContract.
+     * User which implements UserRepository.
      *
-     * @var UserContract
+     * @var UserRepository
      */
-    protected $user;
+    protected $userRepository;
 
     /**
      * The name and signature of the console command.
@@ -56,15 +56,17 @@ class MakePermission extends Command
      *
      * @param PermissionRepository $permissionRepository
      * @param RoleRepository       $roleRepository
-     * @param UserContract         $user
+     * @param UserRepository       $userRepository
      */
-    public function __construct(PermissionRepository $permissionRepository, RoleRepository $roleRepository, UserContract $user)
+    public function __construct(PermissionRepository $permissionRepository,
+                                RoleRepository $roleRepository,
+                                UserRepository $userRepository)
     {
-        parent::__construct();
-
         $this->permissionRepository = $permissionRepository;
-        $this->roleRepository = $roleRepository;
-        $this->user = $user;
+        $this->roleRepository       = $roleRepository;
+        $this->userRepository       = $userRepository;
+
+        parent::__construct();
     }
 
     /**
@@ -72,10 +74,11 @@ class MakePermission extends Command
      */
     public function handle()
     {
-        $name = $this->argument('name');
+        $name         = $this->argument('name');
         $readableName = $this->argument('readableName');
-        $userId = $this->option('user');
-        $roleName = $this->option('role');
+        $userId       = $this->option('user');
+        $roleName     = $this->option('role');
+        
         $permission = $this->createPermission($name, $readableName);
 
         if ($userId) {
@@ -99,6 +102,7 @@ class MakePermission extends Command
     {
         // No need to check is_null($permission) as create() throwsException
         $permission = $this->permissionRepository->create($name, $readableName);
+
         $this->info('Permission created successfully');
 
         return $permission;
@@ -113,7 +117,7 @@ class MakePermission extends Command
     protected function attachPermissionToUser($permission, $userId)
     {
         // Check if user exists
-        if ($user = $this->user->findById($userId)) {
+        if ($user = $this->userRepository->findById($userId)) {
             $user->attachPermission($permission);
             $this->info('Permission attached successfully to user');
         } else {

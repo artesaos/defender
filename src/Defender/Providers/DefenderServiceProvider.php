@@ -9,6 +9,7 @@ use Artesaos\Defender\Permission;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\View\Compilers\BladeCompiler;
 use Artesaos\Defender\Repositories\Eloquent\EloquentRoleRepository;
+use Artesaos\Defender\Repositories\Eloquent\EloquentUserRepository;
 use Artesaos\Defender\Repositories\Eloquent\EloquentPermissionRepository;
 
 /**
@@ -60,12 +61,6 @@ class DefenderServiceProvider extends ServiceProvider
 
         $this->loadHelpers();
 
-        $this->app->bind('Artesaos\Defender\Contracts\User', function () {
-            $model = $this->app['config']->get('auth.model', 'App\User');
-
-            return new $model();
-        });
-
         $this->registerCommands();
     }
 
@@ -76,7 +71,7 @@ class DefenderServiceProvider extends ServiceProvider
      */
     public function provides()
     {
-        return ['defender', 'defender.role', 'defender.permission'];
+        return ['defender', 'defender.role', 'defender.permission', 'defender.user'];
     }
 
     /**
@@ -98,6 +93,15 @@ class DefenderServiceProvider extends ServiceProvider
 
         $this->app->singleton('Artesaos\Defender\Contracts\Repositories\PermissionRepository', function ($app) {
             return $app['defender.permission'];
+        });
+        
+        $this->app->singleton('defender.user', function ($app) {
+            $userModel = $app['config']->get('auth.model', 'App\User');
+            return new EloquentUserRepository($app, $app->make($userModel));
+        });
+
+        $this->app->singleton('Artesaos\Defender\Contracts\Repositories\UserRepository', function ($app) {
+            return $app['defender.user'];
         });
     }
 

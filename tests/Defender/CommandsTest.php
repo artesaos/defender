@@ -9,8 +9,8 @@
 
 namespace Artesaos\Defender\Testing;
 
-use Artesaos\Defender\Contracts\Repositories\RoleRepository;
 use Artesaos\Defender\Role;
+use Artesaos\Defender\Contracts\Repositories\RoleRepository;
 
 class CommandsTest extends AbstractTestCase
 {

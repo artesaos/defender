@@ -4,7 +4,7 @@ namespace Artesaos\Defender\Commands;
 
 use Illuminate\Console\Command;
 use Artesaos\Defender\Contracts\Repositories\RoleRepository;
-use Artesaos\Defender\Contracts\User as UserContract;
+use Artesaos\Defender\Contracts\Repositories\UserRepository;
 
 /**
  * Class MakeRole.
@@ -19,11 +19,11 @@ class MakeRole extends Command
     protected $roleRepository;
 
     /**
-     * User which implements UseContract.
+     * User which implements UserRepository.
      *
-     * @var UserContract
+     * @var UserRepository
      */
-    protected $user;
+    protected $userRepository;
 
     /**
      * The name and signature of the console command.
@@ -45,14 +45,14 @@ class MakeRole extends Command
      * Create a new command instance.
      *
      * @param RoleRepository $roleRepository
-     * @param UserContract   $user
+     * @param UserRepository $userRepository
      */
-    public function __construct(RoleRepository $roleRepository, UserContract $user)
+    public function __construct(RoleRepository $roleRepository, UserRepository $userRepository)
     {
-        parent::__construct();
-
         $this->roleRepository = $roleRepository;
-        $this->user = $user;
+        $this->userRepository = $userRepository;
+
+        parent::__construct();
     }
 
     /**
@@ -61,7 +61,8 @@ class MakeRole extends Command
     public function handle()
     {
         $roleName = $this->argument('name');
-        $userId = $this->option('user');
+        $userId   = $this->option('user');
+
         $role = $this->createRole($roleName);
 
         if ($userId) {
@@ -80,6 +81,7 @@ class MakeRole extends Command
     {
         // No need to check is_null($role) as create() throwsException
         $role = $this->roleRepository->create($roleName);
+
         $this->info('Role created successfully');
 
         return $role;
@@ -94,7 +96,7 @@ class MakeRole extends Command
     protected function attachRoleToUser($role, $userId)
     {
         // Check if user exists
-        if ($user = $this->user->findById($userId)) {
+        if ($user = $this->userRepository->findById($userId)) {
             $user->attachRole($role);
             $this->info('Role attached successfully to user');
         } else {
