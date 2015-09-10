@@ -66,13 +66,14 @@ class Defender implements DefenderContract
      * Check if the authenticated user has the given permission.
      *
      * @param string $permission
+     * @param bool   $force
      *
      * @return bool
      */
-    public function hasPermission($permission)
+    public function hasPermission($permission, $force = false)
     {
         if (! is_null($this->getUser())) {
-            return $this->getUser()->hasPermission($permission);
+            return $this->getUser()->hasPermission($permission, $force);
         }
 
         return false;
@@ -83,13 +84,14 @@ class Defender implements DefenderContract
      * using only the roles.
      *
      * @param string $permission
+     * @param bool   $force
      *
      * @return bool
      */
-    public function roleHasPermission($permission)
+    public function roleHasPermission($permission, $force = false)
     {
         if (! is_null($this->getUser())) {
-            return $this->getUser()->roleHasPermission($permission);
+            return $this->getUser()->roleHasPermission($permission, $force);
         }
 
         return false;

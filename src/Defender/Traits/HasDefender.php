@@ -23,12 +23,13 @@ trait HasDefender
      * User permissions override role permissions.
      *
      * @param string $permission
+     * @param bool   $force
      *
      * @return bool
      */
-    public function hasPermission($permission)
+    public function hasPermission($permission, $force = false)
     {
-        return $this->roleHasPermission($permission);
+        return $this->roleHasPermission($permission, $force);
     }
 
     /**
@@ -36,17 +37,18 @@ trait HasDefender
      * only his roles.
      *
      * @param string $permission
+     * @param bool   $force
      *
      * @return bool
      */
-    public function roleHasPermission($permission)
+    public function roleHasPermission($permission, $force = false)
     {
         // If has superuser role
         if ($this->hasRole(config('defender.superuser_role', 'superuser'))) {
             return true;
         }
 
-        $permissions = $this->getPermissions()->lists('name')->toArray();
+        $permissions = $this->getPermissions($force)->lists('name')->toArray();
 
         return in_array($permission, $permissions);
     }

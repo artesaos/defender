@@ -77,7 +77,7 @@ class EloquentPermissionRepositoryTest extends AbstractTestCase
 
         $this->assertTrue($permission->users()->get()->contains($user->id));
 
-        $this->assertTrue($user->hasPermission('users.delete'));
+        $this->assertTrue($user->hasPermission('users.delete', true));
 
         $this->assertInstanceOf(
             'Artesaos\Defender\Pivots\PermissionUserPivot',

@@ -18,20 +18,22 @@ interface Defender
      * Check if the authenticated user has the given permission.
      *
      * @param string $permission
+     * @param bool   $force
      *
      * @return bool
      */
-    public function hasPermission($permission);
+    public function hasPermission($permission, $force = false);
 
     /**
      * Check if the authenticated user has the given permission
      * using only the roles.
      *
      * @param string $permission
+     * @param bool   $force
      *
      * @return bool
      */
-    public function roleHasPermission($permission);
+    public function roleHasPermission($permission, $force = false);
 
     /**
      * Return if the authenticated user has the given role.
