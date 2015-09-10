@@ -64,7 +64,7 @@ class DefenderSpec extends ObjectBehavior
     {
         $auth->user()->shouldBeCalled()->willReturn(null);
         $app->offsetGet('auth')->shouldBeCalled()->willReturn($auth);
-        $this->can('permission_name')->shouldReturn(false);
+        $this->hasPermission('permission_name')->shouldReturn(false);
     }
 
     public function it_should_throw_an_exception_when_the_given_role_already_exists(RoleRepository $roleRepository)

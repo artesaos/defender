@@ -344,13 +344,13 @@ Laravel's Blade extension for using Defender.
 #### @can
 
 ```
-@can('user.index')
+@hasPermission('user.index')
     shows your protected stuff
 @endcan
 ```
 
 ```
-@can('user.index')
+@hasPermission('user.index')
     shows your protected stuff
 @else
     shows the data for those who doesn't have the user.index permission
@@ -403,7 +403,7 @@ With the Defender's Facade you can access the API and use it at any part of your
 
 ----------
 
-##### `Defender::can($permission)`:
+##### `Defender::hasPermission($permission)`:
 
 Check if the logged user has the `$permission`.
 
@@ -498,7 +498,7 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
 
 This trait, beyond configuring the relationships, will add the following methods to your object `App\User`:
 
-#####`public function can($permission)`:
+#####`public function hasPermission($permission)`:
 
 This method checks if the logged user has the permission `$permission`
 
@@ -507,7 +507,7 @@ In Defender, there are 2 kind of permissions: `User permissions` and `Role permi
 ```php
 public function foo(Authenticable $user)
 {
-    if ($user->can('user.create'));
+    if ($user->hasPermission('user.create'));
 }
 ```
 

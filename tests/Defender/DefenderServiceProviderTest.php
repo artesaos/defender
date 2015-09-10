@@ -113,7 +113,7 @@ class DefenderServiceProviderTest extends AbstractTestCase
     public function testShouldLoadHelpers()
     {
         $this->assertTrue(function_exists('defender'), 'Helper \'defender()\' not loaded.');
-        $this->assertTrue(function_exists('can'), 'Helper \'can()\'  not loaded.');
+        $this->assertTrue(function_exists('can'), 'Helper \'hasPermission()\'  not loaded.');
         $this->assertTrue(function_exists('roles'), 'Helper \'roles()\'  not loaded.');
     }
 
@@ -133,7 +133,7 @@ class DefenderServiceProviderTest extends AbstractTestCase
 
         if ($this->isInIsolation()) {
             $this->assertFalse(function_exists('defender'), 'Helper \'defender()\' loaded.');
-            $this->assertFalse(function_exists('can'), 'Helper \'can()\'  loaded.');
+            $this->assertFalse(function_exists('can'), 'Helper \'hasPermission()\'  loaded.');
             $this->assertFalse(function_exists('roles'), 'Helper \'roles()\'  loaded.');
         }
     }

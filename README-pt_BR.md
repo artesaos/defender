@@ -265,13 +265,13 @@ Extensões do Blade para facilitar o uso do defender.
 #### @can
 
 ```
-@can('user.index')
+@hasPermission('user.index')
     aqui mostra algo relacionado a essa permissão
 @endcan
 ```
 
 ```
-@can('user.index')
+@hasPermission('user.index')
     aqui mostra algo relacionado ao usuário a essa permissão
 @else
     aqui mostra as informações pra quem não tem a permissão user.index
@@ -302,7 +302,7 @@ Com a facade do defender você pode acessar a API e utilizá-la em qualquer part
 
 ----------
 
-##### `Defender::can($permission)`:
+##### `Defender::hasPermission($permission)`:
 
 Verifica se o usuário logado possui a permissão `$permission`.
 
@@ -388,7 +388,7 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
 
 Esta trait, além de configurar os relacionamentos, adicionará os seguintes métodos no seu object `App\User`:
 
-#####`public function can($permission)`:
+#####`public function hasPermission($permission)`:
 
 Este método verifica se o usuário logado no sistema possui a permissão `$permission`
 
@@ -397,7 +397,7 @@ No Defender, existem 2 tipos de permissões: `Permissões de Usuário` e `Permis
 ```php
 public function foo(Authenticable $user)
 {
-    if ($user->can('user.create');
+    if ($user->hasPermission('user.create');
 }
 ```
 

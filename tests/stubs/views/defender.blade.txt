@@ -2,6 +2,6 @@
 Yes, you are admin!
 @endis
 
-@can('do.this')
+@hasPermission('do.this')
 Yes, you can do this!
 @endcan

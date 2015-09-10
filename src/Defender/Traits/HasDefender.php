@@ -26,7 +26,7 @@ trait HasDefender
      *
      * @return bool
      */
-    public function can($permission)
+    public function hasPermission($permission)
     {
         return $this->canWithRolePermissions($permission);
     }

@@ -69,10 +69,10 @@ class Defender implements DefenderContract
      *
      * @return bool
      */
-    public function can($permission)
+    public function hasPermission($permission)
     {
         if (! is_null($this->getUser())) {
-            return $this->getUser()->can($permission);
+            return $this->getUser()->hasPermission($permission);
         }
 
         return false;

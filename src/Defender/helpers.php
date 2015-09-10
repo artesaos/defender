@@ -12,7 +12,7 @@ if (! function_exists('defender')) {
     }
 }
 
-if (! function_exists('can')) {
+if (! function_exists('hasPermission')) {
     /**
      * Check if the current user has some permissions.
      *
@@ -20,7 +20,7 @@ if (! function_exists('can')) {
      *
      * @return bool
      */
-    function can($permissions)
+    function hasPermission($permissions)
     {
         if (! is_array($permissions)) {
             $permissions = func_get_args();

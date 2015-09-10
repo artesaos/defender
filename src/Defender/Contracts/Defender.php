@@ -21,7 +21,7 @@ interface Defender
      *
      * @return bool
      */
-    public function can($permission);
+    public function hasPermission($permission);
 
     /**
      * Check if the authenticated user has the given permission

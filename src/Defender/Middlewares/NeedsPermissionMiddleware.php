@@ -33,7 +33,7 @@ class NeedsPermissionMiddleware extends AbstractDefenderMiddleware
             $canResult = true;
 
             foreach ($permissions as $permission) {
-                $canPermission = $this->user->can($permission);
+                $canPermission = $this->user->hasPermission($permission);
 
                 // Check if any permission is enough
                 if ($anyPermission and $canPermission) {
