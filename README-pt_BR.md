@@ -262,20 +262,20 @@ Route::get('foo', ['middleware' => ['auth', 'needsRole'], 'is' => ['admin', 'mem
 
 Extensões do Blade para facilitar o uso do defender.
 
-#### @can
+#### @shield
 
 ```
-@hasPermission('user.index')
+@shield('user.index')
     aqui mostra algo relacionado a essa permissão
-@endcan
+@endshield
 ```
 
 ```
-@hasPermission('user.index')
+@shield('user.index')
     aqui mostra algo relacionado ao usuário a essa permissão
 @else
     aqui mostra as informações pra quem não tem a permissão user.index
-@endcan
+@endshield
 ```
 
 #### @is
@@ -308,7 +308,7 @@ Verifica se o usuário logado possui a permissão `$permission`.
 
 ----------
 
-##### `Defender::canWithRolePermissions($permission)`:
+##### `Defender::roleHasPermission($permission)`:
 
 Verifica se o usuário logado possui a permissão `$permission` utilizando apenas os grupos.
 
@@ -403,14 +403,14 @@ public function foo(Authenticable $user)
 
 ----------
 
-##### `public function canWithRolePermissions($permission)`:
+##### `public function roleHasPermission($permission)`:
 
 Este método funciona praticamente da mesma forma que o método anterior, a única diferença é que as permissões de usuário não são consideradas, ou seja, apenas as permissões dos grupos que o usuário pertence são usadas na hora de verificar a permissão.
 
 ```php
 public function foo(Authenticable $user)
 {
-    if ($user->canWithRolePermissions('user.create');
+    if ($user->roleHasPermission('user.create');
 }
 ```
 

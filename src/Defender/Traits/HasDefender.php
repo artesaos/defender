@@ -28,7 +28,7 @@ trait HasDefender
      */
     public function hasPermission($permission)
     {
-        return $this->canWithRolePermissions($permission);
+        return $this->roleHasPermission($permission);
     }
 
     /**
@@ -39,7 +39,7 @@ trait HasDefender
      *
      * @return bool
      */
-    public function canWithRolePermissions($permission)
+    public function roleHasPermission($permission)
     {
         // If has superuser role
         if ($this->hasRole(config('defender.superuser_role', 'superuser'))) {

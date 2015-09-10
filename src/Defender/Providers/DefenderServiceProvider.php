@@ -94,7 +94,7 @@ class DefenderServiceProvider extends ServiceProvider
         $this->app->singleton('Artesaos\Defender\Contracts\Repositories\PermissionRepository', function ($app) {
             return $app['defender.permission'];
         });
-        
+
         $this->app->singleton('defender.user', function ($app) {
             $userModel = $app['config']->get('auth.model', 'App\User');
             return new EloquentUserRepository($app, $app->make($userModel));
@@ -116,13 +116,13 @@ class DefenderServiceProvider extends ServiceProvider
 
         $this->app->afterResolving('blade.compiler', function (BladeCompiler $bladeCompiler) {
             /*
-             * add @can and @endcan to blade compiler
+             * add @shield and @endshield to blade compiler
              */
-            $bladeCompiler->directive('can', function ($expression) {
-                return "<?php if(app('defender')->can{$expression}): ?>";
+            $bladeCompiler->directive('shield', function ($expression) {
+                return "<?php if(app('defender')->hasPermission{$expression}): ?>";
             });
 
-            $bladeCompiler->directive('endcan', function ($expression) {
+            $bladeCompiler->directive('endshield', function ($expression) {
                 return '<?php endif; ?>';
             });
 

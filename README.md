@@ -341,20 +341,20 @@ $this->middleware('needsRole:admin|editor,true');
 
 Laravel's Blade extension for using Defender.
 
-#### @can
+#### @shield
 
 ```
-@hasPermission('user.index')
+@shield('user.index')
     shows your protected stuff
-@endcan
+@endshield
 ```
 
 ```
-@hasPermission('user.index')
+@shield('user.index')
     shows your protected stuff
 @else
     shows the data for those who doesn't have the user.index permission
-@endcan
+@endshield
 ```
 
 #### @is
@@ -409,7 +409,7 @@ Check if the logged user has the `$permission`.
 
 ----------
 
-##### `Defender::canWithRolePermissions($permission)`:
+##### `Defender::roleHasPermission($permission)`:
 
 Check if the logged user has the `$permission` checking only the role permissions.
 
@@ -513,14 +513,14 @@ public function foo(Authenticable $user)
 
 ----------
 
-##### `public function canWithRolePermissions($permission)`:
+##### `public function roleHasPermission($permission)`:
 
 This method works the same way the previous one, the only diference is that the user permissions are not considered, however, only the role's permissions that the user belongs are used to check the access.
 
 ```php
 public function foo(Authenticable $user)
 {
-    if ($user->canWithRolePermissions('user.create');
+    if ($user->roleHasPermission('user.create');
 }
 ```
 

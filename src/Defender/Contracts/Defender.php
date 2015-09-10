@@ -31,7 +31,7 @@ interface Defender
      *
      * @return bool
      */
-    public function canWithRolePermissions($permission);
+    public function roleHasPermission($permission);
 
     /**
      * Return if the authenticated user has the given role.

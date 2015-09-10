@@ -74,9 +74,9 @@ class DefenderServiceProviderTest extends AbstractTestCase
 
         $this->assertNotEmpty($compiled);
 
-        $this->assertNotContains('@can', $compiled);
+        $this->assertNotContains('@shield', $compiled);
         $this->assertNotContains('@is', $compiled);
-        $this->assertNotContains('@endcan', $compiled);
+        $this->assertNotContains('@endshield', $compiled);
         $this->assertNotContains('@endis', $compiled);
 
         $this->assertStringEqualsFile($expected, $compiled);
@@ -99,9 +99,9 @@ class DefenderServiceProviderTest extends AbstractTestCase
 
         $this->assertNotEmpty($compiled);
 
-        $this->assertContains('@can', $compiled);
+        $this->assertContains('@shield', $compiled);
         $this->assertContains('@is', $compiled);
-        $this->assertContains('@endcan', $compiled);
+        $this->assertContains('@endshield', $compiled);
         $this->assertContains('@endis', $compiled);
 
         $this->assertStringNotEqualsFile($expected, $compiled);
@@ -113,7 +113,7 @@ class DefenderServiceProviderTest extends AbstractTestCase
     public function testShouldLoadHelpers()
     {
         $this->assertTrue(function_exists('defender'), 'Helper \'defender()\' not loaded.');
-        $this->assertTrue(function_exists('can'), 'Helper \'hasPermission()\'  not loaded.');
+        $this->assertTrue(function_exists('hasPermission'), 'Helper \'hasPermission()\'  not loaded.');
         $this->assertTrue(function_exists('roles'), 'Helper \'roles()\'  not loaded.');
     }
 
@@ -133,7 +133,7 @@ class DefenderServiceProviderTest extends AbstractTestCase
 
         if ($this->isInIsolation()) {
             $this->assertFalse(function_exists('defender'), 'Helper \'defender()\' loaded.');
-            $this->assertFalse(function_exists('can'), 'Helper \'hasPermission()\'  loaded.');
+            $this->assertFalse(function_exists('hasPermission'), 'Helper \'hasPermission()\'  loaded.');
             $this->assertFalse(function_exists('roles'), 'Helper \'roles()\'  loaded.');
         }
     }
