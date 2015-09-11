@@ -41,7 +41,7 @@ ou se preferir, adicione o seguinte trecho manualmente:
 ```json
 {
 	"require": {
-		"artesaos/defender": "^0.2.x"
+		"artesaos/defender": "~0.4"
 	}
 }
 ```
@@ -61,7 +61,7 @@ Para usar o Defender em sua aplicação Laravel, é necessário registrar o pack
 
 ### 3. User Class
 
-Na sua classe de usuário, ela precisa implementar a interface 'Artesaos\Defender\Contracts\User' e adicionar a trait `Artesaos\Defender\Traits\HasDefender` para disponibilizar a criação de grupos e permissões:
+Na sua classe de usuário, adicione a trait `Artesaos\Defender\Traits\HasDefender` para disponibilizar a criação de grupos e permissões:
 
 ```php
 <?php
@@ -75,7 +75,7 @@ use Illuminate\Auth\Passwords\CanResetPassword;
 use Illuminate\Contracts\Auth\Authenticatable as AuthenticatableContract;
 use Illuminate\Contracts\Auth\CanResetPassword as CanResetPasswordContract;
 
-class User extends Model implements AuthenticatableContract, CanResetPasswordContract, DefenderUserContract
+class User extends Model implements AuthenticatableContract, CanResetPasswordContract
 {
     use Authenticatable, CanResetPassword, HasDefender;
 ```
