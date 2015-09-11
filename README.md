@@ -196,7 +196,7 @@ To protect your routes, you can use the built-in middlewares.
 #### Checking Permissions: needsPermissionMiddleware
 
 ```php
-Route::get('foo', ['middleware' => ['auth', 'needsPermission'], 'can' => 'user.create', function()
+Route::get('foo', ['middleware' => ['auth', 'needsPermission'], 'shield' => 'user.create', function()
 {
     return 'Yes I can!';
 }]);
@@ -219,7 +219,7 @@ $this->middeware('needsPermission:user.index');
 You can pass an array of permissions to check on.
 
 ```php
-Route::get('foo', ['middleware' => ['auth', 'needsPermission'], 'can' => ['user.index', 'user.create'], function()
+Route::get('foo', ['middleware' => ['auth', 'needsPermission'], 'shield' => ['user.index', 'user.create'], function()
 {
     return 'Yes I can!';
 }]);
@@ -242,7 +242,7 @@ $this->middleware('needsPermission:user.index|user.create');
 When you pass an array of permissions, the route will be fired only if the user has all the permissions. However, if you want to allow the access to the route when the user has at least one of the permissions, just add `'any' => true`.
 
 ```php
-Route::get('foo', ['middleware' => ['auth', 'needsPermission'], 'can' => ['user.index', 'user.create'], 'any' => true, function()
+Route::get('foo', ['middleware' => ['auth', 'needsPermission'], 'shield' => ['user.index', 'user.create'], 'any' => true, function()
 {
     return 'Yes I can!';
 }]);
@@ -292,7 +292,7 @@ $this->middeware('needsRole:admin');
 You can pass an array of permissions to check on.
 
 ```php
-Route::get('foo', ['middleware' => ['auth', 'needsRole'], 'can' => ['admin', 'member'], function()
+Route::get('foo', ['middleware' => ['auth', 'needsRole'], 'shield' => ['admin', 'member'], function()
 {
     return 'Yes I am!';
 }]);
