@@ -61,7 +61,7 @@ class MakeRole extends Command
     public function handle()
     {
         $roleName = $this->argument('name');
-        $userId   = $this->option('user');
+        $userId = $this->option('user');
 
         $role = $this->createRole($roleName);
 
