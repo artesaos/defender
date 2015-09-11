@@ -59,7 +59,7 @@ You need to update your application configuration in order to register the packa
 
 ### 3. User Class
 
-On your User class, you need to make the user implement the interface 'Artesaos\Defender\Contracts\User' and add the trait `Artesaos\Defender\Traits\HasDefender` to enable the creation of permissions and roles:
+On your User class, add the trait `Artesaos\Defender\Traits\HasDefender` to enable the creation of permissions and roles:
 
 ```php
 <?php
