@@ -70,25 +70,25 @@ trait HasDefender
     }
 
     /**
+     * @return \Illuminate\Support\Collection
+     */
+    public function getRolesPermissions()
+    {
+        $roles = $this->roles()->get(['id'])->lists('id')->toArray();
+
+        return app('defender.permission')->getByRoles($roles);
+    }
+
+    /**
      * Get fresh permissions from database.
      *
      * @return \Illuminate\Support\Collection
      */
     protected function getFreshPermissions()
     {
-        $roles = $this->roles()->get()->lists('id')->toArray();
+        $permissionsRoles = $this->getRolesPermissions();
 
-        $permissionsRoles = app('defender.permission')->getByRoles($roles);
-
-        $table = $this->permissions()->getTable();
-
-        $permissions = $this->permissions()
-            ->where($table.'.value', true)
-            ->where(function ($q) use ($table) {
-                $q->where($table.'.expires', '>=', Carbon::now());
-                $q->orWhereNull($table.'.expires');
-            })
-            ->get();
+        $permissions = app('defender.permission')->getActivesByUser($this);
 
         $permissions = $permissions->merge($permissionsRoles)
             ->map(function ($permission) {
