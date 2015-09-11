@@ -57,7 +57,7 @@ class Javascript implements JavascriptContract
         /** @var HasDefender $user */
         $user = $this->defender->getUser();
 
-        $permissions = $user ? $user->getPermissions() : null;
+        $permissions = $user ? $user->getAllPermissions() : null;
 
         return $permissions;
     }
