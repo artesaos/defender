@@ -39,7 +39,7 @@ or manually update your `composer.json` file
 ```json
 {
     "require": {
-        "artesaos/defender": "~0.3"
+        "artesaos/defender": "~0.4"
     }
 }
 ```
@@ -68,14 +68,12 @@ namespace App;
 
 use Illuminate\Auth\Authenticatable;
 use Illuminate\Database\Eloquent\Model;
+use Artesaos\Defender\Traits\HasDefender;
 use Illuminate\Auth\Passwords\CanResetPassword;
 use Illuminate\Contracts\Auth\Authenticatable as AuthenticatableContract;
 use Illuminate\Contracts\Auth\CanResetPassword as CanResetPasswordContract;
 
-use Artesaos\Defender\Contracts\User as DefenderUserContract;
-use Artesaos\Defender\Traits\HasDefender;
-
-class User extends Model implements AuthenticatableContract, CanResetPasswordContract, DefenderUserContract
+class User extends Model implements AuthenticatableContract, CanResetPasswordContract
 {
     use Authenticatable, CanResetPassword, HasDefender;
 ...
