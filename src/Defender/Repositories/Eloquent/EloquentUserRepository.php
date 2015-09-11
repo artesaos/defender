@@ -12,12 +12,12 @@ class EloquentUserRepository extends AbstractEloquentRepository implements UserR
     {
         parent::__construct($app, $user);
     }
-    
+
     public function attachRole($roleName)
     {
         return $this->model->attachRole($roleName);
     }
-    
+
     public function attachPermission($permissionName, array $options = [])
     {
         return $this->model->attachPermission($permissionName, $options);

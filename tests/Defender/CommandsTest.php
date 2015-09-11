@@ -15,7 +15,7 @@ use Artesaos\Defender\Contracts\Repositories\RoleRepository;
 class CommandsTest extends AbstractTestCase
 {
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function setUp()
     {
@@ -33,7 +33,7 @@ class CommandsTest extends AbstractTestCase
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      * @return array
      */
     public function getPackageProviders($app)
