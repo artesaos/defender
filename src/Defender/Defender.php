@@ -80,6 +80,23 @@ class Defender implements DefenderContract
     }
 
     /**
+     * Check if the authenticated user has the given permission.
+     *
+     * @param string $permission
+     * @param bool   $force
+     *
+     * @return bool
+     */
+    public function canDo($permission, $force = false)
+    {
+        if (! is_null($this->getUser())) {
+            return $this->getUser()->canDo($permission, $force);
+        }
+
+        return false;
+    }
+
+    /**
      * Check if the authenticated user has the given permission
      * using only the roles.
      *

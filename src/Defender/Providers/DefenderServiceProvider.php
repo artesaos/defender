@@ -119,7 +119,7 @@ class DefenderServiceProvider extends ServiceProvider
              * add @shield and @endshield to blade compiler
              */
             $bladeCompiler->directive('shield', function ($expression) {
-                return "<?php if(app('defender')->hasPermission{$expression}): ?>";
+                return "<?php if(app('defender')->canDo{$expression}): ?>";
             });
 
             $bladeCompiler->directive('endshield', function ($expression) {

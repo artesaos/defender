@@ -25,6 +25,16 @@ interface Defender
     public function hasPermission($permission, $force = false);
 
     /**
+     * Check if the authenticated user has the given permission.
+     *
+     * @param string $permission
+     * @param bool   $force
+     *
+     * @return bool
+     */
+    public function canDo($permission, $force = false);
+
+    /**
      * Check if the authenticated user has the given permission
      * using only the roles.
      *
