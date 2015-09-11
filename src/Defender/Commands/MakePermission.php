@@ -63,8 +63,8 @@ class MakePermission extends Command
                                 UserRepository $userRepository)
     {
         $this->permissionRepository = $permissionRepository;
-        $this->roleRepository       = $roleRepository;
-        $this->userRepository       = $userRepository;
+        $this->roleRepository = $roleRepository;
+        $this->userRepository = $userRepository;
 
         parent::__construct();
     }
@@ -74,11 +74,11 @@ class MakePermission extends Command
      */
     public function handle()
     {
-        $name         = $this->argument('name');
+        $name = $this->argument('name');
         $readableName = $this->argument('readableName');
-        $userId       = $this->option('user');
-        $roleName     = $this->option('role');
-        
+        $userId = $this->option('user');
+        $roleName = $this->option('role');
+
         $permission = $this->createPermission($name, $readableName);
 
         if ($userId) {
