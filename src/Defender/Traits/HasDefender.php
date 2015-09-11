@@ -2,7 +2,6 @@
 
 namespace Artesaos\Defender\Traits;
 
-use Carbon\Carbon;
 use Artesaos\Defender\Traits\Users\HasRoles;
 use Artesaos\Defender\Traits\Users\HasPermissions;
 
@@ -19,6 +18,11 @@ trait HasDefender
     private $cachedPermissions;
 
     /**
+     * @var \Illuminate\Support\Collection
+     */
+    private $cachedRolePermissions;
+
+    /**
      * Returns if the current user has the given permission.
      * User permissions override role permissions.
      *
@@ -29,7 +33,39 @@ trait HasDefender
      */
     public function hasPermission($permission, $force = false)
     {
-        return $this->roleHasPermission($permission, $force);
+        $permissions = $this->getAllPermissions($force)->lists('name')->toArray();
+
+        return in_array($permission, $permissions);
+    }
+
+
+    /**
+     * Checks for permission
+     * If has superuser group automatically passes
+     *
+     * @param string $permission
+     * @param bool   $force
+     *
+     * @return bool
+     */
+    public function canDo($permission, $force = false)
+    {
+        // If has superuser role
+        if($this->isSuperUser()) {
+            return true;
+        }
+
+        return $this->hasPermission($permission, $force);
+    }
+
+    /**
+     * check has superuser role
+     *
+     * @return bool
+     */
+    public function isSuperUser()
+    {
+        return $this->hasRole(config('defender.superuser_role', 'superuser'));
     }
 
     /**
@@ -43,12 +79,7 @@ trait HasDefender
      */
     public function roleHasPermission($permission, $force = false)
     {
-        // If has superuser role
-        if ($this->hasRole(config('defender.superuser_role', 'superuser'))) {
-            return true;
-        }
-
-        $permissions = $this->getPermissions($force)->lists('name')->toArray();
+        $permissions = $this->getRolesPermissions($force)->lists('name')->toArray();
 
         return in_array($permission, $permissions);
     }
@@ -60,19 +91,33 @@ trait HasDefender
      *
      * @return \Illuminate\Support\Collection
      */
-    public function getPermissions($force = false)
+    public function getAllPermissions($force = false)
     {
         if (empty($this->cachedPermissions) or $force) {
-            $this->cachedPermissions = $this->getFreshPermissions();
+            $this->cachedPermissions = $this->getFreshAllPermissions();
         }
 
         return $this->cachedPermissions;
     }
 
     /**
+     * @param bool $force
+     *
      * @return \Illuminate\Support\Collection
      */
-    public function getRolesPermissions()
+    public function getRolesPermissions($force = false)
+    {
+        if (empty($this->cachedRolePermissions) or $force) {
+            $this->cachedRolePermissions = $this->getFreshRolesPermissions();
+        }
+
+        return $this->cachedRolePermissions;
+    }
+
+    /**
+     * @return \Illuminate\Support\Collection
+     */
+    protected function getFreshRolesPermissions()
     {
         $roles = $this->roles()->get(['id'])->lists('id')->toArray();
 
@@ -84,9 +129,9 @@ trait HasDefender
      *
      * @return \Illuminate\Support\Collection
      */
-    protected function getFreshPermissions()
+    protected function getFreshAllPermissions()
     {
-        $permissionsRoles = $this->getRolesPermissions();
+        $permissionsRoles = $this->getRolesPermissions(true);
 
         $permissions = app('defender.permission')->getActivesByUser($this);
 
