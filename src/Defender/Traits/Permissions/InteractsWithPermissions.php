@@ -16,7 +16,7 @@ trait InteractsWithPermissions
     public function attachPermission($permission, array $options = [])
     {
         if (! is_array($permission)) {
-            if ($this->hasPermission($permission->name)) {
+            if ($this->existPermission($permission->name)) {
                 return;
             }
         }
@@ -34,7 +34,7 @@ trait InteractsWithPermissions
      *
      * @return bool
      */
-    public function hasPermission($permissionName)
+    public function existPermission($permissionName)
     {
         $permission = $this->permissions->first(function ($key, $value) use ($permissionName) {
             return ($value->name == $permissionName);
