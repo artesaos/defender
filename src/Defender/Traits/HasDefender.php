@@ -38,10 +38,9 @@ trait HasDefender
         return in_array($permission, $permissions);
     }
 
-
     /**
      * Checks for permission
-     * If has superuser group automatically passes
+     * If has superuser group automatically passes.
      *
      * @param string $permission
      * @param bool   $force
@@ -51,7 +50,7 @@ trait HasDefender
     public function canDo($permission, $force = false)
     {
         // If has superuser role
-        if($this->isSuperUser()) {
+        if ($this->isSuperUser()) {
             return true;
         }
 
@@ -59,7 +58,7 @@ trait HasDefender
     }
 
     /**
-     * check has superuser role
+     * check has superuser role.
      *
      * @return bool
      */
