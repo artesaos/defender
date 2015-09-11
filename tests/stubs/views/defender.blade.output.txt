@@ -2,6 +2,6 @@
 Yes, you are admin!
 <?php endif; ?>
 
-<?php if(app('defender')->hasPermission('do.this')): ?>
+<?php if(app('defender')->canDo('do.this')): ?>
 Yes, you can do this!
 <?php endif; ?>
