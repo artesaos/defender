@@ -211,7 +211,7 @@ Route::get('foo', ['middleware' => ['auth', 'needsPermission:user.index'], funct
 With this syntax it's also possible to use the middlewaren within your controllers.
 
 ```php
-$this->middeware('needsPermission:user.index');
+$this->middleware('needsPermission:user.index');
 ```
 
 You can pass an array of permissions to check on.
@@ -284,7 +284,7 @@ Route::get('foo', ['middleware' => ['auth', 'needsRole:admin'], function() {
 With this syntax it's also possible to use the middlewaren within your controllers.
 
 ```php
-$this->middeware('needsRole:admin');
+$this->middleware('needsRole:admin');
 ```
 
 You can pass an array of permissions to check on.
