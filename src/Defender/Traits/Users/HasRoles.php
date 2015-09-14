@@ -90,4 +90,21 @@ trait HasRoles
     {
         return $this->roles()->sync($roles);
     }
+
+    /**
+     * Take user by roles
+     *
+     * @param \Illuminate\Database\Query\Builder $query
+     * @param string|array $roles
+     *
+     * @return \Illuminate\Database\Query\Builder
+     */
+    public function scopeWhichRoles($query, $roles)
+    {
+        return $query->whereHas('roles', function($query) use($roles) {
+            $roles = (is_array($roles)) ? $roles : [$roles];
+
+            $query->whereIn('name', $roles);
+        });
+    }
 }
