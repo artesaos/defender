@@ -92,7 +92,7 @@ trait HasRoles
     }
 
     /**
-     * Take user by roles
+     * Take user by roles.
      *
      * @param \Illuminate\Database\Query\Builder $query
      * @param string|array $roles
@@ -101,7 +101,7 @@ trait HasRoles
      */
     public function scopeWhichRoles($query, $roles)
     {
-        return $query->whereHas('roles', function($query) use($roles) {
+        return $query->whereHas('roles', function ($query) use ($roles) {
             $roles = (is_array($roles)) ? $roles : [$roles];
 
             $query->whereIn('name', $roles);
