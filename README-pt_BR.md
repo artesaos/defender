@@ -515,7 +515,7 @@ public function foo(Authenticable $user)
 {
     $permissions = [
 	    1 => ['value' => false],
-	    2 => ['value' => true,
+	    2 => ['value' => true],
 	    3 => ['value' => true]
     ];
 
