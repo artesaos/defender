@@ -1,4 +1,4 @@
-# Defender
+﻿# Defender
 ----------
 
 [Readme em Português](https://github.com/artesaos/defender/blob/master/README-pt_BR.md).
@@ -179,7 +179,7 @@ $user = User::find(1);
 $user->attachPermission($permission);
 
 // or you can add the user to a group and that group has the power to rule create users.
-$grupoAdmin->attachPermission($permissaoCriarUsuario);
+$roleAdmin->attachPermission($permission);
 
 // Now this user is in the Administrators group.
 $user->attachRole($roleAdmin);
