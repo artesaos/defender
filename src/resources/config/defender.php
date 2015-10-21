@@ -9,12 +9,12 @@ return [
     /*
      * Default Role model used by Defender.
      */
-    'role_model' => 'Artesaos\Defender\Role',
+    'role_model' => Artesaos\Defender\Role::class,
 
     /*
      * Default Permission model used by Defender.
      */
-    'permission_model' => 'Artesaos\Defender\Permission',
+    'permission_model' => Artesaos\Defender\Permission::class,
 
     /*
      * Roles table name
@@ -54,7 +54,7 @@ return [
     /*
      * Forbidden callback
      */
-    'forbidden_callback' => '\Artesaos\Defender\Handlers\ForbiddenHandler',
+    'forbidden_callback' => Artesaos\Defender\Handlers\ForbiddenHandler::class,
 
     /*
      * Use blade template helpers
