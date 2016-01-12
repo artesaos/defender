@@ -3,7 +3,7 @@
 
 [Readme em Português](https://github.com/artesaos/defender/blob/master/README-pt_BR.md).
 
-Defender is a Access Control List (ACL) Solution for Laravel 5.
+Defender is a Access Control List (ACL) Solution for Laravel 5.1. **(Not compatible with Laravel 5.2)**  
 With security and usability in mind, this project aims to provide you a safe way to control your application access without losing the fun of coding.
 
 > Current Build Status
