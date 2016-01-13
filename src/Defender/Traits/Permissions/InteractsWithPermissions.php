@@ -37,7 +37,7 @@ trait InteractsWithPermissions
     public function existPermission($permissionName)
     {
         $permission = $this->permissions->first(function ($key, $value) use ($permissionName) {
-            return ($value->name == $permissionName);
+            return $value->name == $permissionName;
         });
 
         if (! empty($permission)) {

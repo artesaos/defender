@@ -158,6 +158,6 @@ abstract class AbstractTestCase extends TestCase
      */
     protected function parseSubPath($path)
     {
-        return ($path ? DIRECTORY_SEPARATOR.trim($path, DIRECTORY_SEPARATOR) : '');
+        return $path ? DIRECTORY_SEPARATOR.trim($path, DIRECTORY_SEPARATOR) : '';
     }
 }
