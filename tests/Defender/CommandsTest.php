@@ -6,7 +6,6 @@
  * Date: 12/07/15
  * Time: 01:01.
  */
-
 namespace Artesaos\Defender\Testing;
 
 use Artesaos\Defender\Role;
