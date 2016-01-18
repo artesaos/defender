@@ -37,7 +37,7 @@ trait HasRoles
     public function hasRole($role)
     {
         return $this->roles
-            ->where('name', $role)
+            ->where('name', is_object($role) ? $role->name : $role)
             ->first() != null;
     }
 
@@ -48,7 +48,7 @@ trait HasRoles
      */
     public function attachRole($role)
     {
-        if (! $this->hasRole($role->name)) {
+        if (! $this->hasRole($role)) {
             $this->roles()->attach($role);
         }
     }
