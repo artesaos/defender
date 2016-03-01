@@ -194,7 +194,7 @@ class EloquentPermissionRepositoryTest extends AbstractTestCase
     }
 
     /**
-     * Assert to see in Database a Role attached to User.
+     * Assert to not see in Database a Permission attached to User.
      * @param Permission $permission
      * @param User $user
      */
