@@ -24,8 +24,6 @@ class DefenderServiceProvider extends ServiceProvider
      */
     protected $defer = false;
 
-    /**
-     */
     public function boot()
     {
         $this->publishResources();
