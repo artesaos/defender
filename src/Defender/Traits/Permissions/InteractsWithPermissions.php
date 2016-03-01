@@ -109,8 +109,6 @@ trait InteractsWithPermissions
         if ($expiredPermissions->count() > 0) {
             return $this->permissions()->detach($expiredPermissions->modelKeys());
         }
-
-        return;
     }
 
     /**
@@ -131,7 +129,5 @@ trait InteractsWithPermissions
                 );
             }
         }
-
-        return;
     }
 }
