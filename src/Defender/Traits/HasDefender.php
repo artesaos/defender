@@ -58,7 +58,7 @@ trait HasDefender
                         break;
                     }
                 } else {
-                    if (!in_array($permission, $allPermissions)) {
+                    if (! in_array($permission, $allPermissions)) {
                         return false;
                         break;
                     }
