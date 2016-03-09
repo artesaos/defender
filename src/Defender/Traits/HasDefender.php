@@ -39,6 +39,34 @@ trait HasDefender
     }
 
     /**
+     * Returns if the current user has all or one permission of the given array.
+     * User permissions override role permissions.
+     *
+     * @param array $permissions Array of permissions
+     * @param bool $strict       Check if has all permissions from array or one of them
+     * @param bool $force
+     * @return bool
+     */
+    public function hasPermissions(array $permissions, $strict = true, $force = false)
+    {
+        $allPermissions = $this->getAllPermissions($force)->lists('name')->toArray();
+
+        $equalPermissions = array_intersect($permissions, $allPermissions);
+
+        if (count($equalPermissions) > 0) {
+            if ($strict == false) {
+                return true;
+            }
+
+            if (count($equalPermissions) == count($permissions)) {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    /**
      * Checks for permission
      * If has superuser group automatically passes.
      *
