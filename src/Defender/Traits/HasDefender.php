@@ -43,28 +43,22 @@ trait HasDefender
      * User permissions override role permissions.
      *
      * @param array $permissions Array of permissions
-     * @param bool $strict       Check if has all permissions from array or one of them
+     * @param bool $strict Check if has all permissions from array or one of them
      * @param bool $force
      * @return bool
      */
     public function hasPermissions(array $permissions, $strict = true, $force = false)
     {
         $allPermissions = $this->getAllPermissions($force)->lists('name')->toArray();
-        if (is_array($permissions)) {
-            foreach ($permissions as $permission) {
-                if ($strict == false) {
-                    if (in_array($permission, $allPermissions)) {
-                        return true;
-                        break;
-                    }
-                } else {
-                    if (! in_array($permission, $allPermissions)) {
-                        return false;
-                        break;
-                    }
-                }
-            }
+
+        $equalPermissions = array_intersect($permissions, $allPermissions);
+
+        if (count($equalPermissions) > 0){
+            if ($strict == false) return true;
+            if (count($equalPermissions) == count($permissions)) return true;
         }
+
+        return false;
     }
 
     /**
