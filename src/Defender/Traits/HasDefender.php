@@ -43,7 +43,7 @@ trait HasDefender
      * User permissions override role permissions.
      *
      * @param array $permissions Array of permissions
-     * @param bool $strict Check if has all permissions from array or one of them
+     * @param bool $strict       Check if has all permissions from array or one of them
      * @param bool $force
      * @return bool
      */
@@ -53,9 +53,14 @@ trait HasDefender
 
         $equalPermissions = array_intersect($permissions, $allPermissions);
 
-        if (count($equalPermissions) > 0){
-            if ($strict == false) return true;
-            if (count($equalPermissions) == count($permissions)) return true;
+        if (count($equalPermissions) > 0) {
+            if ($strict == false) {
+                return true;
+            }
+
+            if (count($equalPermissions) == count($permissions)) {
+                return true;
+            }
         }
 
         return false;
