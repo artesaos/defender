@@ -50,17 +50,10 @@ trait HasDefender
     public function hasPermissions(array $permissions, $strict = true, $force = false)
     {
         $allPermissions = $this->getAllPermissions($force)->lists('name')->toArray();
-
         $equalPermissions = array_intersect($permissions, $allPermissions);
-
-        if (count($equalPermissions) > 0) {
-            if ($strict == false) {
-                return true;
-            }
-
-            if (count($equalPermissions) == count($permissions)) {
-                return true;
-            }
+        $countEqual = count($equalPermissions);
+        if ($countEqual > 0 && ($strict === false || $countEqual === count($permissions))) {
+            return true;
         }
 
         return false;
