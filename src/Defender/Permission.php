@@ -73,7 +73,7 @@ class Permission extends Model
      */
     public function newPivot(Model $parent, array $attributes, $table, $exists)
     {
-        $userModel = app()['config']->get('auth.model');
+        $userModel = app()['config']->get('defender.user_model');
         $roleModel = app()['config']->get('defender.role_model');
 
         if ($parent instanceof $userModel) {
