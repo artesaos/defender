@@ -28,7 +28,7 @@
     "phpunit/phpunit": "~4.0",
     "phpspec/phpspec": "~2.1",
     "fabpot/php-cs-fixer": "~1.0",
-    "orchestra/testbench": "~3.0",
+    "orchestra/testbench": "~3.2",
     "fzaninotto/faker": "~1.5"
   },
   "autoload": {
