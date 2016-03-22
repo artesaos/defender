@@ -154,7 +154,7 @@ You can use these commands to create the roles and permissions for you applicati
 
 ```shell
 php artisan defender:make:role admin  # creates the role admin
-php artisan defender:make:role member --user=1 # creates the role admin and attaches this role to the user where id=1
+php artisan defender:make:role admin --user=1 # creates the role admin and attaches this role to the user where id=1
 php artisan defender:make:permission users.index "List all the users" # creates the permission
 php artisan defender:make:permission users.create "Create user" --user=1 # creates the permission and attaches it to user where id=1
 php artisan defender:make:permission users.destroy "Delete user" --role=admin # creates the permission and attaches it to the role admin
