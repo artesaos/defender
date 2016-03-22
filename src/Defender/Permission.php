@@ -56,7 +56,7 @@ class Permission extends Model
     public function users()
     {
         return $this->belongsToMany(
-            config('auth.model'),
+            config('defender.user_model'),
             config('defender.permission_user_table'),
             config('defender.permission_key'),
             'user_id'
