@@ -94,7 +94,7 @@ class DefenderServiceProvider extends ServiceProvider
         });
 
         $this->app->singleton('defender.user', function ($app) {
-            $userModel = $app['config']->get('auth.model', 'App\User');
+            $userModel = $app['config']->get('defender.user_model');
 
             return new EloquentUserRepository($app, $app->make($userModel));
         });
