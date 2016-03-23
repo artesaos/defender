@@ -1,7 +1,0 @@
-@is('admin')
-Yes, you are admin!
-@endis
-
-@shield('do.this')
-Yes, you can do this!
-@endshield

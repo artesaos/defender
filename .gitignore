@@ -1,7 +1,6 @@
 /vendor
 /.idea
-.php_cs.cache
+*.cache
 composer.phar
 composer.lock
-tmp[a-zA-Z0-9]{6,32}
 .DS_Store
