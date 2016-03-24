@@ -8,8 +8,10 @@ return [
 
     /*
      * Default User model used by Defender.
+     *
+     * Leave blank for auto discovery
      */
-    'user_model' => 'App\User',
+    'user_model' => '',
 
     /*
      * Default Role model used by Defender.
