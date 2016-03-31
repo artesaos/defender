@@ -686,7 +686,7 @@ public function foo()
 
     $userX->attachPermission($permission, [
         'value' => false, // false means that he will not have the permission,
-        'expires' => \Carbon\Carbon::now()->addDays(7) // Daqui a quanto tempo essa permissão irá expirar
+        'expires' => \Carbon\Carbon::now()->addDays(7) // Set the permission's expiration date
     ]);
 
 }
