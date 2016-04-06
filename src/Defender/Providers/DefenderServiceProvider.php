@@ -28,6 +28,7 @@ class DefenderServiceProvider extends ServiceProvider
     {
         $this->publishResources();
         $this->publishMigrations();
+        $this->setUserModelConfig();
     }
 
     /**
@@ -94,7 +95,7 @@ class DefenderServiceProvider extends ServiceProvider
         });
 
         $this->app->singleton('defender.user', function ($app) {
-            $userModel = $app['config']->get('auth.model', 'App\User');
+            $userModel = $app['config']->get('defender.user_model');
 
             return new EloquentUserRepository($app, $app->make($userModel));
         });
@@ -177,5 +178,19 @@ class DefenderServiceProvider extends ServiceProvider
     {
         $this->commands('Artesaos\Defender\Commands\MakeRole');
         $this->commands('Artesaos\Defender\Commands\MakePermission');
+    }
+
+    /**
+     * Set the default configuration for the user model.
+     * */
+    private function setUserModelConfig()
+    {
+        if (config('defender.user_model') == '') {
+            if (str_contains($this->app->version(), '5.1')) {
+                return config(['defender.user_model' => $this->app['auth']->getProvider()->getModel()]);
+            }
+
+            return config(['defender.user_model' => $this->app['auth']->guard()->getProvider()->getModel()]);
+        }
     }
 }

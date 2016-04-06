@@ -134,7 +134,8 @@ abstract class AbstractTestCase extends TestCase
             'prefix' => '',
         ]);
 
-        $app['config']->set('auth.model', 'Artesaos\Defender\Testing\User');
+        $app['config']->set('defender.user_model', 'Artesaos\Defender\Testing\User');
+        $app['config']->set('auth.model', $app['config']->get('defender.user_model'));
     }
 
     /**

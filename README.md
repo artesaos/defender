@@ -3,7 +3,7 @@
 
 [Readme em Português](https://github.com/artesaos/defender/blob/master/README-pt_BR.md).
 
-Defender is a Access Control List (ACL) Solution for Laravel 5.1. **(Not compatible with Laravel 5.2)**  
+Defender is a Access Control List (ACL) Solution for Laravel 5.1 and 5.2 (single auth). **(Not compatible with Laravel 5.2 multi-auth)**  
 With security and usability in mind, this project aims to provide you a safe way to control your application access without losing the fun of coding.
 
 > Current Build Status
@@ -39,7 +39,7 @@ or manually update your `composer.json` file
 ```json
 {
     "require": {
-        "artesaos/defender": "~0.4"
+        "artesaos/defender": "~0.5"
     }
 }
 ```
@@ -76,6 +76,22 @@ use Illuminate\Contracts\Auth\CanResetPassword as CanResetPasswordContract;
 class User extends Model implements AuthenticatableContract, CanResetPasswordContract
 {
     use Authenticatable, CanResetPassword, HasDefender;
+...
+```
+
+If you are using laravel 5.2, there is a small difference:
+
+```php
+<?php
+
+namespace App;
+
+use Artesaos\Defender\Traits\HasDefender;
+use Illuminate\Foundation\Auth\User as Authenticatable;
+
+class User extends Authenticatable
+{
+    use HasDefender;
 ...
 ```
 
@@ -146,6 +162,8 @@ If the built-in middlewares doesn't fit your needs, you can make your own by usi
 
 Defender handles only access control. The authentication is still made by Laravel's `Auth`.
 
+**Note: If you are using a different model for your users or has changed the namespace, please update the user_model key on your defender config file**
+
 ### Creating roles and permissions
 
 #### With commands
@@ -200,7 +218,7 @@ Route::get('foo', ['middleware' => ['auth', 'needsPermission'], 'shield' => 'use
 }]);
 ```
 
-If you're using Laravel 5.1 it's possible to use Middleware Parameters.
+If you're using Laravel 5.1+ it's possible to use Middleware Parameters.
 
 ```php
 Route::get('foo', ['middleware' => ['auth', 'needsPermission:user.index'], function() {

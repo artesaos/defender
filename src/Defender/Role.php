@@ -46,7 +46,7 @@ class Role extends Model
     public function users()
     {
         return $this->belongsToMany(
-            config('auth.model'),
+            config('defender.user_model'),
             config('defender.role_user_table'),
             config('defender.role_key'),
             'user_id'

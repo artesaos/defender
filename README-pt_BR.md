@@ -41,7 +41,7 @@ ou se preferir, adicione o seguinte trecho manualmente:
 ```json
 {
 	"require": {
-		"artesaos/defender": "~0.4"
+		"artesaos/defender": "~0.5"
 	}
 }
 ```
@@ -78,6 +78,22 @@ use Illuminate\Contracts\Auth\CanResetPassword as CanResetPasswordContract;
 class User extends Model implements AuthenticatableContract, CanResetPasswordContract
 {
     use Authenticatable, CanResetPassword, HasDefender;
+```
+
+Se você está utilizando o Laravel 5.2, há uma pequena diferença:
+
+```php
+<?php
+
+namespace App;
+
+use Artesaos\Defender\Traits\HasDefender;
+use Illuminate\Foundation\Auth\User as Authenticatable;
+
+class User extends Authenticatable
+{
+    use HasDefender;
+...
 ```
 
 #### 4 Publicando o arquivo de configuração e as migrations
@@ -149,6 +165,8 @@ Caso os middlewares padrões do Defender não atendam as suas necessidades, voc�
 ## Usando o Defender
 
 O Defender realiza apenas o controle de acesso em sua aplicação, ou seja, a tarefa de autenticação é realizada pelo `Auth` que faz parte do core do Laravel.
+
+**Nota: Se você utilizar um model diferente para os usuários ou mudou o namespace, atualize a chave `user_model` no seu arquivo de configuração do `defender`**
 
 ### Criando Grupos e Permissões
 
