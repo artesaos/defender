@@ -12,7 +12,7 @@ interface RoleRepository extends AbstractRepository
      *
      * @param string $roleName
      * @param string $readableName
-     * 
+     *
      * @return \Artesaos\Defender\Role
      */
     public function create($roleName, $readableName = null);

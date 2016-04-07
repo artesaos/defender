@@ -54,6 +54,7 @@ class MigrationsTest extends AbstractTestCase
             config('defender.role_table', 'roles') => [
                 'id',
                 'name',
+                'readable_name',
                 'created_at',
                 'updated_at',
             ],

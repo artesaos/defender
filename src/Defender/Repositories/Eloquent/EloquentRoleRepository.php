@@ -26,9 +26,10 @@ class EloquentRoleRepository extends AbstractEloquentRepository implements RoleR
      *
      * @param string $roleName
      * @param string $readableName
-     * 
-     * @return Role
+     *
      * @throws RoleExistsException
+     *
+     * @return Role
      */
     public function create($roleName, $readableName = null)
     {
@@ -39,7 +40,7 @@ class EloquentRoleRepository extends AbstractEloquentRepository implements RoleR
 
         return $role = $this->model->create([
             'name' => $roleName,
-            'readable_name' => $readableName
+            'readable_name' => $readableName,
         ]);
     }
 }

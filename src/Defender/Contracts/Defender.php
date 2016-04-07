@@ -133,7 +133,7 @@ interface Defender
      *
      * @param string $roleName
      * @param string $readableName
-     * 
+     *
      * @return \Artesaos\Defender\Role
      */
     public function createRole($roleName, $readableName = null);

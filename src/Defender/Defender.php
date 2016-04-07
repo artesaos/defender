@@ -256,7 +256,7 @@ class Defender implements DefenderContract
      *
      * @param string $roleName
      * @param string $readableName
-     * 
+     *
      * @return Role
      */
     public function createRole($roleName, $readableName = null)

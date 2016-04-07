@@ -106,12 +106,13 @@ class CommandsTest extends AbstractTestCase
      */
     public function testCommandShouldMakeARole()
     {
-        $this->artisan('defender:make:role', ['name' => 'a.role']);
+        $this->artisan('defender:make:role', ['name' => 'a.role', '--readableName' => 'A Role']);
 
         $this->seeInDatabase(
             config('defender.role_table', 'roles'),
             [
                 'name' => 'a.role',
+                'readable_name' => 'A Role',
             ]
         );
     }
@@ -121,12 +122,13 @@ class CommandsTest extends AbstractTestCase
      */
     public function testCommandShouldMakeARoleToUser()
     {
-        $this->artisan('defender:make:role', ['name' => 'user.role', '--user' => 1]);
+        $this->artisan('defender:make:role', ['name' => 'user.role', '--readableName' => 'User Role', '--user' => 1]);
 
         $this->seeInDatabase(
             config('defender.role_table', 'roles'),
             [
                 'name' => 'user.role',
+                'readable_name' => 'User Role',
             ]
         );
 
