@@ -24,19 +24,22 @@ class EloquentRoleRepository extends AbstractEloquentRepository implements RoleR
     /**
      * Create a new role with the given name.
      *
-     * @param $roleName
-     *
-     * @throws \Exception
-     *
+     * @param string $roleName
+     * @param string $readableName
+     * 
      * @return Role
+     * @throws RoleExistsException
      */
-    public function create($roleName)
+    public function create($roleName, $readableName = null)
     {
         if (! is_null($this->findByName($roleName))) {
             // TODO: add translation support
             throw new RoleExistsException('A role with the given name already exists');
         }
 
-        return $role = $this->model->create(['name' => $roleName]);
+        return $role = $this->model->create([
+            'name' => $roleName,
+            'readable_name' => $readableName
+        ]);
     }
 }

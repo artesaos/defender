@@ -11,10 +11,9 @@ interface RoleRepository extends AbstractRepository
      * Create a new role with the given name.
      *
      * @param string $roleName
-     *
-     * @throws \Exception
-     *
+     * @param string $readableName
+     * 
      * @return \Artesaos\Defender\Role
      */
-    public function create($roleName);
+    public function create($roleName, $readableName = null);
 }

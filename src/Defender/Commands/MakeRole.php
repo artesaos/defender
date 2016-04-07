@@ -32,6 +32,7 @@ class MakeRole extends Command
      */
     protected $signature = 'defender:make:role
                             {name : Name of the role}
+                            {readableName : A readable name of the role}
                             {--user= : User id. Attach role to user with the provided id}';
 
     /**
@@ -61,9 +62,10 @@ class MakeRole extends Command
     public function handle()
     {
         $roleName = $this->argument('name');
+        $readableName = $this->argument('readableName');
         $userId = $this->option('user');
 
-        $role = $this->createRole($roleName);
+        $role = $this->createRole($roleName, $readableName);
 
         if ($userId) {
             $this->attachRoleToUser($role, $userId);
@@ -74,13 +76,14 @@ class MakeRole extends Command
      * Create role.
      *
      * @param string $roleName
-     *
+     * @param string $readableName
+     * 
      * @return \Artesaos\Defender\Role
      */
-    protected function createRole($roleName)
+    protected function createRole($roleName, $readableName = null)
     {
         // No need to check is_null($role) as create() throwsException
-        $role = $this->roleRepository->create($roleName);
+        $role = $this->roleRepository->create($roleName, $readableName);
 
         $this->info('Role created successfully');
 
