@@ -122,7 +122,7 @@ trait HasDefender
 
     /**
      * Get permissions from database based on roles.
-     * 
+     *
      * @param bool $force
      *
      * @return \Illuminate\Support\Collection
@@ -138,7 +138,7 @@ trait HasDefender
 
     /**
      * Get fresh permissions from database based on roles.
-     * 
+     *
      * @return \Illuminate\Support\Collection
      */
     protected function getFreshRolesPermissions()
