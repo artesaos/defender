@@ -132,10 +132,11 @@ interface Defender
      * Uses a repository to actually create the role.
      *
      * @param string $roleName
+     * @param string $readableName
      *
      * @return \Artesaos\Defender\Role
      */
-    public function createRole($roleName);
+    public function createRole($roleName, $readableName = null);
 
     /**
      * @param string $permissionName
