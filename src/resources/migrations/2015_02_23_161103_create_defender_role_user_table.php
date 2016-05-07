@@ -12,7 +12,7 @@ class CreateDefenderRoleUserTable extends Migration
     {
         Schema::create(config('defender.role_user_table', 'role_user'), function (Blueprint $table) {
             $table->integer('user_id')->unsigned()->index();
-            $table->foreign('user_id')->references('id')->on(config('auth.table', 'users'))->onDelete('cascade');
+            $table->foreign('user_id')->references(app(config("auth.model"))->getKeyName())->on(config('auth.table', 'users'))->onDelete('cascade');
 
             $table->integer(config('defender.role_key', 'role_id'))->unsigned()->index();
             $table->foreign(config('defender.role_key', 'role_id'))->references('id')
