@@ -88,7 +88,7 @@ class DefenderServiceProvider extends ServiceProvider
 
         $this->app->singleton('defender.permission', function ($app) {
             $permissionModel = $app['config']->get('defender.permission_model');
-            
+
             return new EloquentPermissionRepository($app, $app->make($permissionModel));
         });
 
