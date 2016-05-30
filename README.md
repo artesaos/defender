@@ -739,6 +739,7 @@ To use your own classes for Role and Permission models, first set the `role_mode
 
 Following are two examples of how Role and Permission models must be implemented for MongoDB using [jenssegers/laravel-mongodb](https://github.com/jenssegers/laravel-mongodb) driver:
 
+```php
     <?php
     
     // Role model
@@ -755,7 +756,9 @@ Following are two examples of how Role and Permission models must be implemented
     class Role extends Model implements RoleInterface {
         use Role;
     }
+```
 
+```php
     <?php
     
     // Permission model
@@ -773,5 +776,6 @@ Following are two examples of how Role and Permission models must be implemented
     {
         use Permission;    
     }
+```
 
 You must use the correct traits and each class has to implemet the corresponding interface contract.
