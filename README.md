@@ -744,7 +744,7 @@ Following are two examples of how Role and Permission models must be implemented
     
     // Role model
     
-    namespace Pordio;
+    namespace App;
     
     use Jenssegers\Mongodb\Eloquent\Model;
     use Artesaos\Defender\Traits\Models\Role;
@@ -763,7 +763,7 @@ Following are two examples of how Role and Permission models must be implemented
     
     // Permission model
     
-    namespace Pordio;
+    namespace App;
     
     use Jenssegers\Mongodb\Eloquent\Model;
     use Artesaos\Defender\Traits\Models\Permission;
