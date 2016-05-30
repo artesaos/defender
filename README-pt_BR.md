@@ -616,3 +616,46 @@ public function foo()
 	];
 }
 ```
+
+## Usando modelos personalizados para Role e Permission
+
+Para utilizar suas próprias classes para os modelos Role e Permission, primeiramente defina os valores para as chaves `role_model` e `permission_model` no arquivo de configuração `defender.php`.
+
+A seguir dois exemplos de como devem ser implementados os modelos de Role e Permission para MongoDB usando o driver [jenssegers/laravel-mongodb](https://github.com/jenssegers/laravel-mongodb):
+
+    <?php
+    
+    // Role model
+    
+    namespace Pordio;
+    
+    use Jenssegers\Mongodb\Eloquent\Model;
+    use Artesaos\Defender\Traits\Models\Role;
+    use Artesaos\Defender\Contracts\Role as RoleInterface;
+    
+    /**
+     * Class Role.
+     */
+    class Role extends Model implements RoleInterface {
+        use Role;
+    }
+
+    <?php
+    
+    // Permission model
+    
+    namespace Pordio;
+    
+    use Jenssegers\Mongodb\Eloquent\Model;
+    use Artesaos\Defender\Traits\Models\Permission;
+    use Artesaos\Defender\Contracts\Permission as PermissionInterface;
+    
+    /**
+     * Class Permission.
+     */
+    class Permission extends Model implements PermissionInterface
+    {
+        use Permission;    
+    }
+
+Você deve utilizar os traits corretos e cada classe deve implementar o contrato de interface correspondente.
