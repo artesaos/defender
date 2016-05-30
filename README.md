@@ -732,3 +732,46 @@ public function foo()
 
 It's also possible to extend an existing temporary:
 Just use the `$user->extendPermission($permissionName, array $options)` method.
+
+## Using custom Role and Permission models
+
+To use your own classes for Role and Permission models, first set the `role_model` and `permission_model` keys at `defender.php` config.
+
+Following are two examples of how Role and Permission models must be implemented for MongoDB using [jenssegers/laravel-mongodb](https://github.com/jenssegers/laravel-mongodb) driver:
+
+    <?php
+    
+    // Role model
+    
+    namespace Pordio;
+    
+    use Jenssegers\Mongodb\Eloquent\Model;
+    use Artesaos\Defender\Traits\Models\Role;
+    use Artesaos\Defender\Contracts\Role as RoleInterface;
+    
+    /**
+     * Class Role.
+     */
+    class Role extends Model implements RoleInterface {
+        use Role;
+    }
+
+    <?php
+    
+    // Permission model
+    
+    namespace Pordio;
+    
+    use Jenssegers\Mongodb\Eloquent\Model;
+    use Artesaos\Defender\Traits\Models\Permission;
+    use Artesaos\Defender\Contracts\Permission as PermissionInterface;
+    
+    /**
+     * Class Permission.
+     */
+    class Permission extends Model implements PermissionInterface
+    {
+        use Permission;    
+    }
+
+You must use the correct traits and each class has to implemet the corresponding interface contract.
