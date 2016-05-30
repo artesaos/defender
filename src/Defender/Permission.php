@@ -10,5 +10,5 @@ use Artesaos\Defender\Traits\Models\Permission;
  */
 class Permission extends Model implements Contracts\Permission
 {
-    use Permission;    
+    use Permission;
 }
