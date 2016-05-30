@@ -2,7 +2,8 @@
 
 namespace Artesaos\Defender\Repositories\Eloquent;
 
-use Artesaos\Defender\Role;
+use Artesaos\Defender\Contracts\Role;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Contracts\Foundation\Application;
 use Artesaos\Defender\Exceptions\RoleExistsException;
 use Artesaos\Defender\Contracts\Repositories\RoleRepository;
