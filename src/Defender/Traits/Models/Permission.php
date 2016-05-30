@@ -21,12 +21,17 @@ trait Permission
      */
     public function __construct(array $attributes = [])
     {
-        parent::__construct($attributes);
-        $this->table = config('defender.permission_table', 'permissions');
+        /**
+         * Must to be declared before parent::__construct call
+         */
         $this->fillable = $fillable = [
             'name',
             'readable_name',
         ];
+
+        parent::__construct($attributes);
+
+        $this->table = config('defender.permission_table', 'permissions');
     }
 
     /**
