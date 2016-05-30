@@ -23,12 +23,13 @@ trait Role
      */
     public function __construct(array $attributes = [])
     {
-        parent::__construct($attributes);
-
-        $this->table = config('defender.role_table', 'roles');
         $this->fillable = [
                 'name',
             ];
+
+        parent::__construct($attributes);
+
+        $this->table = config('defender.role_table', 'roles');
     }
 
     /**
