@@ -623,11 +623,12 @@ Para utilizar suas próprias classes para os modelos Role e Permission, primeira
 
 A seguir dois exemplos de como devem ser implementados os modelos de Role e Permission para MongoDB usando o driver [jenssegers/laravel-mongodb](https://github.com/jenssegers/laravel-mongodb):
 
+```php
     <?php
     
     // Role model
     
-    namespace Pordio;
+    namespace App;
     
     use Jenssegers\Mongodb\Eloquent\Model;
     use Artesaos\Defender\Traits\Models\Role;
@@ -640,11 +641,14 @@ A seguir dois exemplos de como devem ser implementados os modelos de Role e Perm
         use Role;
     }
 
+```
+
+```php
     <?php
     
     // Permission model
     
-    namespace Pordio;
+    namespace App;
     
     use Jenssegers\Mongodb\Eloquent\Model;
     use Artesaos\Defender\Traits\Models\Permission;
@@ -657,5 +661,6 @@ A seguir dois exemplos de como devem ser implementados os modelos de Role e Perm
     {
         use Permission;    
     }
+```
 
 Você deve utilizar os traits corretos e cada classe deve implementar o contrato de interface correspondente.
