@@ -21,9 +21,7 @@ trait Permission
      */
     public function __construct(array $attributes = [])
     {
-        /**
-         * Must to be declared before parent::__construct call
-         */
+         // Must to be declared before parent::__construct call
         $this->fillable = $fillable = [
             'name',
             'readable_name',
