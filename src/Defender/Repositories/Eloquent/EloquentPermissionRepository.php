@@ -2,7 +2,7 @@
 
 namespace Artesaos\Defender\Repositories\Eloquent;
 
-use Artesaos\Defender\Permission;
+use Artesaos\Defender\Contracts\Permission;
 use Illuminate\Contracts\Foundation\Application;
 use Artesaos\Defender\Exceptions\PermissionExistsException;
 use Artesaos\Defender\Contracts\Repositories\PermissionRepository;

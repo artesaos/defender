@@ -2,10 +2,8 @@
 
 namespace Artesaos\Defender\Providers;
 
-use Artesaos\Defender\Role;
 use Artesaos\Defender\Defender;
 use Artesaos\Defender\Javascript;
-use Artesaos\Defender\Permission;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\View\Compilers\BladeCompiler;
 use Artesaos\Defender\Repositories\Eloquent\EloquentRoleRepository;
@@ -79,7 +77,9 @@ class DefenderServiceProvider extends ServiceProvider
     protected function registerRepositoryInterfaces()
     {
         $this->app->singleton('defender.role', function ($app) {
-            return new EloquentRoleRepository($app, new Role());
+            $roleModel = $app['config']->get('defender.role_model');
+
+            return new EloquentRoleRepository($app, $app->make($roleModel));
         });
 
         $this->app->singleton('Artesaos\Defender\Contracts\Repositories\RoleRepository', function ($app) {
@@ -87,7 +87,9 @@ class DefenderServiceProvider extends ServiceProvider
         });
 
         $this->app->singleton('defender.permission', function ($app) {
-            return new EloquentPermissionRepository($app, new Permission());
+            $permissionModel = $app['config']->get('defender.permission_model');
+
+            return new EloquentPermissionRepository($app, $app->make($permissionModel));
         });
 
         $this->app->singleton('Artesaos\Defender\Contracts\Repositories\PermissionRepository', function ($app) {
