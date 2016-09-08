@@ -200,7 +200,7 @@ class DefenderServiceProvider extends ServiceProvider
         }
     }
 
-     /**
+    /**
      * Strip the parentheses from the given expression.
      *
      * @param  string  $expression

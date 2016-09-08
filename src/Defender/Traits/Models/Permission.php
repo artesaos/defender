@@ -12,11 +12,6 @@ use Artesaos\Defender\Pivots\PermissionUserPivot;
 trait Permission
 {
     /**
-     * @var
-     */
-    protected $table;
-
-    /**
      * @param array $attributes
      */
     public function __construct(array $attributes = [])

@@ -12,13 +12,6 @@ trait Role
     use RoleHasPermissions;
 
     /**
-     * Table name.
-     *
-     * @var string
-     */
-    protected $table;
-
-    /**
      * @param array $attributes
      */
     public function __construct(array $attributes = [])
