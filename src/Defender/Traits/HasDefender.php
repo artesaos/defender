@@ -33,7 +33,7 @@ trait HasDefender
      */
     public function hasPermission($permission, $force = false)
     {
-        $permissions = $this->getAllPermissions($force)->lists('name')->toArray();
+        $permissions = $this->getAllPermissions($force)->pluck('name')->toArray();
 
         return in_array($permission, $permissions);
     }
@@ -49,7 +49,7 @@ trait HasDefender
      */
     public function hasPermissions(array $permissions, $strict = true, $force = false)
     {
-        $allPermissions = $this->getAllPermissions($force)->lists('name')->toArray();
+        $allPermissions = $this->getAllPermissions($force)->pluck('name')->toArray();
         $equalPermissions = array_intersect($permissions, $allPermissions);
         $countEqual = count($equalPermissions);
         if ($countEqual > 0 && ($strict === false || $countEqual === count($permissions))) {
@@ -99,7 +99,7 @@ trait HasDefender
      */
     public function roleHasPermission($permission, $force = false)
     {
-        $permissions = $this->getRolesPermissions($force)->lists('name')->toArray();
+        $permissions = $this->getRolesPermissions($force)->pluck('name')->toArray();
 
         return in_array($permission, $permissions);
     }
@@ -143,7 +143,7 @@ trait HasDefender
      */
     protected function getFreshRolesPermissions()
     {
-        $roles = $this->roles()->get(['id'])->lists('id')->toArray();
+        $roles = $this->roles()->get(['id'])->pluck('id')->toArray();
 
         return app('defender.permission')->getByRoles($roles);
     }

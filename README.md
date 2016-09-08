@@ -3,7 +3,7 @@
 
 [Readme em Português](https://github.com/artesaos/defender/blob/master/README-pt_BR.md).
 
-Defender is a Access Control List (ACL) Solution for Laravel 5.1 and 5.2 (single auth). **(Not compatible with Laravel 5.2 multi-auth)**  
+Defender is a Access Control List (ACL) Solution for Laravel 5.* (single auth). **(Not compatible with multi-auth)**  
 With security and usability in mind, this project aims to provide you a safe way to control your application access without losing the fun of coding.
 
 > Current Build Status
@@ -79,7 +79,7 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
 ...
 ```
 
-If you are using laravel 5.2, there is a small difference:
+If you are using laravel 5.2+, there is a small difference:
 
 ```php
 <?php

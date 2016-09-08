@@ -2,6 +2,7 @@
 
 namespace Artesaos\Defender\Providers;
 
+use Illuminate\Support\Str;
 use Artesaos\Defender\Defender;
 use Artesaos\Defender\Javascript;
 use Illuminate\Support\ServiceProvider;
@@ -76,6 +77,9 @@ class DefenderServiceProvider extends ServiceProvider
      */
     protected function registerRepositoryInterfaces()
     {
+        $this->app->bind('Artesaos\Defender\Contracts\Permission', 'Artesaos\Defender\Permission');
+        $this->app->bind('Artesaos\Defender\Contracts\Role', 'Artesaos\Defender\Role');
+
         $this->app->singleton('defender.role', function ($app) {
             $roleModel = $app['config']->get('defender.role_model');
 
@@ -121,7 +125,7 @@ class DefenderServiceProvider extends ServiceProvider
              * add @shield and @endshield to blade compiler
              */
             $bladeCompiler->directive('shield', function ($expression) {
-                return "<?php if(app('defender')->canDo{$expression}): ?>";
+                return "<?php if(app('defender')->canDo({$this->stripParentheses($expression)})): ?>";
             });
 
             $bladeCompiler->directive('endshield', function ($expression) {
@@ -132,7 +136,7 @@ class DefenderServiceProvider extends ServiceProvider
              * add @is and @endis to blade compiler
              */
             $bladeCompiler->directive('is', function ($expression) {
-                return "<?php if(app('defender')->hasRoles{$expression}): ?>";
+                return "<?php if(app('defender')->hasRoles({$this->stripParentheses($expression)})): ?>";
             });
 
             $bladeCompiler->directive('endis', function ($expression) {
@@ -194,5 +198,19 @@ class DefenderServiceProvider extends ServiceProvider
 
             return config(['defender.user_model' => $this->app['auth']->guard()->getProvider()->getModel()]);
         }
+    }
+
+     /**
+     * Strip the parentheses from the given expression.
+     *
+     * @param  string  $expression
+     * @return string
+     */
+    private function stripParentheses($expression)
+    {
+        if (Str::startsWith($expression, '(')) {
+            $expression = substr($expression, 1, -1);
+        }
+        return $expression;
     }
 }

@@ -93,7 +93,7 @@ abstract class AbstractEloquentRepository implements AbstractRepository
      */
     public function getList($value, $key = 'id')
     {
-        return $this->model->lists($value, $key);
+        return $this->model->pluck($value, $key);
     }
 
     /**

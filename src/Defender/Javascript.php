@@ -32,8 +32,8 @@ class Javascript implements JavascriptContract
         $permissions = $this->getPermissions();
 
         return view('defender::javascript', [
-            'roles' => $roles ? $roles->lists('name')->toJson() : '[]',
-            'permissions' => $permissions ? $permissions->lists('name')->toJson() : '[]',
+            'roles' => $roles ? $roles->pluck('name')->toJson() : '[]',
+            'permissions' => $permissions ? $permissions->pluck('name')->toJson() : '[]',
         ]);
     }
 

@@ -14,20 +14,25 @@
     {
       "name": "Vagner do Carmo",
       "email": "vluzrmos@gmail.com"
+    },
+    {
+      "name": "Mauri de Souza Nunes",
+      "email": "mauri870@gmail.com",
+      "homepage": "https://mauri870.github.io"
     }
   ],
   "require": {
     "php": ">=5.5.9",
-    "illuminate/contracts": "~5.1 || ~5.2",
-    "illuminate/http": "~5.1 || ~5.2",
-    "illuminate/support": "~5.1 || ~5.2",
-    "illuminate/database": "~5.1 || ~5.2",
-    "illuminate/view": "~5.1 || ~5.2"
+    "illuminate/contracts": "~5.0",
+    "illuminate/http": "~5.0",
+    "illuminate/support": "~5.0",
+    "illuminate/database": "~5.0",
+    "illuminate/view": "~5.0"
   },
   "require-dev": {
     "phpunit/phpunit": "~4.0",
     "phpspec/phpspec": "~2.1",
-    "fabpot/php-cs-fixer": "~1.0",
+    "friendsofphp/php-cs-fixer": "~1.0",
     "orchestra/testbench": "~3.0",
     "fzaninotto/faker": "~1.5"
   },
