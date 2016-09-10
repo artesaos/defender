@@ -211,6 +211,7 @@ class DefenderServiceProvider extends ServiceProvider
         if (Str::startsWith($expression, '(')) {
             $expression = substr($expression, 1, -1);
         }
+
         return $expression;
     }
 }
