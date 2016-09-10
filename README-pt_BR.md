@@ -41,7 +41,7 @@ ou se preferir, adicione o seguinte trecho manualmente:
 ```json
 {
 	"require": {
-		"artesaos/defender": "~0.5"
+		"artesaos/defender": "~0.6"
 	}
 }
 ```
