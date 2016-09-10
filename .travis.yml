@@ -4,11 +4,24 @@ php:
   - 5.5
   - 5.6
   - 7.0
-  - hhvm
+  - 7.1
+  - nightly
+
+matrix:
+    include:
+      - php: 5.6
+        env: setup=pre-5.3
+      - php: 7.1
+        env: setup=pre-5.3  
+      - php: nightly
+        env: setup=pre-5.3
+      - php: hhvm
+        env: setup=pre-5.3
 
 before_script:
-  - travis_retry composer self-update
-  - travis_retry composer install --prefer-source --no-interaction
+  - if [[ $setup = 'pre-5.3' ]]; then travis_retry composer require --dev "orchestra/testbench=3.2.*"; fi
+  - if [[ $setup = 'pre-5.3' ]]; then travis_retry composer require "illuminate/contracts=5.2.*" "illuminate/http=5.2.*" "illuminate/support=5.2.*" "illuminate/database=5.2.*" "illuminate/view=5.2.*" --no-interaction; fi
+  - travis_retry composer install --no-interaction --prefer-source --no-suggest
 
 notifications:
   slack: laravel-br:cdt7z4D0Eybo0eJrH7tOErzh  
