@@ -77,13 +77,15 @@ class DefenderServiceProvider extends ServiceProvider
      */
     protected function registerRepositoryInterfaces()
     {
-        $this->app->bind('Artesaos\Defender\Contracts\Permission', 'Artesaos\Defender\Permission');
-        $this->app->bind('Artesaos\Defender\Contracts\Role', 'Artesaos\Defender\Role');
+        $this->app->bind('Artesaos\Defender\Contracts\Permission', function ($app) {
+            return $app->make($this->app['config']->get('defender.permission_model'));
+        });
+        $this->app->bind('Artesaos\Defender\Contracts\Role', function ($app) {
+            return $app->make($this->app['config']->get('defender.role_model'));
+        });
 
         $this->app->singleton('defender.role', function ($app) {
-            $roleModel = $app['config']->get('defender.role_model');
-
-            return new EloquentRoleRepository($app, $app->make($roleModel));
+            return new EloquentRoleRepository($app, $app->make(\Artesaos\Defender\Contracts\Role::class));
         });
 
         $this->app->singleton('Artesaos\Defender\Contracts\Repositories\RoleRepository', function ($app) {
@@ -91,9 +93,7 @@ class DefenderServiceProvider extends ServiceProvider
         });
 
         $this->app->singleton('defender.permission', function ($app) {
-            $permissionModel = $app['config']->get('defender.permission_model');
-
-            return new EloquentPermissionRepository($app, $app->make($permissionModel));
+            return new EloquentPermissionRepository($app, $app->make(\Artesaos\Defender\Contracts\Permission::class));
         });
 
         $this->app->singleton('Artesaos\Defender\Contracts\Repositories\PermissionRepository', function ($app) {

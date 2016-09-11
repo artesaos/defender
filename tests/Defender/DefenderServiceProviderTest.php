@@ -26,6 +26,13 @@ class DefenderServiceProviderTest extends AbstractTestCase
         'testShouldNotLoadHelpers',
     ];
 
+    public function testModelBindings()
+    {
+        $this->assertInstanceOf('Artesaos\Defender\Role', $this->app->make('Artesaos\Defender\Contracts\Role'));
+
+        $this->assertInstanceOf('Artesaos\Defender\Permission', $this->app->make('Artesaos\Defender\Contracts\Permission'));
+    }
+
     /**
      * Verify if all services are in service container.
      */
@@ -143,8 +150,6 @@ class DefenderServiceProviderTest extends AbstractTestCase
      */
     public function testShouldPublishConfigAndMigrations()
     {
-        //dd(config_path());
-
         $this->artisan('vendor:publish');
 
         $resourcesPath = __DIR__.'/../../src/resources';
