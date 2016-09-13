@@ -1,7 +1,6 @@
 language: php
 
 php:
-  - 5.5
   - 5.6
   - 7.0
   - 7.1
@@ -12,7 +11,7 @@ matrix:
       - php: 5.6
         env: setup=pre-5.3
       - php: 7.1
-        env: setup=pre-5.3  
+        env: setup=pre-5.3
       - php: nightly
         env: setup=pre-5.3
       - php: hhvm
@@ -24,8 +23,8 @@ before_script:
   - travis_retry composer install --no-interaction --prefer-source --no-suggest
 
 notifications:
-  slack: laravel-br:cdt7z4D0Eybo0eJrH7tOErzh  
-  
+  slack: laravel-br:cdt7z4D0Eybo0eJrH7tOErzh
+
 script:
 #  - vendor/bin/phpspec run -v
   - phpunit --process-isolation
