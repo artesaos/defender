@@ -30,19 +30,7 @@ abstract class AbstractTestCase extends TestCase
         $paths = is_array($path) ? $path : [$path];
 
         foreach ($paths as $path) {
-            $code = $this->artisan(
-                'migrate',
-                ['--realpath' => $path]
-            );
-
-            $this->assertEquals(
-                0,
-                $code,
-                sprintf(
-                    'Something went wrong when migrating %s.',
-                    str_replace(realpath($this->srcPath('..')), '', realpath($path))
-                )
-            );
+            $this->loadMigrationsFrom(['--realpath' => $path]);
         }
     }
 

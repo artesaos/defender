@@ -37,7 +37,7 @@ trait HasPermissions
      *
      * @return PermissionUserPivot
      */
-    public function newPivot(Model $parent, array $attributes, $table, $exists, $using=null)
+    public function newPivot(Model $parent, array $attributes, $table, $exists, $using = null)
     {
         $permissionModel = app()['config']->get('defender.permission_model');
 

@@ -17,6 +17,7 @@ class EloquentPermissionRepositoryTest extends AbstractTestCase
      */
     protected $providers = [
         'Artesaos\Defender\Providers\DefenderServiceProvider',
+        'Orchestra\Database\ConsoleServiceProvider',
     ];
 
     /**
@@ -125,7 +126,7 @@ class EloquentPermissionRepositoryTest extends AbstractTestCase
             $where['readable_name'] = $readableName;
         }
 
-        $this->seeInDatabase(
+        $this->assertDatabaseHas(
             config('defender.permission_table', 'permissions'),
             $where
         );
@@ -184,7 +185,7 @@ class EloquentPermissionRepositoryTest extends AbstractTestCase
      */
     protected function seePermissionAttachedToUserInDatabase(Permission $permission, User $user)
     {
-        $this->seeInDatabase(
+        $this->assertDatabaseHas(
             config('defender.permission_user_table', 'permission_user'),
             [
                 config('defender.permission_key', 'permission_id') => $permission->id,

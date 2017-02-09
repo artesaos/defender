@@ -3,8 +3,8 @@
 namespace Artesaos\Defender\Commands;
 
 use Illuminate\Console\Command;
-use Artesaos\Defender\Contracts\Repositories\UserRepository;
 use Artesaos\Defender\Contracts\Repositories\RoleRepository;
+use Artesaos\Defender\Contracts\Repositories\UserRepository;
 use Artesaos\Defender\Contracts\Repositories\PermissionRepository;
 
 /**
