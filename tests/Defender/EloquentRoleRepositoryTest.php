@@ -2,9 +2,9 @@
 
 namespace Artesaos\Defender\Testing;
 
-use Artesaos\Defender\Contracts\Repositories\RoleRepository;
 use Artesaos\Defender\Role;
 use Illuminate\Database\Eloquent\Collection;
+use Artesaos\Defender\Contracts\Repositories\RoleRepository;
 
 /**
  * Class EloquentRoleRepositoryTest.

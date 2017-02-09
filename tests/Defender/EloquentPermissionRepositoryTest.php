@@ -2,9 +2,9 @@
 
 namespace Artesaos\Defender\Testing;
 
+use Artesaos\Defender\Role;
 use Artesaos\Defender\Permission;
 use Artesaos\Defender\Repositories\Eloquent\EloquentPermissionRepository;
-use Artesaos\Defender\Role;
 
 /**
  * Class EloquentPermissionRepositoryTest.
