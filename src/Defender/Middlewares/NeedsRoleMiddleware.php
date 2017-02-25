@@ -28,6 +28,10 @@ class NeedsRoleMiddleware extends AbstractDefenderMiddleware
         if (is_null($this->user)) {
             return $this->forbiddenResponse();
         }
+        
+        if ($this->user->isSuperUser()) {
+            return $next($request);
+        }
 
         if (is_array($roles) and count($roles) > 0) {
             $hasResult = true;
