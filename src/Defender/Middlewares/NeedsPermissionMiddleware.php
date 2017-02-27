@@ -28,6 +28,10 @@ class NeedsPermissionMiddleware extends AbstractDefenderMiddleware
         if (is_null($this->user)) {
             return $this->forbiddenResponse();
         }
+        
+        if ($this->user->isSuperUser()) {
+            return $next($request);
+        }
 
         if (is_array($permissions) and count($permissions) > 0) {
             $canResult = true;
