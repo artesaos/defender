@@ -3,6 +3,7 @@
 namespace Artesaos\Defender\Contracts;
 
 use Illuminate\Database\Eloquent\Model;
+use Artesaos\Defender\Pivots\PermissionUserPivot;
 
 /**
  * Interface Permission.
@@ -28,8 +29,9 @@ interface Permission
      * @param array  $attributes
      * @param string $table
      * @param bool   $exists
+     * @param  string|null  $using
      *
      * @return PermissionUserPivot|\Illuminate\Database\Eloquent\Relations\Pivot
      */
-    public function newPivot(Model $parent, array $attributes, $table, $exists);
+    public function newPivot(Model $parent, array $attributes, $table, $exists, $using = null);
 }

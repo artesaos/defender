@@ -62,20 +62,21 @@ trait Permission
      * @param array  $attributes
      * @param string $table
      * @param bool   $exists
+     * @param  string|null  $using
      *
      * @return PermissionUserPivot|\Illuminate\Database\Eloquent\Relations\Pivot
      */
-    public function newPivot(Model $parent, array $attributes, $table, $exists)
+    public function newPivot(Model $parent, array $attributes, $table, $exists, $using = null)
     {
         $userModel = app()['config']->get('defender.user_model');
         $roleModel = app()['config']->get('defender.role_model');
 
         if ($parent instanceof $userModel) {
-            return new PermissionUserPivot($parent, $attributes, $table, $exists);
+            return new PermissionUserPivot($parent, $attributes, $table, $exists, $using);
         }
 
         if ($parent instanceof $roleModel) {
-            return new PermissionRolePivot($parent, $attributes, $table, $exists);
+            return new PermissionRolePivot($parent, $attributes, $table, $exists, $using);
         }
 
         return parent::newPivot($parent, $attributes, $table, $exists);

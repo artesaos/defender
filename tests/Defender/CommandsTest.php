@@ -6,6 +6,7 @@
  * Date: 12/07/15
  * Time: 01:01.
  */
+
 namespace Artesaos\Defender\Testing;
 
 use Artesaos\Defender\Role;
@@ -39,6 +40,7 @@ class CommandsTest extends AbstractTestCase
     {
         return [
             'Artesaos\Defender\Providers\DefenderServiceProvider',
+            'Orchestra\Database\ConsoleServiceProvider',
         ];
     }
 
@@ -49,7 +51,7 @@ class CommandsTest extends AbstractTestCase
     {
         $this->artisan('defender:make:permission', ['name' => 'a.permission', 'readableName' => 'A permission.']);
 
-        $this->seeInDatabase(
+        $this->assertDatabaseHas(
             config('defender.permission_table', 'permissions'),
             [
                 'name' => 'a.permission',
@@ -65,7 +67,7 @@ class CommandsTest extends AbstractTestCase
     {
         $this->artisan('defender:make:permission', ['name' => 'user.index', 'readableName' => 'List Users', '--user' => 1]);
 
-        $this->seeInDatabase(
+        $this->assertDatabaseHas(
             config('defender.permission_table', 'permissions'),
             [
                 'name' => 'user.index',
@@ -84,7 +86,7 @@ class CommandsTest extends AbstractTestCase
     public function testCommandShouldMakeAPermissionToRole()
     {
         $this->artisan('defender:make:permission', ['name' => 'user.delete', 'readableName' => 'Remove Users', '--role' => 'admin']);
-        $this->seeInDatabase(
+        $this->assertDatabaseHas(
             config('defender.permission_table', 'permissions'),
             [
                 'name' => 'user.delete',
@@ -108,7 +110,7 @@ class CommandsTest extends AbstractTestCase
     {
         $this->artisan('defender:make:role', ['name' => 'a.role']);
 
-        $this->seeInDatabase(
+        $this->assertDatabaseHas(
             config('defender.role_table', 'roles'),
             [
                 'name' => 'a.role',
@@ -123,7 +125,7 @@ class CommandsTest extends AbstractTestCase
     {
         $this->artisan('defender:make:role', ['name' => 'user.role', '--user' => 1]);
 
-        $this->seeInDatabase(
+        $this->assertDatabaseHas(
             config('defender.role_table', 'roles'),
             [
                 'name' => 'user.role',

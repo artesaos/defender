@@ -13,7 +13,10 @@ class JavascriptTest extends AbstractTestCase
      * Array of service providers.
      * @var array
      */
-    protected $providers = ['Artesaos\Defender\Providers\DefenderServiceProvider'];
+    protected $providers = [
+        'Artesaos\Defender\Providers\DefenderServiceProvider',
+        'Orchestra\Database\ConsoleServiceProvider',
+    ];
 
     /**
      * New defender instance.

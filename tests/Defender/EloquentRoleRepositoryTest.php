@@ -2,9 +2,9 @@
 
 namespace Artesaos\Defender\Testing;
 
-use Artesaos\Defender\Contracts\Repositories\RoleRepository;
 use Artesaos\Defender\Role;
 use Illuminate\Database\Eloquent\Collection;
+use Artesaos\Defender\Contracts\Repositories\RoleRepository;
 
 /**
  * Class EloquentRoleRepositoryTest.
@@ -17,6 +17,7 @@ class EloquentRoleRepositoryTest extends AbstractTestCase
      */
     protected $providers = [
         'Artesaos\Defender\Providers\DefenderServiceProvider',
+        'Orchestra\Database\ConsoleServiceProvider',
     ];
 
     /**
@@ -106,7 +107,7 @@ class EloquentRoleRepositoryTest extends AbstractTestCase
 
         $role = $repository->create($rolename);
 
-        $this->seeInDatabase(
+        $this->assertDatabaseHas(
             config('defender.role_table', 'roles'),
             ['name' => $rolename]
         );
@@ -142,7 +143,7 @@ class EloquentRoleRepositoryTest extends AbstractTestCase
      */
     protected function seeRoleAttachedToUserInDatabase(Role $role, User $user)
     {
-        $this->seeInDatabase(
+        $this->assertDatabaseHas(
             config('defender.role_user_table', 'role_user'),
             [
                 config('defender.role_key', 'role_id') => $role->id,
@@ -158,7 +159,7 @@ class EloquentRoleRepositoryTest extends AbstractTestCase
      */
     protected function notSeeRoleAttachedToUserInDatabase(Role $role, User $user)
     {
-        $this->notSeeInDatabase(
+        $this->assertDatabaseMissing(
             config('defender.role_user_table', 'role_user'),
             [
                 config('defender.role_key', 'role_id') => $role->id,

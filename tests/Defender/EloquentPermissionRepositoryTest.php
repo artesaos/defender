@@ -2,9 +2,9 @@
 
 namespace Artesaos\Defender\Testing;
 
+use Artesaos\Defender\Role;
 use Artesaos\Defender\Permission;
 use Artesaos\Defender\Repositories\Eloquent\EloquentPermissionRepository;
-use Artesaos\Defender\Role;
 
 /**
  * Class EloquentPermissionRepositoryTest.
@@ -17,6 +17,7 @@ class EloquentPermissionRepositoryTest extends AbstractTestCase
      */
     protected $providers = [
         'Artesaos\Defender\Providers\DefenderServiceProvider',
+        'Orchestra\Database\ConsoleServiceProvider',
     ];
 
     /**
@@ -125,7 +126,7 @@ class EloquentPermissionRepositoryTest extends AbstractTestCase
             $where['readable_name'] = $readableName;
         }
 
-        $this->seeInDatabase(
+        $this->assertDatabaseHas(
             config('defender.permission_table', 'permissions'),
             $where
         );
@@ -184,7 +185,7 @@ class EloquentPermissionRepositoryTest extends AbstractTestCase
      */
     protected function seePermissionAttachedToUserInDatabase(Permission $permission, User $user)
     {
-        $this->seeInDatabase(
+        $this->assertDatabaseHas(
             config('defender.permission_user_table', 'permission_user'),
             [
                 config('defender.permission_key', 'permission_id') => $permission->id,
@@ -200,7 +201,7 @@ class EloquentPermissionRepositoryTest extends AbstractTestCase
      */
     protected function notSeePermissionAttachedToUserInDatabase(Permission $permission, User $user)
     {
-        $this->notSeeInDatabase(
+        $this->assertDatabaseMissing(
             config('defender.permission_user_table', 'permission_user'),
             [
                 config('defender.permission_key', 'permission_id') => $permission->id,
@@ -216,7 +217,7 @@ class EloquentPermissionRepositoryTest extends AbstractTestCase
      */
     protected function seePermissionAttachedToRoleInDatabase(Permission $permission, Role $role)
     {
-        $this->seeInDatabase(
+        $this->assertDatabaseHas(
             config('defender.permission_role_table', 'permission_role'),
             [
                 config('defender.permission_key', 'permission_id') => $permission->id,
@@ -232,7 +233,7 @@ class EloquentPermissionRepositoryTest extends AbstractTestCase
      */
     protected function notSeePermissionAttachedToRoleInDatabase(Permission $permission, Role $role)
     {
-        $this->notSeeInDatabase(
+        $this->assertDatabaseMissing(
             config('defender.permission_role_table', 'permission_role'),
             [
                 config('defender.permission_key', 'permission_id') => $permission->id,

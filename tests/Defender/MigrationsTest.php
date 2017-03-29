@@ -13,6 +13,7 @@ class MigrationsTest extends AbstractTestCase
      */
     protected $providers = [
         'Artesaos\Defender\Providers\DefenderServiceProvider',
+        'Orchestra\Database\ConsoleServiceProvider',
     ];
 
     /**
