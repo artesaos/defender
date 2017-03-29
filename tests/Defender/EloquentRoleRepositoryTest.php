@@ -107,7 +107,7 @@ class EloquentRoleRepositoryTest extends AbstractTestCase
 
         $role = $repository->create($rolename);
 
-        $this->seeInDatabase(
+        $this->assertDatabaseHas(
             config('defender.role_table', 'roles'),
             ['name' => $rolename]
         );
@@ -143,7 +143,7 @@ class EloquentRoleRepositoryTest extends AbstractTestCase
      */
     protected function seeRoleAttachedToUserInDatabase(Role $role, User $user)
     {
-        $this->seeInDatabase(
+        $this->assertDatabaseHas(
             config('defender.role_user_table', 'role_user'),
             [
                 config('defender.role_key', 'role_id') => $role->id,
@@ -159,7 +159,7 @@ class EloquentRoleRepositoryTest extends AbstractTestCase
      */
     protected function notSeeRoleAttachedToUserInDatabase(Role $role, User $user)
     {
-        $this->notSeeInDatabase(
+        $this->assertDatabaseMissing(
             config('defender.role_user_table', 'role_user'),
             [
                 config('defender.role_key', 'role_id') => $role->id,
