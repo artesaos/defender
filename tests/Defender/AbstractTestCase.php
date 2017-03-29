@@ -30,7 +30,7 @@ abstract class AbstractTestCase extends TestCase
         $paths = is_array($path) ? $path : [$path];
 
         foreach ($paths as $path) {
-            $this->loadMigrationsFrom(['--realpath' => $path]);
+            $this->loadMigrationsFrom($path);
         }
     }
 
