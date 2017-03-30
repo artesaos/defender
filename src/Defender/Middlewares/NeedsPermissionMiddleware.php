@@ -28,7 +28,7 @@ class NeedsPermissionMiddleware extends AbstractDefenderMiddleware
         if (is_null($this->user)) {
             return $this->forbiddenResponse();
         }
-        
+
         if ($this->user->isSuperUser()) {
             return $next($request);
         }
