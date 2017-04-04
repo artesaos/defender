@@ -79,6 +79,6 @@ trait Permission
             return new PermissionRolePivot($parent, $attributes, $table, $exists, $using);
         }
 
-        return parent::newPivot($parent, $attributes, $table, $exists);
+        return parent::newPivot($parent, $attributes, $table, $exists, $using);
     }
 }
