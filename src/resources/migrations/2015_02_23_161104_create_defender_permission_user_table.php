@@ -12,7 +12,7 @@ class CreateDefenderPermissionUserTable extends Migration
     {
         Schema::create(config('defender.permission_user_table', 'permission_user'), function (Blueprint $table) {
             $table->integer('user_id')->unsigned()->index();
-            $table->foreign('user_id')->references('id')->on(config('auth.table', 'users'))->onDelete('cascade');
+            $table->foreign('user_id')->references(app(config("auth.model"))->getKeyName())->on(config('auth.table', 'users'))->onDelete('cascade');
 
             $table->integer(config('defender.permission_key', 'permission_id'))->unsigned()->index();
             $table->foreign(config('defender.permission_key', 'permission_id'))->references('id')
