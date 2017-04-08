@@ -226,7 +226,7 @@ Route::get('foo', ['middleware' => ['auth', 'needsPermission:user.index'], funct
 }]);
 ```
 
-With this syntax it's also possible to use the middlewaren within your controllers.
+With this syntax it's also possible to use the middleware within your controllers.
 
 ```php
 $this->middleware('needsPermission:user.index');
@@ -299,7 +299,7 @@ Route::get('foo', ['middleware' => ['auth', 'needsRole:admin'], function() {
 }]);
 ```
 
-With this syntax it's also possible to use the middlewaren within your controllers.
+With this syntax it's also possible to use the middleware within your controllers.
 
 ```php
 $this->middleware('needsRole:admin');
@@ -520,7 +520,7 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
 
 This trait, beyond configuring the relationships, will add the following methods to your object `App\User`:
 
-#####`public function hasPermission($permission)`:
+##### `public function hasPermission($permission)`:
 
 This method checks if the logged user has the permission `$permission`
 
@@ -570,7 +570,7 @@ public function foo(Authenticable $user)
 
 ##### `public function detachRole($role)`:
 
-Deatach the role `$role` from the user (inverse to `attachRole()`).
+Detach the role `$role` from the user (inverse to `attachRole()`).
 
 ```php
 public function foo(Authenticable $user)
@@ -589,7 +589,7 @@ public function foo(Authenticable $user)
 
 ##### `public function syncRoles(array $roles = array())`:
 
-This is like the `attachRole()` method, but only the roles in the array `$roles` will be on the relationship after the method runs. `$roles` it's an array of `ids` for the needed roles.
+This is like the `attachRole()` method, but only the roles in the array `$roles` will be on the relationship after the method runs. `$roles` is an array of `ids` for the needed roles.
 
 ```php
 public function foo(Authenticable $user)
@@ -640,7 +640,7 @@ public function foo(Authenticable $user)
 
 ##### `public function syncPermissions(array $permissions)`:
 
-This is like the method `syncRoles`. but only the roles in the array `$permissions` be on the relationship after the method runs.
+This is like the method `syncRoles`, but only the roles in the array `$permissions` be on the relationship after the method runs.
 
 ```php
 public function foo(Authenticable $user)
@@ -685,7 +685,7 @@ public function foo(Authenticable $user)
 
 ### Temporary permissions
 
-One of the coolest Defender's features it's to add temporary permissions to a group or an user.
+One of Defender's coolest features is to add temporary permissions to a group or an user.
 
 #### For example
 
