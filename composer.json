@@ -45,5 +45,15 @@
   "config":{
     "preferred-install": "dist"
   },
-  "minimum-stability" : "stable"
+  "minimum-stability" : "stable",
+  "extra": {
+    "laravel": {
+      "providers": [
+        "Artesaos\\Defender\\Providers\\DefenderServiceProvider"
+      ],
+      "aliases": {
+        "Defender": "Artesaos\\Defender\\Facades\\Defender"
+      }
+    }
+  }
 }
