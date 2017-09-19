@@ -5,3 +5,7 @@ Yes, you are admin!
 <?php if(app('defender')->canDo('do.this')): ?>
 Yes, you can do this!
 <?php endif; ?>
+
+<?php if(!app('defender')->canDo('do.this')): ?>
+No, you can not do this!
+<?php endif; ?>
