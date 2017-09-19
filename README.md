@@ -373,6 +373,14 @@ Laravel's Blade extension for using Defender.
 @endshield
 ```
 
+#### @cannotdo
+
+```
+@cannotdo('user.index')
+    shows the data for those who doesn't have the user.index permission
+@endcannotdo
+```
+
 #### @is
 
 ```
