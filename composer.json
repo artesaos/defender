@@ -1,26 +1,7 @@
 {
-  "name": "artesaos/defender",
-  "description": "Roles & Permissions for Laravel 5",
+  "name": "munizeverton/defender",
+  "description": "Fork de artesaos/defender",
   "license": "MIT",
-  "authors": [
-    {
-      "name": "Andreo Vieira",
-      "email": "andreoav@gmail.com"
-    },
-    {
-      "name": "Luiz Vinicius Reis",
-      "email": "luiz.vinicius73@gmail.com"
-    },
-    {
-      "name": "Vagner do Carmo",
-      "email": "vluzrmos@gmail.com"
-    },
-    {
-      "name": "Mauri de Souza Nunes",
-      "email": "mauri870@gmail.com",
-      "homepage": "https://mauri870.github.io"
-    }
-  ],
   "require": {
     "php": ">=5.6.4",
     "illuminate/contracts": "~5.4",
@@ -39,7 +20,7 @@
   },
   "autoload": {
     "psr-4": {
-      "Artesaos\\Defender\\": "src/Defender/"
+      "Munizeverton\\Defender\\": "src/Defender/"
     }
   },
   "config":{
