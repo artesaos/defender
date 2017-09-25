@@ -142,6 +142,17 @@ class DefenderServiceProvider extends ServiceProvider
             $bladeCompiler->directive('endis', function ($expression) {
                 return '<?php endif; ?>';
             });
+
+            /*
+             * add @cannotdo and @endcannotdo to blade compiler
+             */
+            $bladeCompiler->directive('cannotdo', function ($expression) {
+                return "<?php if(!app('defender')->canDo({$this->stripParentheses($expression)})): ?>";
+            });
+
+            $bladeCompiler->directive('endcannotdo', function ($expression) {
+                return '<?php endif; ?>';
+            });
         });
     }
 

@@ -5,3 +5,7 @@ Yes, you are admin!
 @shield('do.this')
 Yes, you can do this!
 @endshield
+
+@cannotdo('do.this')
+No, you can not do this!
+@endcannotdo

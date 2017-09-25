@@ -83,8 +83,10 @@ class DefenderServiceProviderTest extends AbstractTestCase
 
         $this->assertNotContains('@shield', $compiled);
         $this->assertNotContains('@is', $compiled);
+        $this->assertNotContains('@cannotdo', $compiled);
         $this->assertNotContains('@endshield', $compiled);
         $this->assertNotContains('@endis', $compiled);
+        $this->assertNotContains('@endcannotdo', $compiled);
 
         $this->assertStringEqualsFile($expected, $compiled);
     }
