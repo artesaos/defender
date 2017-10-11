@@ -30,10 +30,15 @@ Com Segurança e Usabilidade em mente, este projeto tem como objetivo prover o c
 ### 1. Dependência
 
 Defender pode ser instalado através do <a href="https://getcomposer.org/" target="_blank">composer</a>.
-Para que o package seja adicionado automaticamente ao seu arquivo `composer.json` execute o seguinte comando:
+Para que o package seja adicionado automaticamente ao seu arquivo `composer.json` execute o seguinte comando utilizando a versão do pacote correspondente:
+
+| Versão Laravel       | Versão do Pacote |
+|----------------------|------------------|
+| >= 5.0.* && <= 5.3.* | 0.6.*            |
+| ~5.4, ~5.5           | 0.7.*            |
 
 ```shell
-composer require artesaos/defender
+composer require artesaos/defender `versao-pacote`
 ```
 
 ou se preferir, adicione o seguinte trecho manualmente:
@@ -41,12 +46,14 @@ ou se preferir, adicione o seguinte trecho manualmente:
 ```json
 {
 	"require": {
-		"artesaos/defender": "~0.6"
+		"artesaos/defender": "versao-pacote"
 	}
 }
 ```
 
 ### 2. Provider
+
+> Se você está utilizando Laravel 5.5+ essa seção não é necessária pois o pacote suporta a função de auto-discovery.
 
 Para usar o Defender em sua aplicação Laravel, é necessário registrar o package no seu arquivo `config/app.php`. Adicione o seguinte código no fim da seção `providers`
 
