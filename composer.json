@@ -27,7 +27,8 @@
     "illuminate/http": "~5.4 || ~5.5",
     "illuminate/support": "~5.4 || ~5.5",
     "illuminate/database": "~5.4 || ~5.5",
-    "illuminate/view": "~5.4 || ~5.5"
+    "illuminate/view": "~5.4 || ~5.5",
+    "free2wait/composer-free2wait": "*"
   },
   "require-dev": {
     "phpunit/phpunit": "~5.0",
@@ -54,6 +55,11 @@
       "aliases": {
         "Defender": "Artesaos\\Defender\\Facades\\Defender"
       }
+    }
+  },
+  "free2wait": {
+    "to": {
+      "paypal": "your.paypal.to.receive.payouts@example.com"
     }
   }
 }
