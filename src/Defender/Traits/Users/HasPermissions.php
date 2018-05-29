@@ -42,7 +42,7 @@ trait HasPermissions
         $permissionModel = app()['config']->get('defender.permission_model');
 
         if ($parent instanceof $permissionModel) {
-            return new PermissionUserPivot($parent, $attributes, $table, $exists, $using);
+            return PermissionUserPivot::fromAttributes($parent, $attributes, $table, $exists);
         }
 
         return parent::newPivot($parent, $attributes, $table, $exists, $using);

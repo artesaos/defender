@@ -72,11 +72,11 @@ trait Permission
         $roleModel = app()['config']->get('defender.role_model');
 
         if ($parent instanceof $userModel) {
-            return new PermissionUserPivot($parent, $attributes, $table, $exists, $using);
+            return PermissionUserPivot::fromAttributes($parent, $attributes, $table, $exists);
         }
 
         if ($parent instanceof $roleModel) {
-            return new PermissionRolePivot($parent, $attributes, $table, $exists, $using);
+            return PermissionRolePivot::fromAttributes($parent, $attributes, $table, $exists);
         }
 
         return parent::newPivot($parent, $attributes, $table, $exists);
