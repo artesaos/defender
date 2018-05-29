@@ -1,8 +1,6 @@
 ﻿# Defender
 ----------
 
-[Readme em Português](https://github.com/artesaos/defender/blob/master/README-pt_BR.md).
-
 Defender is an Access Control List (ACL) Solution for Laravel 5.* (single auth). **(Not compatible with multi-auth)**  
 With security and usability in mind, this project aims to provide you a safe way to control your application access without losing the fun of coding.
 
@@ -20,9 +18,6 @@ With security and usability in mind, this project aims to provide you a safe way
 [![Monthly Downloads](https://poser.pugx.org/artesaos/defender/d/monthly.png)](https://packagist.org/packages/artesaos/defender)
 [![Daily Downloads](https://poser.pugx.org/artesaos/defender/d/daily.png)](https://packagist.org/packages/artesaos/defender)
 
-> Tips
-
-<a href="http://zenhub.io" target="_blank"><img src="https://raw.githubusercontent.com/ZenHubIO/support/master/zenhub-badge.png" height="18px" alt="Powered by ZenHub"/></a>
 
 ## Contribution welcome
 
@@ -38,7 +33,7 @@ Using <a href="https://getcomposer.org/" target="_blank">composer</a>, execute t
 |----------------------|------------------|
 | >= 5.0.* && <= 5.3.* | 0.6.*            |
 | 5.4.*                | 0.7.*            |
-| ~5.5                 | 0.8.*            |
+| ~5.5.*               | 0.8.*            |
 
 ```shell
 composer require artesaos/defender
