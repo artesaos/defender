@@ -24,6 +24,10 @@ With security and usability in mind, this project aims to provide you a safe way
 
 <a href="http://zenhub.io" target="_blank"><img src="https://raw.githubusercontent.com/ZenHubIO/support/master/zenhub-badge.png" height="18px" alt="Powered by ZenHub"/></a>
 
+## Contribution welcome
+
+Defender is looking for maintainers and contributors.
+
 ## Installation
 
 ### 1. Dependency
@@ -33,10 +37,11 @@ Using <a href="https://getcomposer.org/" target="_blank">composer</a>, execute t
 | Version Constraint   | Package Version  |
 |----------------------|------------------|
 | >= 5.0.* && <= 5.3.* | 0.6.*            |
-| ~5.4, ~5.5           | 0.7.*            |
+| 5.4.*                | 0.7.*            |
+| ~5.5                 | 0.8.*            |
 
 ```shell
-composer require artesaos/defender `package-version`
+composer require artesaos/defender
 ```
 
 or manually update your `composer.json` file
@@ -44,7 +49,7 @@ or manually update your `composer.json` file
 ```json
 {
     "require": {
-        "artesaos/defender": "package-version"
+        "artesaos/defender": "~0.8.0"
     }
 }
 ```
