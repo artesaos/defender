@@ -32,8 +32,8 @@ Using <a href="https://getcomposer.org/" target="_blank">composer</a>, execute t
 | Version Constraint   | Package Version  |
 |----------------------|------------------|
 | >= 5.0.* && <= 5.3.* | 0.6.*            |
-| 5.4.*                | 0.7.*            |
-| ~5.5.*               | 0.8.*            |
+| ~5.4, ~5.5           | 0.7.*            |
+| >= 5.6.*             | 0.8.*            |
 
 ```shell
 composer require artesaos/defender
