@@ -142,6 +142,17 @@ class DefenderServiceProvider extends ServiceProvider
             $bladeCompiler->directive('endis', function ($expression) {
                 return '<?php endif; ?>';
             });
+
+            /*
+             * add @isnot and @endisnot to blade compiler
+             */
+            $bladeCompiler->directive('isnot', function ($expression) {
+                return "<?php if(!app('defender')->hasRoles({$this->stripParentheses($expression)})): ?>";
+            });
+
+            $bladeCompiler->directive('endisnot', function ($expression) {
+                return '<?php endif; ?>';
+            });
         });
     }
 

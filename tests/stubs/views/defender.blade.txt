@@ -2,6 +2,10 @@
 Yes, you are admin!
 @endis
 
+@isnot('admin')
+No, you are not an admin!
+@endisnot
+
 @shield('do.this')
 Yes, you can do this!
 @endshield
