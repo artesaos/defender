@@ -2,6 +2,10 @@
 Yes, you are admin!
 <?php endif; ?>
 
+<?php if(!app('defender')->hasRoles('admin')): ?>
+No, you are not an admin!
+<?php endif; ?>
+
 <?php if(app('defender')->canDo('do.this')): ?>
 Yes, you can do this!
 <?php endif; ?>
