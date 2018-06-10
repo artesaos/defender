@@ -4,7 +4,6 @@ namespace Artesaos\Defender\Providers;
 
 use Illuminate\Support\Str;
 use Artesaos\Defender\Defender;
-use Artesaos\Defender\Javascript;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\View\Compilers\BladeCompiler;
 use Artesaos\Defender\Repositories\Eloquent\EloquentRoleRepository;
