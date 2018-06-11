@@ -2,6 +2,11 @@ language: php
 
 php:
   - 7.1
+  - 7.2
+
+cache:
+  directories:
+    - $HOME/.composer/cache
 
 before_script:
   - travis_retry composer install --no-interaction --prefer-source --no-suggest
@@ -10,5 +15,4 @@ notifications:
   slack: laravel-br:cdt7z4D0Eybo0eJrH7tOErzh
 
 script:
-#  - vendor/bin/phpspec run -v
   - vendor/bin/phpunit --process-isolation
