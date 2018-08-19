@@ -35,6 +35,12 @@ trait HasDefender
     {
         $permissions = $this->getAllPermissions($force)->pluck('name')->toArray();
 
+        if (strpos($permission, '*')) {
+            $permission = substr($permission, 0, -2);
+
+            return (bool) preg_grep('~'.$permission.'~', $permissions);
+        }
+
         return in_array($permission, $permissions);
     }
 
