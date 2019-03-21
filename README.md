@@ -380,6 +380,16 @@ Laravel's Blade extension for using Defender.
 @endshield
 ```
 
+You can also use wildcard(*)
+
+```
+@shield('user.*')
+    shows your protected stuff
+@else
+    shows the data for those who doesn't have the any permission with 'user' prefix
+@endshield
+```
+
 #### @is
 
 ```
