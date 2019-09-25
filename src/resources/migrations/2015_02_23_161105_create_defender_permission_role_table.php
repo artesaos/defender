@@ -1,5 +1,7 @@
 <?php
 
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
@@ -32,8 +34,10 @@ class CreateDefenderPermissionRoleTable extends Migration
     public function down()
     {
         Schema::table(config('defender.permission_role_table', 'permission_role'), function (Blueprint $table) {
-            $table->dropForeign(config('defender.permission_role_table', 'permission_role').'_'.config('defender.permission_key', 'permission_id').'_foreign');
-            $table->dropForeign(config('defender.permission_role_table', 'permission_role').'_'.config('defender.role_key', 'role_id').'_foreign');
+            if (DB::getDriverName() !== 'sqlite') {
+                $table->dropForeign(config('defender.permission_role_table', 'permission_role').'_'.config('defender.permission_key', 'permission_id').'_foreign');
+                $table->dropForeign(config('defender.permission_role_table', 'permission_role').'_'.config('defender.role_key', 'role_id').'_foreign');
+            }
         });
 
         Schema::drop(config('defender.permission_role_table', 'permission_role'));

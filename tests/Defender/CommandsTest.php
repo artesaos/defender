@@ -17,7 +17,7 @@ class CommandsTest extends AbstractTestCase
     /**
      * {@inheritdoc}
      */
-    public function setUp()
+    public function setUp() : void
     {
         parent::setUp();
 
@@ -27,8 +27,8 @@ class CommandsTest extends AbstractTestCase
         ]);
 
         $this->seed([
-            'UserTableSeeder',
-            'RoleTableSeeder',
+            UserTableSeeder::class,
+            RoleTableSeeder::class,
         ]);
     }
 
@@ -49,7 +49,7 @@ class CommandsTest extends AbstractTestCase
      */
     public function testCommandShouldMakeAPermission()
     {
-        $this->artisan('defender:make:permission', ['name' => 'a.permission', 'readableName' => 'A permission.']);
+        $this->artisan('defender:make:permission', ['name' => 'a.permission', 'readableName' => 'A permission.'])->assertExitCode(0)->run();
 
         $this->assertDatabaseHas(
             config('defender.permission_table', 'permissions'),
@@ -65,7 +65,7 @@ class CommandsTest extends AbstractTestCase
      */
     public function testCommandShouldMakeAPermissionToUser()
     {
-        $this->artisan('defender:make:permission', ['name' => 'user.index', 'readableName' => 'List Users', '--user' => 1]);
+        $this->artisan('defender:make:permission', ['name' => 'user.index', 'readableName' => 'List Users', '--user' => 1])->assertExitCode(0)->run();
 
         $this->assertDatabaseHas(
             config('defender.permission_table', 'permissions'),

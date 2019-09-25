@@ -23,7 +23,7 @@ class EloquentPermissionRepositoryTest extends AbstractTestCase
     /**
      * {@inheritdoc}
      */
-    public function setUp()
+    public function setUp() : void
     {
         parent::setUp();
 
@@ -33,8 +33,8 @@ class EloquentPermissionRepositoryTest extends AbstractTestCase
         ]);
 
         $this->seed([
-            'UserTableSeeder',
-            'RoleTableSeeder',
+            UserTableSeeder::class,
+            RoleTableSeeder::class,
         ]);
     }
 
@@ -70,7 +70,7 @@ class EloquentPermissionRepositoryTest extends AbstractTestCase
 
         /** @var Permission $permission */
         /** @var User $user */
-        list($permission, $user) = $this->createAndAttachPermission(
+        [$permission, $user] = $this->createAndAttachPermission(
             'users.delete',
             ['name' => 'admin'],
             'Delete users'

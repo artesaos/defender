@@ -41,12 +41,11 @@ abstract class AbstractTestCase extends TestCase
     public function seed($seeder = 'DatabaseSeeder')
     {
         $seeders = is_array($seeder) ? $seeder : [$seeder];
-
         foreach ($seeders as $seeder) {
             $code = $this->artisan(
                 'db:seed',
-                ['--class' => str_contains($seeder, '\\') ? $seeder : 'Artesaos\Defender\Testing\\'.$seeder]
-            );
+                ['--class' => $seeder]
+            )->assertExitCode(0)->run();
 
             $this->assertEquals(0, $code, sprintf('Something went wrong when seeding %s.', $seeder));
         }

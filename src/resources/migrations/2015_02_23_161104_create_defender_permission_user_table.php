@@ -30,8 +30,10 @@ class CreateDefenderPermissionUserTable extends Migration
     public function down()
     {
         Schema::table(config('defender.permission_user_table', 'permission_user'), function (Blueprint $table) {
-            $table->dropForeign(config('defender.permission_user_table', 'permission_user').'_user_id_foreign');
-            $table->dropForeign(config('defender.permission_user_table', 'permission_user').'_'.config('defender.permission_key', 'permission_id').'_foreign');
+            if (DB::getDriverName() !== 'sqlite') {
+                $table->dropForeign(config('defender.permission_user_table', 'permission_user').'_user_id_foreign');
+                $table->dropForeign(config('defender.permission_user_table', 'permission_user').'_'.config('defender.permission_key', 'permission_id').'_foreign');
+            }
         });
 
         Schema::drop(config('defender.permission_user_table', 'permission_user'));

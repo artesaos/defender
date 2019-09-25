@@ -27,7 +27,7 @@ class JavascriptTest extends AbstractTestCase
     /**
      * {@inheritdoc}
      */
-    public function setUp()
+    public function setUp() : void
     {
         parent::setUp();
 
@@ -37,8 +37,8 @@ class JavascriptTest extends AbstractTestCase
         ]);
 
         $this->seed([
-            'UserTableSeeder',
-            'RoleTableSeeder',
+            UserTableSeeder::class,
+            RoleTableSeeder::class,
         ]);
 
         $this->app->singleton('Illuminate\Contracts\Debug\ExceptionHandler', 'Orchestra\Testbench\Exceptions\Handler');

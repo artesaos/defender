@@ -20,7 +20,7 @@ class HasDefenderTest extends AbstractTestCase
     /**
      * {@inheritdoc}
      */
-    public function setUp()
+    public function setUp() : void
     {
         parent::setUp();
 
@@ -30,8 +30,8 @@ class HasDefenderTest extends AbstractTestCase
         ]);
 
         $this->seed([
-            'UserTableSeeder',
-            'PermissionTableSeeder',
+            UserTableSeeder::class,
+            PermissionTableSeeder::class,
         ]);
     }
 
