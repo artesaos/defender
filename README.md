@@ -1,7 +1,7 @@
 ﻿# Defender
 ----------
 
-Defender is an Access Control List (ACL) Solution for Laravel 5.* / 6.* (single auth). **(Not compatible with multi-auth)**  
+Defender is an Access Control List (ACL) Solution for Laravel 6.* (single auth). **(Not compatible with multi-auth)**  
 With security and usability in mind, this project aims to provide you a safe way to control your application access without losing the fun of coding.
 
 > Current Build Status
