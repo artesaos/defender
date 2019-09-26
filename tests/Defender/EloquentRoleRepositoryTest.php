@@ -23,7 +23,7 @@ class EloquentRoleRepositoryTest extends AbstractTestCase
     /**
      * {@inheritdoc}
      */
-    public function setUp()
+    public function setUp() : void
     {
         parent::setUp();
 
@@ -32,7 +32,7 @@ class EloquentRoleRepositoryTest extends AbstractTestCase
             $this->resourcePath('migrations'),
         ]);
 
-        $this->seed('UserTableSeeder');
+        $this->seed(UserTableSeeder::class);
     }
 
     /**
@@ -77,7 +77,7 @@ class EloquentRoleRepositoryTest extends AbstractTestCase
 
         /** @var Role $role */
         /** @var User $user */
-        list($role, $user) = $this->createAndAttachRole('superuser', ['name' => 'admin']);
+        [$role, $user] = $this->createAndAttachRole('superuser', ['name' => 'admin']);
 
         $this->notSeeRoleAttachedToUserInDatabase($role, User::where('name', 'normal')->first());
 

@@ -81,12 +81,12 @@ class DefenderServiceProviderTest extends AbstractTestCase
 
         $this->assertNotEmpty($compiled);
 
-        $this->assertNotContains('@shield', $compiled);
-        $this->assertNotContains('@is', $compiled);
-        $this->assertNotContains('@endshield', $compiled);
-        $this->assertNotContains('@endis', $compiled);
-        $this->assertNotContains('@isnot', $compiled);
-        $this->assertNotContains('@endisnot', $compiled);
+        $this->assertStringNotContainsString('@shield', $compiled);
+        $this->assertStringNotContainsString('@is', $compiled);
+        $this->assertStringNotContainsString('@endshield', $compiled);
+        $this->assertStringNotContainsString('@endis', $compiled);
+        $this->assertStringNotContainsString('@isnot', $compiled);
+        $this->assertStringNotContainsString('@endisnot', $compiled);
         $this->assertStringEqualsFile($expected, $compiled);
     }
 
@@ -107,12 +107,12 @@ class DefenderServiceProviderTest extends AbstractTestCase
 
         $this->assertNotEmpty($compiled);
 
-        $this->assertContains('@shield', $compiled);
-        $this->assertContains('@is', $compiled);
-        $this->assertContains('@endshield', $compiled);
-        $this->assertContains('@endis', $compiled);
-        $this->assertContains('@isnot', $compiled);
-        $this->assertContains('@endisnot', $compiled);
+        $this->assertStringContainsString('@shield', $compiled);
+        $this->assertStringContainsString('@is', $compiled);
+        $this->assertStringContainsString('@endshield', $compiled);
+        $this->assertStringContainsString('@endis', $compiled);
+        $this->assertStringContainsString('@isnot', $compiled);
+        $this->assertStringContainsString('@endisnot', $compiled);
 
         $this->assertStringNotEqualsFile($expected, $compiled);
     }
