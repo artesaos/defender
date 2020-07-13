@@ -1,7 +1,7 @@
 ﻿# Defender
 ----------
 
-Defender is an Access Control List (ACL) Solution for Laravel 6.* (single auth). **(Not compatible with multi-auth)**  
+Defender is an Access Control List (ACL) Solution for Laravel 5 / 6 / 7 (single auth). **(Not compatible with multi-auth)**  
 With security and usability in mind, this project aims to provide you a safe way to control your application access without losing the fun of coding.
 
 > Current Build Status
@@ -34,7 +34,8 @@ Using <a href="https://getcomposer.org/" target="_blank">composer</a>, execute t
 | >= 5.0.* && <= 5.3.* | 0.6.*            |
 | ~5.4, ~5.5           | 0.7.*            |
 | >= 5.6.*             | 0.8.*            |
-| >= 6.0.*             | 0.9.*            |
+| ~6.0                 | 0.9.*            |
+| ~7.0                 | 0.10.*           |
 
 ```shell
 composer require artesaos/defender
@@ -45,14 +46,14 @@ or manually update your `composer.json` file
 ```json
 {
     "require": {
-        "artesaos/defender": "~0.9.0"
+        "artesaos/defender": "~0.10.0"
     }
 }
 ```
 
 ### 2. Provider
 
-> If you are using Laravel 5.5+(including Laravel 6) skip this section since our package support auto-discovery.
+> If you are using Laravel >= 5.5 skip this section since our package support auto-discovery.
 
 You need to update your application configuration in order to register the package, so it can be loaded by Laravel. Just update your `config/app.php` file adding the following code at the end of your `'providers'` section:
 
