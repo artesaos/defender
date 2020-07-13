@@ -3,6 +3,7 @@
 namespace Artesaos\Defender\Middlewares;
 
 use Artesaos\Defender\Contracts\ForbiddenHandler;
+use Illuminate\Support\Arr;
 
 /**
  * Class AbstractDefenderMiddleware.
@@ -30,7 +31,7 @@ abstract class AbstractDefenderMiddleware
     {
         $routeActions = $this->getActions($request);
 
-        return array_get($routeActions, 'any', false);
+        return Arr::get($routeActions, 'any', false);
     }
 
     /**

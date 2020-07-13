@@ -2,6 +2,8 @@
 
 namespace Artesaos\Defender\Traits\Permissions;
 
+use Illuminate\Support\Arr;
+
 /**
  * Trait InteractsWithPermissions.
  */
@@ -22,8 +24,8 @@ trait InteractsWithPermissions
         }
 
         $this->permissions()->attach($permission, [
-            'value'   => array_get($options, 'value', true),
-            'expires' => array_get($options, 'expires', null),
+            'value'   => Arr::get($options, 'value', true),
+            'expires' => Arr::get($options, 'expires', null),
         ]);
     }
 
@@ -125,7 +127,7 @@ trait InteractsWithPermissions
             if ($_permission->name === $permission) {
                 return $this->permissions()->updateExistingPivot(
                     $_permission->id,
-                    array_only($options, ['value', 'expires'])
+                    Arr::only($options, ['value', 'expires'])
                 );
             }
         }

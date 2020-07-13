@@ -3,6 +3,7 @@
 namespace Artesaos\Defender\Middlewares;
 
 use Closure;
+use Illuminate\Support\Arr;
 
 /**
  * Class DefenderHasPermissionMiddleware.
@@ -64,7 +65,7 @@ class NeedsRoleMiddleware extends AbstractDefenderMiddleware
     {
         $routeActions = $this->getActions($request);
 
-        $roles = array_get($routeActions, 'is', []);
+        $roles = Arr::get($routeActions, 'is', []);
 
         return is_array($roles) ? $roles : (array) $roles;
     }
