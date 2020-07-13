@@ -2,8 +2,8 @@
 
 namespace Artesaos\Defender\Traits;
 
-use Artesaos\Defender\Traits\Users\HasRoles;
 use Artesaos\Defender\Traits\Users\HasPermissions;
+use Artesaos\Defender\Traits\Users\HasRoles;
 
 /**
  * Trait HasDefender.

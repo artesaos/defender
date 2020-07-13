@@ -2,8 +2,8 @@
 
 namespace Artesaos\Defender\Testing;
 
-use Illuminate\Database\Seeder;
 use Artesaos\Defender\Permission;
+use Illuminate\Database\Seeder;
 
 /**
  * Class PermissionTableSeeder.

@@ -17,8 +17,8 @@ trait Role
     public function __construct(array $attributes = [])
     {
         $this->fillable = [
-                'name',
-            ];
+            'name',
+        ];
 
         parent::__construct($attributes);
 

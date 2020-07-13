@@ -2,9 +2,9 @@
 
 namespace Artesaos\Defender\Testing;
 
-use Artesaos\Defender\Role;
 use Artesaos\Defender\Permission;
 use Artesaos\Defender\Repositories\Eloquent\EloquentPermissionRepository;
+use Artesaos\Defender\Role;
 
 /**
  * Class EloquentPermissionRepositoryTest.
@@ -23,7 +23,7 @@ class EloquentPermissionRepositoryTest extends AbstractTestCase
     /**
      * {@inheritdoc}
      */
-    public function setUp() : void
+    public function setUp(): void
     {
         parent::setUp();
 

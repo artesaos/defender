@@ -2,11 +2,11 @@
 
 namespace Artesaos\Defender\Repositories\Eloquent;
 
-use Carbon\Carbon;
 use Artesaos\Defender\Contracts\Permission;
-use Illuminate\Contracts\Foundation\Application;
-use Artesaos\Defender\Exceptions\PermissionExistsException;
 use Artesaos\Defender\Contracts\Repositories\PermissionRepository;
+use Artesaos\Defender\Exceptions\PermissionExistsException;
+use Carbon\Carbon;
+use Illuminate\Contracts\Foundation\Application;
 
 /**
  * Class EloquentPermissionRepository.

@@ -3,12 +3,12 @@
 namespace spec\Artesaos\Defender;
 
 use ArrayAccess;
-use PhpSpec\ObjectBehavior;
-use Illuminate\Contracts\Auth\Guard;
-use Illuminate\Contracts\Auth\Authenticatable;
-use Illuminate\Contracts\Foundation\Application;
-use Artesaos\Defender\Contracts\Repositories\RoleRepository;
 use Artesaos\Defender\Contracts\Repositories\PermissionRepository;
+use Artesaos\Defender\Contracts\Repositories\RoleRepository;
+use Illuminate\Contracts\Auth\Authenticatable;
+use Illuminate\Contracts\Auth\Guard;
+use Illuminate\Contracts\Foundation\Application;
+use PhpSpec\ObjectBehavior;
 
 /**
  * Class DefenderSpec.

@@ -2,8 +2,8 @@
 
 namespace Artesaos\Defender\Contracts;
 
-use Illuminate\Database\Eloquent\Model;
 use Artesaos\Defender\Pivots\PermissionUserPivot;
+use Illuminate\Database\Eloquent\Model;
 
 /**
  * Interface Permission.

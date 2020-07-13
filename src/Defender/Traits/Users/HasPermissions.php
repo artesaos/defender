@@ -2,9 +2,9 @@
 
 namespace Artesaos\Defender\Traits\Users;
 
-use Illuminate\Database\Eloquent\Model;
 use Artesaos\Defender\Pivots\PermissionUserPivot;
 use Artesaos\Defender\Traits\Permissions\InteractsWithPermissions;
+use Illuminate\Database\Eloquent\Model;
 
 /**
  * Trait HasPermissions.

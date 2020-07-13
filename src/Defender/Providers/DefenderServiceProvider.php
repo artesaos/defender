@@ -2,13 +2,13 @@
 
 namespace Artesaos\Defender\Providers;
 
-use Illuminate\Support\Str;
 use Artesaos\Defender\Defender;
-use Illuminate\Support\ServiceProvider;
-use Illuminate\View\Compilers\BladeCompiler;
+use Artesaos\Defender\Repositories\Eloquent\EloquentPermissionRepository;
 use Artesaos\Defender\Repositories\Eloquent\EloquentRoleRepository;
 use Artesaos\Defender\Repositories\Eloquent\EloquentUserRepository;
-use Artesaos\Defender\Repositories\Eloquent\EloquentPermissionRepository;
+use Illuminate\Support\ServiceProvider;
+use Illuminate\Support\Str;
+use Illuminate\View\Compilers\BladeCompiler;
 
 /**
  * Class DefenderServiceProvider.

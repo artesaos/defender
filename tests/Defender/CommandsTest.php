@@ -9,15 +9,15 @@
 
 namespace Artesaos\Defender\Testing;
 
-use Artesaos\Defender\Role;
 use Artesaos\Defender\Contracts\Repositories\RoleRepository;
+use Artesaos\Defender\Role;
 
 class CommandsTest extends AbstractTestCase
 {
     /**
      * {@inheritdoc}
      */
-    public function setUp() : void
+    public function setUp(): void
     {
         parent::setUp();
 

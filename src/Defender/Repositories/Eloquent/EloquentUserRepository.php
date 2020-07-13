@@ -2,9 +2,9 @@
 
 namespace Artesaos\Defender\Repositories\Eloquent;
 
-use Illuminate\Database\Eloquent\Model;
-use Illuminate\Contracts\Foundation\Application;
 use Artesaos\Defender\Contracts\Repositories\UserRepository;
+use Illuminate\Contracts\Foundation\Application;
+use Illuminate\Database\Eloquent\Model;
 
 class EloquentUserRepository extends AbstractEloquentRepository implements UserRepository
 {

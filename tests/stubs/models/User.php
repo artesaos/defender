@@ -2,12 +2,12 @@
 
 namespace Artesaos\Defender\Testing;
 
-use Illuminate\Auth\Authenticatable;
-use Illuminate\Database\Eloquent\Model;
 use Artesaos\Defender\Traits\HasDefender;
+use Illuminate\Auth\Authenticatable;
 use Illuminate\Auth\Passwords\CanResetPassword;
 use Illuminate\Contracts\Auth\Authenticatable as AuthenticatableContract;
 use Illuminate\Contracts\Auth\CanResetPassword as CanResetPasswordContract;
+use Illuminate\Database\Eloquent\Model;
 
 /**
  * Class User.
