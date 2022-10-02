@@ -56,6 +56,11 @@ class EloquentPermissionRepository extends AbstractEloquentRepository implements
     {
         return $this->model->whereHas('roles', function ($query) use ($rolesIds) {
             $query->whereIn('id', $rolesIds);
+            $query->where('value', true);
+            $query->where(function ($q) {
+                $q->where('expires', '>=', Carbon::now());
+                $q->orWhereNull('expires');
+            });
         })->get();
     }
 
