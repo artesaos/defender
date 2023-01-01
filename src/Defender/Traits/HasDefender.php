@@ -2,8 +2,8 @@
 
 namespace Artesaos\Defender\Traits;
 
-use Artesaos\Defender\Traits\Users\HasPermissions;
 use Artesaos\Defender\Traits\Users\HasRoles;
+use Artesaos\Defender\Traits\Users\HasPermissions;
 
 /**
  * Trait HasDefender.
@@ -69,7 +69,7 @@ trait HasDefender
      * Checks for permission
      * If has superuser group automatically passes.
      *
-     * @param string $permission
+     * @param string|array $permission
      * @param bool   $force
      *
      * @return bool
@@ -79,6 +79,10 @@ trait HasDefender
         // If has superuser role
         if ($this->isSuperUser()) {
             return true;
+        }
+
+        if (is_array($permission)) {
+            return $this->hasPermissions($permission, $force);
         }
 
         return $this->hasPermission($permission, $force);

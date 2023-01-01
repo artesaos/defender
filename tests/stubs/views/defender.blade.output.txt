@@ -9,3 +9,7 @@ No, you are not an admin!
 <?php if(app('defender')->canDo('do.this')): ?>
 Yes, you can do this!
 <?php endif; ?>
+
+<?php if(app('defender')->canDo(['can-do-that', 'that-can-here'])): ?>
+Yes, you can do this!
+<?php endif; ?>
