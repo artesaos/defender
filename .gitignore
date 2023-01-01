@@ -1,6 +1,8 @@
 /vendor
 /.idea
 .php_cs.cache
+.php-cs-fixer.cache
 composer.phar
 tmp[a-zA-Z0-9]{6,32}
 .DS_Store
+.phpunit.result.cache

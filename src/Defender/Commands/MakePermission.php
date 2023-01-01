@@ -60,8 +60,8 @@ class MakePermission extends Command
      */
     public function __construct(
         PermissionRepository $permissionRepository,
-                                RoleRepository $roleRepository,
-                                UserRepository $userRepository
+        RoleRepository $roleRepository,
+        UserRepository $userRepository
     ) {
         $this->permissionRepository = $permissionRepository;
         $this->roleRepository = $roleRepository;
