@@ -10,13 +10,13 @@ $finder = Symfony\Component\Finder\Finder::create()
     ->ignoreVCS(true);
 ;
 
-return PhpCsFixer\Config::create()
+return (new PhpCsFixer\Config())
     ->setRules(array(
       '@PSR2' => true,
       // addtional rules
       'array_syntax' => ['syntax' => 'short'],
-      'no_multiline_whitespace_before_semicolons' => true,
-      'no_short_echo_tag' => true,
+      'multiline_whitespace_before_semicolons' => true,
+      'echo_tag_syntax' => true,
       'no_unused_imports' => true,
       'not_operator_with_successor_space' => true,
     ))

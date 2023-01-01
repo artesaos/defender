@@ -9,3 +9,7 @@ No, you are not an admin!
 @shield('do.this')
 Yes, you can do this!
 @endshield
+
+@shield(['can-do-that', 'that-can-here'])
+Yes, you can do this!
+@endshield

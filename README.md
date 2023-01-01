@@ -384,6 +384,14 @@ Laravel's Blade extension for using Defender.
 @endshield
 ```
 
+```
+@shield(['user.index', 'user.list'])
+    shows your protected stuff
+@else
+    shows the data for those who doesn't have the any permission with 'user' prefix
+@endshield
+```
+
 You can also use wildcard(*)
 
 ```
