@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "47186a3851558020ef0fa033f5f3e0a1",
+    "content-hash": "f421440d60d4fa713e36b5b5983527bf",
     "packages": [
         {
             "name": "brick/math",
@@ -1837,17 +1837,11 @@
         },
         {
             "name": "phpspec/phpspec",
-            "version": "7.3.0",
+            "version": "dev-patch-1",
             "source": {
                 "type": "git",
-                "url": "https://github.com/phpspec/phpspec.git",
-                "reference": "7e44b188e8e01f9c9a8ca6cb0d7aceaabcea2133"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/phpspec/phpspec/zipball/7e44b188e8e01f9c9a8ca6cb0d7aceaabcea2133",
-                "reference": "7e44b188e8e01f9c9a8ca6cb0d7aceaabcea2133",
-                "shasum": ""
+                "url": "https://github.com/arendjantetteroo/phpspec",
+                "reference": "1e5e0e5c350897fb247e900fc7cb9ea28dec9eb4"
             },
             "require": {
                 "doctrine/instantiator": "^1.0.5",
@@ -1855,7 +1849,7 @@
                 "php": "^7.3 || 8.0.* || 8.1.* || 8.2.*",
                 "phpspec/php-diff": "^1.0.0",
                 "phpspec/prophecy": "^1.9",
-                "sebastian/exporter": "^3.0 || ^4.0",
+                "sebastian/exporter": "^3.0 || ^4.0 || ^5.0",
                 "symfony/console": "^3.4 || ^4.4 || ^5.0 || ^6.0",
                 "symfony/event-dispatcher": "^3.4 || ^4.4 || ^5.0 || ^6.0",
                 "symfony/finder": "^3.4 || ^4.4 || ^5.0 || ^6.0",
@@ -1869,7 +1863,7 @@
                 "behat/behat": "^3.3",
                 "phpunit/phpunit": "^8.0 || ^9.0",
                 "symfony/filesystem": "^3.4 || ^4.0 || ^5.0 || ^6.0",
-                "vimeo/psalm": "^4.3"
+                "vimeo/psalm": "^4.3 || ^5.2"
             },
             "suggest": {
                 "phpspec/nyan-formatters": "Adds Nyan formatters"
@@ -1888,7 +1882,11 @@
                     "PhpSpec": "src/"
                 }
             },
-            "notification-url": "https://packagist.org/downloads/",
+            "autoload-dev": {
+                "psr-0": {
+                    "spec\\PhpSpec": "."
+                }
+            },
             "license": [
                 "MIT"
             ],
@@ -1918,11 +1916,7 @@
                 "testing",
                 "tests"
             ],
-            "support": {
-                "issues": "https://github.com/phpspec/phpspec/issues",
-                "source": "https://github.com/phpspec/phpspec/tree/7.3.0"
-            },
-            "time": "2022-12-14T16:15:59+00:00"
+            "time": "2023-02-03T12:33:10+00:00"
         },
         {
             "name": "phpspec/prophecy",
@@ -8631,7 +8625,9 @@
     ],
     "aliases": [],
     "minimum-stability": "stable",
-    "stability-flags": [],
+    "stability-flags": {
+        "phpspec/phpspec": 20
+    },
     "prefer-stable": false,
     "prefer-lowest": false,
     "platform": {
