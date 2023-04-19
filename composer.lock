@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "f421440d60d4fa713e36b5b5983527bf",
+    "content-hash": "040026f7ac18716f5e4ecd4a89235585",
     "packages": [
         {
             "name": "brick/math",
@@ -1837,11 +1837,17 @@
         },
         {
             "name": "phpspec/phpspec",
-            "version": "dev-patch-1",
+            "version": "dev-main",
             "source": {
                 "type": "git",
-                "url": "https://github.com/arendjantetteroo/phpspec",
-                "reference": "1e5e0e5c350897fb247e900fc7cb9ea28dec9eb4"
+                "url": "https://github.com/phpspec/phpspec.git",
+                "reference": "ea698535b15fbb1740ad3da52929f0dc2bee819e"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/phpspec/phpspec/zipball/ea698535b15fbb1740ad3da52929f0dc2bee819e",
+                "reference": "ea698535b15fbb1740ad3da52929f0dc2bee819e",
+                "shasum": ""
             },
             "require": {
                 "doctrine/instantiator": "^1.0.5",
@@ -1868,6 +1874,7 @@
             "suggest": {
                 "phpspec/nyan-formatters": "Adds Nyan formatters"
             },
+            "default-branch": true,
             "bin": [
                 "bin/phpspec"
             ],
@@ -1882,11 +1889,7 @@
                     "PhpSpec": "src/"
                 }
             },
-            "autoload-dev": {
-                "psr-0": {
-                    "spec\\PhpSpec": "."
-                }
-            },
+            "notification-url": "https://packagist.org/downloads/",
             "license": [
                 "MIT"
             ],
@@ -1916,7 +1919,11 @@
                 "testing",
                 "tests"
             ],
-            "time": "2023-02-03T12:33:10+00:00"
+            "support": {
+                "issues": "https://github.com/phpspec/phpspec/issues",
+                "source": "https://github.com/phpspec/phpspec/tree/main"
+            },
+            "time": "2023-04-05T12:03:18+00:00"
         },
         {
             "name": "phpspec/prophecy",
@@ -8624,7 +8631,7 @@
         }
     ],
     "aliases": [],
-    "minimum-stability": "stable",
+    "minimum-stability": "dev",
     "stability-flags": {
         "phpspec/phpspec": 20
     },
