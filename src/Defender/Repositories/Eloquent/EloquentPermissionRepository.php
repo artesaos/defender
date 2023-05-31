@@ -7,7 +7,7 @@ use Artesaos\Defender\Contracts\Repositories\PermissionRepository;
 use Artesaos\Defender\Exceptions\PermissionExistsException;
 use Carbon\Carbon;
 use Illuminate\Contracts\Foundation\Application;
-
+use Illuminate\Support\Facades\DB;
 /**
  * Class EloquentPermissionRepository.
  */
@@ -56,6 +56,11 @@ class EloquentPermissionRepository extends AbstractEloquentRepository implements
     {
         return $this->model->whereHas('roles', function ($query) use ($rolesIds) {
             $query->whereIn('id', $rolesIds);
+            $query->where('value', true);
+            $query->where(function ($q) {
+                $q->where('expires', '>=', Carbon::now());
+                $q->orWhereNull('expires');
+            });
         })->get();
     }
 
@@ -67,7 +72,9 @@ class EloquentPermissionRepository extends AbstractEloquentRepository implements
     public function getActivesByUser($user)
     {
         $table = $user->permissions()->getTable();
-
+        if ($user->isSuperUser()) {
+            return DB::table(config('defender.permission_table', 'permissions'))->get();
+        }
         return $user->permissions()
             ->where($table.'.value', true)
             ->where(function ($q) use ($table) {
